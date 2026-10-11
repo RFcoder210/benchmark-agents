@@ -1,0 +1,16 @@
+# Arquivos gerados pelo Python ao executar scripts
+__pycache__/
+*.pyc
+
+# Ambiente virtual do Python (pode ser recriado a qualquer momento)
+.venv/
+venv/
+
+# Chaves de API e configurações secretas: nunca vão para o Git
+.env
+
+# Estado gerado pelos scripts do medidor de uso
+.plano/estado/
+
+# Configurações locais do Claude Code (específicas desta máquina)
+.claude/settings.local.json
