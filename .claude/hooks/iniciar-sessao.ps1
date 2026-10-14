@@ -31,25 +31,14 @@ $agora = Get-Date
 $linhas = @()
 $linhas += ("Data atual: {0} ({1}), {2}." -f $agora.ToString('yyyy-MM-dd'), $agora.ToString('dddd', $ptBR), $agora.ToString('HH:mm'))
 
-$pastaPlano = Join-Path $raiz '.plano'
-if (-not (Test-Path $pastaPlano)) {
-    $linhas += "Este projeto ainda não possui a pasta .plano do sistema de agentes."
-    Write-Output ($linhas -join "`n")
-    exit 0
-}
-
-$arqObjetivo = Join-Path $pastaPlano 'OBJETIVO.md'
-$arqPlano    = Join-Path $pastaPlano 'PLANO.md'
+# Neste projeto (benchmark) não usamos a orquestração do CRM: o estado
+# duradouro fica na seção "Estado atual" do CLAUDE.md e o bilhete do dia
+# em .plano/RETOMADA.md, gravado pela skill /encerrar-dia.
+$pastaPlano  = Join-Path $raiz '.plano'
 $arqRetomada = Join-Path $pastaPlano 'RETOMADA.md'
 
-if (-not (Test-Path $arqPlano)) {
-    $linhas += "Situação do sistema de agentes: ainda não existe .plano/PLANO.md. O primeiro passo é o usuário preencher .plano/OBJETIVO.md e executar /orquestrar."
-    Write-Output ($linhas -join "`n")
-    exit 0
-}
-
 if ($origem -eq 'compact') {
-    $linhas += "A conversa acabou de ser compactada. O estado detalhado das tarefas está em .plano/ESTADO.md."
+    $linhas += "A conversa acabou de ser compactada. O estado duradouro do projeto está na seção 'Estado atual' do CLAUDE.md."
 }
 
 if (Test-Path $arqRetomada) {
@@ -63,7 +52,7 @@ if (Test-Path $arqRetomada) {
     $linhas += $texto.Trim()
     $linhas += "-----"
 } else {
-    $linhas += "Não há .plano/RETOMADA.md; o estado das tarefas está em .plano/ESTADO.md."
+    $linhas += "Não há .plano/RETOMADA.md; o estado do projeto está na seção 'Estado atual' do CLAUDE.md."
 }
 
 # Última medição de uso, se houver
@@ -79,6 +68,6 @@ if (Test-Path $arqUso) {
     } catch { }
 }
 
-$linhas += "O ciclo de trabalho do projeto é conduzido pelo comando /orquestrar."
+$linhas += "Rotina: uma sessão por dia. Comece pela 'Próxima ação' da retomada; ao terminar o dia, o usuário digita /encerrar-dia."
 Write-Output ($linhas -join "`n")
 exit 0
