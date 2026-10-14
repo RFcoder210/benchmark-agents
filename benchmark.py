@@ -19,7 +19,8 @@ from agente import interpretar  # a função do agente, definida em agente.py
 ARQUIVO_CASOS = "casos/casos.json"
 PASTA_RESULTADOS = "resultados"
 N_EXECUCOES = 3        # cada caso roda 3 vezes, porque o agente pode variar
-VERSAO_AGENTE = "v1"   # mude a cada alteração no agente (v2, v3...)
+VERSAO_AGENTE = "v2"   # mude a cada alteração no agente (v2, v3...)
+# Histórico: v1 = linha de base (instruções); v2 = + bloco de exemplos resolvidos no prompt
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 
