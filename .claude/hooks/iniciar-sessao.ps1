@@ -68,6 +68,24 @@ if (Test-Path $arqUso) {
     } catch { }
 }
 
+# Nome da sessão: "Dia N · DD/MM · foco". N vem da última linha de .plano/DIARIO.md:
+# se a data de hoje já está lá, é o mesmo dia; senão, é o próximo número.
+$arqDiario = Join-Path $pastaPlano 'DIARIO.md'
+$hoje = $agora.ToString('yyyy-MM-dd')
+$numeroDia = 1
+$jaRegistrado = $false
+if (Test-Path $arqDiario) {
+    $linhasDiario = Get-Content -Encoding UTF8 $arqDiario | Where-Object { $_ -match '^\|\s*\d+\s*\|' }
+    if ($linhasDiario) {
+        $ultima = @($linhasDiario)[-1]
+        $partes = $ultima.Split('|')
+        $ultimoN = [int]$partes[1].Trim()
+        $jaRegistrado = ($partes[2].Trim() -eq $hoje)
+        $numeroDia = if ($jaRegistrado) { $ultimoN } else { $ultimoN + 1 }
+    }
+}
+$sufixo = if ($jaRegistrado) { ' (2)' } else { '' }
+$linhas += ("Nome da sessão: se o título atual não segue o padrão, renomeie-a logo no início com set_session_title (session_id 'self') para 'Dia {0} · {1} · <foco em 2 a 5 palavras>{2}', com o foco tirado da 'Próxima ação'. Se for um dia novo, acrescente a linha do Dia {0} em .plano/DIARIO.md." -f $numeroDia, $agora.ToString('dd/MM'), $sufixo)
 $linhas += "Rotina: uma sessão por dia. Comece pela 'Próxima ação' da retomada; ao terminar o dia, o usuário digita /encerrar-dia."
 Write-Output ($linhas -join "`n")
 exit 0

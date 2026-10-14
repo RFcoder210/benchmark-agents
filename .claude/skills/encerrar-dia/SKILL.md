@@ -32,4 +32,5 @@ entrega automaticamente à próxima sessão. Não duplique informação entre os
 - (arquivos relevantes para a próxima ação)
 ```
 
+5b. **Diário e nome da sessão:** feche a linha do dia em `.plano/DIARIO.md` (resumo em 1 frase). Se o foco do dia mudou e o nome da sessão ficou desatualizado, acerte-o com `set_session_title` (`session_id: "self"`), mantendo o padrão `Dia N · DD/MM · foco`, e atualize a coluna Sessão do diário.
 6. **Responder ao usuário, em no máximo 6 linhas:** o que foi concluído hoje, a primeira ação de amanhã, o que ele precisa providenciar (se algo) e a orientação: "Pode fechar esta sessão. Amanhã, abra uma sessão nova nesta pasta; a retomada será carregada automaticamente."
