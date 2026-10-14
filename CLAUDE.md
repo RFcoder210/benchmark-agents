@@ -36,7 +36,9 @@ A especificação completa (escopo da v1, métricas, formato do CSV, plano em et
 - Problema conhecido (não corrigido de propósito, para ser a 1ª melhoria medida): no C02 o modelo copia o exemplo "Qual foi o valor e a forma de pagamento?" e inclui `valor` em `campos_faltantes`.
 - Modelo decidido: **local, pelo Ollama** (gratuito, sem chave de API). Hardware: 16 GB de RAM e GTX 1650 de 4 GB, adequado para modelos de cerca de 3B.
 - Melhorias no agente seguem a "escada": temperatura 0 → saída estruturada → instruções → exemplos no prompt → validação em Python → modelo maior → fine-tuning (último recurso, fora da v1). Cada degrau é medido pelo benchmark.
-- Ordem das etapas: 1. casos de teste com gabarito (concluída) → 2. agente mínimo (concluída) → **3. script do benchmark (etapa atual)** → 4. linha de base.
+- Ordem das etapas: 1. casos de teste com gabarito (concluída) → 2. agente mínimo (concluída) → 3. script do benchmark (concluída) → **4. linha de base (etapa atual: análise)**.
+- Benchmark: [benchmark.py](benchmark.py) (lê casos → executa 3× → compara → acrescenta em `resultados/resultados.csv`, com `;` e vírgula decimal, e grava as respostas cruas em `resultados/brutos_*.json`). [testar_comparar.py](testar_comparar.py) testa `comparar()` sem rodar o modelo.
+- Linha de base v1 (14/10, 2 execuções completas, resultado idêntico): **25/45 (56%)**; registrar 75%, **perguntar 7%**, ignorar 100%; ~3 s e ~1515 tokens por resposta. Principal falha: o agente assume dados em vez de perguntar (C09, C10, C13, C15).
 - Regras do agente: [especificacao-agente.md](especificacao-agente.md). Casos: `casos/casos.json` (15 de ajuste) e `casos/casos_ocultos.json` (5 ocultos).
 - [teste_conexao.py](teste_conexao.py) é só o teste inicial Python → Ollama (sem prompt nem ferramentas).
 - A pasta `.claude/` traz, do projeto CRM, o medidor de uso e o sistema de orquestração (`/orquestrar`, agentes em `.claude/agents/`). Na v1 trabalhamos diretamente, etapa por etapa, sem a orquestração. O hook `testar-ao-parar.ps1` ainda é do CRM (roda `npm test` apenas se houver `index.html`) e não faz nada aqui até ser adaptado para Python.

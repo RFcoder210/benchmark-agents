@@ -1,0 +1,46 @@
+﻿data;versao_agente;id_caso;categoria;dificuldade;execucao_n;acertou;campos_errados;tempo_s;tokens;custo;n_passos;observacao
+2026-10-14 19:47;v1;C01;registrar;facil;1;1;;18,38;1515;0,0;1;
+2026-10-14 19:47;v1;C01;registrar;facil;2;1;;3,06;1515;0,0;1;
+2026-10-14 19:47;v1;C01;registrar;facil;3;1;;2,67;1515;0,0;1;
+2026-10-14 19:47;v1;C02;perguntar;facil;1;0;campos_faltantes;2,96;1510;0,0;1;campos_faltantes=['valor', 'pagamento'] (esperado ['pagamento'])
+2026-10-14 19:47;v1;C02;perguntar;facil;2;0;campos_faltantes;3,59;1510;0,0;1;campos_faltantes=['valor', 'pagamento'] (esperado ['pagamento'])
+2026-10-14 19:47;v1;C02;perguntar;facil;3;0;campos_faltantes;3,19;1510;0,0;1;campos_faltantes=['valor', 'pagamento'] (esperado ['pagamento'])
+2026-10-14 19:47;v1;C03;registrar;facil;1;1;;3,05;1517;0,0;1;
+2026-10-14 19:47;v1;C03;registrar;facil;2;1;;3,21;1517;0,0;1;
+2026-10-14 19:47;v1;C03;registrar;facil;3;1;;3,24;1517;0,0;1;
+2026-10-14 19:47;v1;C04;ignorar;facil;1;1;;0,49;1464;0,0;0;
+2026-10-14 19:47;v1;C04;ignorar;facil;2;1;;0,24;1464;0,0;0;
+2026-10-14 19:47;v1;C04;ignorar;facil;3;1;;0,21;1464;0,0;0;
+2026-10-14 19:47;v1;C05;registrar;facil;1;1;;3,37;1528;0,0;1;
+2026-10-14 19:47;v1;C05;registrar;facil;2;1;;3,11;1528;0,0;1;
+2026-10-14 19:47;v1;C05;registrar;facil;3;1;;3,2;1528;0,0;1;
+2026-10-14 19:47;v1;C06;registrar;medio;1;1;;3,27;1513;0,0;1;
+2026-10-14 19:47;v1;C06;registrar;medio;2;1;;3,15;1513;0,0;1;
+2026-10-14 19:47;v1;C06;registrar;medio;3;1;;3,23;1513;0,0;1;
+2026-10-14 19:47;v1;C07;registrar;medio;1;1;;3,42;1522;0,0;1;
+2026-10-14 19:47;v1;C07;registrar;medio;2;1;;3,11;1522;0,0;1;
+2026-10-14 19:47;v1;C07;registrar;medio;3;1;;3,02;1522;0,0;1;
+2026-10-14 19:47;v1;C08;registrar;medio;1;0;acao;3,67;1531;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria do gasto (ex: transporte) e qual foi a forma de pagamento (já foi informado como pix)?"""
+2026-10-14 19:47;v1;C08;registrar;medio;2;0;acao;3,11;1523;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria do gasto (ex: transporte) e a forma de pagamento foi realmente pix?"""
+2026-10-14 19:47;v1;C08;registrar;medio;3;0;acao;3,07;1523;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria do gasto (ex: transporte) e a forma de pagamento foi realmente pix?"""
+2026-10-14 19:47;v1;C09;perguntar;medio;1;0;acao;3,3;1525;0,0;1;registrou: valor=89.9, categoria=educacao, pagamento=credito, data=2026-10-11
+2026-10-14 19:47;v1;C09;perguntar;medio;2;0;acao;3,03;1525;0,0;1;registrou: valor=89.9, categoria=educacao, pagamento=credito, data=2026-10-11
+2026-10-14 19:47;v1;C09;perguntar;medio;3;0;acao;3,03;1525;0,0;1;registrou: valor=89.9, categoria=educacao, pagamento=credito, data=2026-10-11
+2026-10-14 19:47;v1;C10;perguntar;medio;1;1;;2,45;1506;0,0;1;
+2026-10-14 19:47;v1;C10;perguntar;medio;2;0;acao;2,78;1514;0,0;1;registrou: valor=0, categoria=educacao, pagamento=pix, data=2026-10-11
+2026-10-14 19:47;v1;C10;perguntar;medio;3;0;acao;2,79;1514;0,0;1;registrou: valor=0, categoria=educacao, pagamento=pix, data=2026-10-11
+2026-10-14 19:47;v1;C11;ignorar;medio;1;1;;0,53;1469;0,0;0;
+2026-10-14 19:47;v1;C11;ignorar;medio;2;1;;0,2;1469;0,0;0;
+2026-10-14 19:47;v1;C11;ignorar;medio;3;1;;0,2;1469;0,0;0;
+2026-10-14 19:47;v1;C12;registrar;dificil;1;1;;3,25;1529;0,0;1;
+2026-10-14 19:47;v1;C12;registrar;dificil;2;1;;3,12;1529;0,0;1;
+2026-10-14 19:47;v1;C12;registrar;dificil;3;1;;3,06;1529;0,0;1;
+2026-10-14 19:47;v1;C13;perguntar;dificil;1;0;acao;3,03;1519;0,0;1;registrou: valor=50, categoria=outros, pagamento=debito, data=2026-10-11
+2026-10-14 19:47;v1;C13;perguntar;dificil;2;0;acao;2,88;1519;0,0;1;registrou: valor=50, categoria=outros, pagamento=debito, data=2026-10-11
+2026-10-14 19:47;v1;C13;perguntar;dificil;3;0;acao;2,91;1519;0,0;1;registrou: valor=50, categoria=outros, pagamento=debito, data=2026-10-11
+2026-10-14 19:47;v1;C14;registrar;dificil;1;0;acao;3,44;1526;0,0;1;"perguntou ['valor', 'categoria']: ""Qual foi o valor e em que categoria (presente) você gostaria de classificar esse gasto?"""
+2026-10-14 19:47;v1;C14;registrar;dificil;2;0;acao;3,26;1526;0,0;1;"perguntou ['valor', 'categoria']: ""Qual foi o valor e em que categoria (presente) você gostaria de classificar esse gasto?"""
+2026-10-14 19:47;v1;C14;registrar;dificil;3;0;acao;3,13;1526;0,0;1;"perguntou ['valor', 'categoria']: ""Qual foi o valor e em que categoria (presente) você gostaria de classificar esse gasto?"""
+2026-10-14 19:47;v1;C15;perguntar;dificil;1;0;acao;2,85;1514;0,0;1;registrou: valor=60, categoria=outros, pagamento=dinheiro, data=2026-10-10
+2026-10-14 19:47;v1;C15;perguntar;dificil;2;0;acao;2,69;1514;0,0;1;registrou: valor=60, categoria=outros, pagamento=dinheiro, data=2026-10-10
+2026-10-14 19:47;v1;C15;perguntar;dificil;3;0;acao;2,78;1514;0,0;1;registrou: valor=60, categoria=outros, pagamento=dinheiro, data=2026-10-10
