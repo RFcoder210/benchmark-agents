@@ -27,6 +27,8 @@ A especificação completa (escopo da v1, métricas, formato do CSV, plano em et
 - Windows 11. Comandos e caminhos compatíveis com Windows.
 - Python 3.14 pelo comando **`py`** (o comando `python` abre a Microsoft Store e não deve ser usado).
 - Git instalado; o repositório é local.
+- Ambiente virtual em `.venv` (bibliotecas em `requirements.txt`). Execute os scripts com `.venv\Scripts\python arquivo.py`, não com `py`.
+- Ollama 0.40.4 instalado (`%LOCALAPPDATA%\Programs\Ollama\ollama.exe`). Modelo do agente: **`qwen3:4b-instruct`** (sem raciocínio). Também está baixado `qwen3:4b`, que é a versão "thinking" (sempre raciocina; ~35 s por resposta curta), reservado para um experimento futuro.
 
 ## 4. Estado atual
 
