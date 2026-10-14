@@ -1,0 +1,42 @@
+[
+  {
+    "id": "O01",
+    "mensagem": "Ônibus 4,40 dinheiro",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "facil",
+    "testa": "gasto completo e curto",
+    "esperado": {"acao": "registrar", "valor": 4.4, "categoria": "transporte", "pagamento": "dinheiro", "data": "2026-10-11"}
+  },
+  {
+    "id": "O02",
+    "mensagem": "ifod 37,9 no credito",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "medio",
+    "testa": "erro de digitação no estabelecimento",
+    "esperado": {"acao": "registrar", "valor": 37.9, "categoria": "alimentacao", "pagamento": "credito", "data": "2026-10-11"}
+  },
+  {
+    "id": "O03",
+    "mensagem": "Feira deu 64 reais",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "medio",
+    "testa": "falta a forma de pagamento",
+    "esperado": {"acao": "perguntar", "campos_faltantes": ["pagamento"]}
+  },
+  {
+    "id": "O04",
+    "mensagem": "quanto eu gastei com uber esse mês?",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "dificil",
+    "testa": "pergunta sobre gastos, não é gasto",
+    "esperado": {"acao": "ignorar"}
+  },
+  {
+    "id": "O05",
+    "mensagem": "padaria 12,5 no cartão",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "dificil",
+    "testa": "cartão sem dizer se é débito ou crédito",
+    "esperado": {"acao": "perguntar", "campos_faltantes": ["pagamento"]}
+  }
+]

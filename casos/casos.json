@@ -1,0 +1,122 @@
+[
+  {
+    "id": "C01",
+    "mensagem": "Gastei 35 no mercado no pix",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "facil",
+    "testa": "gasto completo e direto",
+    "esperado": {"acao": "registrar", "valor": 35.0, "categoria": "mercado", "pagamento": "pix", "data": "2026-10-11"}
+  },
+  {
+    "id": "C02",
+    "mensagem": "Almoço 22",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "facil",
+    "testa": "falta a forma de pagamento",
+    "esperado": {"acao": "perguntar", "campos_faltantes": ["pagamento"]}
+  },
+  {
+    "id": "C03",
+    "mensagem": "Uber 18,50 no crédito",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "facil",
+    "testa": "valor com vírgula decimal",
+    "esperado": {"acao": "registrar", "valor": 18.5, "categoria": "transporte", "pagamento": "credito", "data": "2026-10-11"}
+  },
+  {
+    "id": "C04",
+    "mensagem": "Bom dia! Tudo certo?",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "facil",
+    "testa": "cumprimento, não é gasto",
+    "esperado": {"acao": "ignorar"}
+  },
+  {
+    "id": "C05",
+    "mensagem": "Paguei a conta de luz, 187,30 no débito",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "facil",
+    "testa": "conta da casa",
+    "esperado": {"acao": "registrar", "valor": 187.3, "categoria": "moradia", "pagamento": "debito", "data": "2026-10-11"}
+  },
+  {
+    "id": "C06",
+    "mensagem": "farmacia 42 no deb",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "medio",
+    "testa": "sem acento e pagamento abreviado",
+    "esperado": {"acao": "registrar", "valor": 42.0, "categoria": "saude", "pagamento": "debito", "data": "2026-10-11"}
+  },
+  {
+    "id": "C07",
+    "mensagem": "trinta reais de pipoca e ingresso no cinema, dinheiro",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "medio",
+    "testa": "valor por extenso",
+    "esperado": {"acao": "registrar", "valor": 30.0, "categoria": "lazer", "pagamento": "dinheiro", "data": "2026-10-11"}
+  },
+  {
+    "id": "C08",
+    "mensagem": "ontem abasteci o carro, 150 pila no pix",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "medio",
+    "testa": "data relativa (ontem) e gíria para valor",
+    "esperado": {"acao": "registrar", "valor": 150.0, "categoria": "transporte", "pagamento": "pix", "data": "2026-10-10"}
+  },
+  {
+    "id": "C09",
+    "mensagem": "Comprei um livro de Python por 89,90 no cartão",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "medio",
+    "testa": "cartão sem dizer se é débito ou crédito",
+    "esperado": {"acao": "perguntar", "campos_faltantes": ["pagamento"]}
+  },
+  {
+    "id": "C10",
+    "mensagem": "paguei o curso de inglês no pix",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "medio",
+    "testa": "falta o valor",
+    "esperado": {"acao": "perguntar", "campos_faltantes": ["valor"]}
+  },
+  {
+    "id": "C11",
+    "mensagem": "Recebi 3.000 de salário hoje",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "medio",
+    "testa": "receita com valor, não é gasto",
+    "esperado": {"acao": "ignorar"}
+  },
+  {
+    "id": "C12",
+    "mensagem": "aluguel R$ 1.250,00 pago via pix dia 5",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "dificil",
+    "testa": "separador de milhar, símbolo R$ e data explícita",
+    "esperado": {"acao": "registrar", "valor": 1250.0, "categoria": "moradia", "pagamento": "pix", "data": "2026-10-05"}
+  },
+  {
+    "id": "C13",
+    "mensagem": "gastei 50 na loja no débito",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "dificil",
+    "testa": "categoria não identificável",
+    "esperado": {"acao": "perguntar", "campos_faltantes": ["categoria"]}
+  },
+  {
+    "id": "C14",
+    "mensagem": "presente de aniversário pra minha mãe, 80 no crédito",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "dificil",
+    "testa": "gasto conhecido sem categoria própria (outros)",
+    "esperado": {"acao": "registrar", "valor": 80.0, "categoria": "outros", "pagamento": "credito", "data": "2026-10-11"}
+  },
+  {
+    "id": "C15",
+    "mensagem": "gastei 60 ontem",
+    "data_referencia": "2026-10-11",
+    "dificuldade": "dificil",
+    "testa": "faltam categoria e pagamento",
+    "esperado": {"acao": "perguntar", "campos_faltantes": ["categoria", "pagamento"]}
+  }
+]

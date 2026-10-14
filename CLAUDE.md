@@ -18,7 +18,7 @@ A especificação completa (escopo da v1, métricas, formato do CSV, plano em et
 
 - **Custo:** antes de qualquer ação que gere custo (chamada de API paga), **avise e estime o custo** e aguarde minha confirmação.
 - **Isolamento:** o benchmark **nunca** grava no Notion real nem envia mensagens reais pelo Telegram. Ele testa apenas a interpretação do agente (mensagem → dados estruturados ou pergunta de volta), com ferramentas simuladas.
-- **Conjunto oculto:** os casos marcados como ocultos não são usados durante os ajustes do agente, apenas na validação final. Não os leia nem os mostre ao ajustar o agente.
+- **Conjunto oculto:** `casos/casos_ocultos.json` não é usado durante os ajustes do agente, apenas na validação final. **Não abra esse arquivo** ao ajustar prompts, regras ou código do agente; use só `casos/casos.json`.
 - **Uma mudança por vez** no agente entre execuções do benchmark.
 - Cada caso é executado **mais de uma vez** (padrão: 3), porque agentes não respondem sempre igual.
 
@@ -30,6 +30,10 @@ A especificação completa (escopo da v1, métricas, formato do CSV, plano em et
 
 ## 4. Estado atual
 
-- Etapa atual: **1 — entender como o agente de gastos é chamado**. Ainda falta saber onde está o código do agente, qual modelo ele usa, se há custo por chamada e como ele devolve o resultado.
-- Ainda não há código do benchmark.
+- O agente de gastos **ainda não existe**; será construído aqui, em versão mínima: só a interpretação (mensagem → ferramenta simulada `registrar_gasto` ou `perguntar_usuario`), sem Telegram nem Notion.
+- Modelo decidido: **local, pelo Ollama** (gratuito, sem chave de API). Hardware: 16 GB de RAM e GTX 1650 de 4 GB, adequado para modelos de cerca de 3B.
+- Melhorias no agente seguem a "escada": temperatura 0 → saída estruturada → instruções → exemplos no prompt → validação em Python → modelo maior → fine-tuning (último recurso, fora da v1). Cada degrau é medido pelo benchmark.
+- Ordem das etapas: 1. casos de teste com gabarito (concluída) → **2. agente mínimo (etapa atual)** → 3. script do benchmark → 4. linha de base.
+- Regras do agente: [especificacao-agente.md](especificacao-agente.md). Casos: `casos/casos.json` (15 de ajuste) e `casos/casos_ocultos.json` (5 ocultos).
+- Ainda não há código.
 - A pasta `.claude/` traz, do projeto CRM, o medidor de uso e o sistema de orquestração (`/orquestrar`, agentes em `.claude/agents/`). Na v1 trabalhamos diretamente, etapa por etapa, sem a orquestração. O hook `testar-ao-parar.ps1` ainda é do CRM (roda `npm test` apenas se houver `index.html`) e não faz nada aqui até ser adaptado para Python.
