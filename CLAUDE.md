@@ -32,10 +32,11 @@ A especificação completa (escopo da v1, métricas, formato do CSV, plano em et
 
 ## 4. Estado atual
 
-- O agente de gastos **ainda não existe**; será construído aqui, em versão mínima: só a interpretação (mensagem → ferramenta simulada `registrar_gasto` ou `perguntar_usuario`), sem Telegram nem Notion.
+- O agente de gastos está em [agente.py](agente.py), em versão mínima: só a interpretação (mensagem → ferramenta simulada `registrar_gasto` ou `perguntar_usuario(pergunta, campos_faltantes)`), sem Telegram nem Notion. A função `interpretar(mensagem, data_referencia)` é o ponto de entrada do benchmark. O `PROMPT_SISTEMA` foi escrito em conjunto com o usuário (14/10).
+- Problema conhecido (não corrigido de propósito, para ser a 1ª melhoria medida): no C02 o modelo copia o exemplo "Qual foi o valor e a forma de pagamento?" e inclui `valor` em `campos_faltantes`.
 - Modelo decidido: **local, pelo Ollama** (gratuito, sem chave de API). Hardware: 16 GB de RAM e GTX 1650 de 4 GB, adequado para modelos de cerca de 3B.
 - Melhorias no agente seguem a "escada": temperatura 0 → saída estruturada → instruções → exemplos no prompt → validação em Python → modelo maior → fine-tuning (último recurso, fora da v1). Cada degrau é medido pelo benchmark.
-- Ordem das etapas: 1. casos de teste com gabarito (concluída) → **2. agente mínimo (etapa atual)** → 3. script do benchmark → 4. linha de base.
+- Ordem das etapas: 1. casos de teste com gabarito (concluída) → 2. agente mínimo (concluída) → **3. script do benchmark (etapa atual)** → 4. linha de base.
 - Regras do agente: [especificacao-agente.md](especificacao-agente.md). Casos: `casos/casos.json` (15 de ajuste) e `casos/casos_ocultos.json` (5 ocultos).
-- Ainda não há código.
+- [teste_conexao.py](teste_conexao.py) é só o teste inicial Python → Ollama (sem prompt nem ferramentas).
 - A pasta `.claude/` traz, do projeto CRM, o medidor de uso e o sistema de orquestração (`/orquestrar`, agentes em `.claude/agents/`). Na v1 trabalhamos diretamente, etapa por etapa, sem a orquestração. O hook `testar-ao-parar.ps1` ainda é do CRM (roda `npm test` apenas se houver `index.html`) e não faz nada aqui até ser adaptado para Python.

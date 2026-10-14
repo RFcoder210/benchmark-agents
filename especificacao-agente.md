@@ -9,7 +9,7 @@ O agente recebe **uma mensagem de texto** e uma **data de referência** (que faz
 | Ação | Ferramenta | Quando |
 |---|---|---|
 | Registrar | `registrar_gasto(valor, categoria, pagamento, data)` | o gasto está completo e sem ambiguidade |
-| Perguntar | `perguntar_usuario(pergunta)` | falta informação ou ela é ambígua |
+| Perguntar | `perguntar_usuario(pergunta, campos_faltantes)` | falta informação ou ela é ambígua; `campos_faltantes` lista os campos que faltam (`valor`, `categoria`, `pagamento`) |
 | Ignorar | nenhuma ferramenta | a mensagem não é um gasto |
 
 As ferramentas são **simuladas**: não gravam no Notion nem enviam mensagens. Apenas registram o que o agente tentou fazer.
@@ -50,5 +50,5 @@ As ferramentas são **simuladas**: não gravam no Notion nem enviam mensagens. A
    - Diferença para `outros`: em `outros` o gasto é **conhecido** (ex.: "presente de aniversário") e só não tem categoria própria. Na pergunta, **não se sabe** em que se gastou.
 6. **Faltam várias informações** → uma única pergunta, cobrindo todas as que faltam.
 7. **Data**: não mencionada → data de referência; "ontem" → data de referência menos 1 dia; data explícita (ex.: "dia 3") → essa data, no mês da data de referência.
-8. **Não é gasto** (cumprimentos, perguntas, receitas como salário) → nenhuma ferramenta.
+8. **Não é gasto** (cumprimentos, perguntas, receitas como salário, transferências para contas do próprio usuário, como poupança ou investimento) → nenhuma ferramenta.
 9. **Um gasto por mensagem.** Mensagens com vários gastos ficam fora da v1 e não entram nos casos de teste.
