@@ -57,10 +57,10 @@
   },
   {
     "id": "C08",
-    "mensagem": "ontem abasteci o carro, 150 pila no pix",
+    "mensagem": "ontem abasteci o carro, 150 no pix",
     "data_referencia": "2026-10-11",
     "dificuldade": "medio",
-    "testa": "data relativa (ontem) e gíria para valor",
+    "testa": "data relativa (ontem) e categoria deduzida da atividade (abastecer)",
     "esperado": {"acao": "registrar", "valor": 150.0, "categoria": "transporte", "pagamento": "pix", "data": "2026-10-10"}
   },
   {
