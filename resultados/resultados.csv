@@ -1,466 +1,511 @@
-﻿data;versao_agente;id_caso;categoria;dificuldade;execucao_n;acertou;campos_errados;tempo_s;tokens;custo;n_passos;observacao
-2026-10-14 19:47;v1;C01;registrar;facil;1;1;;18,38;1515;0,0;1;
-2026-10-14 19:47;v1;C01;registrar;facil;2;1;;3,06;1515;0,0;1;
-2026-10-14 19:47;v1;C01;registrar;facil;3;1;;2,67;1515;0,0;1;
-2026-10-14 19:47;v1;C02;perguntar;facil;1;0;campos_faltantes;2,96;1510;0,0;1;campos_faltantes=['valor', 'pagamento'] (esperado ['pagamento'])
-2026-10-14 19:47;v1;C02;perguntar;facil;2;0;campos_faltantes;3,59;1510;0,0;1;campos_faltantes=['valor', 'pagamento'] (esperado ['pagamento'])
-2026-10-14 19:47;v1;C02;perguntar;facil;3;0;campos_faltantes;3,19;1510;0,0;1;campos_faltantes=['valor', 'pagamento'] (esperado ['pagamento'])
-2026-10-14 19:47;v1;C03;registrar;facil;1;1;;3,05;1517;0,0;1;
-2026-10-14 19:47;v1;C03;registrar;facil;2;1;;3,21;1517;0,0;1;
-2026-10-14 19:47;v1;C03;registrar;facil;3;1;;3,24;1517;0,0;1;
-2026-10-14 19:47;v1;C04;ignorar;facil;1;1;;0,49;1464;0,0;0;
-2026-10-14 19:47;v1;C04;ignorar;facil;2;1;;0,24;1464;0,0;0;
-2026-10-14 19:47;v1;C04;ignorar;facil;3;1;;0,21;1464;0,0;0;
-2026-10-14 19:47;v1;C05;registrar;facil;1;1;;3,37;1528;0,0;1;
-2026-10-14 19:47;v1;C05;registrar;facil;2;1;;3,11;1528;0,0;1;
-2026-10-14 19:47;v1;C05;registrar;facil;3;1;;3,2;1528;0,0;1;
-2026-10-14 19:47;v1;C06;registrar;medio;1;1;;3,27;1513;0,0;1;
-2026-10-14 19:47;v1;C06;registrar;medio;2;1;;3,15;1513;0,0;1;
-2026-10-14 19:47;v1;C06;registrar;medio;3;1;;3,23;1513;0,0;1;
-2026-10-14 19:47;v1;C07;registrar;medio;1;1;;3,42;1522;0,0;1;
-2026-10-14 19:47;v1;C07;registrar;medio;2;1;;3,11;1522;0,0;1;
-2026-10-14 19:47;v1;C07;registrar;medio;3;1;;3,02;1522;0,0;1;
-2026-10-14 19:47;v1;C08;registrar;medio;1;0;acao;3,67;1531;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria do gasto (ex: transporte) e qual foi a forma de pagamento (já foi informado como pix)?"""
-2026-10-14 19:47;v1;C08;registrar;medio;2;0;acao;3,11;1523;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria do gasto (ex: transporte) e a forma de pagamento foi realmente pix?"""
-2026-10-14 19:47;v1;C08;registrar;medio;3;0;acao;3,07;1523;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria do gasto (ex: transporte) e a forma de pagamento foi realmente pix?"""
-2026-10-14 19:47;v1;C09;perguntar;medio;1;0;acao;3,3;1525;0,0;1;registrou: valor=89.9, categoria=educacao, pagamento=credito, data=2026-10-11
-2026-10-14 19:47;v1;C09;perguntar;medio;2;0;acao;3,03;1525;0,0;1;registrou: valor=89.9, categoria=educacao, pagamento=credito, data=2026-10-11
-2026-10-14 19:47;v1;C09;perguntar;medio;3;0;acao;3,03;1525;0,0;1;registrou: valor=89.9, categoria=educacao, pagamento=credito, data=2026-10-11
-2026-10-14 19:47;v1;C10;perguntar;medio;1;1;;2,45;1506;0,0;1;
-2026-10-14 19:47;v1;C10;perguntar;medio;2;0;acao;2,78;1514;0,0;1;registrou: valor=0, categoria=educacao, pagamento=pix, data=2026-10-11
-2026-10-14 19:47;v1;C10;perguntar;medio;3;0;acao;2,79;1514;0,0;1;registrou: valor=0, categoria=educacao, pagamento=pix, data=2026-10-11
-2026-10-14 19:47;v1;C11;ignorar;medio;1;1;;0,53;1469;0,0;0;
-2026-10-14 19:47;v1;C11;ignorar;medio;2;1;;0,2;1469;0,0;0;
-2026-10-14 19:47;v1;C11;ignorar;medio;3;1;;0,2;1469;0,0;0;
-2026-10-14 19:47;v1;C12;registrar;dificil;1;1;;3,25;1529;0,0;1;
-2026-10-14 19:47;v1;C12;registrar;dificil;2;1;;3,12;1529;0,0;1;
-2026-10-14 19:47;v1;C12;registrar;dificil;3;1;;3,06;1529;0,0;1;
-2026-10-14 19:47;v1;C13;perguntar;dificil;1;0;acao;3,03;1519;0,0;1;registrou: valor=50, categoria=outros, pagamento=debito, data=2026-10-11
-2026-10-14 19:47;v1;C13;perguntar;dificil;2;0;acao;2,88;1519;0,0;1;registrou: valor=50, categoria=outros, pagamento=debito, data=2026-10-11
-2026-10-14 19:47;v1;C13;perguntar;dificil;3;0;acao;2,91;1519;0,0;1;registrou: valor=50, categoria=outros, pagamento=debito, data=2026-10-11
-2026-10-14 19:47;v1;C14;registrar;dificil;1;0;acao;3,44;1526;0,0;1;"perguntou ['valor', 'categoria']: ""Qual foi o valor e em que categoria (presente) você gostaria de classificar esse gasto?"""
-2026-10-14 19:47;v1;C14;registrar;dificil;2;0;acao;3,26;1526;0,0;1;"perguntou ['valor', 'categoria']: ""Qual foi o valor e em que categoria (presente) você gostaria de classificar esse gasto?"""
-2026-10-14 19:47;v1;C14;registrar;dificil;3;0;acao;3,13;1526;0,0;1;"perguntou ['valor', 'categoria']: ""Qual foi o valor e em que categoria (presente) você gostaria de classificar esse gasto?"""
-2026-10-14 19:47;v1;C15;perguntar;dificil;1;0;acao;2,85;1514;0,0;1;registrou: valor=60, categoria=outros, pagamento=dinheiro, data=2026-10-10
-2026-10-14 19:47;v1;C15;perguntar;dificil;2;0;acao;2,69;1514;0,0;1;registrou: valor=60, categoria=outros, pagamento=dinheiro, data=2026-10-10
-2026-10-14 19:47;v1;C15;perguntar;dificil;3;0;acao;2,78;1514;0,0;1;registrou: valor=60, categoria=outros, pagamento=dinheiro, data=2026-10-10
-2026-10-14 19:58;v2;C01;registrar;facil;1;1;;22,3;1813;0,0;1;
-2026-10-14 19:58;v2;C01;registrar;facil;2;1;;4,15;1813;0,0;1;
-2026-10-14 19:58;v2;C01;registrar;facil;3;1;;4,77;1813;0,0;1;
-2026-10-14 19:58;v2;C02;perguntar;facil;1;1;;2,67;1796;0,0;1;
-2026-10-14 19:58;v2;C02;perguntar;facil;2;1;;2,62;1796;0,0;1;
-2026-10-14 19:58;v2;C02;perguntar;facil;3;1;;2,52;1796;0,0;1;
-2026-10-14 19:58;v2;C03;registrar;facil;1;1;;3,33;1813;0,0;1;
-2026-10-14 19:58;v2;C03;registrar;facil;2;1;;3,23;1813;0,0;1;
-2026-10-14 19:58;v2;C03;registrar;facil;3;1;;3,19;1813;0,0;1;
-2026-10-14 19:58;v2;C04;ignorar;facil;1;1;;0,42;1760;0,0;0;
-2026-10-14 19:58;v2;C04;ignorar;facil;2;1;;0,21;1760;0,0;0;
-2026-10-14 19:58;v2;C04;ignorar;facil;3;1;;0,2;1760;0,0;0;
-2026-10-14 19:58;v2;C05;registrar;facil;1;1;;3,48;1824;0,0;1;
-2026-10-14 19:58;v2;C05;registrar;facil;2;1;;3,32;1824;0,0;1;
-2026-10-14 19:58;v2;C05;registrar;facil;3;1;;3,36;1824;0,0;1;
-2026-10-14 19:58;v2;C06;registrar;medio;1;1;;3,5;1811;0,0;1;
-2026-10-14 19:58;v2;C06;registrar;medio;2;1;;3,5;1811;0,0;1;
-2026-10-14 19:58;v2;C06;registrar;medio;3;1;;3,98;1811;0,0;1;
-2026-10-14 19:58;v2;C07;registrar;medio;1;0;acao;3,31;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-14 19:58;v2;C07;registrar;medio;2;0;acao;3,0;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-14 19:58;v2;C07;registrar;medio;3;0;acao;3,09;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-14 19:58;v2;C08;registrar;medio;1;0;acao;3,32;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
-2026-10-14 19:58;v2;C08;registrar;medio;2;0;acao;3,09;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
-2026-10-14 19:58;v2;C08;registrar;medio;3;0;acao;3,19;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
-2026-10-14 19:58;v2;C09;perguntar;medio;1;1;;2,93;1810;0,0;1;
-2026-10-14 19:58;v2;C09;perguntar;medio;2;1;;2,89;1810;0,0;1;
-2026-10-14 19:58;v2;C09;perguntar;medio;3;1;;2,94;1810;0,0;1;
-2026-10-14 19:58;v2;C10;perguntar;medio;1;0;acao;1,98;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
-2026-10-14 19:58;v2;C10;perguntar;medio;2;0;acao;1,67;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
-2026-10-14 19:58;v2;C10;perguntar;medio;3;0;acao;1,59;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
-2026-10-14 19:58;v2;C11;ignorar;medio;1;1;;0,54;1765;0,0;0;
-2026-10-14 19:58;v2;C11;ignorar;medio;2;1;;0,2;1765;0,0;0;
-2026-10-14 19:58;v2;C11;ignorar;medio;3;1;;0,21;1765;0,0;0;
-2026-10-14 19:58;v2;C12;registrar;dificil;1;1;;3,67;1825;0,0;1;
-2026-10-14 19:58;v2;C12;registrar;dificil;2;1;;3,43;1825;0,0;1;
-2026-10-14 19:58;v2;C12;registrar;dificil;3;1;;3,38;1825;0,0;1;
-2026-10-14 19:58;v2;C13;perguntar;dificil;1;0;acao;3,64;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-14 19:58;v2;C13;perguntar;dificil;2;0;acao;3,33;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-14 19:58;v2;C13;perguntar;dificil;3;0;acao;3,34;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-14 19:58;v2;C14;registrar;dificil;1;0;acao;2,96;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-14 19:58;v2;C14;registrar;dificil;2;0;acao;3,0;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-14 19:58;v2;C14;registrar;dificil;3;0;acao;3,03;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-14 19:58;v2;C15;perguntar;dificil;1;1;;3,29;1808;0,0;1;
-2026-10-14 19:58;v2;C15;perguntar;dificil;2;1;;3,28;1808;0,0;1;
-2026-10-14 19:58;v2;C15;perguntar;dificil;3;1;;3,49;1808;0,0;1;
-2026-10-15 22:24;v2-loteA;C01;registrar;facil;1;1;;7,4;1813;0,0;1;
-2026-10-15 22:24;v2-loteA;C01;registrar;facil;2;1;;2,93;1813;0,0;1;
-2026-10-15 22:24;v2-loteA;C01;registrar;facil;3;1;;2,93;1813;0,0;1;
-2026-10-15 22:24;v2-loteA;C02;perguntar;facil;1;1;;2,31;1796;0,0;1;
-2026-10-15 22:24;v2-loteA;C02;perguntar;facil;2;1;;2,22;1796;0,0;1;
-2026-10-15 22:24;v2-loteA;C02;perguntar;facil;3;1;;2,26;1796;0,0;1;
-2026-10-15 22:24;v2-loteA;C03;registrar;facil;1;1;;3,1;1813;0,0;1;
-2026-10-15 22:24;v2-loteA;C03;registrar;facil;2;1;;3,02;1813;0,0;1;
-2026-10-15 22:24;v2-loteA;C03;registrar;facil;3;1;;3,03;1813;0,0;1;
-2026-10-15 22:24;v2-loteA;C04;ignorar;facil;1;1;;0,4;1760;0,0;0;
-2026-10-15 22:24;v2-loteA;C04;ignorar;facil;2;1;;0,2;1760;0,0;0;
-2026-10-15 22:24;v2-loteA;C04;ignorar;facil;3;1;;0,2;1760;0,0;0;
-2026-10-15 22:24;v2-loteA;C05;registrar;facil;1;1;;3,35;1824;0,0;1;
-2026-10-15 22:24;v2-loteA;C05;registrar;facil;2;1;;3,14;1824;0,0;1;
-2026-10-15 22:24;v2-loteA;C05;registrar;facil;3;1;;3,1;1824;0,0;1;
-2026-10-15 22:24;v2-loteA;C06;registrar;medio;1;1;;3,12;1811;0,0;1;
-2026-10-15 22:24;v2-loteA;C06;registrar;medio;2;1;;3,04;1811;0,0;1;
-2026-10-15 22:24;v2-loteA;C06;registrar;medio;3;1;;3,03;1811;0,0;1;
-2026-10-15 22:24;v2-loteA;C07;registrar;medio;1;0;acao;2,81;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:24;v2-loteA;C07;registrar;medio;2;0;acao;2,66;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:24;v2-loteA;C07;registrar;medio;3;0;acao;2,62;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:24;v2-loteA;C08;registrar;medio;1;0;acao;2,62;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
-2026-10-15 22:24;v2-loteA;C08;registrar;medio;2;0;acao;2,32;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
-2026-10-15 22:24;v2-loteA;C08;registrar;medio;3;0;acao;2,39;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
-2026-10-15 22:24;v2-loteA;C09;perguntar;medio;1;1;;2,62;1810;0,0;1;
-2026-10-15 22:24;v2-loteA;C09;perguntar;medio;2;1;;2,45;1810;0,0;1;
-2026-10-15 22:24;v2-loteA;C09;perguntar;medio;3;1;;2,48;1810;0,0;1;
-2026-10-15 22:24;v2-loteA;C10;perguntar;medio;1;0;acao;1,44;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
-2026-10-15 22:24;v2-loteA;C10;perguntar;medio;2;0;acao;1,23;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
-2026-10-15 22:24;v2-loteA;C10;perguntar;medio;3;0;acao;1,33;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
-2026-10-15 22:24;v2-loteA;C11;ignorar;medio;1;1;;0,53;1765;0,0;0;
-2026-10-15 22:24;v2-loteA;C11;ignorar;medio;2;1;;0,19;1765;0,0;0;
-2026-10-15 22:24;v2-loteA;C11;ignorar;medio;3;1;;0,19;1765;0,0;0;
-2026-10-15 22:24;v2-loteA;C12;registrar;dificil;1;1;;3,35;1825;0,0;1;
-2026-10-15 22:24;v2-loteA;C12;registrar;dificil;2;1;;3,13;1825;0,0;1;
-2026-10-15 22:24;v2-loteA;C12;registrar;dificil;3;1;;3,16;1825;0,0;1;
-2026-10-15 22:24;v2-loteA;C13;perguntar;dificil;1;0;acao;3,2;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:24;v2-loteA;C13;perguntar;dificil;2;0;acao;3,05;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:24;v2-loteA;C13;perguntar;dificil;3;0;acao;3,06;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:24;v2-loteA;C14;registrar;dificil;1;1;;3,2;1819;0,0;1;
-2026-10-15 22:24;v2-loteA;C14;registrar;dificil;2;0;acao;2,57;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-15 22:24;v2-loteA;C14;registrar;dificil;3;0;acao;2,54;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-15 22:24;v2-loteA;C15;perguntar;dificil;1;1;;2,9;1808;0,0;1;
-2026-10-15 22:24;v2-loteA;C15;perguntar;dificil;2;1;;2,81;1808;0,0;1;
-2026-10-15 22:24;v2-loteA;C15;perguntar;dificil;3;1;;2,83;1808;0,0;1;
-2026-10-15 22:26;v2-t0.7;C01;registrar;facil;1;1;;3,19;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C01;registrar;facil;2;1;;2,98;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C01;registrar;facil;3;1;;3,02;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C01;registrar;facil;4;1;;2,99;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C01;registrar;facil;5;1;;3,0;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C01;registrar;facil;6;1;;2,97;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C01;registrar;facil;7;1;;2,99;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C01;registrar;facil;8;1;;2,99;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C01;registrar;facil;9;1;;2,95;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C01;registrar;facil;10;1;;2,98;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;1;1;;2,32;1796;0,0;1;
-2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;2;1;;2,25;1796;0,0;1;
-2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;3;1;;2,26;1796;0,0;1;
-2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;4;1;;2,25;1796;0,0;1;
-2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;5;1;;2,25;1796;0,0;1;
-2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;6;1;;2,26;1796;0,0;1;
-2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;7;1;;2,25;1796;0,0;1;
-2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;8;1;;2,24;1796;0,0;1;
-2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;9;1;;2,27;1796;0,0;1;
-2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;10;1;;2,26;1796;0,0;1;
-2026-10-15 22:26;v2-t0.7;C03;registrar;facil;1;1;;3,11;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C03;registrar;facil;2;1;;3,01;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C03;registrar;facil;3;1;;3,02;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C03;registrar;facil;4;1;;3,11;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C03;registrar;facil;5;1;;3,05;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C03;registrar;facil;6;1;;3,0;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C03;registrar;facil;7;1;;3,01;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C03;registrar;facil;8;1;;3,05;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C03;registrar;facil;9;1;;3,02;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C03;registrar;facil;10;1;;3,0;1813;0,0;1;
-2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;1;1;;0,4;1760;0,0;0;
-2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;2;1;;0,2;1760;0,0;0;
-2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;3;1;;0,2;1760;0,0;0;
-2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;4;1;;0,19;1760;0,0;0;
-2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;5;1;;0,2;1760;0,0;0;
-2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;6;1;;0,2;1760;0,0;0;
-2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;7;1;;0,19;1760;0,0;0;
-2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;8;1;;0,19;1760;0,0;0;
-2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;9;1;;0,2;1760;0,0;0;
-2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;10;1;;0,2;1760;0,0;0;
-2026-10-15 22:26;v2-t0.7;C05;registrar;facil;1;1;;3,45;1824;0,0;1;
-2026-10-15 22:26;v2-t0.7;C05;registrar;facil;2;1;;3,08;1824;0,0;1;
-2026-10-15 22:26;v2-t0.7;C05;registrar;facil;3;1;;3,08;1824;0,0;1;
-2026-10-15 22:26;v2-t0.7;C05;registrar;facil;4;1;;3,07;1824;0,0;1;
-2026-10-15 22:26;v2-t0.7;C05;registrar;facil;5;1;;3,07;1824;0,0;1;
-2026-10-15 22:26;v2-t0.7;C05;registrar;facil;6;1;;3,06;1824;0,0;1;
-2026-10-15 22:26;v2-t0.7;C05;registrar;facil;7;1;;3,0;1824;0,0;1;
-2026-10-15 22:26;v2-t0.7;C05;registrar;facil;8;1;;3,08;1824;0,0;1;
-2026-10-15 22:26;v2-t0.7;C05;registrar;facil;9;1;;3,02;1824;0,0;1;
-2026-10-15 22:26;v2-t0.7;C05;registrar;facil;10;1;;3,05;1824;0,0;1;
-2026-10-15 22:26;v2-t0.7;C06;registrar;medio;1;1;;3,03;1811;0,0;1;
-2026-10-15 22:26;v2-t0.7;C06;registrar;medio;2;1;;2,97;1811;0,0;1;
-2026-10-15 22:26;v2-t0.7;C06;registrar;medio;3;1;;2,96;1811;0,0;1;
-2026-10-15 22:26;v2-t0.7;C06;registrar;medio;4;1;;2,97;1811;0,0;1;
-2026-10-15 22:26;v2-t0.7;C06;registrar;medio;5;1;;2,96;1811;0,0;1;
-2026-10-15 22:26;v2-t0.7;C06;registrar;medio;6;1;;2,91;1811;0,0;1;
-2026-10-15 22:26;v2-t0.7;C06;registrar;medio;7;1;;2,97;1811;0,0;1;
-2026-10-15 22:26;v2-t0.7;C06;registrar;medio;8;1;;2,98;1811;0,0;1;
-2026-10-15 22:26;v2-t0.7;C06;registrar;medio;9;1;;2,94;1811;0,0;1;
-2026-10-15 22:26;v2-t0.7;C06;registrar;medio;10;1;;2,93;1811;0,0;1;
-2026-10-15 22:26;v2-t0.7;C07;registrar;medio;1;0;acao;2,72;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:26;v2-t0.7;C07;registrar;medio;2;0;acao;2,54;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:26;v2-t0.7;C07;registrar;medio;3;0;acao;2,56;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:26;v2-t0.7;C07;registrar;medio;4;0;acao;2,56;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:26;v2-t0.7;C07;registrar;medio;5;0;acao;2,56;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:26;v2-t0.7;C07;registrar;medio;6;0;acao;2,53;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:26;v2-t0.7;C07;registrar;medio;7;0;acao;2,52;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:26;v2-t0.7;C07;registrar;medio;8;0;acao;2,83;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:26;v2-t0.7;C07;registrar;medio;9;0;acao;2,56;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:26;v2-t0.7;C07;registrar;medio;10;0;acao;2,74;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:26;v2-t0.7;C08;registrar;medio;1;0;acao;2,85;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
-2026-10-15 22:26;v2-t0.7;C08;registrar;medio;2;0;acao;2,4;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
-2026-10-15 22:26;v2-t0.7;C08;registrar;medio;3;0;acao;2,31;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
-2026-10-15 22:26;v2-t0.7;C08;registrar;medio;4;0;acao;2,54;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
-2026-10-15 22:26;v2-t0.7;C08;registrar;medio;5;0;acao;2,34;1808;0,0;1;"perguntou ['categoria']: ""Foi no débito ou no crédito?"""
-2026-10-15 22:26;v2-t0.7;C08;registrar;medio;6;0;acao;2,53;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
-2026-10-15 22:26;v2-t0.7;C08;registrar;medio;7;0;acao;2,34;1808;0,0;1;"perguntou ['categoria']: ""Foi no débito ou no crédito?"""
-2026-10-15 22:26;v2-t0.7;C08;registrar;medio;8;0;acao;2,55;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
-2026-10-15 22:26;v2-t0.7;C08;registrar;medio;9;0;acao;2,27;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
-2026-10-15 22:26;v2-t0.7;C08;registrar;medio;10;0;acao;2,32;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
-2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;1;1;;2,64;1810;0,0;1;
-2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;2;1;;2,42;1810;0,0;1;
-2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;3;1;;2,52;1810;0,0;1;
-2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;4;1;;2,51;1810;0,0;1;
-2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;5;1;;2,45;1810;0,0;1;
-2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;6;1;;2,48;1810;0,0;1;
-2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;7;1;;2,36;1810;0,0;1;
-2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;8;1;;2,39;1810;0,0;1;
-2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;9;1;;2,37;1810;0,0;1;
-2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;10;1;;2,4;1810;0,0;1;
-2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;1;0;acao;1,42;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
-2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;2;1;;2,26;1802;0,0;1;
-2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;3;1;;2,38;1802;0,0;1;
-2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;4;0;acao;1,25;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
-2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;5;1;;2,38;1802;0,0;1;
-2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;6;0;acao;1,26;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
-2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;7;1;;2,31;1802;0,0;1;
-2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;8;1;;2,33;1802;0,0;1;
-2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;9;0;acao;1,26;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
-2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;10;1;;2,36;1802;0,0;1;
-2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;1;1;;0,51;1765;0,0;0;
-2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;2;1;;0,2;1765;0,0;0;
-2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;3;1;;0,2;1765;0,0;0;
-2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;4;1;;0,2;1765;0,0;0;
-2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;5;1;;0,2;1765;0,0;0;
-2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;6;1;;0,2;1765;0,0;0;
-2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;7;1;;0,2;1765;0,0;0;
-2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;8;1;;0,2;1765;0,0;0;
-2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;9;1;;0,2;1765;0,0;0;
-2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;10;1;;0,2;1765;0,0;0;
-2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;1;1;;3,38;1825;0,0;1;
-2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;2;1;;3,07;1825;0,0;1;
-2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;3;1;;3,09;1825;0,0;1;
-2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;4;1;;3,05;1825;0,0;1;
-2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;5;1;;3,14;1825;0,0;1;
-2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;6;1;;3,16;1825;0,0;1;
-2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;7;1;;3,16;1825;0,0;1;
-2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;8;1;;3,12;1825;0,0;1;
-2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;9;1;;3,17;1825;0,0;1;
-2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;10;1;;3,21;1825;0,0;1;
-2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;1;0;acao;3,25;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;2;0;acao;3,09;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;3;0;acao;3,06;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;4;0;acao;3,12;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;5;0;acao;3,11;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;6;0;acao;3,11;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;7;0;acao;3,45;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;8;0;acao;3,25;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;9;0;acao;3,13;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;10;0;acao;3,09;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;1;0;acao;2,8;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;2;0;acao;2,65;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;3;0;acao;2,59;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;4;0;acao;2,63;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;5;0;acao;2,65;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;6;1;;3,13;1819;0,0;1;
-2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;7;1;;3,11;1819;0,0;1;
-2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;8;0;acao;2,59;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;9;0;acao;2,61;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;10;0;acao;2,57;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
-2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;1;1;;3,01;1808;0,0;1;
-2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;2;1;;2,82;1808;0,0;1;
-2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;3;1;;2,86;1808;0,0;1;
-2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;4;1;;2,88;1808;0,0;1;
-2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;5;1;;2,9;1808;0,0;1;
-2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;6;1;;2,86;1808;0,0;1;
-2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;7;1;;2,85;1808;0,0;1;
-2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;8;1;;2,87;1808;0,0;1;
-2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;9;1;;2,89;1808;0,0;1;
-2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;10;1;;2,89;1808;0,0;1;
-2026-10-15 22:32;v2-ordemB;C01;registrar;facil;1;1;;9,55;1813;0,0;1;
-2026-10-15 22:32;v2-ordemB;C01;registrar;facil;2;1;;3,11;1813;0,0;1;
-2026-10-15 22:32;v2-ordemB;C01;registrar;facil;3;1;;3,08;1813;0,0;1;
-2026-10-15 22:32;v2-ordemB;C02;perguntar;facil;1;0;campos_faltantes;3,0;1807;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
-2026-10-15 22:32;v2-ordemB;C02;perguntar;facil;2;0;campos_faltantes;2,97;1807;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
-2026-10-15 22:32;v2-ordemB;C02;perguntar;facil;3;0;campos_faltantes;2,91;1807;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
-2026-10-15 22:32;v2-ordemB;C03;registrar;facil;1;1;;3,2;1813;0,0;1;
-2026-10-15 22:32;v2-ordemB;C03;registrar;facil;2;1;;3,13;1813;0,0;1;
-2026-10-15 22:32;v2-ordemB;C03;registrar;facil;3;1;;3,19;1813;0,0;1;
-2026-10-15 22:32;v2-ordemB;C04;ignorar;facil;1;1;;0,43;1760;0,0;0;
-2026-10-15 22:32;v2-ordemB;C04;ignorar;facil;2;1;;0,2;1760;0,0;0;
-2026-10-15 22:32;v2-ordemB;C04;ignorar;facil;3;1;;0,21;1760;0,0;0;
-2026-10-15 22:32;v2-ordemB;C05;registrar;facil;1;1;;3,39;1824;0,0;1;
-2026-10-15 22:32;v2-ordemB;C05;registrar;facil;2;1;;3,22;1824;0,0;1;
-2026-10-15 22:32;v2-ordemB;C05;registrar;facil;3;1;;3,16;1824;0,0;1;
-2026-10-15 22:32;v2-ordemB;C06;registrar;medio;1;1;;3,17;1811;0,0;1;
-2026-10-15 22:32;v2-ordemB;C06;registrar;medio;2;1;;3,09;1811;0,0;1;
-2026-10-15 22:32;v2-ordemB;C06;registrar;medio;3;1;;3,12;1811;0,0;1;
-2026-10-15 22:32;v2-ordemB;C07;registrar;medio;1;0;acao;2,88;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:32;v2-ordemB;C07;registrar;medio;2;0;acao;2,71;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:32;v2-ordemB;C07;registrar;medio;3;0;acao;2,63;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:32;v2-ordemB;C08;registrar;medio;1;0;acao;2,97;1814;0,0;1;"perguntou ['categoria']: ""Em que categoria esse gasto se encaixa? (ex: transporte)"""
-2026-10-15 22:32;v2-ordemB;C08;registrar;medio;2;0;acao;2,77;1814;0,0;1;"perguntou ['categoria']: ""Em que categoria esse gasto se encaixa? (ex: transporte)"""
-2026-10-15 22:32;v2-ordemB;C08;registrar;medio;3;0;acao;2,8;1814;0,0;1;"perguntou ['categoria']: ""Em que categoria esse gasto se encaixa? (ex: transporte)"""
-2026-10-15 22:32;v2-ordemB;C09;perguntar;medio;1;1;;2,76;1810;0,0;1;
-2026-10-15 22:32;v2-ordemB;C09;perguntar;medio;2;1;;2,51;1810;0,0;1;
-2026-10-15 22:32;v2-ordemB;C09;perguntar;medio;3;1;;2,49;1810;0,0;1;
-2026-10-15 22:32;v2-ordemB;C10;perguntar;medio;1;0;acao;1,67;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
-2026-10-15 22:32;v2-ordemB;C10;perguntar;medio;2;0;acao;1,49;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
-2026-10-15 22:32;v2-ordemB;C10;perguntar;medio;3;0;acao;1,56;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
-2026-10-15 22:32;v2-ordemB;C11;ignorar;medio;1;1;;0,54;1765;0,0;0;
-2026-10-15 22:32;v2-ordemB;C11;ignorar;medio;2;1;;0,21;1765;0,0;0;
-2026-10-15 22:32;v2-ordemB;C11;ignorar;medio;3;1;;0,21;1765;0,0;0;
-2026-10-15 22:32;v2-ordemB;C12;registrar;dificil;1;1;;3,43;1825;0,0;1;
-2026-10-15 22:32;v2-ordemB;C12;registrar;dificil;2;1;;3,19;1825;0,0;1;
-2026-10-15 22:32;v2-ordemB;C12;registrar;dificil;3;1;;3,17;1825;0,0;1;
-2026-10-15 22:32;v2-ordemB;C13;perguntar;dificil;1;1;;3,12;1813;0,0;1;
-2026-10-15 22:32;v2-ordemB;C13;perguntar;dificil;2;1;;2,93;1813;0,0;1;
-2026-10-15 22:32;v2-ordemB;C13;perguntar;dificil;3;1;;2,9;1813;0,0;1;
-2026-10-15 22:32;v2-ordemB;C14;registrar;dificil;1;0;acao;2,51;1804;0,0;1;"perguntou ['categoria']: ""Em que foi esse gasto?"""
-2026-10-15 22:32;v2-ordemB;C14;registrar;dificil;2;0;acao;2,3;1804;0,0;1;"perguntou ['categoria']: ""Em que foi esse gasto?"""
-2026-10-15 22:32;v2-ordemB;C14;registrar;dificil;3;0;acao;2,3;1804;0,0;1;"perguntou ['categoria']: ""Em que foi esse gasto?"""
-2026-10-15 22:32;v2-ordemB;C15;perguntar;dificil;1;1;;3,03;1808;0,0;1;
-2026-10-15 22:32;v2-ordemB;C15;perguntar;dificil;2;1;;2,95;1808;0,0;1;
-2026-10-15 22:32;v2-ordemB;C15;perguntar;dificil;3;1;;2,93;1808;0,0;1;
-2026-10-15 22:34;v2-ordemC;C01;registrar;facil;1;1;;9,31;1813;0,0;1;
-2026-10-15 22:34;v2-ordemC;C01;registrar;facil;2;1;;3,14;1813;0,0;1;
-2026-10-15 22:34;v2-ordemC;C01;registrar;facil;3;1;;3,17;1813;0,0;1;
-2026-10-15 22:34;v2-ordemC;C02;perguntar;facil;1;0;campos_faltantes;2,58;1799;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
-2026-10-15 22:34;v2-ordemC;C02;perguntar;facil;2;0;campos_faltantes;2,94;1808;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
-2026-10-15 22:34;v2-ordemC;C02;perguntar;facil;3;0;campos_faltantes;2,97;1808;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
-2026-10-15 22:34;v2-ordemC;C03;registrar;facil;1;1;;3,15;1813;0,0;1;
-2026-10-15 22:34;v2-ordemC;C03;registrar;facil;2;1;;3,16;1813;0,0;1;
-2026-10-15 22:34;v2-ordemC;C03;registrar;facil;3;1;;3,03;1813;0,0;1;
-2026-10-15 22:34;v2-ordemC;C04;ignorar;facil;1;1;;0,43;1760;0,0;0;
-2026-10-15 22:34;v2-ordemC;C04;ignorar;facil;2;1;;0,2;1760;0,0;0;
-2026-10-15 22:34;v2-ordemC;C04;ignorar;facil;3;1;;0,21;1760;0,0;0;
-2026-10-15 22:34;v2-ordemC;C05;registrar;facil;1;1;;3,43;1824;0,0;1;
-2026-10-15 22:34;v2-ordemC;C05;registrar;facil;2;0;acao;1,94;1802;0,0;0;"ignorou; texto: ""registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-"""
-2026-10-15 22:34;v2-ordemC;C05;registrar;facil;3;0;acao;1,97;1802;0,0;0;"ignorou; texto: ""registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-"""
-2026-10-15 22:34;v2-ordemC;C06;registrar;medio;1;0;acao;1,56;1781;0,0;0;"ignorou; texto: ""registrar_gasto: valor 42.0, categoria saude, pagamento debito, data de referênc"""
-2026-10-15 22:34;v2-ordemC;C06;registrar;medio;2;0;acao;1,36;1781;0,0;0;"ignorou; texto: ""registrar_gasto: valor 42.0, categoria saude, pagamento debito, data de referênc"""
-2026-10-15 22:34;v2-ordemC;C06;registrar;medio;3;0;acao;1,42;1781;0,0;0;"ignorou; texto: ""registrar_gasto: valor 42.0, categoria saude, pagamento debito, data de referênc"""
-2026-10-15 22:34;v2-ordemC;C07;registrar;medio;1;0;acao;2,88;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:34;v2-ordemC;C07;registrar;medio;2;0;acao;2,64;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (ex: lazer)"""
-2026-10-15 22:34;v2-ordemC;C07;registrar;medio;3;0;acao;2,84;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (ex: lazer)"""
-2026-10-15 22:34;v2-ordemC;C08;registrar;medio;1;0;acao;2,75;1809;0,0;1;"perguntou ['pagamento']: ""Foi no débito ou no crédito?"""
-2026-10-15 22:34;v2-ordemC;C08;registrar;medio;2;0;acao;2,51;1809;0,0;1;"perguntou ['pagamento']: ""Foi no débito ou no crédito?"""
-2026-10-15 22:34;v2-ordemC;C08;registrar;medio;3;0;acao;2,5;1809;0,0;1;"perguntou ['pagamento']: ""Foi no débito ou no crédito?"""
-2026-10-15 22:34;v2-ordemC;C09;perguntar;medio;1;1;;2,8;1810;0,0;1;
-2026-10-15 22:34;v2-ordemC;C09;perguntar;medio;2;1;;2,51;1810;0,0;1;
-2026-10-15 22:34;v2-ordemC;C09;perguntar;medio;3;1;;2,49;1810;0,0;1;
-2026-10-15 22:34;v2-ordemC;C10;perguntar;medio;1;0;acao;1,7;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
-2026-10-15 22:34;v2-ordemC;C10;perguntar;medio;2;0;acao;1,51;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
-2026-10-15 22:34;v2-ordemC;C10;perguntar;medio;3;0;acao;1,54;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
-2026-10-15 22:34;v2-ordemC;C11;ignorar;medio;1;1;;0,56;1765;0,0;0;
-2026-10-15 22:34;v2-ordemC;C11;ignorar;medio;2;1;;0,21;1765;0,0;0;
-2026-10-15 22:34;v2-ordemC;C11;ignorar;medio;3;1;;0,22;1765;0,0;0;
-2026-10-15 22:34;v2-ordemC;C12;registrar;dificil;1;1;;3,41;1825;0,0;1;
-2026-10-15 22:34;v2-ordemC;C12;registrar;dificil;2;1;;3,15;1825;0,0;1;
-2026-10-15 22:34;v2-ordemC;C12;registrar;dificil;3;1;;3,24;1825;0,0;1;
-2026-10-15 22:34;v2-ordemC;C13;perguntar;dificil;1;0;acao;3,4;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:34;v2-ordemC;C13;perguntar;dificil;2;0;acao;3,14;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:34;v2-ordemC;C13;perguntar;dificil;3;0;acao;3,16;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:34;v2-ordemC;C14;registrar;dificil;1;1;;3,32;1819;0,0;1;
-2026-10-15 22:34;v2-ordemC;C14;registrar;dificil;2;1;;3,16;1819;0,0;1;
-2026-10-15 22:34;v2-ordemC;C14;registrar;dificil;3;1;;3,1;1819;0,0;1;
-2026-10-15 22:34;v2-ordemC;C15;perguntar;dificil;1;1;;2,58;1801;0,0;1;
-2026-10-15 22:34;v2-ordemC;C15;perguntar;dificil;2;1;;2,55;1801;0,0;1;
-2026-10-15 22:34;v2-ordemC;C15;perguntar;dificil;3;1;;2,48;1801;0,0;1;
-2026-10-15 22:36;v2-ordemD;C01;registrar;facil;1;1;;9,1;1813;0,0;1;
-2026-10-15 22:36;v2-ordemD;C01;registrar;facil;2;1;;3,04;1813;0,0;1;
-2026-10-15 22:36;v2-ordemD;C01;registrar;facil;3;1;;3,0;1813;0,0;1;
-2026-10-15 22:36;v2-ordemD;C02;perguntar;facil;1;0;campos_faltantes;3,06;1808;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
-2026-10-15 22:36;v2-ordemD;C02;perguntar;facil;2;0;campos_faltantes;2,95;1807;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
-2026-10-15 22:36;v2-ordemD;C02;perguntar;facil;3;0;campos_faltantes;2,98;1807;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
-2026-10-15 22:36;v2-ordemD;C03;registrar;facil;1;1;;3,22;1813;0,0;1;
-2026-10-15 22:36;v2-ordemD;C03;registrar;facil;2;1;;3,11;1813;0,0;1;
-2026-10-15 22:36;v2-ordemD;C03;registrar;facil;3;1;;3,09;1813;0,0;1;
-2026-10-15 22:36;v2-ordemD;C04;ignorar;facil;1;1;;0,42;1760;0,0;0;
-2026-10-15 22:36;v2-ordemD;C04;ignorar;facil;2;1;;0,21;1760;0,0;0;
-2026-10-15 22:36;v2-ordemD;C04;ignorar;facil;3;1;;0,22;1760;0,0;0;
-2026-10-15 22:36;v2-ordemD;C05;registrar;facil;1;1;;3,44;1824;0,0;1;
-2026-10-15 22:36;v2-ordemD;C05;registrar;facil;2;1;;3,2;1824;0,0;1;
-2026-10-15 22:36;v2-ordemD;C05;registrar;facil;3;1;;3,22;1824;0,0;1;
-2026-10-15 22:36;v2-ordemD;C06;registrar;medio;1;1;;3,21;1811;0,0;1;
-2026-10-15 22:36;v2-ordemD;C06;registrar;medio;2;1;;3,12;1811;0,0;1;
-2026-10-15 22:36;v2-ordemD;C06;registrar;medio;3;1;;3,15;1811;0,0;1;
-2026-10-15 22:36;v2-ordemD;C07;registrar;medio;1;0;acao;2,9;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:36;v2-ordemD;C07;registrar;medio;2;0;acao;2,66;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:36;v2-ordemD;C07;registrar;medio;3;0;acao;2,65;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:36;v2-ordemD;C08;registrar;medio;1;0;acao;2,81;1809;0,0;1;"perguntou ['pagamento']: ""Foi no débito ou no crédito?"""
-2026-10-15 22:36;v2-ordemD;C08;registrar;medio;2;0;acao;2,52;1809;0,0;1;"perguntou ['pagamento']: ""Foi no débito ou no crédito?"""
-2026-10-15 22:36;v2-ordemD;C08;registrar;medio;3;0;acao;2,54;1809;0,0;1;"perguntou ['pagamento']: ""Foi no débito ou no crédito?"""
-2026-10-15 22:36;v2-ordemD;C09;perguntar;medio;1;1;;2,78;1810;0,0;1;
-2026-10-15 22:36;v2-ordemD;C09;perguntar;medio;2;1;;2,51;1810;0,0;1;
-2026-10-15 22:36;v2-ordemD;C09;perguntar;medio;3;1;;2,49;1810;0,0;1;
-2026-10-15 22:36;v2-ordemD;C10;perguntar;medio;1;0;acao;1,71;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
-2026-10-15 22:36;v2-ordemD;C10;perguntar;medio;2;0;acao;1,56;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
-2026-10-15 22:36;v2-ordemD;C10;perguntar;medio;3;0;acao;1,54;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
-2026-10-15 22:36;v2-ordemD;C11;ignorar;medio;1;1;;0,55;1765;0,0;0;
-2026-10-15 22:36;v2-ordemD;C11;ignorar;medio;2;1;;0,21;1765;0,0;0;
-2026-10-15 22:36;v2-ordemD;C11;ignorar;medio;3;1;;0,21;1765;0,0;0;
-2026-10-15 22:36;v2-ordemD;C12;registrar;dificil;1;1;;3,46;1825;0,0;1;
-2026-10-15 22:36;v2-ordemD;C12;registrar;dificil;2;1;;3,19;1825;0,0;1;
-2026-10-15 22:36;v2-ordemD;C12;registrar;dificil;3;1;;3,38;1825;0,0;1;
-2026-10-15 22:36;v2-ordemD;C13;perguntar;dificil;1;0;acao;3,3;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:36;v2-ordemD;C13;perguntar;dificil;2;0;acao;3,15;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:36;v2-ordemD;C13;perguntar;dificil;3;0;acao;3,13;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:36;v2-ordemD;C14;registrar;dificil;1;1;;3,36;1819;0,0;1;
-2026-10-15 22:36;v2-ordemD;C14;registrar;dificil;2;1;;3,14;1819;0,0;1;
-2026-10-15 22:36;v2-ordemD;C14;registrar;dificil;3;1;;3,1;1819;0,0;1;
-2026-10-15 22:36;v2-ordemD;C15;perguntar;dificil;1;1;;3,07;1809;0,0;1;
-2026-10-15 22:36;v2-ordemD;C15;perguntar;dificil;2;1;;2,99;1809;0,0;1;
-2026-10-15 22:36;v2-ordemD;C15;perguntar;dificil;3;1;;2,84;1809;0,0;1;
-2026-10-15 22:38;v3-candidato;C01;registrar;facil;1;1;;10,47;1930;0,0;1;
-2026-10-15 22:38;v3-candidato;C01;registrar;facil;2;1;;3,07;1930;0,0;1;
-2026-10-15 22:38;v3-candidato;C01;registrar;facil;3;1;;3,1;1930;0,0;1;
-2026-10-15 22:38;v3-candidato;C02;perguntar;facil;1;1;;2,55;1913;0,0;1;
-2026-10-15 22:38;v3-candidato;C02;perguntar;facil;2;1;;2,39;1913;0,0;1;
-2026-10-15 22:38;v3-candidato;C02;perguntar;facil;3;1;;2,38;1913;0,0;1;
-2026-10-15 22:38;v3-candidato;C03;registrar;facil;1;1;;3,28;1930;0,0;1;
-2026-10-15 22:38;v3-candidato;C03;registrar;facil;2;1;;3,15;1930;0,0;1;
-2026-10-15 22:38;v3-candidato;C03;registrar;facil;3;1;;3,25;1930;0,0;1;
-2026-10-15 22:38;v3-candidato;C04;ignorar;facil;1;1;;0,46;1877;0,0;0;
-2026-10-15 22:38;v3-candidato;C04;ignorar;facil;2;1;;0,21;1877;0,0;0;
-2026-10-15 22:38;v3-candidato;C04;ignorar;facil;3;1;;0,22;1877;0,0;0;
-2026-10-15 22:38;v3-candidato;C05;registrar;facil;1;0;acao;2,27;1919;0,0;0;"ignorou; texto: ""registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-"""
-2026-10-15 22:38;v3-candidato;C05;registrar;facil;2;0;acao;2,03;1919;0,0;0;"ignorou; texto: ""registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-"""
-2026-10-15 22:38;v3-candidato;C05;registrar;facil;3;0;acao;2,03;1919;0,0;0;"ignorou; texto: ""registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-"""
-2026-10-15 22:38;v3-candidato;C06;registrar;medio;1;1;;3,32;1928;0,0;1;
-2026-10-15 22:38;v3-candidato;C06;registrar;medio;2;1;;3,26;1928;0,0;1;
-2026-10-15 22:38;v3-candidato;C06;registrar;medio;3;1;;3,29;1928;0,0;1;
-2026-10-15 22:38;v3-candidato;C07;registrar;medio;1;0;acao;2,91;1927;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
-2026-10-15 22:38;v3-candidato;C07;registrar;medio;2;0;acao;2,8;1927;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (ex: lazer)"""
-2026-10-15 22:38;v3-candidato;C07;registrar;medio;3;0;acao;2,78;1927;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (ex: lazer)"""
-2026-10-15 22:38;v3-candidato;C08;registrar;medio;1;0;acao;2,68;1924;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
-2026-10-15 22:38;v3-candidato;C08;registrar;medio;2;0;acao;2,42;1924;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
-2026-10-15 22:38;v3-candidato;C08;registrar;medio;3;0;acao;2,45;1924;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
-2026-10-15 22:38;v3-candidato;C09;perguntar;medio;1;1;;2,83;1927;0,0;1;
-2026-10-15 22:38;v3-candidato;C09;perguntar;medio;2;1;;2,57;1927;0,0;1;
-2026-10-15 22:38;v3-candidato;C09;perguntar;medio;3;1;;2,57;1927;0,0;1;
-2026-10-15 22:38;v3-candidato;C10;perguntar;medio;1;0;acao;1,55;1899;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
-2026-10-15 22:38;v3-candidato;C10;perguntar;medio;2;0;acao;1,35;1899;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
-2026-10-15 22:38;v3-candidato;C10;perguntar;medio;3;0;acao;1,39;1899;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
-2026-10-15 22:38;v3-candidato;C11;ignorar;medio;1;1;;0,59;1882;0,0;0;
-2026-10-15 22:38;v3-candidato;C11;ignorar;medio;2;1;;0,22;1882;0,0;0;
-2026-10-15 22:38;v3-candidato;C11;ignorar;medio;3;1;;0,23;1882;0,0;0;
-2026-10-15 22:38;v3-candidato;C12;registrar;dificil;1;1;;3,5;1942;0,0;1;
-2026-10-15 22:38;v3-candidato;C12;registrar;dificil;2;1;;3,27;1942;0,0;1;
-2026-10-15 22:38;v3-candidato;C12;registrar;dificil;3;1;;3,21;1942;0,0;1;
-2026-10-15 22:38;v3-candidato;C13;perguntar;dificil;1;0;acao;3,37;1934;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:38;v3-candidato;C13;perguntar;dificil;2;0;acao;3,16;1934;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:38;v3-candidato;C13;perguntar;dificil;3;0;acao;3,21;1934;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
-2026-10-15 22:38;v3-candidato;C14;registrar;dificil;1;1;;3,45;1936;0,0;1;
-2026-10-15 22:38;v3-candidato;C14;registrar;dificil;2;1;;3,19;1936;0,0;1;
-2026-10-15 22:38;v3-candidato;C14;registrar;dificil;3;1;;3,17;1936;0,0;1;
-2026-10-15 22:38;v3-candidato;C15;perguntar;dificil;1;1;;3,1;1925;0,0;1;
-2026-10-15 22:38;v3-candidato;C15;perguntar;dificil;2;1;;3,0;1925;0,0;1;
-2026-10-15 22:38;v3-candidato;C15;perguntar;dificil;3;1;;2,92;1925;0,0;1;
+﻿data;versao_agente;id_caso;categoria;dificuldade;execucao_n;ordem;acertou;campos_errados;tipo_erro;tempo_s;tokens;custo;n_passos;observacao
+2026-10-14 19:47;v1;C01;registrar;facil;1;original;1;;;18,38;1515;0,0;1;
+2026-10-14 19:47;v1;C01;registrar;facil;2;original;1;;;3,06;1515;0,0;1;
+2026-10-14 19:47;v1;C01;registrar;facil;3;original;1;;;2,67;1515;0,0;1;
+2026-10-14 19:47;v1;C02;perguntar;facil;1;original;0;campos_faltantes;campos;2,96;1510;0,0;1;campos_faltantes=['valor', 'pagamento'] (esperado ['pagamento'])
+2026-10-14 19:47;v1;C02;perguntar;facil;2;original;0;campos_faltantes;campos;3,59;1510;0,0;1;campos_faltantes=['valor', 'pagamento'] (esperado ['pagamento'])
+2026-10-14 19:47;v1;C02;perguntar;facil;3;original;0;campos_faltantes;campos;3,19;1510;0,0;1;campos_faltantes=['valor', 'pagamento'] (esperado ['pagamento'])
+2026-10-14 19:47;v1;C03;registrar;facil;1;original;1;;;3,05;1517;0,0;1;
+2026-10-14 19:47;v1;C03;registrar;facil;2;original;1;;;3,21;1517;0,0;1;
+2026-10-14 19:47;v1;C03;registrar;facil;3;original;1;;;3,24;1517;0,0;1;
+2026-10-14 19:47;v1;C04;ignorar;facil;1;original;1;;;0,49;1464;0,0;0;
+2026-10-14 19:47;v1;C04;ignorar;facil;2;original;1;;;0,24;1464;0,0;0;
+2026-10-14 19:47;v1;C04;ignorar;facil;3;original;1;;;0,21;1464;0,0;0;
+2026-10-14 19:47;v1;C05;registrar;facil;1;original;1;;;3,37;1528;0,0;1;
+2026-10-14 19:47;v1;C05;registrar;facil;2;original;1;;;3,11;1528;0,0;1;
+2026-10-14 19:47;v1;C05;registrar;facil;3;original;1;;;3,2;1528;0,0;1;
+2026-10-14 19:47;v1;C06;registrar;medio;1;original;1;;;3,27;1513;0,0;1;
+2026-10-14 19:47;v1;C06;registrar;medio;2;original;1;;;3,15;1513;0,0;1;
+2026-10-14 19:47;v1;C06;registrar;medio;3;original;1;;;3,23;1513;0,0;1;
+2026-10-14 19:47;v1;C07;registrar;medio;1;original;1;;;3,42;1522;0,0;1;
+2026-10-14 19:47;v1;C07;registrar;medio;2;original;1;;;3,11;1522;0,0;1;
+2026-10-14 19:47;v1;C07;registrar;medio;3;original;1;;;3,02;1522;0,0;1;
+2026-10-14 19:47;v1;C08;registrar;medio;1;original;0;acao;acao;3,67;1531;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria do gasto (ex: transporte) e qual foi a forma de pagamento (já foi informado como pix)?"""
+2026-10-14 19:47;v1;C08;registrar;medio;2;original;0;acao;acao;3,11;1523;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria do gasto (ex: transporte) e a forma de pagamento foi realmente pix?"""
+2026-10-14 19:47;v1;C08;registrar;medio;3;original;0;acao;acao;3,07;1523;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria do gasto (ex: transporte) e a forma de pagamento foi realmente pix?"""
+2026-10-14 19:47;v1;C09;perguntar;medio;1;original;0;acao;acao;3,3;1525;0,0;1;registrou: valor=89.9, categoria=educacao, pagamento=credito, data=2026-10-11
+2026-10-14 19:47;v1;C09;perguntar;medio;2;original;0;acao;acao;3,03;1525;0,0;1;registrou: valor=89.9, categoria=educacao, pagamento=credito, data=2026-10-11
+2026-10-14 19:47;v1;C09;perguntar;medio;3;original;0;acao;acao;3,03;1525;0,0;1;registrou: valor=89.9, categoria=educacao, pagamento=credito, data=2026-10-11
+2026-10-14 19:47;v1;C10;perguntar;medio;1;original;1;;;2,45;1506;0,0;1;
+2026-10-14 19:47;v1;C10;perguntar;medio;2;original;0;acao;acao;2,78;1514;0,0;1;registrou: valor=0, categoria=educacao, pagamento=pix, data=2026-10-11
+2026-10-14 19:47;v1;C10;perguntar;medio;3;original;0;acao;acao;2,79;1514;0,0;1;registrou: valor=0, categoria=educacao, pagamento=pix, data=2026-10-11
+2026-10-14 19:47;v1;C11;ignorar;medio;1;original;1;;;0,53;1469;0,0;0;
+2026-10-14 19:47;v1;C11;ignorar;medio;2;original;1;;;0,2;1469;0,0;0;
+2026-10-14 19:47;v1;C11;ignorar;medio;3;original;1;;;0,2;1469;0,0;0;
+2026-10-14 19:47;v1;C12;registrar;dificil;1;original;1;;;3,25;1529;0,0;1;
+2026-10-14 19:47;v1;C12;registrar;dificil;2;original;1;;;3,12;1529;0,0;1;
+2026-10-14 19:47;v1;C12;registrar;dificil;3;original;1;;;3,06;1529;0,0;1;
+2026-10-14 19:47;v1;C13;perguntar;dificil;1;original;0;acao;acao;3,03;1519;0,0;1;registrou: valor=50, categoria=outros, pagamento=debito, data=2026-10-11
+2026-10-14 19:47;v1;C13;perguntar;dificil;2;original;0;acao;acao;2,88;1519;0,0;1;registrou: valor=50, categoria=outros, pagamento=debito, data=2026-10-11
+2026-10-14 19:47;v1;C13;perguntar;dificil;3;original;0;acao;acao;2,91;1519;0,0;1;registrou: valor=50, categoria=outros, pagamento=debito, data=2026-10-11
+2026-10-14 19:47;v1;C14;registrar;dificil;1;original;0;acao;acao;3,44;1526;0,0;1;"perguntou ['valor', 'categoria']: ""Qual foi o valor e em que categoria (presente) você gostaria de classificar esse gasto?"""
+2026-10-14 19:47;v1;C14;registrar;dificil;2;original;0;acao;acao;3,26;1526;0,0;1;"perguntou ['valor', 'categoria']: ""Qual foi o valor e em que categoria (presente) você gostaria de classificar esse gasto?"""
+2026-10-14 19:47;v1;C14;registrar;dificil;3;original;0;acao;acao;3,13;1526;0,0;1;"perguntou ['valor', 'categoria']: ""Qual foi o valor e em que categoria (presente) você gostaria de classificar esse gasto?"""
+2026-10-14 19:47;v1;C15;perguntar;dificil;1;original;0;acao;acao;2,85;1514;0,0;1;registrou: valor=60, categoria=outros, pagamento=dinheiro, data=2026-10-10
+2026-10-14 19:47;v1;C15;perguntar;dificil;2;original;0;acao;acao;2,69;1514;0,0;1;registrou: valor=60, categoria=outros, pagamento=dinheiro, data=2026-10-10
+2026-10-14 19:47;v1;C15;perguntar;dificil;3;original;0;acao;acao;2,78;1514;0,0;1;registrou: valor=60, categoria=outros, pagamento=dinheiro, data=2026-10-10
+2026-10-14 19:58;v2;C01;registrar;facil;1;original;1;;;22,3;1813;0,0;1;
+2026-10-14 19:58;v2;C01;registrar;facil;2;original;1;;;4,15;1813;0,0;1;
+2026-10-14 19:58;v2;C01;registrar;facil;3;original;1;;;4,77;1813;0,0;1;
+2026-10-14 19:58;v2;C02;perguntar;facil;1;original;1;;;2,67;1796;0,0;1;
+2026-10-14 19:58;v2;C02;perguntar;facil;2;original;1;;;2,62;1796;0,0;1;
+2026-10-14 19:58;v2;C02;perguntar;facil;3;original;1;;;2,52;1796;0,0;1;
+2026-10-14 19:58;v2;C03;registrar;facil;1;original;1;;;3,33;1813;0,0;1;
+2026-10-14 19:58;v2;C03;registrar;facil;2;original;1;;;3,23;1813;0,0;1;
+2026-10-14 19:58;v2;C03;registrar;facil;3;original;1;;;3,19;1813;0,0;1;
+2026-10-14 19:58;v2;C04;ignorar;facil;1;original;1;;;0,42;1760;0,0;0;
+2026-10-14 19:58;v2;C04;ignorar;facil;2;original;1;;;0,21;1760;0,0;0;
+2026-10-14 19:58;v2;C04;ignorar;facil;3;original;1;;;0,2;1760;0,0;0;
+2026-10-14 19:58;v2;C05;registrar;facil;1;original;1;;;3,48;1824;0,0;1;
+2026-10-14 19:58;v2;C05;registrar;facil;2;original;1;;;3,32;1824;0,0;1;
+2026-10-14 19:58;v2;C05;registrar;facil;3;original;1;;;3,36;1824;0,0;1;
+2026-10-14 19:58;v2;C06;registrar;medio;1;original;1;;;3,5;1811;0,0;1;
+2026-10-14 19:58;v2;C06;registrar;medio;2;original;1;;;3,5;1811;0,0;1;
+2026-10-14 19:58;v2;C06;registrar;medio;3;original;1;;;3,98;1811;0,0;1;
+2026-10-14 19:58;v2;C07;registrar;medio;1;original;0;acao;acao;3,31;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-14 19:58;v2;C07;registrar;medio;2;original;0;acao;acao;3,0;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-14 19:58;v2;C07;registrar;medio;3;original;0;acao;acao;3,09;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-14 19:58;v2;C08;registrar;medio;1;original;0;acao;acao;3,32;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
+2026-10-14 19:58;v2;C08;registrar;medio;2;original;0;acao;acao;3,09;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
+2026-10-14 19:58;v2;C08;registrar;medio;3;original;0;acao;acao;3,19;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
+2026-10-14 19:58;v2;C09;perguntar;medio;1;original;1;;;2,93;1810;0,0;1;
+2026-10-14 19:58;v2;C09;perguntar;medio;2;original;1;;;2,89;1810;0,0;1;
+2026-10-14 19:58;v2;C09;perguntar;medio;3;original;1;;;2,94;1810;0,0;1;
+2026-10-14 19:58;v2;C10;perguntar;medio;1;original;0;acao;formato;1,98;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-14 19:58;v2;C10;perguntar;medio;2;original;0;acao;formato;1,67;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-14 19:58;v2;C10;perguntar;medio;3;original;0;acao;formato;1,59;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-14 19:58;v2;C11;ignorar;medio;1;original;1;;;0,54;1765;0,0;0;
+2026-10-14 19:58;v2;C11;ignorar;medio;2;original;1;;;0,2;1765;0,0;0;
+2026-10-14 19:58;v2;C11;ignorar;medio;3;original;1;;;0,21;1765;0,0;0;
+2026-10-14 19:58;v2;C12;registrar;dificil;1;original;1;;;3,67;1825;0,0;1;
+2026-10-14 19:58;v2;C12;registrar;dificil;2;original;1;;;3,43;1825;0,0;1;
+2026-10-14 19:58;v2;C12;registrar;dificil;3;original;1;;;3,38;1825;0,0;1;
+2026-10-14 19:58;v2;C13;perguntar;dificil;1;original;0;acao;acao;3,64;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-14 19:58;v2;C13;perguntar;dificil;2;original;0;acao;acao;3,33;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-14 19:58;v2;C13;perguntar;dificil;3;original;0;acao;acao;3,34;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-14 19:58;v2;C14;registrar;dificil;1;original;0;acao;acao;2,96;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-14 19:58;v2;C14;registrar;dificil;2;original;0;acao;acao;3,0;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-14 19:58;v2;C14;registrar;dificil;3;original;0;acao;acao;3,03;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-14 19:58;v2;C15;perguntar;dificil;1;original;1;;;3,29;1808;0,0;1;
+2026-10-14 19:58;v2;C15;perguntar;dificil;2;original;1;;;3,28;1808;0,0;1;
+2026-10-14 19:58;v2;C15;perguntar;dificil;3;original;1;;;3,49;1808;0,0;1;
+2026-10-15 22:24;v2-loteA;C01;registrar;facil;1;original;1;;;7,4;1813;0,0;1;
+2026-10-15 22:24;v2-loteA;C01;registrar;facil;2;original;1;;;2,93;1813;0,0;1;
+2026-10-15 22:24;v2-loteA;C01;registrar;facil;3;original;1;;;2,93;1813;0,0;1;
+2026-10-15 22:24;v2-loteA;C02;perguntar;facil;1;original;1;;;2,31;1796;0,0;1;
+2026-10-15 22:24;v2-loteA;C02;perguntar;facil;2;original;1;;;2,22;1796;0,0;1;
+2026-10-15 22:24;v2-loteA;C02;perguntar;facil;3;original;1;;;2,26;1796;0,0;1;
+2026-10-15 22:24;v2-loteA;C03;registrar;facil;1;original;1;;;3,1;1813;0,0;1;
+2026-10-15 22:24;v2-loteA;C03;registrar;facil;2;original;1;;;3,02;1813;0,0;1;
+2026-10-15 22:24;v2-loteA;C03;registrar;facil;3;original;1;;;3,03;1813;0,0;1;
+2026-10-15 22:24;v2-loteA;C04;ignorar;facil;1;original;1;;;0,4;1760;0,0;0;
+2026-10-15 22:24;v2-loteA;C04;ignorar;facil;2;original;1;;;0,2;1760;0,0;0;
+2026-10-15 22:24;v2-loteA;C04;ignorar;facil;3;original;1;;;0,2;1760;0,0;0;
+2026-10-15 22:24;v2-loteA;C05;registrar;facil;1;original;1;;;3,35;1824;0,0;1;
+2026-10-15 22:24;v2-loteA;C05;registrar;facil;2;original;1;;;3,14;1824;0,0;1;
+2026-10-15 22:24;v2-loteA;C05;registrar;facil;3;original;1;;;3,1;1824;0,0;1;
+2026-10-15 22:24;v2-loteA;C06;registrar;medio;1;original;1;;;3,12;1811;0,0;1;
+2026-10-15 22:24;v2-loteA;C06;registrar;medio;2;original;1;;;3,04;1811;0,0;1;
+2026-10-15 22:24;v2-loteA;C06;registrar;medio;3;original;1;;;3,03;1811;0,0;1;
+2026-10-15 22:24;v2-loteA;C07;registrar;medio;1;original;0;acao;acao;2,81;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:24;v2-loteA;C07;registrar;medio;2;original;0;acao;acao;2,66;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:24;v2-loteA;C07;registrar;medio;3;original;0;acao;acao;2,62;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:24;v2-loteA;C08;registrar;medio;1;original;0;acao;acao;2,62;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
+2026-10-15 22:24;v2-loteA;C08;registrar;medio;2;original;0;acao;acao;2,32;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
+2026-10-15 22:24;v2-loteA;C08;registrar;medio;3;original;0;acao;acao;2,39;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
+2026-10-15 22:24;v2-loteA;C09;perguntar;medio;1;original;1;;;2,62;1810;0,0;1;
+2026-10-15 22:24;v2-loteA;C09;perguntar;medio;2;original;1;;;2,45;1810;0,0;1;
+2026-10-15 22:24;v2-loteA;C09;perguntar;medio;3;original;1;;;2,48;1810;0,0;1;
+2026-10-15 22:24;v2-loteA;C10;perguntar;medio;1;original;0;acao;formato;1,44;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
+2026-10-15 22:24;v2-loteA;C10;perguntar;medio;2;original;0;acao;formato;1,23;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
+2026-10-15 22:24;v2-loteA;C10;perguntar;medio;3;original;0;acao;formato;1,33;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
+2026-10-15 22:24;v2-loteA;C11;ignorar;medio;1;original;1;;;0,53;1765;0,0;0;
+2026-10-15 22:24;v2-loteA;C11;ignorar;medio;2;original;1;;;0,19;1765;0,0;0;
+2026-10-15 22:24;v2-loteA;C11;ignorar;medio;3;original;1;;;0,19;1765;0,0;0;
+2026-10-15 22:24;v2-loteA;C12;registrar;dificil;1;original;1;;;3,35;1825;0,0;1;
+2026-10-15 22:24;v2-loteA;C12;registrar;dificil;2;original;1;;;3,13;1825;0,0;1;
+2026-10-15 22:24;v2-loteA;C12;registrar;dificil;3;original;1;;;3,16;1825;0,0;1;
+2026-10-15 22:24;v2-loteA;C13;perguntar;dificil;1;original;0;acao;acao;3,2;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:24;v2-loteA;C13;perguntar;dificil;2;original;0;acao;acao;3,05;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:24;v2-loteA;C13;perguntar;dificil;3;original;0;acao;acao;3,06;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:24;v2-loteA;C14;registrar;dificil;1;original;1;;;3,2;1819;0,0;1;
+2026-10-15 22:24;v2-loteA;C14;registrar;dificil;2;original;0;acao;acao;2,57;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-15 22:24;v2-loteA;C14;registrar;dificil;3;original;0;acao;acao;2,54;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-15 22:24;v2-loteA;C15;perguntar;dificil;1;original;1;;;2,9;1808;0,0;1;
+2026-10-15 22:24;v2-loteA;C15;perguntar;dificil;2;original;1;;;2,81;1808;0,0;1;
+2026-10-15 22:24;v2-loteA;C15;perguntar;dificil;3;original;1;;;2,83;1808;0,0;1;
+2026-10-15 22:26;v2-t0.7;C01;registrar;facil;1;original;1;;;3,19;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C01;registrar;facil;2;original;1;;;2,98;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C01;registrar;facil;3;original;1;;;3,02;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C01;registrar;facil;4;original;1;;;2,99;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C01;registrar;facil;5;original;1;;;3,0;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C01;registrar;facil;6;original;1;;;2,97;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C01;registrar;facil;7;original;1;;;2,99;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C01;registrar;facil;8;original;1;;;2,99;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C01;registrar;facil;9;original;1;;;2,95;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C01;registrar;facil;10;original;1;;;2,98;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;1;original;1;;;2,32;1796;0,0;1;
+2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;2;original;1;;;2,25;1796;0,0;1;
+2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;3;original;1;;;2,26;1796;0,0;1;
+2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;4;original;1;;;2,25;1796;0,0;1;
+2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;5;original;1;;;2,25;1796;0,0;1;
+2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;6;original;1;;;2,26;1796;0,0;1;
+2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;7;original;1;;;2,25;1796;0,0;1;
+2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;8;original;1;;;2,24;1796;0,0;1;
+2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;9;original;1;;;2,27;1796;0,0;1;
+2026-10-15 22:26;v2-t0.7;C02;perguntar;facil;10;original;1;;;2,26;1796;0,0;1;
+2026-10-15 22:26;v2-t0.7;C03;registrar;facil;1;original;1;;;3,11;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C03;registrar;facil;2;original;1;;;3,01;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C03;registrar;facil;3;original;1;;;3,02;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C03;registrar;facil;4;original;1;;;3,11;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C03;registrar;facil;5;original;1;;;3,05;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C03;registrar;facil;6;original;1;;;3,0;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C03;registrar;facil;7;original;1;;;3,01;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C03;registrar;facil;8;original;1;;;3,05;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C03;registrar;facil;9;original;1;;;3,02;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C03;registrar;facil;10;original;1;;;3,0;1813;0,0;1;
+2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;1;original;1;;;0,4;1760;0,0;0;
+2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;2;original;1;;;0,2;1760;0,0;0;
+2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;3;original;1;;;0,2;1760;0,0;0;
+2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;4;original;1;;;0,19;1760;0,0;0;
+2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;5;original;1;;;0,2;1760;0,0;0;
+2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;6;original;1;;;0,2;1760;0,0;0;
+2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;7;original;1;;;0,19;1760;0,0;0;
+2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;8;original;1;;;0,19;1760;0,0;0;
+2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;9;original;1;;;0,2;1760;0,0;0;
+2026-10-15 22:26;v2-t0.7;C04;ignorar;facil;10;original;1;;;0,2;1760;0,0;0;
+2026-10-15 22:26;v2-t0.7;C05;registrar;facil;1;original;1;;;3,45;1824;0,0;1;
+2026-10-15 22:26;v2-t0.7;C05;registrar;facil;2;original;1;;;3,08;1824;0,0;1;
+2026-10-15 22:26;v2-t0.7;C05;registrar;facil;3;original;1;;;3,08;1824;0,0;1;
+2026-10-15 22:26;v2-t0.7;C05;registrar;facil;4;original;1;;;3,07;1824;0,0;1;
+2026-10-15 22:26;v2-t0.7;C05;registrar;facil;5;original;1;;;3,07;1824;0,0;1;
+2026-10-15 22:26;v2-t0.7;C05;registrar;facil;6;original;1;;;3,06;1824;0,0;1;
+2026-10-15 22:26;v2-t0.7;C05;registrar;facil;7;original;1;;;3,0;1824;0,0;1;
+2026-10-15 22:26;v2-t0.7;C05;registrar;facil;8;original;1;;;3,08;1824;0,0;1;
+2026-10-15 22:26;v2-t0.7;C05;registrar;facil;9;original;1;;;3,02;1824;0,0;1;
+2026-10-15 22:26;v2-t0.7;C05;registrar;facil;10;original;1;;;3,05;1824;0,0;1;
+2026-10-15 22:26;v2-t0.7;C06;registrar;medio;1;original;1;;;3,03;1811;0,0;1;
+2026-10-15 22:26;v2-t0.7;C06;registrar;medio;2;original;1;;;2,97;1811;0,0;1;
+2026-10-15 22:26;v2-t0.7;C06;registrar;medio;3;original;1;;;2,96;1811;0,0;1;
+2026-10-15 22:26;v2-t0.7;C06;registrar;medio;4;original;1;;;2,97;1811;0,0;1;
+2026-10-15 22:26;v2-t0.7;C06;registrar;medio;5;original;1;;;2,96;1811;0,0;1;
+2026-10-15 22:26;v2-t0.7;C06;registrar;medio;6;original;1;;;2,91;1811;0,0;1;
+2026-10-15 22:26;v2-t0.7;C06;registrar;medio;7;original;1;;;2,97;1811;0,0;1;
+2026-10-15 22:26;v2-t0.7;C06;registrar;medio;8;original;1;;;2,98;1811;0,0;1;
+2026-10-15 22:26;v2-t0.7;C06;registrar;medio;9;original;1;;;2,94;1811;0,0;1;
+2026-10-15 22:26;v2-t0.7;C06;registrar;medio;10;original;1;;;2,93;1811;0,0;1;
+2026-10-15 22:26;v2-t0.7;C07;registrar;medio;1;original;0;acao;acao;2,72;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:26;v2-t0.7;C07;registrar;medio;2;original;0;acao;acao;2,54;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:26;v2-t0.7;C07;registrar;medio;3;original;0;acao;acao;2,56;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:26;v2-t0.7;C07;registrar;medio;4;original;0;acao;acao;2,56;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:26;v2-t0.7;C07;registrar;medio;5;original;0;acao;acao;2,56;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:26;v2-t0.7;C07;registrar;medio;6;original;0;acao;acao;2,53;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:26;v2-t0.7;C07;registrar;medio;7;original;0;acao;acao;2,52;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:26;v2-t0.7;C07;registrar;medio;8;original;0;acao;acao;2,83;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:26;v2-t0.7;C07;registrar;medio;9;original;0;acao;acao;2,56;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:26;v2-t0.7;C07;registrar;medio;10;original;0;acao;acao;2,74;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:26;v2-t0.7;C08;registrar;medio;1;original;0;acao;acao;2,85;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
+2026-10-15 22:26;v2-t0.7;C08;registrar;medio;2;original;0;acao;acao;2,4;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
+2026-10-15 22:26;v2-t0.7;C08;registrar;medio;3;original;0;acao;acao;2,31;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
+2026-10-15 22:26;v2-t0.7;C08;registrar;medio;4;original;0;acao;acao;2,54;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
+2026-10-15 22:26;v2-t0.7;C08;registrar;medio;5;original;0;acao;acao;2,34;1808;0,0;1;"perguntou ['categoria']: ""Foi no débito ou no crédito?"""
+2026-10-15 22:26;v2-t0.7;C08;registrar;medio;6;original;0;acao;acao;2,53;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
+2026-10-15 22:26;v2-t0.7;C08;registrar;medio;7;original;0;acao;acao;2,34;1808;0,0;1;"perguntou ['categoria']: ""Foi no débito ou no crédito?"""
+2026-10-15 22:26;v2-t0.7;C08;registrar;medio;8;original;0;acao;acao;2,55;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
+2026-10-15 22:26;v2-t0.7;C08;registrar;medio;9;original;0;acao;acao;2,27;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
+2026-10-15 22:26;v2-t0.7;C08;registrar;medio;10;original;0;acao;acao;2,32;1807;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
+2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;1;original;1;;;2,64;1810;0,0;1;
+2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;2;original;1;;;2,42;1810;0,0;1;
+2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;3;original;1;;;2,52;1810;0,0;1;
+2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;4;original;1;;;2,51;1810;0,0;1;
+2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;5;original;1;;;2,45;1810;0,0;1;
+2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;6;original;1;;;2,48;1810;0,0;1;
+2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;7;original;1;;;2,36;1810;0,0;1;
+2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;8;original;1;;;2,39;1810;0,0;1;
+2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;9;original;1;;;2,37;1810;0,0;1;
+2026-10-15 22:26;v2-t0.7;C09;perguntar;medio;10;original;1;;;2,4;1810;0,0;1;
+2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;1;original;0;acao;formato;1,42;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
+2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;2;original;1;;;2,26;1802;0,0;1;
+2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;3;original;1;;;2,38;1802;0,0;1;
+2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;4;original;0;acao;formato;1,25;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
+2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;5;original;1;;;2,38;1802;0,0;1;
+2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;6;original;0;acao;formato;1,26;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
+2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;7;original;1;;;2,31;1802;0,0;1;
+2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;8;original;1;;;2,33;1802;0,0;1;
+2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;9;original;0;acao;formato;1,26;1782;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
+2026-10-15 22:26;v2-t0.7;C10;perguntar;medio;10;original;1;;;2,36;1802;0,0;1;
+2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;1;original;1;;;0,51;1765;0,0;0;
+2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;2;original;1;;;0,2;1765;0,0;0;
+2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;3;original;1;;;0,2;1765;0,0;0;
+2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;4;original;1;;;0,2;1765;0,0;0;
+2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;5;original;1;;;0,2;1765;0,0;0;
+2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;6;original;1;;;0,2;1765;0,0;0;
+2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;7;original;1;;;0,2;1765;0,0;0;
+2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;8;original;1;;;0,2;1765;0,0;0;
+2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;9;original;1;;;0,2;1765;0,0;0;
+2026-10-15 22:26;v2-t0.7;C11;ignorar;medio;10;original;1;;;0,2;1765;0,0;0;
+2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;1;original;1;;;3,38;1825;0,0;1;
+2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;2;original;1;;;3,07;1825;0,0;1;
+2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;3;original;1;;;3,09;1825;0,0;1;
+2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;4;original;1;;;3,05;1825;0,0;1;
+2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;5;original;1;;;3,14;1825;0,0;1;
+2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;6;original;1;;;3,16;1825;0,0;1;
+2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;7;original;1;;;3,16;1825;0,0;1;
+2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;8;original;1;;;3,12;1825;0,0;1;
+2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;9;original;1;;;3,17;1825;0,0;1;
+2026-10-15 22:26;v2-t0.7;C12;registrar;dificil;10;original;1;;;3,21;1825;0,0;1;
+2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;1;original;0;acao;acao;3,25;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;2;original;0;acao;acao;3,09;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;3;original;0;acao;acao;3,06;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;4;original;0;acao;acao;3,12;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;5;original;0;acao;acao;3,11;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;6;original;0;acao;acao;3,11;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;7;original;0;acao;acao;3,45;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;8;original;0;acao;acao;3,25;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;9;original;0;acao;acao;3,13;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:26;v2-t0.7;C13;perguntar;dificil;10;original;0;acao;acao;3,09;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;1;original;0;acao;acao;2,8;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;2;original;0;acao;acao;2,65;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;3;original;0;acao;acao;2,59;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;4;original;0;acao;acao;2,63;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;5;original;0;acao;acao;2,65;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;6;original;1;;;3,13;1819;0,0;1;
+2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;7;original;1;;;3,11;1819;0,0;1;
+2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;8;original;0;acao;acao;2,59;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;9;original;0;acao;acao;2,61;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-15 22:26;v2-t0.7;C14;registrar;dificil;10;original;0;acao;acao;2,57;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;1;original;1;;;3,01;1808;0,0;1;
+2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;2;original;1;;;2,82;1808;0,0;1;
+2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;3;original;1;;;2,86;1808;0,0;1;
+2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;4;original;1;;;2,88;1808;0,0;1;
+2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;5;original;1;;;2,9;1808;0,0;1;
+2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;6;original;1;;;2,86;1808;0,0;1;
+2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;7;original;1;;;2,85;1808;0,0;1;
+2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;8;original;1;;;2,87;1808;0,0;1;
+2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;9;original;1;;;2,89;1808;0,0;1;
+2026-10-15 22:26;v2-t0.7;C15;perguntar;dificil;10;original;1;;;2,89;1808;0,0;1;
+2026-10-15 22:32;v2-ordemB;C01;registrar;facil;1;ordemB;1;;;9,55;1813;0,0;1;
+2026-10-15 22:32;v2-ordemB;C01;registrar;facil;2;ordemB;1;;;3,11;1813;0,0;1;
+2026-10-15 22:32;v2-ordemB;C01;registrar;facil;3;ordemB;1;;;3,08;1813;0,0;1;
+2026-10-15 22:32;v2-ordemB;C02;perguntar;facil;1;ordemB;0;campos_faltantes;campos;3,0;1807;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-15 22:32;v2-ordemB;C02;perguntar;facil;2;ordemB;0;campos_faltantes;campos;2,97;1807;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-15 22:32;v2-ordemB;C02;perguntar;facil;3;ordemB;0;campos_faltantes;campos;2,91;1807;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-15 22:32;v2-ordemB;C03;registrar;facil;1;ordemB;1;;;3,2;1813;0,0;1;
+2026-10-15 22:32;v2-ordemB;C03;registrar;facil;2;ordemB;1;;;3,13;1813;0,0;1;
+2026-10-15 22:32;v2-ordemB;C03;registrar;facil;3;ordemB;1;;;3,19;1813;0,0;1;
+2026-10-15 22:32;v2-ordemB;C04;ignorar;facil;1;ordemB;1;;;0,43;1760;0,0;0;
+2026-10-15 22:32;v2-ordemB;C04;ignorar;facil;2;ordemB;1;;;0,2;1760;0,0;0;
+2026-10-15 22:32;v2-ordemB;C04;ignorar;facil;3;ordemB;1;;;0,21;1760;0,0;0;
+2026-10-15 22:32;v2-ordemB;C05;registrar;facil;1;ordemB;1;;;3,39;1824;0,0;1;
+2026-10-15 22:32;v2-ordemB;C05;registrar;facil;2;ordemB;1;;;3,22;1824;0,0;1;
+2026-10-15 22:32;v2-ordemB;C05;registrar;facil;3;ordemB;1;;;3,16;1824;0,0;1;
+2026-10-15 22:32;v2-ordemB;C06;registrar;medio;1;ordemB;1;;;3,17;1811;0,0;1;
+2026-10-15 22:32;v2-ordemB;C06;registrar;medio;2;ordemB;1;;;3,09;1811;0,0;1;
+2026-10-15 22:32;v2-ordemB;C06;registrar;medio;3;ordemB;1;;;3,12;1811;0,0;1;
+2026-10-15 22:32;v2-ordemB;C07;registrar;medio;1;ordemB;0;acao;acao;2,88;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:32;v2-ordemB;C07;registrar;medio;2;ordemB;0;acao;acao;2,71;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:32;v2-ordemB;C07;registrar;medio;3;ordemB;0;acao;acao;2,63;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:32;v2-ordemB;C08;registrar;medio;1;ordemB;0;acao;acao;2,97;1814;0,0;1;"perguntou ['categoria']: ""Em que categoria esse gasto se encaixa? (ex: transporte)"""
+2026-10-15 22:32;v2-ordemB;C08;registrar;medio;2;ordemB;0;acao;acao;2,77;1814;0,0;1;"perguntou ['categoria']: ""Em que categoria esse gasto se encaixa? (ex: transporte)"""
+2026-10-15 22:32;v2-ordemB;C08;registrar;medio;3;ordemB;0;acao;acao;2,8;1814;0,0;1;"perguntou ['categoria']: ""Em que categoria esse gasto se encaixa? (ex: transporte)"""
+2026-10-15 22:32;v2-ordemB;C09;perguntar;medio;1;ordemB;1;;;2,76;1810;0,0;1;
+2026-10-15 22:32;v2-ordemB;C09;perguntar;medio;2;ordemB;1;;;2,51;1810;0,0;1;
+2026-10-15 22:32;v2-ordemB;C09;perguntar;medio;3;ordemB;1;;;2,49;1810;0,0;1;
+2026-10-15 22:32;v2-ordemB;C10;perguntar;medio;1;ordemB;0;acao;formato;1,67;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-15 22:32;v2-ordemB;C10;perguntar;medio;2;ordemB;0;acao;formato;1,49;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-15 22:32;v2-ordemB;C10;perguntar;medio;3;ordemB;0;acao;formato;1,56;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-15 22:32;v2-ordemB;C11;ignorar;medio;1;ordemB;1;;;0,54;1765;0,0;0;
+2026-10-15 22:32;v2-ordemB;C11;ignorar;medio;2;ordemB;1;;;0,21;1765;0,0;0;
+2026-10-15 22:32;v2-ordemB;C11;ignorar;medio;3;ordemB;1;;;0,21;1765;0,0;0;
+2026-10-15 22:32;v2-ordemB;C12;registrar;dificil;1;ordemB;1;;;3,43;1825;0,0;1;
+2026-10-15 22:32;v2-ordemB;C12;registrar;dificil;2;ordemB;1;;;3,19;1825;0,0;1;
+2026-10-15 22:32;v2-ordemB;C12;registrar;dificil;3;ordemB;1;;;3,17;1825;0,0;1;
+2026-10-15 22:32;v2-ordemB;C13;perguntar;dificil;1;ordemB;1;;;3,12;1813;0,0;1;
+2026-10-15 22:32;v2-ordemB;C13;perguntar;dificil;2;ordemB;1;;;2,93;1813;0,0;1;
+2026-10-15 22:32;v2-ordemB;C13;perguntar;dificil;3;ordemB;1;;;2,9;1813;0,0;1;
+2026-10-15 22:32;v2-ordemB;C14;registrar;dificil;1;ordemB;0;acao;acao;2,51;1804;0,0;1;"perguntou ['categoria']: ""Em que foi esse gasto?"""
+2026-10-15 22:32;v2-ordemB;C14;registrar;dificil;2;ordemB;0;acao;acao;2,3;1804;0,0;1;"perguntou ['categoria']: ""Em que foi esse gasto?"""
+2026-10-15 22:32;v2-ordemB;C14;registrar;dificil;3;ordemB;0;acao;acao;2,3;1804;0,0;1;"perguntou ['categoria']: ""Em que foi esse gasto?"""
+2026-10-15 22:32;v2-ordemB;C15;perguntar;dificil;1;ordemB;1;;;3,03;1808;0,0;1;
+2026-10-15 22:32;v2-ordemB;C15;perguntar;dificil;2;ordemB;1;;;2,95;1808;0,0;1;
+2026-10-15 22:32;v2-ordemB;C15;perguntar;dificil;3;ordemB;1;;;2,93;1808;0,0;1;
+2026-10-15 22:34;v2-ordemC;C01;registrar;facil;1;ordemC;1;;;9,31;1813;0,0;1;
+2026-10-15 22:34;v2-ordemC;C01;registrar;facil;2;ordemC;1;;;3,14;1813;0,0;1;
+2026-10-15 22:34;v2-ordemC;C01;registrar;facil;3;ordemC;1;;;3,17;1813;0,0;1;
+2026-10-15 22:34;v2-ordemC;C02;perguntar;facil;1;ordemC;0;campos_faltantes;campos;2,58;1799;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-15 22:34;v2-ordemC;C02;perguntar;facil;2;ordemC;0;campos_faltantes;campos;2,94;1808;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-15 22:34;v2-ordemC;C02;perguntar;facil;3;ordemC;0;campos_faltantes;campos;2,97;1808;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-15 22:34;v2-ordemC;C03;registrar;facil;1;ordemC;1;;;3,15;1813;0,0;1;
+2026-10-15 22:34;v2-ordemC;C03;registrar;facil;2;ordemC;1;;;3,16;1813;0,0;1;
+2026-10-15 22:34;v2-ordemC;C03;registrar;facil;3;ordemC;1;;;3,03;1813;0,0;1;
+2026-10-15 22:34;v2-ordemC;C04;ignorar;facil;1;ordemC;1;;;0,43;1760;0,0;0;
+2026-10-15 22:34;v2-ordemC;C04;ignorar;facil;2;ordemC;1;;;0,2;1760;0,0;0;
+2026-10-15 22:34;v2-ordemC;C04;ignorar;facil;3;ordemC;1;;;0,21;1760;0,0;0;
+2026-10-15 22:34;v2-ordemC;C05;registrar;facil;1;ordemC;1;;;3,43;1824;0,0;1;
+2026-10-15 22:34;v2-ordemC;C05;registrar;facil;2;ordemC;0;acao;formato;1,94;1802;0,0;0;"ignorou; texto: ""registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-"""
+2026-10-15 22:34;v2-ordemC;C05;registrar;facil;3;ordemC;0;acao;formato;1,97;1802;0,0;0;"ignorou; texto: ""registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-"""
+2026-10-15 22:34;v2-ordemC;C06;registrar;medio;1;ordemC;0;acao;formato;1,56;1781;0,0;0;"ignorou; texto: ""registrar_gasto: valor 42.0, categoria saude, pagamento debito, data de referênc"""
+2026-10-15 22:34;v2-ordemC;C06;registrar;medio;2;ordemC;0;acao;formato;1,36;1781;0,0;0;"ignorou; texto: ""registrar_gasto: valor 42.0, categoria saude, pagamento debito, data de referênc"""
+2026-10-15 22:34;v2-ordemC;C06;registrar;medio;3;ordemC;0;acao;formato;1,42;1781;0,0;0;"ignorou; texto: ""registrar_gasto: valor 42.0, categoria saude, pagamento debito, data de referênc"""
+2026-10-15 22:34;v2-ordemC;C07;registrar;medio;1;ordemC;0;acao;acao;2,88;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:34;v2-ordemC;C07;registrar;medio;2;ordemC;0;acao;acao;2,64;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (ex: lazer)"""
+2026-10-15 22:34;v2-ordemC;C07;registrar;medio;3;ordemC;0;acao;acao;2,84;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (ex: lazer)"""
+2026-10-15 22:34;v2-ordemC;C08;registrar;medio;1;ordemC;0;acao;acao;2,75;1809;0,0;1;"perguntou ['pagamento']: ""Foi no débito ou no crédito?"""
+2026-10-15 22:34;v2-ordemC;C08;registrar;medio;2;ordemC;0;acao;acao;2,51;1809;0,0;1;"perguntou ['pagamento']: ""Foi no débito ou no crédito?"""
+2026-10-15 22:34;v2-ordemC;C08;registrar;medio;3;ordemC;0;acao;acao;2,5;1809;0,0;1;"perguntou ['pagamento']: ""Foi no débito ou no crédito?"""
+2026-10-15 22:34;v2-ordemC;C09;perguntar;medio;1;ordemC;1;;;2,8;1810;0,0;1;
+2026-10-15 22:34;v2-ordemC;C09;perguntar;medio;2;ordemC;1;;;2,51;1810;0,0;1;
+2026-10-15 22:34;v2-ordemC;C09;perguntar;medio;3;ordemC;1;;;2,49;1810;0,0;1;
+2026-10-15 22:34;v2-ordemC;C10;perguntar;medio;1;ordemC;0;acao;formato;1,7;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-15 22:34;v2-ordemC;C10;perguntar;medio;2;ordemC;0;acao;formato;1,51;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-15 22:34;v2-ordemC;C10;perguntar;medio;3;ordemC;0;acao;formato;1,54;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-15 22:34;v2-ordemC;C11;ignorar;medio;1;ordemC;1;;;0,56;1765;0,0;0;
+2026-10-15 22:34;v2-ordemC;C11;ignorar;medio;2;ordemC;1;;;0,21;1765;0,0;0;
+2026-10-15 22:34;v2-ordemC;C11;ignorar;medio;3;ordemC;1;;;0,22;1765;0,0;0;
+2026-10-15 22:34;v2-ordemC;C12;registrar;dificil;1;ordemC;1;;;3,41;1825;0,0;1;
+2026-10-15 22:34;v2-ordemC;C12;registrar;dificil;2;ordemC;1;;;3,15;1825;0,0;1;
+2026-10-15 22:34;v2-ordemC;C12;registrar;dificil;3;ordemC;1;;;3,24;1825;0,0;1;
+2026-10-15 22:34;v2-ordemC;C13;perguntar;dificil;1;ordemC;0;acao;acao;3,4;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:34;v2-ordemC;C13;perguntar;dificil;2;ordemC;0;acao;acao;3,14;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:34;v2-ordemC;C13;perguntar;dificil;3;ordemC;0;acao;acao;3,16;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:34;v2-ordemC;C14;registrar;dificil;1;ordemC;1;;;3,32;1819;0,0;1;
+2026-10-15 22:34;v2-ordemC;C14;registrar;dificil;2;ordemC;1;;;3,16;1819;0,0;1;
+2026-10-15 22:34;v2-ordemC;C14;registrar;dificil;3;ordemC;1;;;3,1;1819;0,0;1;
+2026-10-15 22:34;v2-ordemC;C15;perguntar;dificil;1;ordemC;1;;;2,58;1801;0,0;1;
+2026-10-15 22:34;v2-ordemC;C15;perguntar;dificil;2;ordemC;1;;;2,55;1801;0,0;1;
+2026-10-15 22:34;v2-ordemC;C15;perguntar;dificil;3;ordemC;1;;;2,48;1801;0,0;1;
+2026-10-15 22:36;v2-ordemD;C01;registrar;facil;1;ordemD;1;;;9,1;1813;0,0;1;
+2026-10-15 22:36;v2-ordemD;C01;registrar;facil;2;ordemD;1;;;3,04;1813;0,0;1;
+2026-10-15 22:36;v2-ordemD;C01;registrar;facil;3;ordemD;1;;;3,0;1813;0,0;1;
+2026-10-15 22:36;v2-ordemD;C02;perguntar;facil;1;ordemD;0;campos_faltantes;campos;3,06;1808;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-15 22:36;v2-ordemD;C02;perguntar;facil;2;ordemD;0;campos_faltantes;campos;2,95;1807;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-15 22:36;v2-ordemD;C02;perguntar;facil;3;ordemD;0;campos_faltantes;campos;2,98;1807;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-15 22:36;v2-ordemD;C03;registrar;facil;1;ordemD;1;;;3,22;1813;0,0;1;
+2026-10-15 22:36;v2-ordemD;C03;registrar;facil;2;ordemD;1;;;3,11;1813;0,0;1;
+2026-10-15 22:36;v2-ordemD;C03;registrar;facil;3;ordemD;1;;;3,09;1813;0,0;1;
+2026-10-15 22:36;v2-ordemD;C04;ignorar;facil;1;ordemD;1;;;0,42;1760;0,0;0;
+2026-10-15 22:36;v2-ordemD;C04;ignorar;facil;2;ordemD;1;;;0,21;1760;0,0;0;
+2026-10-15 22:36;v2-ordemD;C04;ignorar;facil;3;ordemD;1;;;0,22;1760;0,0;0;
+2026-10-15 22:36;v2-ordemD;C05;registrar;facil;1;ordemD;1;;;3,44;1824;0,0;1;
+2026-10-15 22:36;v2-ordemD;C05;registrar;facil;2;ordemD;1;;;3,2;1824;0,0;1;
+2026-10-15 22:36;v2-ordemD;C05;registrar;facil;3;ordemD;1;;;3,22;1824;0,0;1;
+2026-10-15 22:36;v2-ordemD;C06;registrar;medio;1;ordemD;1;;;3,21;1811;0,0;1;
+2026-10-15 22:36;v2-ordemD;C06;registrar;medio;2;ordemD;1;;;3,12;1811;0,0;1;
+2026-10-15 22:36;v2-ordemD;C06;registrar;medio;3;ordemD;1;;;3,15;1811;0,0;1;
+2026-10-15 22:36;v2-ordemD;C07;registrar;medio;1;ordemD;0;acao;acao;2,9;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:36;v2-ordemD;C07;registrar;medio;2;ordemD;0;acao;acao;2,66;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:36;v2-ordemD;C07;registrar;medio;3;ordemD;0;acao;acao;2,65;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:36;v2-ordemD;C08;registrar;medio;1;ordemD;0;acao;acao;2,81;1809;0,0;1;"perguntou ['pagamento']: ""Foi no débito ou no crédito?"""
+2026-10-15 22:36;v2-ordemD;C08;registrar;medio;2;ordemD;0;acao;acao;2,52;1809;0,0;1;"perguntou ['pagamento']: ""Foi no débito ou no crédito?"""
+2026-10-15 22:36;v2-ordemD;C08;registrar;medio;3;ordemD;0;acao;acao;2,54;1809;0,0;1;"perguntou ['pagamento']: ""Foi no débito ou no crédito?"""
+2026-10-15 22:36;v2-ordemD;C09;perguntar;medio;1;ordemD;1;;;2,78;1810;0,0;1;
+2026-10-15 22:36;v2-ordemD;C09;perguntar;medio;2;ordemD;1;;;2,51;1810;0,0;1;
+2026-10-15 22:36;v2-ordemD;C09;perguntar;medio;3;ordemD;1;;;2,49;1810;0,0;1;
+2026-10-15 22:36;v2-ordemD;C10;perguntar;medio;1;ordemD;0;acao;formato;1,71;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-15 22:36;v2-ordemD;C10;perguntar;medio;2;ordemD;0;acao;formato;1,56;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-15 22:36;v2-ordemD;C10;perguntar;medio;3;ordemD;0;acao;formato;1,54;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-15 22:36;v2-ordemD;C11;ignorar;medio;1;ordemD;1;;;0,55;1765;0,0;0;
+2026-10-15 22:36;v2-ordemD;C11;ignorar;medio;2;ordemD;1;;;0,21;1765;0,0;0;
+2026-10-15 22:36;v2-ordemD;C11;ignorar;medio;3;ordemD;1;;;0,21;1765;0,0;0;
+2026-10-15 22:36;v2-ordemD;C12;registrar;dificil;1;ordemD;1;;;3,46;1825;0,0;1;
+2026-10-15 22:36;v2-ordemD;C12;registrar;dificil;2;ordemD;1;;;3,19;1825;0,0;1;
+2026-10-15 22:36;v2-ordemD;C12;registrar;dificil;3;ordemD;1;;;3,38;1825;0,0;1;
+2026-10-15 22:36;v2-ordemD;C13;perguntar;dificil;1;ordemD;0;acao;acao;3,3;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:36;v2-ordemD;C13;perguntar;dificil;2;ordemD;0;acao;acao;3,15;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:36;v2-ordemD;C13;perguntar;dificil;3;ordemD;0;acao;acao;3,13;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:36;v2-ordemD;C14;registrar;dificil;1;ordemD;1;;;3,36;1819;0,0;1;
+2026-10-15 22:36;v2-ordemD;C14;registrar;dificil;2;ordemD;1;;;3,14;1819;0,0;1;
+2026-10-15 22:36;v2-ordemD;C14;registrar;dificil;3;ordemD;1;;;3,1;1819;0,0;1;
+2026-10-15 22:36;v2-ordemD;C15;perguntar;dificil;1;ordemD;1;;;3,07;1809;0,0;1;
+2026-10-15 22:36;v2-ordemD;C15;perguntar;dificil;2;ordemD;1;;;2,99;1809;0,0;1;
+2026-10-15 22:36;v2-ordemD;C15;perguntar;dificil;3;ordemD;1;;;2,84;1809;0,0;1;
+2026-10-15 22:38;v3-candidato;C01;registrar;facil;1;original;1;;;10,47;1930;0,0;1;
+2026-10-15 22:38;v3-candidato;C01;registrar;facil;2;original;1;;;3,07;1930;0,0;1;
+2026-10-15 22:38;v3-candidato;C01;registrar;facil;3;original;1;;;3,1;1930;0,0;1;
+2026-10-15 22:38;v3-candidato;C02;perguntar;facil;1;original;1;;;2,55;1913;0,0;1;
+2026-10-15 22:38;v3-candidato;C02;perguntar;facil;2;original;1;;;2,39;1913;0,0;1;
+2026-10-15 22:38;v3-candidato;C02;perguntar;facil;3;original;1;;;2,38;1913;0,0;1;
+2026-10-15 22:38;v3-candidato;C03;registrar;facil;1;original;1;;;3,28;1930;0,0;1;
+2026-10-15 22:38;v3-candidato;C03;registrar;facil;2;original;1;;;3,15;1930;0,0;1;
+2026-10-15 22:38;v3-candidato;C03;registrar;facil;3;original;1;;;3,25;1930;0,0;1;
+2026-10-15 22:38;v3-candidato;C04;ignorar;facil;1;original;1;;;0,46;1877;0,0;0;
+2026-10-15 22:38;v3-candidato;C04;ignorar;facil;2;original;1;;;0,21;1877;0,0;0;
+2026-10-15 22:38;v3-candidato;C04;ignorar;facil;3;original;1;;;0,22;1877;0,0;0;
+2026-10-15 22:38;v3-candidato;C05;registrar;facil;1;original;0;acao;formato;2,27;1919;0,0;0;"ignorou; texto: ""registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-"""
+2026-10-15 22:38;v3-candidato;C05;registrar;facil;2;original;0;acao;formato;2,03;1919;0,0;0;"ignorou; texto: ""registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-"""
+2026-10-15 22:38;v3-candidato;C05;registrar;facil;3;original;0;acao;formato;2,03;1919;0,0;0;"ignorou; texto: ""registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-"""
+2026-10-15 22:38;v3-candidato;C06;registrar;medio;1;original;1;;;3,32;1928;0,0;1;
+2026-10-15 22:38;v3-candidato;C06;registrar;medio;2;original;1;;;3,26;1928;0,0;1;
+2026-10-15 22:38;v3-candidato;C06;registrar;medio;3;original;1;;;3,29;1928;0,0;1;
+2026-10-15 22:38;v3-candidato;C07;registrar;medio;1;original;0;acao;acao;2,91;1927;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-15 22:38;v3-candidato;C07;registrar;medio;2;original;0;acao;acao;2,8;1927;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (ex: lazer)"""
+2026-10-15 22:38;v3-candidato;C07;registrar;medio;3;original;0;acao;acao;2,78;1927;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (ex: lazer)"""
+2026-10-15 22:38;v3-candidato;C08;registrar;medio;1;original;0;acao;acao;2,68;1924;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
+2026-10-15 22:38;v3-candidato;C08;registrar;medio;2;original;0;acao;acao;2,42;1924;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
+2026-10-15 22:38;v3-candidato;C08;registrar;medio;3;original;0;acao;acao;2,45;1924;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
+2026-10-15 22:38;v3-candidato;C09;perguntar;medio;1;original;1;;;2,83;1927;0,0;1;
+2026-10-15 22:38;v3-candidato;C09;perguntar;medio;2;original;1;;;2,57;1927;0,0;1;
+2026-10-15 22:38;v3-candidato;C09;perguntar;medio;3;original;1;;;2,57;1927;0,0;1;
+2026-10-15 22:38;v3-candidato;C10;perguntar;medio;1;original;0;acao;formato;1,55;1899;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
+2026-10-15 22:38;v3-candidato;C10;perguntar;medio;2;original;0;acao;formato;1,35;1899;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
+2026-10-15 22:38;v3-candidato;C10;perguntar;medio;3;original;0;acao;formato;1,39;1899;0,0;0;"ignorou; texto: ""registrar_gasto: valor 0.0, categoria educacao, pagamento pix, data de referênci"""
+2026-10-15 22:38;v3-candidato;C11;ignorar;medio;1;original;1;;;0,59;1882;0,0;0;
+2026-10-15 22:38;v3-candidato;C11;ignorar;medio;2;original;1;;;0,22;1882;0,0;0;
+2026-10-15 22:38;v3-candidato;C11;ignorar;medio;3;original;1;;;0,23;1882;0,0;0;
+2026-10-15 22:38;v3-candidato;C12;registrar;dificil;1;original;1;;;3,5;1942;0,0;1;
+2026-10-15 22:38;v3-candidato;C12;registrar;dificil;2;original;1;;;3,27;1942;0,0;1;
+2026-10-15 22:38;v3-candidato;C12;registrar;dificil;3;original;1;;;3,21;1942;0,0;1;
+2026-10-15 22:38;v3-candidato;C13;perguntar;dificil;1;original;0;acao;acao;3,37;1934;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:38;v3-candidato;C13;perguntar;dificil;2;original;0;acao;acao;3,16;1934;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:38;v3-candidato;C13;perguntar;dificil;3;original;0;acao;acao;3,21;1934;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-15 22:38;v3-candidato;C14;registrar;dificil;1;original;1;;;3,45;1936;0,0;1;
+2026-10-15 22:38;v3-candidato;C14;registrar;dificil;2;original;1;;;3,19;1936;0,0;1;
+2026-10-15 22:38;v3-candidato;C14;registrar;dificil;3;original;1;;;3,17;1936;0,0;1;
+2026-10-15 22:38;v3-candidato;C15;perguntar;dificil;1;original;1;;;3,1;1925;0,0;1;
+2026-10-15 22:38;v3-candidato;C15;perguntar;dificil;2;original;1;;;3,0;1925;0,0;1;
+2026-10-15 22:38;v3-candidato;C15;perguntar;dificil;3;original;1;;;2,92;1925;0,0;1;
+2026-10-16 06:51;v2;C01;registrar;facil;1;original;1;;;9,86;1813;0,0;1;
+2026-10-16 06:51;v2;C02;perguntar;facil;1;original;1;;;2,19;1796;0,0;1;
+2026-10-16 06:51;v2;C03;registrar;facil;1;original;1;;;2,95;1813;0,0;1;
+2026-10-16 06:51;v2;C04;ignorar;facil;1;original;1;;;0,38;1760;0,0;0;
+2026-10-16 06:51;v2;C05;registrar;facil;1;original;0;acao;formato;2,02;1802;0,0;0;"ignorou; texto: ""registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-"""
+2026-10-16 06:51;v2;C06;registrar;medio;1;original;1;;;3,04;1811;0,0;1;
+2026-10-16 06:51;v2;C07;registrar;medio;1;original;0;acao;acao;2,76;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-16 06:51;v2;C08;registrar;medio;1;original;0;acao;acao;2,84;1812;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto (ex: transporte)?"""
+2026-10-16 06:51;v2;C09;perguntar;medio;1;original;1;;;2,66;1810;0,0;1;
+2026-10-16 06:51;v2;C10;perguntar;medio;1;original;0;acao;formato;1,69;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-16 06:51;v2;C11;ignorar;medio;1;original;1;;;0,51;1765;0,0;0;
+2026-10-16 06:51;v2;C12;registrar;dificil;1;original;1;;;3,39;1825;0,0;1;
+2026-10-16 06:51;v2;C13;perguntar;dificil;1;original;0;acao;acao;3,35;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-16 06:51;v2;C14;registrar;dificil;1;original;0;acao;acao;2,71;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-16 06:51;v2;C15;perguntar;dificil;1;original;1;;;2,84;1808;0,0;1;
+2026-10-16 06:51;v2;C01;registrar;facil;2;invertida;1;;;9,3;1813;0,0;1;
+2026-10-16 06:51;v2;C02;perguntar;facil;2;invertida;0;campos_faltantes;campos;2,84;1806;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-16 06:51;v2;C03;registrar;facil;2;invertida;1;;;3,04;1813;0,0;1;
+2026-10-16 06:51;v2;C04;ignorar;facil;2;invertida;1;;;0,39;1760;0,0;0;
+2026-10-16 06:51;v2;C05;registrar;facil;2;invertida;1;;;3,25;1824;0,0;1;
+2026-10-16 06:51;v2;C06;registrar;medio;2;invertida;1;;;3,04;1811;0,0;1;
+2026-10-16 06:51;v2;C07;registrar;medio;2;invertida;0;acao;acao;2,74;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-16 06:51;v2;C08;registrar;medio;2;invertida;0;acao;acao;2,59;1809;0,0;1;"perguntou ['categoria']: ""Em que categoria esse gasto se encaixa?"""
+2026-10-16 06:51;v2;C09;perguntar;medio;2;invertida;1;;;2,58;1810;0,0;1;
+2026-10-16 06:51;v2;C10;perguntar;medio;2;invertida;0;acao;formato;1,62;1786;0,0;0;"ignorou; texto: ""perguntar_usuario: campos_faltantes [""valor""], pergunta ""Qual foi o valor do cur"""
+2026-10-16 06:51;v2;C11;ignorar;medio;2;invertida;1;;;0,48;1765;0,0;0;
+2026-10-16 06:51;v2;C12;registrar;dificil;2;invertida;1;;;3,27;1825;0,0;1;
+2026-10-16 06:51;v2;C13;perguntar;dificil;2;invertida;1;;;2,39;1803;0,0;1;
+2026-10-16 06:51;v2;C14;registrar;dificil;2;invertida;0;acao;acao;2,5;1807;0,0;1;"perguntou ['categoria']: ""Em que foi esse presente de aniversário?"""
+2026-10-16 06:51;v2;C15;perguntar;dificil;2;invertida;1;;;2,86;1808;0,0;1;
+2026-10-16 06:51;v2;C01;registrar;facil;3;girada;1;;;9,27;1813;0,0;1;
+2026-10-16 06:51;v2;C02;perguntar;facil;3;girada;0;campos_faltantes;campos;2,46;1799;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-16 06:51;v2;C03;registrar;facil;3;girada;1;;;3,07;1813;0,0;1;
+2026-10-16 06:51;v2;C04;ignorar;facil;3;girada;1;;;0,41;1760;0,0;0;
+2026-10-16 06:51;v2;C05;registrar;facil;3;girada;1;;;3,21;1824;0,0;1;
+2026-10-16 06:51;v2;C06;registrar;medio;3;girada;1;;;2,98;1811;0,0;1;
+2026-10-16 06:51;v2;C07;registrar;medio;3;girada;1;;;3,19;1818;0,0;1;
+2026-10-16 06:51;v2;C08;registrar;medio;3;girada;0;acao;acao;2,62;1809;0,0;1;"perguntou ['categoria']: ""Em que categoria esse gasto se encaixa?"""
+2026-10-16 06:51;v2;C09;perguntar;medio;3;girada;1;;;2,64;1810;0,0;1;
+2026-10-16 06:51;v2;C10;perguntar;medio;3;girada;1;;;2,42;1802;0,0;1;
+2026-10-16 06:51;v2;C11;ignorar;medio;3;girada;1;;;0,5;1765;0,0;0;
+2026-10-16 06:51;v2;C12;registrar;dificil;3;girada;1;;;3,27;1825;0,0;1;
+2026-10-16 06:51;v2;C13;perguntar;dificil;3;girada;0;acao;acao;3,26;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-16 06:51;v2;C14;registrar;dificil;3;girada;1;;;3,26;1819;0,0;1;
+2026-10-16 06:51;v2;C15;perguntar;dificil;3;girada;1;;;2,98;1808;0,0;1;

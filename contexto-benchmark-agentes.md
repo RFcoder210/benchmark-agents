@@ -91,7 +91,7 @@ Exemplos de referência:
 ### Estrutura sugerida do CSV de resultados
 
 ```
-data | versao_agente | id_caso | categoria | dificuldade | execucao_n | acertou | campos_errados | tempo_s | tokens | custo | n_passos | observacao
+data | versao_agente | id_caso | categoria | dificuldade | execucao_n | ordem | acertou | campos_errados | tipo_erro | tempo_s | tokens | custo | n_passos | observacao
 ```
 
 ---

@@ -8,13 +8,15 @@
 
 import glob  # biblioteca padrão para procurar arquivos por padrão de nome
 import json
+import os    # para ler a data de modificação dos arquivos
 
-from benchmark import comparar
+from benchmark import classificar_erro, comparar
 
 
-def resposta(acao, argumentos=None, n_chamadas=1):
+def resposta(acao, argumentos=None, n_chamadas=1, texto=""):
     """Monta uma resposta falsa no mesmo formato de interpretar()."""
-    return {"acao": acao, "argumentos": argumentos or {}, "n_chamadas": n_chamadas}
+    return {"acao": acao, "argumentos": argumentos or {}, "n_chamadas": n_chamadas,
+            "texto": texto}
 
 
 # Gabaritos usados nos exemplos.
@@ -70,13 +72,55 @@ def parte_a():
     print(f"  {passaram}/{len(EXEMPLOS)} exemplos passaram\n")
 
 
+# Exemplos de classificar_erro(): (descrição, resposta, gabarito, tipo esperado).
+EXEMPLOS_TIPO = [
+    ("acertou: sem tipo de erro",
+     resposta("registrar", {"valor": 35, "categoria": "mercado", "pagamento": "pix", "data": "2026-10-11"}),
+     GASTO, ""),
+    ("escreveu a chamada como texto (caso C10)",
+     resposta("ignorar", {}, n_chamadas=0,
+              texto='perguntar_usuario: campos_faltantes ["valor"], pergunta "Qual foi o valor?"'),
+     PERGUNTA, "formato"),
+    ("ignorou um gasto sem escrever chamada nenhuma",
+     resposta("ignorar", {}, n_chamadas=0, texto="ignorado"),
+     GASTO, "acao"),
+    ("registrou em vez de perguntar",
+     resposta("registrar", {"valor": 60, "categoria": "outros", "pagamento": "pix", "data": "2026-10-11"}),
+     PERGUNTA, "acao"),
+    ("ação certa, categoria errada",
+     resposta("registrar", {"valor": 35, "categoria": "outros", "pagamento": "pix", "data": "2026-10-11"}),
+     GASTO, "campos"),
+    ("só errou por chamar 2 ferramentas",
+     resposta("registrar", {"valor": 35, "categoria": "mercado", "pagamento": "pix", "data": "2026-10-11"}, n_chamadas=2),
+     GASTO, "formato"),
+]
+
+
+def parte_a2():
+    """Confere se classificar_erro() dá o tipo certo em cada exemplo."""
+    print("PARTE A2 - tipo de erro")
+    passaram = 0
+    for descricao, resp, esperado, tipo_certo in EXEMPLOS_TIPO:
+        _, campos_errados = comparar(resp, esperado)
+        obtido = classificar_erro(resp, esperado, campos_errados)
+        ok = obtido == tipo_certo
+        passaram += ok
+        print(f"  {'OK   ' if ok else 'FALHA'} {descricao}")
+        if not ok:
+            print(f"        esperado {tipo_certo!r}, obtido {obtido!r}")
+    print(f"  {passaram}/{len(EXEMPLOS_TIPO)} exemplos passaram\n")
+
+
 def parte_b():
     """Aplica comparar() às respostas reais da última execução salva."""
-    arquivos = sorted(glob.glob("resultados/brutos_*.json"))
+    arquivos = glob.glob("resultados/brutos_*.json")
     if not arquivos:
         print("PARTE B - nenhum arquivo em resultados/; rode o benchmark.py antes.")
         return
-    caminho = arquivos[-1]  # o último da lista é o mais recente (nome tem data e hora)
+    # O mais recente pela DATA DE MODIFICAÇÃO do arquivo. (Pela ordem alfabética
+    # do nome, "brutos_v3-..." viria depois de "brutos_v2_..." mesmo sendo mais antigo.)
+    # max(..., key=f) devolve o item para o qual f(item) é o maior.
+    caminho = max(arquivos, key=os.path.getmtime)
     with open(caminho, encoding="utf-8") as arquivo:
         registros = json.load(arquivo)
 
@@ -92,4 +136,5 @@ def parte_b():
 
 if __name__ == "__main__":
     parte_a()
+    parte_a2()
     parte_b()
