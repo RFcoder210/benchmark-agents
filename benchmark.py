@@ -14,12 +14,16 @@ import json      # biblioteca padrão para ler e escrever arquivos JSON
 import os        # biblioteca padrão para lidar com pastas e caminhos
 from datetime import datetime  # data e hora atuais, para nomear os resultados
 
-from agente import ACAO_POR_FERRAMENTA, EXEMPLOS_V2, interpretar, montar_prompt
+from agente import ACAO_POR_FERRAMENTA, EXEMPLOS_V2, interpretar
 
 ARQUIVO_CASOS = "casos/casos.json"
 PASTA_RESULTADOS = "resultados"
-VERSAO_AGENTE = "v2"   # mude a cada alteração no agente (v2, v3...)
-# Histórico: v1 = linha de base (instruções); v2 = + bloco de exemplos resolvidos no prompt
+VERSAO_AGENTE = "v4"   # mude a cada alteração no agente (v2, v3...)
+# Histórico: v1 = linha de base (instruções); v2 = + bloco de exemplos resolvidos no prompt;
+# v3 = os mesmos 8 exemplos passam do texto do prompt para a conversa, como
+#      chamadas de ferramenta reais (degrau "saída estruturada") -> REPROVADA em 16/10
+#      (zerou os erros de formato, mas voltou a assumir em vez de perguntar; 27/45);
+# v4 = v2 + validação em Python: recupera a chamada escrita como texto
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 
@@ -76,11 +80,13 @@ def executar_casos(casos, n_execucoes, temperatura=0, prompt_sistema=None, orden
     temperatura e prompt_sistema são repassados ao agente; os valores padrão
     correspondem ao agente oficial."""
 
-    # Monta as "variantes" do prompt: pares (nome da ordem, texto do prompt).
+    # Monta as "variantes": trios (nome da ordem, prompt, ordem dos exemplos).
+    # Com ordens, usa o agente oficial (exemplos como conversa) em cada ordem;
+    # sem ordens, usa prompt_sistema (modo antigo, exemplos escritos no prompt).
     if ordens is None:
-        variantes = [("original", prompt_sistema)]
+        variantes = [("original", prompt_sistema, None)]
     else:
-        variantes = [(nome, montar_prompt(ordem)) for nome, ordem in ordens]
+        variantes = [(nome, None, ordem) for nome, ordem in ordens]
 
     registros = []
     total = len(casos) * len(variantes) * n_execucoes
@@ -92,12 +98,13 @@ def executar_casos(casos, n_execucoes, temperatura=0, prompt_sistema=None, orden
     # (cache), desde que ele não mude. Alternar a ordem a cada chamada destruía
     # esse cache e triplicava o tempo (de ~3 s para ~9 s por resposta).
     # execucao_n conta 1, 2, 3... dentro de cada caso.
-    for i_ordem, (nome_ordem, prompt) in enumerate(variantes):
+    for i_ordem, (nome_ordem, prompt, ordem) in enumerate(variantes):
         for caso in casos:
             for volta in range(n_execucoes):
                 execucao_n = i_ordem * n_execucoes + volta + 1
                 resposta = interpretar(caso["mensagem"], caso["data_referencia"],
-                                       temperatura=temperatura, prompt_sistema=prompt)
+                                       temperatura=temperatura, prompt_sistema=prompt,
+                                       ordem_exemplos=ordem)
                 feitas += 1
 
                 # Guarda tudo o que será necessário para comparar e salvar depois.
@@ -277,6 +284,19 @@ def descrever_erro(resposta, esperado, campos_errados):
     return "; ".join(partes)
 
 
+def observacao(resposta, esperado, campos_errados):
+    """Texto da coluna observacao: o erro (se houver) e, quando a validação da v4
+    recuperou a chamada do texto, um aviso. Assim o "conserto" fica visível no
+    CSV e não esconde que o modelo errou o formato."""
+    partes = []
+    if resposta.get("chamada_recuperada"):
+        partes.append("chamada recuperada do texto")
+    erro = descrever_erro(resposta, esperado, campos_errados)
+    if erro:
+        partes.append(erro)
+    return "; ".join(partes)
+
+
 def avaliar(registros, data_execucao, rotulo=VERSAO_AGENTE):
     """Compara cada execução com o gabarito e monta as linhas do CSV
     (um dicionário por linha, com as chaves de COLUNAS).
@@ -301,7 +321,7 @@ def avaliar(registros, data_execucao, rotulo=VERSAO_AGENTE):
             "tokens": (resposta["tokens_entrada"] or 0) + (resposta["tokens_saida"] or 0),
             "custo": 0.0,
             "n_passos": resposta["n_chamadas"],
-            "observacao": descrever_erro(resposta, r["esperado"], campos_errados),
+            "observacao": observacao(resposta, r["esperado"], campos_errados),
         })
     return linhas
 

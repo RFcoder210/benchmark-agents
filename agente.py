@@ -8,6 +8,8 @@
 # Regras completas: especificacao-agente.md
 # Execução de teste:  .venv\Scripts\python agente.py
 
+import json  # para ler a lista de campos escrita como texto (validação da v4)
+import re    # expressões regulares: procurar padrões dentro de textos
 import time
 import ollama
 
@@ -216,32 +218,155 @@ def montar_prompt(ordem=None, extras=None):
     return _ANTES + "\n".join(exemplos) + _DEPOIS
 
 
-# Verificação de segurança: sem mudanças, a montagem reproduz o prompt oficial
+# Verificação de segurança: sem mudanças, a montagem reproduz o prompt da v2
 # caractere por caractere. Se esta linha falhar, nenhuma variante é confiável.
 assert montar_prompt() == PROMPT_SISTEMA, "montar_prompt() não reproduz o PROMPT_SISTEMA"
 
 
 # ---------------------------------------------------------------------------
+# v3: EXEMPLOS COMO CONVERSA (degrau "saída estruturada" da escada)
+# ---------------------------------------------------------------------------
+# Na v2, os exemplos ficavam ESCRITOS no prompt ("-> registrar_gasto: valor 45.0...").
+# O lote de 15/10 mostrou que o modelo às vezes IMITA esse texto em vez de chamar
+# a ferramenta (C05, C06, C10): entendeu a mensagem, mas respondeu no formato errado.
+# Na v3, os MESMOS 8 exemplos (mesma ordem, mesmo conteúdo) viram mensagens
+# anteriores da conversa, com chamadas de ferramenta DE VERDADE. Analogia: em vez
+# de descrever por escrito como se preenche um formulário, mostramos 8 formulários
+# já preenchidos.
+#
+# O prompt da v3 é o da v2 sem o bloco "## Exemplos resolvidos".
+PROMPT_SISTEMA_V3 = _ANTES[:-len(TITULO_EXEMPLOS)].rstrip("\n") + _DEPOIS
+
+# Cada exemplo: (mensagem do usuário, ferramenta chamada, argumentos).
+# Ferramenta None = não chama nenhuma e responde "ignorado".
+# "data" não aparece aqui: é preenchida com a data de referência de cada caso.
+EXEMPLOS_CONVERSA = [
+    ("pizza 45 no débito", "registrar_gasto",
+     {"valor": 45.0, "categoria": "alimentacao", "pagamento": "debito"}),
+    ("cortei o cabelo, 50 no pix", "registrar_gasto",
+     {"valor": 50.0, "categoria": "outros", "pagamento": "pix"}),
+    ("estacionamento 15", "perguntar_usuario",
+     {"campos_faltantes": ["pagamento"], "pergunta": "Qual foi a forma de pagamento?"}),
+    ("ingresso do show, 120 no cartão", "perguntar_usuario",
+     {"campos_faltantes": ["pagamento"], "pergunta": "Foi no débito ou no crédito?"}),
+    ("paguei a internet no débito", "perguntar_usuario",
+     {"campos_faltantes": ["valor"], "pergunta": "Qual foi o valor?"}),
+    ("saiu 90 no pix", "perguntar_usuario",
+     {"campos_faltantes": ["categoria"], "pergunta": "Em que foi esse gasto?"}),
+    ("lanche ontem", "perguntar_usuario",
+     {"campos_faltantes": ["valor", "pagamento"],
+      "pergunta": "Qual foi o valor e a forma de pagamento?"}),
+    ("transferi 500 pra poupança", None, {}),
+]
+assert len(EXEMPLOS_CONVERSA) == len(EXEMPLOS_V2), "a v3 deve ter os mesmos exemplos da v2"
+
+
+def montar_conversa_exemplos(data_referencia, ordem=None):
+    """Transforma os exemplos em mensagens de conversa, na ordem pedida.
+    Cada exemplo vira um par: a mensagem do usuário ("user") e a resposta do
+    agente ("assistant"), que é uma chamada de ferramenta ou o texto "ignorado"."""
+    if ordem is None:
+        ordem = list(range(len(EXEMPLOS_CONVERSA)))
+    assert sorted(ordem) == list(range(len(EXEMPLOS_CONVERSA))), "ordem inválida"
+
+    mensagens = []
+    for i in ordem:
+        texto, ferramenta, argumentos = EXEMPLOS_CONVERSA[i]
+        mensagens.append({"role": "user", "content": texto})
+        if ferramenta is None:
+            mensagens.append({"role": "assistant", "content": "ignorado"})
+        else:
+            if ferramenta == "registrar_gasto":
+                # {**a, "data": d} = cópia do dicionário a com a chave "data" acrescentada.
+                argumentos = {**argumentos, "data": data_referencia}
+            mensagens.append({
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [{"function": {"name": ferramenta, "arguments": argumentos}}],
+            })
+    return mensagens
+
+
+# ---------------------------------------------------------------------------
+# v4: VALIDAÇÃO EM PYTHON (recuperar a chamada escrita como texto)
+# ---------------------------------------------------------------------------
+# Às vezes o modelo ESCREVE a chamada em vez de fazê-la, copiando o formato dos
+# exemplos do prompt, por exemplo:
+#     registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-11
+#     perguntar_usuario: campos_faltantes ["valor"], pergunta "Qual foi o valor?"
+# Como o formato é sempre o mesmo, o Python consegue ler esse texto e montar a
+# chamada que o modelo quis fazer. Analogia: o atendente entendeu o pedido, mas
+# escreveu no papel em vez de digitar no sistema; alguém digita por ele.
+# Expressões regulares (módulo re) descrevem "padrões" de texto:
+#   ([\d.]+)  = um ou mais dígitos ou pontos (o valor), guardado num "grupo"
+#   (\w+)     = uma palavra (categoria, pagamento)
+#   (.+)      = qualquer texto até o fim (a data)
+PADRAO_REGISTRAR = re.compile(
+    r"registrar_gasto:\s*valor\s+([\d.]+),\s*categoria\s+(\w+),\s*"
+    r"pagamento\s+(\w+),\s*data\s+(.+)")
+PADRAO_PERGUNTAR = re.compile(
+    r'perguntar_usuario:\s*campos_faltantes\s+(\[.*?\]),\s*pergunta\s+"(.*)"')
+
+
+def recuperar_chamada_em_texto(texto, data_referencia):
+    """Se o texto contém uma chamada escrita no formato dos exemplos, devolve
+    (nome_da_ferramenta, argumentos). Se não reconhecer, devolve None."""
+    texto = (texto or "").strip()
+
+    achado = PADRAO_REGISTRAR.search(texto)
+    if achado:
+        valor, categoria, pagamento, data = achado.groups()
+        data = data.strip()
+        # Nos exemplos, a data aparece como "data de referência": troca pela data real.
+        if data.startswith("de referência"):
+            data = data_referencia
+        return "registrar_gasto", {"valor": float(valor), "categoria": categoria,
+                                   "pagamento": pagamento, "data": data}
+
+    achado = PADRAO_PERGUNTAR.search(texto)
+    if achado:
+        campos_texto, pergunta = achado.groups()
+        try:
+            campos = json.loads(campos_texto)  # '["valor"]' -> ["valor"]
+        except json.JSONDecodeError:
+            return None
+        return "perguntar_usuario", {"campos_faltantes": campos, "pergunta": pergunta}
+
+    return None
+
+
+# ---------------------------------------------------------------------------
 # FUNÇÃO PRINCIPAL DO AGENTE
 # ---------------------------------------------------------------------------
-def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None):
+def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
+                ordem_exemplos=None, exemplos_em_conversa=False):
     """Envia a mensagem ao modelo e devolve um dicionário com a decisão do agente
     e as medidas de eficiência (tempo e tokens).
 
-    temperatura e prompt_sistema existem só para os experimentos de calibração
-    (lote.py). Com os valores padrão, o agente é exatamente a versão oficial."""
+    Modos:
+      - prompt_sistema=None (padrão): agente OFICIAL (v4) = prompt da v2, com os
+        exemplos na ordem ordem_exemplos (None = original), + validação em Python
+        que recupera a chamada escrita como texto.
+      - exemplos_em_conversa=True: experimento v3 (reprovado em 16/10), com os
+        exemplos como conversa. Sem validação.
+      - prompt_sistema informado: modo antigo, usado por lote.py para reproduzir
+        a v2 exatamente como foi. Sem validação.
+    temperatura existe para os experimentos de calibração."""
 
-    # Sem prompt informado, usa o oficial (PROMPT_SISTEMA).
-    if prompt_sistema is None:
-        prompt_sistema = PROMPT_SISTEMA
+    oficial = prompt_sistema is None and not exemplos_em_conversa
+    exemplos = []
+    if exemplos_em_conversa:
+        prompt_sistema = PROMPT_SISTEMA_V3
+        exemplos = montar_conversa_exemplos(data_referencia, ordem_exemplos)
+    elif prompt_sistema is None:
+        prompt_sistema = montar_prompt(ordem_exemplos)
 
-    # Monta a conversa: primeiro as instruções (system), depois a mensagem (user).
+    # Monta a conversa: instruções (system), exemplos (se houver) e a mensagem (user).
     # A data de referência é anexada às instruções, para o modelo saber qual é "hoje".
     instrucoes = prompt_sistema.strip() + f"\n\nData de referência (hoje): {data_referencia}"
-    conversa = [
-        {"role": "system", "content": instrucoes},
-        {"role": "user", "content": mensagem},
-    ]
+    conversa = ([{"role": "system", "content": instrucoes}]
+                + exemplos
+                + [{"role": "user", "content": mensagem}])
 
     # Chama o modelo, oferecendo as ferramentas, e mede o tempo.
     inicio = time.perf_counter()
@@ -267,10 +392,21 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None):
         acao = ACAO_POR_FERRAMENTA.get(primeira.function.name, "desconhecida")
         argumentos = dict(primeira.function.arguments)
 
+    # v4: sem chamada de verdade, tenta recuperar a chamada escrita no texto.
+    # Só no agente oficial; os modos de experimento ficam como eram.
+    chamada_recuperada = False
+    if oficial and len(chamadas) == 0:
+        recuperada = recuperar_chamada_em_texto(resposta.message.content, data_referencia)
+        if recuperada is not None:
+            nome, argumentos = recuperada
+            acao = ACAO_POR_FERRAMENTA[nome]
+            chamada_recuperada = True
+
     return {
         "acao": acao,
         "argumentos": argumentos,
         "n_chamadas": len(chamadas),
+        "chamada_recuperada": chamada_recuperada,  # True = veio do texto, não do modelo
         "texto": resposta.message.content,  # texto solto, se o modelo "conversou"
         "tempo_s": round(tempo_s, 2),
         "tokens_entrada": resposta.prompt_eval_count,
