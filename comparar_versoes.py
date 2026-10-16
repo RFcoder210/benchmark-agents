@@ -55,30 +55,55 @@ def mostrar_tabela(base, nova, acertos_base, acertos_nova):
 
 
 # ---------------------------------------------------------------------------
-# A REGRA DE APROVAÇÃO (para você escrever)
+# A REGRA DE APROVAÇÃO
 # ---------------------------------------------------------------------------
+# Base nos dados do lote de 15/10:
+#   - Só reordenar os exemplos virou de 2 a 4 casos (o "limiar de ruído").
+#   - Um caso "estável ✓" (3/3) é um acerto em que dá para confiar;
+#     um caso "sensível" (1/3 ou 2/3) pode virar por acaso.
+# Por isso a regra só dá valor às mudanças que CHEGAM ou SAEM do estável ✓.
+# Oscilar entre 0/3, 1/3 e 2/3 é tratado como ruído e não conta.
+#
+# Analogia: um aluno só "aprendeu" a matéria se acerta a questão nas três
+# versões da prova; acertar em uma e errar em outra ainda é sorte.
+MINIMO_GANHOS = 2   # ganhos necessários para aprovar (1 só pode ser acaso)
+MAXIMO_PERDAS = 0   # um acerto estável que quebra é regressão real: reprova
+
+
+def contar_mudancas(acertos_base, acertos_nova):
+    """Devolve duas listas de casos:
+        ganhos -> não era estável ✓ na base e passou a ser na nova (3/3)
+        perdas -> era estável ✓ na base e deixou de ser na nova"""
+    ganhos, perdas = [], []
+    for caso in acertos_base:
+        antes = acertos_base[caso]
+        depois = acertos_nova.get(caso, 0)   # caso ausente na nova conta como 0
+        if antes < 3 and depois == 3:
+            ganhos.append(caso)
+        elif antes == 3 and depois < 3:
+            perdas.append(caso)
+    return ganhos, perdas
+
+
 def versao_aprovada(acertos_base, acertos_nova):
     """Recebe os dois dicionários {id_caso: acertos de 0 a 3} e devolve True
     (aprovar a versão nova) ou False (manter a base).
 
-    Dados do lote de 15/10 para orientar a sua regra:
-      - Só reordenar os exemplos virou de 2 a 4 casos (o "limiar de ruído").
-      - Um caso "estável ✓" (3/3) é um acerto em que dá para confiar;
-        um caso "sensível" (1/3 ou 2/3) pode virar por acaso.
+    A nova versão é aprovada só se cumprir as TRÊS condições:
+      1. nenhum caso estável ✓ foi perdido (perdas <= MAXIMO_PERDAS);
+      2. pelo menos MINIMO_GANHOS casos viraram estável ✓;
+      3. o total de acertos não caiu (protege contra perdas espalhadas
+         entre casos sensíveis, que a condição 1 não enxerga)."""
+    ganhos, perdas = contar_mudancas(acertos_base, acertos_nova)
+    total_base = sum(acertos_base.values())
+    total_nova = sum(acertos_nova.values())
 
-    Perguntas que a regra deve responder:
-      1. O que conta como um caso GANHO? (ex.: passar de sensível/✗ para estável ✓?)
-      2. O que conta como um caso PERDIDO? Uma perda pesa igual a um ganho?
-      3. Quantos ganhos líquidos são necessários para superar o ruído?
-      4. Existe algum caso que, se perdido, reprova a versão de qualquer jeito?
-
-    Dica de Python: percorra os casos com
-        for caso in acertos_base:
-            antes = acertos_base[caso]
-            depois = acertos_nova.get(caso, 0)
-    e conte os ganhos e as perdas em duas variáveis.
-    """
-    return None  # substitua por sua regra; None = "regra ainda não escrita"
+    condicoes = [
+        len(perdas) <= MAXIMO_PERDAS,
+        len(ganhos) >= MINIMO_GANHOS,
+        total_nova >= total_base,
+    ]
+    return all(condicoes)   # all() = True só se todas as condições forem True
 
 
 if __name__ == "__main__":
@@ -90,8 +115,10 @@ if __name__ == "__main__":
     acertos_nova = acertos_por_caso(nova)
     mostrar_tabela(base, nova, acertos_base, acertos_nova)
 
+    # Mostra os números que levaram à decisão, para ela nunca ser uma "caixa-preta".
+    ganhos, perdas = contar_mudancas(acertos_base, acertos_nova)
+    print(f"\nGanhos (viraram estável ✓): {len(ganhos)} {ganhos}  | mínimo {MINIMO_GANHOS}")
+    print(f"Perdas (deixaram de ser estável ✓): {len(perdas)} {perdas}  | máximo {MAXIMO_PERDAS}")
+
     decisao = versao_aprovada(acertos_base, acertos_nova)
-    if decisao is None:
-        print("\nRegra de aprovação ainda não escrita (versao_aprovada devolve None).")
-    else:
-        print(f"\nDecisão: {'APROVAR ' + nova if decisao else 'MANTER ' + base}")
+    print(f"Decisão: {'APROVAR ' + nova if decisao else 'MANTER ' + base}")
