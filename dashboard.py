@@ -98,6 +98,21 @@ def por_caso(dados):
 
 
 # ---------------------------------------------------------------------------
+# EXIBIÇÃO DOS GRÁFICOS (computador e celular)
+# ---------------------------------------------------------------------------
+def mostrar(grafico):
+    """Mostra um gráfico ocupando a largura disponível, sem passar da tela.
+    No celular a tela tem ~375 px: por isso a legenda vai para BAIXO do gráfico
+    (ao lado, ela empurraria o desenho para fora da tela) e o tamanho total
+    (autosize "fit") já inclui eixos e legenda."""
+    grafico = (grafico
+               .properties(width="container",
+                           autosize=alt.AutoSizeParams(type="fit", contains="padding"))
+               .configure_legend(orient="bottom", direction="horizontal", titleOrient="left"))
+    st.altair_chart(grafico, width="stretch")
+
+
+# ---------------------------------------------------------------------------
 # FILTROS (barra lateral)
 # ---------------------------------------------------------------------------
 st.sidebar.header("Filtros")
@@ -159,13 +174,15 @@ st.caption("Cada caso roda 1 vez em cada ordem dos exemplos (original, invertida
 
 linha_base = resumo[resumo["versao_agente"] == base].iloc[0]
 casos_base = por_caso(dados[dados["versao_agente"] == base])
-col1, col2, col3, col4 = st.columns(4)
-col1.metric(f"Acerto ({base})", f"{linha_base['taxa_pct']:.0f}%",
-            help=f"{int(linha_base['acertos'])} de {int(linha_base['execucoes'])} execuções")
-col2.metric("Casos estáveis ✓", f"{(casos_base['taxa'] == 1).sum()} de {len(casos_base)}",
-            help="Casos que acertaram em todas as execuções.")
-col3.metric("Tempo mediano", f"{linha_base['tempo_mediano']:.1f} s")
-col4.metric("Tokens por resposta", f"{linha_base['tokens_medios']:.0f}")
+# Contêiner horizontal com quebra de linha: 4 números lado a lado no computador
+# e 2 por linha no celular (cada número tem largura fixa de 160 px).
+numeros = st.container(horizontal=True, gap="small")
+numeros.metric(f"Acerto ({base})", f"{linha_base['taxa_pct']:.0f}%",
+               help=f"{int(linha_base['acertos'])} de {int(linha_base['execucoes'])} execuções", width=160)
+numeros.metric("Casos estáveis ✓", f"{(casos_base['taxa'] == 1).sum()} de {len(casos_base)}",
+               help="Casos que acertaram em todas as execuções.", width=160)
+numeros.metric("Tempo mediano", f"{linha_base['tempo_mediano']:.1f} s", width=160)
+numeros.metric("Tokens por resposta", f"{linha_base['tokens_medios']:.0f}", width=160)
 
 
 # ---------------------------------------------------------------------------
@@ -192,7 +209,7 @@ with esquerda:
                  alt.Tooltip("situacao:N", title="Situação")])
     rotulos = alt.Chart(resumo).mark_text(dy=-14, fontSize=12, color=COR_TEXTO).encode(
         x=eixo_versao, y="taxa_pct:Q", text=alt.Text("taxa_pct:Q", format=".0f"))
-    st.altair_chart(faixa + linha + rotulos, width="stretch")
+    mostrar(faixa + linha + rotulos)
 
 with direita:
     st.subheader("Acerto por grupo")
@@ -208,7 +225,7 @@ with direita:
         tooltip=[alt.Tooltip("versao_agente:N", title="Versão"),
                  alt.Tooltip(f"{dimensao}:N", title="Grupo"),
                  alt.Tooltip("taxa_pct:Q", title="Acerto (%)", format=".0f")])
-    st.altair_chart(barras, width="stretch")
+    mostrar(barras)
 
 
 # ---------------------------------------------------------------------------
@@ -234,7 +251,7 @@ with esquerda:
         x=alt.X("versao_agente:N", sort=versoes_presentes), y="id_caso:N", text="rotulo:N",
         color=alt.condition("datum.taxa > 0.5", alt.value("white"), alt.value("#0b0b0b")))
     altura = 26 * tabela["id_caso"].nunique()
-    st.altair_chart((celulas + textos).properties(height=altura), width="stretch")
+    mostrar((celulas + textos).properties(height=altura))
 
 with direita:
     st.subheader("Tipos de erro por versão")
@@ -253,7 +270,7 @@ with direita:
             tooltip=[alt.Tooltip("versao_agente:N", title="Versão"),
                      alt.Tooltip("tipo_erro:N", title="Tipo"),
                      alt.Tooltip("quantidade:Q", title="Quantidade")])
-        st.altair_chart(empilhado, width="stretch")
+        mostrar(empilhado)
 
     st.subheader("Sensibilidade à ordem dos exemplos")
     st.caption("Mesma versão, só com os exemplos do prompt em outra ordem.")
@@ -276,7 +293,7 @@ with direita:
             tooltip=[alt.Tooltip("versao_agente:N", title="Versão"),
                      alt.Tooltip("ordem:N", title="Ordem"),
                      alt.Tooltip("taxa_pct:Q", title="Acerto (%)", format=".0f")])
-        st.altair_chart(barras_ordem, width="stretch")
+        mostrar(barras_ordem)
 
 
 # ---------------------------------------------------------------------------
@@ -293,7 +310,7 @@ with col1:
         x=eixo_versao,
         y=alt.Y("tempo_s:Q", title="Tempo (s)"),
         color=alt.Color("versao_agente:N", scale=escala_cor, legend=None))
-    st.altair_chart(caixas, width="stretch")
+    mostrar(caixas)
 
 with col2:
     st.subheader("Tokens por resposta")
@@ -304,7 +321,7 @@ with col2:
         color=alt.Color("versao_agente:N", scale=escala_cor, legend=None),
         tooltip=[alt.Tooltip("versao_agente:N", title="Versão"),
                  alt.Tooltip("tokens_medios:Q", title="Tokens", format=".0f")])
-    st.altair_chart(tokens, width="stretch")
+    mostrar(tokens)
 
 with col3:
     st.subheader("Eficácia × eficiência")
@@ -319,7 +336,7 @@ with col3:
                  alt.Tooltip("situacao:N", title="Situação")])
     nomes = alt.Chart(resumo).mark_text(dx=12, align="left", fontSize=12, color=COR_TEXTO).encode(
         x="tokens_medios:Q", y="taxa_pct:Q", text="versao_agente:N")
-    st.altair_chart(pontos + nomes, width="stretch")
+    mostrar(pontos + nomes)
 
 
 # ---------------------------------------------------------------------------
@@ -336,7 +353,7 @@ if not temperatura.empty:
         y=alt.Y("id_caso:N", title="Caso"),
         x=alt.X("taxa_pct:Q", title="Acerto (%)", scale=alt.Scale(domain=[0, 100])),
         tooltip=[alt.Tooltip("id_caso:N", title="Caso"), alt.Tooltip("rotulo:N", title="Acertos")])
-    st.altair_chart(horizontais.properties(height=26 * len(instab)), width="stretch")
+    mostrar(horizontais.properties(height=26 * len(instab)))
 
 
 # ---------------------------------------------------------------------------
