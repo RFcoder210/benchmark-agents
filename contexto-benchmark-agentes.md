@@ -105,8 +105,37 @@ data | versao_agente | id_caso | categoria | dificuldade | execucao_n | ordem | 
 5. Script: comparar a resposta com o gabarito.
 6. Script: salvar os resultados no CSV.
 7. Executar a **linha de base** e analisar os resultados comigo.
+8. **Dashboard das métricas:** uma página local que lê `resultados/resultados.csv` e mostra cada métrica no tipo de gráfico mais adequado a ela (ver abaixo).
 
 Em cada etapa, indique quais conceitos de Python estão sendo usados.
+
+### Etapa 8 em detalhe: dashboard
+
+**Ferramenta sugerida:** [Streamlit](https://streamlit.io), gratuito e local. A página inteira é escrita em Python (sem HTML nem JavaScript), roda com `.venv\Scripts\streamlit run dashboard.py` e abre no navegador. Os dados vêm só do CSV: o dashboard **nunca roda o modelo**, apenas lê o que o benchmark já gravou. Alternativa mais simples, se o Streamlit pesar: gráficos estáticos em PNG com matplotlib.
+
+**Qual gráfico para qual métrica** (a regra: o tipo de pergunta escolhe o gráfico):
+
+| Métrica | Pergunta | Gráfico |
+|---|---|---|
+| Eficácia geral por versão | A versão nova melhorou? | **Linha** v1 → v2 → v3..., com uma **faixa sombreada** do limiar de ruído (diferenças dentro da faixa não contam) |
+| Eficácia por ação esperada e por dificuldade | Onde o agente é fraco? | **Barras agrupadas** (uma cor por versão) |
+| Resultado caso a caso | Quais casos são estáveis e quais são sensíveis? | **Mapa de calor** caso × versão, com a cor indicando 0 a 3 ordens acertadas |
+| Tipo de erro | O agente não entende ou erra o formato? | **Barras empilhadas** por versão (formato, ação, campos) |
+| Sensibilidade à ordem dos exemplos | Quanto a ordem muda o resultado? | **Barras** por ordem (original, invertida, girada) dentro de cada versão |
+| Tempo por resposta | A versão ficou mais lenta? Há respostas muito lentas? | **Boxplot** por versão (mostra a mediana e os valores fora do padrão, não só a média) |
+| Tokens por resposta | Quanto custa cada versão? | **Barras** com a média por versão |
+| Eficácia × eficiência | A melhora compensou o custo? | **Dispersão**: eixo X = tokens médios, eixo Y = taxa de acerto, um ponto por versão |
+| Instabilidade com temperatura (lotes de calibração) | Quais casos oscilam? | **Barras horizontais** com a taxa de acerto por caso |
+
+**Filtros na barra lateral:** versões a comparar, ação esperada, dificuldade e se os lotes de calibração (rótulos como `v2-ordemB`) aparecem ou não.
+
+**Sub-etapas** (uma por sessão, cada uma testável sozinha):
+1. Instalar o Streamlit no `.venv`, registrar em `requirements.txt` e abrir uma página "olá" que mostra o CSV como tabela.
+2. Ler e preparar os dados com pandas (conversão da vírgula decimal, taxa por versão): a parte central, escrita pelo usuário com orientação.
+3. Gráficos de eficácia: linha com faixa de ruído e barras agrupadas.
+4. Mapa de calor caso × versão e barras empilhadas de tipo de erro.
+5. Gráficos de eficiência: boxplot de tempo, barras de tokens e dispersão eficácia × eficiência.
+6. Filtros e revisão final. O mesmo dashboard deve servir aos outros agentes do kit, bastando apontar para outro CSV.
 
 ---
 
