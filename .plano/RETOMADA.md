@@ -1,27 +1,14 @@
-# Retomada — 2026-10-14
+# Retomada — 2026-10-15/16
 
-## Feito hoje
-- Ambiente commitado (`.venv`, `requirements.txt`, Ollama 0.40.4) — `ecd2ff1`.
-- Agente mínimo `agente.py` com prompt escrito em conjunto e ferramentas simuladas; `perguntar_usuario` ganhou `campos_faltantes` (especificação atualizada) — `1a3b98e`.
-- Benchmark completo `benchmark.py` (ler → executar 3× → comparar → CSV) e `testar_comparar.py` — `3fe84dc`, `c8b913f`, `c9f4c3a`.
-- Linha de base v1: 25/45 (56%). v2 (bloco de 8 exemplos resolvidos): **30/45 (67%)**, base atual — `9a96d64`.
-- Rotina de uma sessão por dia: hook `iniciar-sessao.ps1` e skill `/encerrar-dia` adaptados a este projeto.
+## Feito na noite de 15/10 (tarefa agendada, sem o usuário)
+- Branch **`lote-noturno-2026-10-15`** (não entrou em `main`). Agente oficial continua **v2**, idêntico.
+- `agente.py`: `interpretar()` aceita `temperatura` e `prompt_sistema` opcionais; `montar_prompt(ordem, extras)` monta variantes (assert confere que reproduz o prompt v2). `benchmark.py`: parâmetros opcionais de rótulo/temperatura/prompt; padrão inalterado.
+- `lote.py` rodou 6 rodadas de calibração (v2-loteA, v2-t0.7, v2-ordemB/C/D, v3-candidato); `analisar_lote.py` gerou as tabelas.
+- Principais números: t=0 quase determinístico (só C14 variou); reordenar exemplos vira 2–4 casos (25–30/45) → limiar de ruído; v3-candidato 30/45 (ganhou C14, perdeu C05), dentro do ruído. C10/C05 falham por escrever a ferramenta como texto.
 
-## Onde paramos
-- v3 **planejada, não implementada**. Nada pendente de commit além desta adaptação (ver git status).
+## Próxima ação (a primeira coisa de amanhã, após 13:30)
+1. Restaurar as notificações do app (silenciadas em 15/10 a pedido do usuário até 16/10 13:30) com ccd_settings set_setting: notification_sound=system; task_complete_notifications, question_notifications e permission_request_notifications=banner.
+2. Ler `resultados/relatorio_lote_2026-10-15.md`, responder às perguntas guiadas e decidir se aprova a v3 e se o branch entra em main.
 
-## Próxima ação (a primeira coisa de amanhã)
-1. Implementar a v3: acrescentar ao bloco "Exemplos resolvidos" do `PROMPT_SISTEMA` 3 exemplos de registrar com categoria deduzida — "pedágio 12,40 no crédito" → transporte; "netflix 55 no crédito" → lazer; "remédio pra gripe 28 em dinheiro" → saude. Nada mais muda.
-2. Mudar `VERSAO_AGENTE` para "v3" (e o comentário de histórico) em `benchmark.py`; rodar `.venv\Scripts\python benchmark.py`.
-3. Comparar v2 × v3 caso a caso a partir de `resultados/resultados.csv`. Meta: recuperar C07, C08, C14 sem perder C02, C09, C15.
-
-## Decisões tomadas que não estão em outro arquivo
-- Uma mudança por vez: a troca do exemplo "transferi 500 pra poupança" (suspeito no C10, que passou a ser ignorado) fica para a v4, se o C10 continuar errando.
-- C13 ("loja" registrada como mercado) é outro tipo de erro; tratar depois, possivelmente com validação em Python.
-- O usuário pode preferir que eu implemente a lógica e ele analise os resultados caso a caso (tabelas por caso).
-
-## Aguardando o usuário
-- Aprovar (ou trocar) os 3 exemplos da v3 antes de rodar.
-
-## Ler se necessário
-- `CLAUDE.md` (seção 4, resultados v1/v2) | `agente.py` (PROMPT_SISTEMA) | `resultados/resultados.csv`
+## Decisões que não estão em outro arquivo
+- A hipótese "exemplo da poupança faz o C10 ser ignorado" ficou fraca: o C10 entende certo, mas escreve a chamada como texto (ver relatório).

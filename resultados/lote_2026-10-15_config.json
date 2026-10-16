@@ -1,0 +1,99 @@
+{
+  "v2-loteA": {
+    "rotulo": "v2-loteA",
+    "temperatura": 0,
+    "n": 3,
+    "ordem": null,
+    "extras": null,
+    "data_execucao": "2026-10-15 22:24",
+    "brutos": "resultados\\brutos_v2-loteA_2026-10-15_2226.json",
+    "status": "ok",
+    "duracao_min": 1.9
+  },
+  "v2-t0.7": {
+    "rotulo": "v2-t0.7",
+    "temperatura": 0.7,
+    "n": 10,
+    "ordem": null,
+    "extras": null,
+    "data_execucao": "2026-10-15 22:26",
+    "brutos": "resultados\\brutos_v2-t0.7_2026-10-15_2232.json",
+    "status": "ok",
+    "duracao_min": 6.0
+  },
+  "v2-ordemB": {
+    "rotulo": "v2-ordemB",
+    "temperatura": 0,
+    "n": 3,
+    "ordem": [
+      3,
+      4,
+      6,
+      7,
+      2,
+      5,
+      0,
+      1
+    ],
+    "extras": null,
+    "data_execucao": "2026-10-15 22:32",
+    "brutos": "resultados\\brutos_v2-ordemB_2026-10-15_2234.json",
+    "status": "ok",
+    "duracao_min": 2.0
+  },
+  "v2-ordemC": {
+    "rotulo": "v2-ordemC",
+    "temperatura": 0,
+    "n": 3,
+    "ordem": [
+      3,
+      7,
+      2,
+      0,
+      4,
+      6,
+      5,
+      1
+    ],
+    "extras": null,
+    "data_execucao": "2026-10-15 22:34",
+    "brutos": "resultados\\brutos_v2-ordemC_2026-10-15_2236.json",
+    "status": "ok",
+    "duracao_min": 1.9
+  },
+  "v2-ordemD": {
+    "rotulo": "v2-ordemD",
+    "temperatura": 0,
+    "n": 3,
+    "ordem": [
+      3,
+      5,
+      2,
+      4,
+      1,
+      6,
+      7,
+      0
+    ],
+    "extras": null,
+    "data_execucao": "2026-10-15 22:36",
+    "brutos": "resultados\\brutos_v2-ordemD_2026-10-15_2238.json",
+    "status": "ok",
+    "duracao_min": 2.0
+  },
+  "v3-candidato": {
+    "rotulo": "v3-candidato",
+    "temperatura": 0,
+    "n": 3,
+    "ordem": null,
+    "extras": [
+      "Mensagem: \"pedágio 12,40 no crédito\"\n-> registrar_gasto: valor 12.4, categoria transporte, pagamento credito, data de referência",
+      "Mensagem: \"netflix 55 no crédito\"\n-> registrar_gasto: valor 55.0, categoria lazer, pagamento credito, data de referência",
+      "Mensagem: \"remédio pra gripe 28 em dinheiro\"\n-> registrar_gasto: valor 28.0, categoria saude, pagamento dinheiro, data de referência"
+    ],
+    "data_execucao": "2026-10-15 22:38",
+    "brutos": "resultados\\brutos_v3-candidato_2026-10-15_2240.json",
+    "status": "ok",
+    "duracao_min": 2.0
+  }
+}

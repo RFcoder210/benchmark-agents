@@ -1,0 +1,1072 @@
+[
+  {
+    "id_caso": "C01",
+    "dificuldade": "facil",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 35.0,
+      "categoria": "mercado",
+      "pagamento": "pix",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 35,
+        "categoria": "mercado",
+        "pagamento": "pix",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 9.31,
+      "tokens_entrada": 1759,
+      "tokens_saida": 54
+    }
+  },
+  {
+    "id_caso": "C01",
+    "dificuldade": "facil",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 35.0,
+      "categoria": "mercado",
+      "pagamento": "pix",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 35,
+        "categoria": "mercado",
+        "pagamento": "pix",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.14,
+      "tokens_entrada": 1759,
+      "tokens_saida": 54
+    }
+  },
+  {
+    "id_caso": "C01",
+    "dificuldade": "facil",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 35.0,
+      "categoria": "mercado",
+      "pagamento": "pix",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 35,
+        "categoria": "mercado",
+        "pagamento": "pix",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.17,
+      "tokens_entrada": 1759,
+      "tokens_saida": 54
+    }
+  },
+  {
+    "id_caso": "C02",
+    "dificuldade": "facil",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que foi esse gasto?",
+        "campos_faltantes": [
+          "categoria",
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.58,
+      "tokens_entrada": 1755,
+      "tokens_saida": 44
+    }
+  },
+  {
+    "id_caso": "C02",
+    "dificuldade": "facil",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que categoria foi esse gasto? E qual foi a forma de pagamento?",
+        "campos_faltantes": [
+          "categoria",
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.94,
+      "tokens_entrada": 1755,
+      "tokens_saida": 53
+    }
+  },
+  {
+    "id_caso": "C02",
+    "dificuldade": "facil",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que categoria foi esse gasto? E qual foi a forma de pagamento?",
+        "campos_faltantes": [
+          "categoria",
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.97,
+      "tokens_entrada": 1755,
+      "tokens_saida": 53
+    }
+  },
+  {
+    "id_caso": "C03",
+    "dificuldade": "facil",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 18.5,
+      "categoria": "transporte",
+      "pagamento": "credito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 18.5,
+        "categoria": "transporte",
+        "pagamento": "credito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.15,
+      "tokens_entrada": 1758,
+      "tokens_saida": 55
+    }
+  },
+  {
+    "id_caso": "C03",
+    "dificuldade": "facil",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 18.5,
+      "categoria": "transporte",
+      "pagamento": "credito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 18.5,
+        "categoria": "transporte",
+        "pagamento": "credito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.16,
+      "tokens_entrada": 1758,
+      "tokens_saida": 55
+    }
+  },
+  {
+    "id_caso": "C03",
+    "dificuldade": "facil",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 18.5,
+      "categoria": "transporte",
+      "pagamento": "credito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 18.5,
+        "categoria": "transporte",
+        "pagamento": "credito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.03,
+      "tokens_entrada": 1758,
+      "tokens_saida": 55
+    }
+  },
+  {
+    "id_caso": "C04",
+    "dificuldade": "facil",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "ignorar"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "ignorado",
+      "tempo_s": 0.43,
+      "tokens_entrada": 1757,
+      "tokens_saida": 3
+    }
+  },
+  {
+    "id_caso": "C04",
+    "dificuldade": "facil",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "ignorar"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "ignorado",
+      "tempo_s": 0.2,
+      "tokens_entrada": 1757,
+      "tokens_saida": 3
+    }
+  },
+  {
+    "id_caso": "C04",
+    "dificuldade": "facil",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "ignorar"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "ignorado",
+      "tempo_s": 0.21,
+      "tokens_entrada": 1757,
+      "tokens_saida": 3
+    }
+  },
+  {
+    "id_caso": "C05",
+    "dificuldade": "facil",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 187.3,
+      "categoria": "moradia",
+      "pagamento": "debito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 187.3,
+        "categoria": "moradia",
+        "pagamento": "debito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.43,
+      "tokens_entrada": 1768,
+      "tokens_saida": 56
+    }
+  },
+  {
+    "id_caso": "C05",
+    "dificuldade": "facil",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 187.3,
+      "categoria": "moradia",
+      "pagamento": "debito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-11",
+      "tempo_s": 1.94,
+      "tokens_entrada": 1768,
+      "tokens_saida": 34
+    }
+  },
+  {
+    "id_caso": "C05",
+    "dificuldade": "facil",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 187.3,
+      "categoria": "moradia",
+      "pagamento": "debito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "registrar_gasto: valor 187.3, categoria moradia, pagamento debito, data 2026-10-11",
+      "tempo_s": 1.97,
+      "tokens_entrada": 1768,
+      "tokens_saida": 34
+    }
+  },
+  {
+    "id_caso": "C06",
+    "dificuldade": "medio",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 42.0,
+      "categoria": "saude",
+      "pagamento": "debito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "registrar_gasto: valor 42.0, categoria saude, pagamento debito, data de referência",
+      "tempo_s": 1.56,
+      "tokens_entrada": 1756,
+      "tokens_saida": 25
+    }
+  },
+  {
+    "id_caso": "C06",
+    "dificuldade": "medio",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 42.0,
+      "categoria": "saude",
+      "pagamento": "debito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "registrar_gasto: valor 42.0, categoria saude, pagamento debito, data de referência",
+      "tempo_s": 1.36,
+      "tokens_entrada": 1756,
+      "tokens_saida": 25
+    }
+  },
+  {
+    "id_caso": "C06",
+    "dificuldade": "medio",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 42.0,
+      "categoria": "saude",
+      "pagamento": "debito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "registrar_gasto: valor 42.0, categoria saude, pagamento debito, data de referência",
+      "tempo_s": 1.42,
+      "tokens_entrada": 1756,
+      "tokens_saida": 25
+    }
+  },
+  {
+    "id_caso": "C07",
+    "dificuldade": "medio",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 30.0,
+      "categoria": "lazer",
+      "pagamento": "dinheiro",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que categoria foi esse gasto? (lazer ou outros)",
+        "campos_faltantes": [
+          "categoria"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.88,
+      "tokens_entrada": 1763,
+      "tokens_saida": 47
+    }
+  },
+  {
+    "id_caso": "C07",
+    "dificuldade": "medio",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 30.0,
+      "categoria": "lazer",
+      "pagamento": "dinheiro",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que categoria foi esse gasto? (ex: lazer)",
+        "campos_faltantes": [
+          "categoria"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.64,
+      "tokens_entrada": 1763,
+      "tokens_saida": 47
+    }
+  },
+  {
+    "id_caso": "C07",
+    "dificuldade": "medio",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 30.0,
+      "categoria": "lazer",
+      "pagamento": "dinheiro",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que categoria foi esse gasto? (ex: lazer)",
+        "campos_faltantes": [
+          "categoria"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.84,
+      "tokens_entrada": 1763,
+      "tokens_saida": 47
+    }
+  },
+  {
+    "id_caso": "C08",
+    "dificuldade": "medio",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 150.0,
+      "categoria": "transporte",
+      "pagamento": "pix",
+      "data": "2026-10-10"
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Foi no débito ou no crédito?",
+        "campos_faltantes": [
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.75,
+      "tokens_entrada": 1765,
+      "tokens_saida": 44
+    }
+  },
+  {
+    "id_caso": "C08",
+    "dificuldade": "medio",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 150.0,
+      "categoria": "transporte",
+      "pagamento": "pix",
+      "data": "2026-10-10"
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Foi no débito ou no crédito?",
+        "campos_faltantes": [
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.51,
+      "tokens_entrada": 1765,
+      "tokens_saida": 44
+    }
+  },
+  {
+    "id_caso": "C08",
+    "dificuldade": "medio",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 150.0,
+      "categoria": "transporte",
+      "pagamento": "pix",
+      "data": "2026-10-10"
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Foi no débito ou no crédito?",
+        "campos_faltantes": [
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.5,
+      "tokens_entrada": 1765,
+      "tokens_saida": 44
+    }
+  },
+  {
+    "id_caso": "C09",
+    "dificuldade": "medio",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Foi no débito ou no crédito?",
+        "campos_faltantes": [
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.8,
+      "tokens_entrada": 1766,
+      "tokens_saida": 44
+    }
+  },
+  {
+    "id_caso": "C09",
+    "dificuldade": "medio",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Foi no débito ou no crédito?",
+        "campos_faltantes": [
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.51,
+      "tokens_entrada": 1766,
+      "tokens_saida": 44
+    }
+  },
+  {
+    "id_caso": "C09",
+    "dificuldade": "medio",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Foi no débito ou no crédito?",
+        "campos_faltantes": [
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.49,
+      "tokens_entrada": 1766,
+      "tokens_saida": 44
+    }
+  },
+  {
+    "id_caso": "C10",
+    "dificuldade": "medio",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "valor"
+      ]
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "perguntar_usuario: campos_faltantes [\"valor\"], pergunta \"Qual foi o valor do curso de inglês?\"",
+      "tempo_s": 1.7,
+      "tokens_entrada": 1759,
+      "tokens_saida": 27
+    }
+  },
+  {
+    "id_caso": "C10",
+    "dificuldade": "medio",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "valor"
+      ]
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "perguntar_usuario: campos_faltantes [\"valor\"], pergunta \"Qual foi o valor do curso de inglês?\"",
+      "tempo_s": 1.51,
+      "tokens_entrada": 1759,
+      "tokens_saida": 27
+    }
+  },
+  {
+    "id_caso": "C10",
+    "dificuldade": "medio",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "valor"
+      ]
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "perguntar_usuario: campos_faltantes [\"valor\"], pergunta \"Qual foi o valor do curso de inglês?\"",
+      "tempo_s": 1.54,
+      "tokens_entrada": 1759,
+      "tokens_saida": 27
+    }
+  },
+  {
+    "id_caso": "C11",
+    "dificuldade": "medio",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "ignorar"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "ignorado",
+      "tempo_s": 0.56,
+      "tokens_entrada": 1762,
+      "tokens_saida": 3
+    }
+  },
+  {
+    "id_caso": "C11",
+    "dificuldade": "medio",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "ignorar"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "ignorado",
+      "tempo_s": 0.21,
+      "tokens_entrada": 1762,
+      "tokens_saida": 3
+    }
+  },
+  {
+    "id_caso": "C11",
+    "dificuldade": "medio",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "ignorar"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "texto": "ignorado",
+      "tempo_s": 0.22,
+      "tokens_entrada": 1762,
+      "tokens_saida": 3
+    }
+  },
+  {
+    "id_caso": "C12",
+    "dificuldade": "dificil",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 1250.0,
+      "categoria": "moradia",
+      "pagamento": "pix",
+      "data": "2026-10-05"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 1250,
+        "categoria": "moradia",
+        "pagamento": "pix",
+        "data": "2026-10-05"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.41,
+      "tokens_entrada": 1769,
+      "tokens_saida": 56
+    }
+  },
+  {
+    "id_caso": "C12",
+    "dificuldade": "dificil",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 1250.0,
+      "categoria": "moradia",
+      "pagamento": "pix",
+      "data": "2026-10-05"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 1250,
+        "categoria": "moradia",
+        "pagamento": "pix",
+        "data": "2026-10-05"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.15,
+      "tokens_entrada": 1769,
+      "tokens_saida": 56
+    }
+  },
+  {
+    "id_caso": "C12",
+    "dificuldade": "dificil",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 1250.0,
+      "categoria": "moradia",
+      "pagamento": "pix",
+      "data": "2026-10-05"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 1250,
+        "categoria": "moradia",
+        "pagamento": "pix",
+        "data": "2026-10-05"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.24,
+      "tokens_entrada": 1769,
+      "tokens_saida": 56
+    }
+  },
+  {
+    "id_caso": "C13",
+    "dificuldade": "dificil",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "categoria"
+      ]
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 50,
+        "categoria": "mercado",
+        "pagamento": "debito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.4,
+      "tokens_entrada": 1762,
+      "tokens_saida": 55
+    }
+  },
+  {
+    "id_caso": "C13",
+    "dificuldade": "dificil",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "categoria"
+      ]
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 50,
+        "categoria": "mercado",
+        "pagamento": "debito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.14,
+      "tokens_entrada": 1762,
+      "tokens_saida": 55
+    }
+  },
+  {
+    "id_caso": "C13",
+    "dificuldade": "dificil",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "categoria"
+      ]
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 50,
+        "categoria": "mercado",
+        "pagamento": "debito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.16,
+      "tokens_entrada": 1762,
+      "tokens_saida": 55
+    }
+  },
+  {
+    "id_caso": "C14",
+    "dificuldade": "dificil",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 80.0,
+      "categoria": "outros",
+      "pagamento": "credito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 80,
+        "categoria": "outros",
+        "pagamento": "credito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.32,
+      "tokens_entrada": 1764,
+      "tokens_saida": 55
+    }
+  },
+  {
+    "id_caso": "C14",
+    "dificuldade": "dificil",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 80.0,
+      "categoria": "outros",
+      "pagamento": "credito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 80,
+        "categoria": "outros",
+        "pagamento": "credito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.16,
+      "tokens_entrada": 1764,
+      "tokens_saida": 55
+    }
+  },
+  {
+    "id_caso": "C14",
+    "dificuldade": "dificil",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "registrar",
+      "valor": 80.0,
+      "categoria": "outros",
+      "pagamento": "credito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 80,
+        "categoria": "outros",
+        "pagamento": "credito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 3.1,
+      "tokens_entrada": 1764,
+      "tokens_saida": 55
+    }
+  },
+  {
+    "id_caso": "C15",
+    "dificuldade": "dificil",
+    "execucao_n": 1,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "categoria",
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que foi esse gasto?",
+        "campos_faltantes": [
+          "categoria",
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.58,
+      "tokens_entrada": 1757,
+      "tokens_saida": 44
+    }
+  },
+  {
+    "id_caso": "C15",
+    "dificuldade": "dificil",
+    "execucao_n": 2,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "categoria",
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que foi esse gasto?",
+        "campos_faltantes": [
+          "categoria",
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.55,
+      "tokens_entrada": 1757,
+      "tokens_saida": 44
+    }
+  },
+  {
+    "id_caso": "C15",
+    "dificuldade": "dificil",
+    "execucao_n": 3,
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "categoria",
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que foi esse gasto?",
+        "campos_faltantes": [
+          "categoria",
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "texto": "",
+      "tempo_s": 2.48,
+      "tokens_entrada": 1757,
+      "tokens_saida": 44
+    }
+  }
+]

@@ -171,15 +171,73 @@ ACAO_POR_FERRAMENTA = {
 
 
 # ---------------------------------------------------------------------------
+# VARIANTES DO PROMPT (usadas só pelos experimentos de calibração, lote.py)
+# ---------------------------------------------------------------------------
+# O bloco "Exemplos resolvidos" é uma sequência de exemplos de 2 linhas cada:
+#     Mensagem: "..."
+#     -> ação esperada
+# Para medir o efeito da ORDEM dos exemplos (sem mudar o conteúdo) e testar
+# exemplos NOVOS, separamos o prompt em 3 pedaços, como fatiar um sanduíche:
+#     antes (até o título do bloco) | exemplos | depois (de "## Regras finais" em diante)
+# O PROMPT_SISTEMA oficial (v2) NÃO é alterado por nada daqui.
+TITULO_EXEMPLOS = "## Exemplos resolvidos\n"
+INICIO_DEPOIS = "\n\n## Regras finais"
+
+
+def separar_exemplos(prompt):
+    """Divide o prompt em (antes, lista_de_exemplos, depois).
+    Cada item da lista é um exemplo de 2 linhas, sem a quebra de linha final."""
+    inicio = prompt.index(TITULO_EXEMPLOS) + len(TITULO_EXEMPLOS)
+    fim = prompt.index(INICIO_DEPOIS)
+    antes, bloco, depois = prompt[:inicio], prompt[inicio:fim], prompt[fim:]
+
+    # Agrupa as linhas de 2 em 2: linhas[0:2], linhas[2:4], ...
+    linhas = bloco.split("\n")
+    assert len(linhas) % 2 == 0, "o bloco de exemplos deveria ter pares de linhas"
+    exemplos = ["\n".join(linhas[i:i + 2]) for i in range(0, len(linhas), 2)]
+    for exemplo in exemplos:
+        assert exemplo.startswith("Mensagem: "), f"exemplo fora do formato: {exemplo!r}"
+    return antes, exemplos, depois
+
+
+# Os 8 exemplos da v2, na ordem original (índices 0 a 7).
+_ANTES, EXEMPLOS_V2, _DEPOIS = separar_exemplos(PROMPT_SISTEMA)
+
+
+def montar_prompt(ordem=None, extras=None):
+    """Monta uma variante do PROMPT_SISTEMA.
+    ordem:  lista de índices de EXEMPLOS_V2 na nova ordem (None = ordem original).
+    extras: lista de exemplos novos (texto de 2 linhas), acrescentados ao FIM do bloco."""
+    if ordem is None:
+        ordem = list(range(len(EXEMPLOS_V2)))
+    # Cada exemplo original deve aparecer exatamente uma vez: só a ordem muda.
+    assert sorted(ordem) == list(range(len(EXEMPLOS_V2))), "ordem inválida"
+    exemplos = [EXEMPLOS_V2[i] for i in ordem] + list(extras or [])
+    return _ANTES + "\n".join(exemplos) + _DEPOIS
+
+
+# Verificação de segurança: sem mudanças, a montagem reproduz o prompt oficial
+# caractere por caractere. Se esta linha falhar, nenhuma variante é confiável.
+assert montar_prompt() == PROMPT_SISTEMA, "montar_prompt() não reproduz o PROMPT_SISTEMA"
+
+
+# ---------------------------------------------------------------------------
 # FUNÇÃO PRINCIPAL DO AGENTE
 # ---------------------------------------------------------------------------
-def interpretar(mensagem, data_referencia):
+def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None):
     """Envia a mensagem ao modelo e devolve um dicionário com a decisão do agente
-    e as medidas de eficiência (tempo e tokens)."""
+    e as medidas de eficiência (tempo e tokens).
+
+    temperatura e prompt_sistema existem só para os experimentos de calibração
+    (lote.py). Com os valores padrão, o agente é exatamente a versão oficial."""
+
+    # Sem prompt informado, usa o oficial (PROMPT_SISTEMA).
+    if prompt_sistema is None:
+        prompt_sistema = PROMPT_SISTEMA
 
     # Monta a conversa: primeiro as instruções (system), depois a mensagem (user).
     # A data de referência é anexada às instruções, para o modelo saber qual é "hoje".
-    instrucoes = PROMPT_SISTEMA.strip() + f"\n\nData de referência (hoje): {data_referencia}"
+    instrucoes = prompt_sistema.strip() + f"\n\nData de referência (hoje): {data_referencia}"
     conversa = [
         {"role": "system", "content": instrucoes},
         {"role": "user", "content": mensagem},
@@ -191,7 +249,7 @@ def interpretar(mensagem, data_referencia):
         model=MODELO,
         messages=conversa,
         tools=FERRAMENTAS,
-        options={"temperature": 0},
+        options={"temperature": temperatura},
     )
     tempo_s = time.perf_counter() - inicio
 

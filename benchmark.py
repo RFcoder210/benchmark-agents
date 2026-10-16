@@ -42,9 +42,11 @@ def carregar_casos(caminho):
 # ---------------------------------------------------------------------------
 # PARTE 2: EXECUTAR O AGENTE
 # ---------------------------------------------------------------------------
-def executar_casos(casos, n_execucoes):
+def executar_casos(casos, n_execucoes, temperatura=0, prompt_sistema=None):
     """Roda o agente em cada caso, n_execucoes vezes, e devolve uma lista
-    com um registro (dicionário) por execução."""
+    com um registro (dicionário) por execução.
+    temperatura e prompt_sistema são repassados ao agente; os valores padrão
+    correspondem ao agente oficial (usados por lote.py para os experimentos)."""
 
     registros = []
     total = len(casos) * n_execucoes
@@ -54,7 +56,8 @@ def executar_casos(casos, n_execucoes):
     # range(1, n + 1) gera os números 1, 2, ..., n.
     for caso in casos:
         for execucao_n in range(1, n_execucoes + 1):
-            resposta = interpretar(caso["mensagem"], caso["data_referencia"])
+            resposta = interpretar(caso["mensagem"], caso["data_referencia"],
+                                   temperatura=temperatura, prompt_sistema=prompt_sistema)
             feitas += 1
 
             # Guarda tudo o que será necessário para comparar e salvar depois.
@@ -73,13 +76,14 @@ def executar_casos(casos, n_execucoes):
     return registros
 
 
-def salvar_brutos(registros):
+def salvar_brutos(registros, rotulo=VERSAO_AGENTE):
     """Salva as respostas cruas num arquivo JSON. Assim a Parte 3 (comparação)
-    pode ser desenvolvida e testada sem rodar o modelo de novo."""
+    pode ser desenvolvida e testada sem rodar o modelo de novo.
+    rotulo entra no nome do arquivo (padrão: a versão oficial do agente)."""
 
     os.makedirs(PASTA_RESULTADOS, exist_ok=True)  # cria a pasta, se não existir
     carimbo = datetime.now().strftime("%Y-%m-%d_%H%M")  # ex.: 2026-10-14_1830
-    caminho = os.path.join(PASTA_RESULTADOS, f"brutos_{VERSAO_AGENTE}_{carimbo}.json")
+    caminho = os.path.join(PASTA_RESULTADOS, f"brutos_{rotulo}_{carimbo}.json")
 
     # ensure_ascii=False mantém os acentos legíveis; indent=2 deixa o arquivo organizado.
     with open(caminho, "w", encoding="utf-8") as arquivo:
@@ -194,9 +198,10 @@ def descrever_erro(resposta, esperado, campos_errados):
     return "; ".join(partes)
 
 
-def avaliar(registros, data_execucao):
+def avaliar(registros, data_execucao, rotulo=VERSAO_AGENTE):
     """Compara cada execução com o gabarito e monta as linhas do CSV
-    (um dicionário por linha, com as chaves de COLUNAS)."""
+    (um dicionário por linha, com as chaves de COLUNAS).
+    rotulo vai na coluna versao_agente (padrão: a versão oficial do agente)."""
 
     linhas = []
     for r in registros:
@@ -204,7 +209,7 @@ def avaliar(registros, data_execucao):
         acertou, campos_errados = comparar(resposta, r["esperado"])
         linhas.append({
             "data": data_execucao,
-            "versao_agente": VERSAO_AGENTE,
+            "versao_agente": rotulo,
             "id_caso": r["id_caso"],
             "categoria": r["esperado"]["acao"],
             "dificuldade": r["dificuldade"],
