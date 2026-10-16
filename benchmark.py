@@ -23,7 +23,10 @@ VERSAO_AGENTE = "v4"   # mude a cada alteração no agente (v2, v3...)
 # v3 = os mesmos 8 exemplos passam do texto do prompt para a conversa, como
 #      chamadas de ferramenta reais (degrau "saída estruturada") -> REPROVADA em 16/10
 #      (zerou os erros de formato, mas voltou a assumir em vez de perguntar; 27/45);
-# v4 = v2 + validação em Python: recupera a chamada escrita como texto
+# v4 = v2 + validação em Python: recupera a chamada escrita como texto;
+# v5 = v4 + regra explícita de quando deduzir e quando perguntar a categoria (instruções)
+#      -> REPROVADA em 16/10 (36/45, ganhou C02 e C14, mas perdeu C09 e C10: passou a
+#      deduzir também o valor, registrando valor 0). Oficial voltou a ser a v4.
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 
