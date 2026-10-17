@@ -734,3 +734,48 @@
 2026-10-17 17:25;v6;C13;perguntar;dificil;3;girada;0;acao;acao;3,74;2089;0,0;1;registrou: valor=50, categoria=outros, pagamento=debito, data=2026-10-11
 2026-10-17 17:25;v6;C14;registrar;dificil;3;girada;1;;;3,65;2091;0,0;1;
 2026-10-17 17:25;v6;C15;perguntar;dificil;3;girada;1;;;2,99;2073;0,0;1;
+2026-10-17 20:13;v7;C01;registrar;facil;1;original;1;;;25,42;1813;0,0;1;
+2026-10-17 20:13;v7;C02;perguntar;facil;1;original;1;;;2,6;1796;0,0;1;
+2026-10-17 20:13;v7;C03;registrar;facil;1;original;1;;;3,38;1813;0,0;1;
+2026-10-17 20:13;v7;C04;ignorar;facil;1;original;1;;;0,47;1760;0,0;0;
+2026-10-17 20:13;v7;C05;registrar;facil;1;original;1;;;3,62;1824;0,0;1;
+2026-10-17 20:13;v7;C06;registrar;medio;1;original;1;;;3,34;1811;0,0;1;
+2026-10-17 20:13;v7;C07;registrar;medio;1;original;0;acao;acao;3,14;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-17 20:13;v7;C08;registrar;medio;1;original;0;acao;acao;2,81;1805;0,0;1;"perguntou ['categoria']: ""Qual foi a categoria desse gasto?"""
+2026-10-17 20:13;v7;C09;perguntar;medio;1;original;1;;;3,07;1810;0,0;1;
+2026-10-17 20:13;v7;C10;perguntar;medio;1;original;1;;;1,99;1786;0,0;0;chamada recuperada do texto
+2026-10-17 20:13;v7;C11;ignorar;medio;1;original;1;;;0,61;1765;0,0;0;
+2026-10-17 20:13;v7;C12;registrar;dificil;1;original;1;;;3,9;1825;0,0;1;
+2026-10-17 20:13;v7;C13;perguntar;dificil;1;original;0;acao;acao;3,78;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-17 20:13;v7;C14;registrar;dificil;1;original;0;acao;acao;3,14;1810;0,0;1;"perguntou ['categoria']: ""Em que foi o presente de aniversário pra sua mãe?"""
+2026-10-17 20:13;v7;C15;perguntar;dificil;1;original;1;;;3,17;1808;0,0;1;
+2026-10-17 20:13;v7;C01;registrar;facil;2;invertida;1;;;9,73;1813;0,0;1;
+2026-10-17 20:13;v7;C02;perguntar;facil;2;invertida;0;campos_faltantes;campos;3,79;1806;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-17 20:13;v7;C03;registrar;facil;2;invertida;1;;;3,64;1813;0,0;1;
+2026-10-17 20:13;v7;C04;ignorar;facil;2;invertida;1;;;0,44;1760;0,0;0;
+2026-10-17 20:13;v7;C05;registrar;facil;2;invertida;1;;;3,63;1824;0,0;1;
+2026-10-17 20:13;v7;C06;registrar;medio;2;invertida;1;;;3,36;1811;0,0;1;
+2026-10-17 20:13;v7;C07;registrar;medio;2;invertida;0;acao;acao;3,01;1810;0,0;1;"perguntou ['categoria']: ""Em que categoria foi esse gasto? (lazer ou outros)"""
+2026-10-17 20:13;v7;C08;registrar;medio;2;invertida;0;acao;acao;2,91;1807;0,0;1;"perguntou ['categoria']: ""Em que categoria esse gasto se encaixa?"""
+2026-10-17 20:13;v7;C09;perguntar;medio;2;invertida;1;;;2,85;1810;0,0;1;
+2026-10-17 20:13;v7;C10;perguntar;medio;2;invertida;1;;;1,78;1786;0,0;0;chamada recuperada do texto
+2026-10-17 20:13;v7;C11;ignorar;medio;2;invertida;1;;;0,52;1765;0,0;0;
+2026-10-17 20:13;v7;C12;registrar;dificil;2;invertida;1;;;3,62;1825;0,0;1;
+2026-10-17 20:13;v7;C13;perguntar;dificil;2;invertida;1;;;2,65;1803;0,0;1;
+2026-10-17 20:13;v7;C14;registrar;dificil;2;invertida;0;acao;acao;2,97;1807;0,0;1;"perguntou ['categoria']: ""Em que foi esse presente de aniversário?"""
+2026-10-17 20:13;v7;C15;perguntar;dificil;2;invertida;1;;;3,27;1808;0,0;1;
+2026-10-17 20:13;v7;C01;registrar;facil;3;girada;1;;;9,61;1813;0,0;1;
+2026-10-17 20:13;v7;C02;perguntar;facil;3;girada;0;campos_faltantes;campos;2,72;1799;0,0;1;campos_faltantes=['categoria', 'pagamento'] (esperado ['pagamento'])
+2026-10-17 20:13;v7;C03;registrar;facil;3;girada;1;;;3,33;1813;0,0;1;
+2026-10-17 20:13;v7;C04;ignorar;facil;3;girada;1;;;0,45;1760;0,0;0;
+2026-10-17 20:13;v7;C05;registrar;facil;3;girada;1;;;3,55;1824;0,0;1;
+2026-10-17 20:13;v7;C06;registrar;medio;3;girada;1;;;3,37;1811;0,0;1;
+2026-10-17 20:13;v7;C07;registrar;medio;3;girada;1;;;3,59;1818;0,0;1;
+2026-10-17 20:13;v7;C08;registrar;medio;3;girada;0;acao;acao;2,86;1807;0,0;1;"perguntou ['categoria']: ""Em que categoria esse gasto se encaixa?"""
+2026-10-17 20:13;v7;C09;perguntar;medio;3;girada;1;;;2,86;1810;0,0;1;
+2026-10-17 20:13;v7;C10;perguntar;medio;3;girada;1;;;2,66;1802;0,0;1;
+2026-10-17 20:13;v7;C11;ignorar;medio;3;girada;1;;;0,57;1765;0,0;0;
+2026-10-17 20:13;v7;C12;registrar;dificil;3;girada;1;;;3,55;1825;0,0;1;
+2026-10-17 20:13;v7;C13;perguntar;dificil;3;girada;0;acao;acao;3,49;1817;0,0;1;registrou: valor=50, categoria=mercado, pagamento=debito, data=2026-10-11
+2026-10-17 20:13;v7;C14;registrar;dificil;3;girada;1;;;3,45;1819;0,0;1;
+2026-10-17 20:13;v7;C15;perguntar;dificil;3;girada;1;;;3,18;1808;0,0;1;

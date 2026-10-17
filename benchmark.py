@@ -18,7 +18,7 @@ from agente import ACAO_POR_FERRAMENTA, EXEMPLOS_V2, interpretar
 
 ARQUIVO_CASOS = "casos/casos.json"
 PASTA_RESULTADOS = "resultados"
-VERSAO_AGENTE = "v4"   # mude a cada alteração no agente (v2, v3...)
+VERSAO_AGENTE = "v7"   # mude a cada alteração no agente (v2, v3...)
 # Histórico: v1 = linha de base (instruções); v2 = + bloco de exemplos resolvidos no prompt;
 # v3 = os mesmos 8 exemplos passam do texto do prompt para a conversa, como
 #      chamadas de ferramenta reais (degrau "saída estruturada") -> REPROVADA em 16/10
@@ -31,6 +31,10 @@ VERSAO_AGENTE = "v4"   # mude a cada alteração no agente (v2, v3...)
 #      (valor e pagamento nunca são deduzidos) e exemplos diferentes dos casos de ajuste
 #      -> REPROVADA em 17/10 (38/45, ganhou C02, C07 e C14, mas perdeu C10: valor 0 vindo
 #      da chamada recuperada do texto). Oficial voltou a ser a v4.
+# v7 = v4 + trava em Python: registro sem valor positivo (0, ausente) vira pergunta
+#      do valor (régua neutra: implementa "nunca invente um valor" da especificação)
+#      -> APROVADA em 17/10 pela régua neutra (34/45, igual à v4 caso a caso; a trava
+#      não foi acionada). Base atual.
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 
@@ -298,6 +302,8 @@ def observacao(resposta, esperado, campos_errados):
     partes = []
     if resposta.get("chamada_recuperada"):
         partes.append("chamada recuperada do texto")
+    if resposta.get("valor_travado"):   # v7: registro com valor 0 virou pergunta
+        partes.append("valor 0 trocado por pergunta")
     erro = descrever_erro(resposta, esperado, campos_errados)
     if erro:
         partes.append(erro)

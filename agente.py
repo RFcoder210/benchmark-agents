@@ -336,6 +336,26 @@ def recuperar_chamada_em_texto(texto, data_referencia):
 
 
 # ---------------------------------------------------------------------------
+# VALIDAÇÃO EM PYTHON (v7): TRAVA DO VALOR 0
+# ---------------------------------------------------------------------------
+# A especificação diz: "Nunca invente nem assuma um valor padrão". Nenhum gasto
+# real custa R$ 0, então um registro com valor 0 (ou sem valor) significa que o
+# modelo inventou o número. Nesse caso, o Python troca o registro por uma
+# pergunta do valor. Analogia: o carro que não liga sem o cinto afivelado; o
+# prompt pede, mas é a trava que garante.
+PERGUNTA_VALOR = {"campos_faltantes": ["valor"], "pergunta": "Qual foi o valor?"}
+
+
+def valor_invalido(argumentos):
+    """Devolve True se o registro não tem um valor positivo de verdade:
+    valor ausente, vazio, 0, negativo ou que não é número."""
+    try:
+        return float(argumentos.get("valor")) <= 0
+    except (TypeError, ValueError):   # None (ausente) ou texto como "abc"
+        return True
+
+
+# ---------------------------------------------------------------------------
 # FUNÇÃO PRINCIPAL DO AGENTE
 # ---------------------------------------------------------------------------
 def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
@@ -344,9 +364,9 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
     e as medidas de eficiência (tempo e tokens).
 
     Modos:
-      - prompt_sistema=None (padrão): agente OFICIAL (v4) = prompt da v2, com os
+      - prompt_sistema=None (padrão): agente OFICIAL (v7) = prompt da v2, com os
         exemplos na ordem ordem_exemplos (None = original), + validação em Python
-        que recupera a chamada escrita como texto.
+        que recupera a chamada escrita como texto (v4) + trava do valor 0 (v7).
       - exemplos_em_conversa=True: experimento v3 (reprovado em 16/10), com os
         exemplos como conversa. Sem validação.
       - prompt_sistema informado: modo antigo, usado por lote.py para reproduzir
@@ -402,11 +422,20 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
             acao = ACAO_POR_FERRAMENTA[nome]
             chamada_recuperada = True
 
+    # v7: um registro sem valor positivo vira pergunta do valor. Vale tanto para a
+    # chamada real quanto para a recuperada do texto. Só no agente oficial.
+    valor_travado = False
+    if oficial and acao == "registrar" and valor_invalido(argumentos):
+        acao = "perguntar"
+        argumentos = dict(PERGUNTA_VALOR)   # dict() faz uma cópia, para não alterar o original
+        valor_travado = True
+
     return {
         "acao": acao,
         "argumentos": argumentos,
         "n_chamadas": len(chamadas),
         "chamada_recuperada": chamada_recuperada,  # True = veio do texto, não do modelo
+        "valor_travado": valor_travado,  # True = registro com valor 0 trocado por pergunta
         "texto": resposta.message.content,  # texto solto, se o modelo "conversou"
         "tempo_s": round(tempo_s, 2),
         "tokens_entrada": resposta.prompt_eval_count,
