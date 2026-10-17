@@ -18,7 +18,7 @@ from streamlit.testing.v1 import AppTest
 from benchmark import ARQUIVO_CSV
 from comparar_versoes import acertos_por_caso
 
-OFICIAIS = ["v1", "v2", "v3", "v4", "v5"]
+OFICIAIS = ["v1", "v2", "v3", "v4", "v5", "v6"]
 resultados = []  # lista de (nome do teste, passou?, detalhe)
 
 
@@ -77,7 +77,7 @@ p = nova_pagina()
 checar("padrão: roda sem erro", sem_erro(p), p.exception)
 checar("padrão: 4 números no topo", len(p.metric) == 4)
 checar("padrão: 9 gráficos", len(p.get("vega_lite_chart")) == 9, len(p.get("vega_lite_chart")))
-checar("padrão: versões = as 5 oficiais",
+checar("padrão: versões = todas as oficiais",
        widget(p, "multiselect", "Versões").value == OFICIAIS,
        widget(p, "multiselect", "Versões").value)
 checar("padrão: referência = v4", widget(p, "selectbox", "Versão de referência (faixa de ruído)").value == "v4")
@@ -113,7 +113,7 @@ widget(p, "checkbox", "Incluir lotes de calibração").check().run()
 opcoes = widget(p, "multiselect", "Versões").options
 checar("calibração: sem erro", sem_erro(p), p.exception)
 checar("calibração: rótulos do lote aparecem", "v2-t0.7" in opcoes and "v2-ordemB" in opcoes, opcoes)
-checar("calibração: oficiais vêm antes dos lotes", opcoes[:5] == OFICIAIS, opcoes[:6])
+checar("calibração: oficiais vêm antes dos lotes", opcoes[:len(OFICIAIS)] == OFICIAIS, opcoes[:len(OFICIAIS) + 1])
 
 # 6. Todas as execuções (não só a mais recente)
 p = nova_pagina()

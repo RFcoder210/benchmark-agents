@@ -27,6 +27,10 @@ VERSAO_AGENTE = "v4"   # mude a cada alteração no agente (v2, v3...)
 # v5 = v4 + regra explícita de quando deduzir e quando perguntar a categoria (instruções)
 #      -> REPROVADA em 16/10 (36/45, ganhou C02 e C14, mas perdeu C09 e C10: passou a
 #      deduzir também o valor, registrando valor 0). Oficial voltou a ser a v4.
+# v6 = v4 + regra de categoria da v5, restrita: a dedução vale só para a categoria
+#      (valor e pagamento nunca são deduzidos) e exemplos diferentes dos casos de ajuste
+#      -> REPROVADA em 17/10 (38/45, ganhou C02, C07 e C14, mas perdeu C10: valor 0 vindo
+#      da chamada recuperada do texto). Oficial voltou a ser a v4.
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 
