@@ -85,31 +85,48 @@ def contar_mudancas(acertos_base, acertos_nova):
     return ganhos, perdas
 
 
-def versao_aprovada(acertos_base, acertos_nova):
+def versao_aprovada(acertos_base, acertos_nova, neutra=False):
     """Recebe os dois dicionários {id_caso: acertos de 0 a 3} e devolve True
     (aprovar a versão nova) ou False (manter a base).
 
-    A nova versão é aprovada só se cumprir as TRÊS condições:
+    Régua normal (neutra=False): a nova versão é aprovada só se cumprir as
+    TRÊS condições:
       1. nenhum caso estável ✓ foi perdido (perdas <= MAXIMO_PERDAS);
       2. pelo menos MINIMO_GANHOS casos viraram estável ✓;
       3. o total de acertos não caiu (protege contra perdas espalhadas
-         entre casos sensíveis, que a condição 1 não enxerga)."""
+         entre casos sensíveis, que a condição 1 não enxerga).
+
+    Régua neutra (neutra=True, regra de 17/10): para uma trava de segurança
+    que implementa uma regra explícita da especificação (ex.: "nunca invente
+    um valor"). O valor dela é impedir erros futuros, não ganhar casos agora,
+    então a condição 2 não é exigida; valem só a 1 e a 3. O tipo da mudança
+    é decidido ANTES de rodar o benchmark, nunca depois de ver o resultado."""
     ganhos, perdas = contar_mudancas(acertos_base, acertos_nova)
     total_base = sum(acertos_base.values())
     total_nova = sum(acertos_nova.values())
 
-    condicoes = [
-        len(perdas) <= MAXIMO_PERDAS,
-        len(ganhos) >= MINIMO_GANHOS,
-        total_nova >= total_base,
-    ]
+    if neutra:
+        condicoes = [
+            len(perdas) <= MAXIMO_PERDAS,
+            total_nova >= total_base,
+        ]
+    else:
+        condicoes = [
+            len(perdas) <= MAXIMO_PERDAS,
+            len(ganhos) >= MINIMO_GANHOS,
+            total_nova >= total_base,
+        ]
     return all(condicoes)   # all() = True só se todas as condições forem True
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        sys.exit("Uso: .venv\\Scripts\\python comparar_versoes.py VERSAO_BASE VERSAO_NOVA")
-    base, nova = sys.argv[1], sys.argv[2]  # sys.argv = palavras digitadas no terminal
+    # sys.argv = palavras digitadas no terminal. Ex.: comparar_versoes.py v4 v7 --neutra
+    #   -> ["comparar_versoes.py", "v4", "v7", "--neutra"]
+    neutra = "--neutra" in sys.argv          # True se a palavra foi digitada
+    versoes = [a for a in sys.argv[1:] if a != "--neutra"]
+    if len(versoes) != 2:
+        sys.exit("Uso: .venv\\Scripts\\python comparar_versoes.py VERSAO_BASE VERSAO_NOVA [--neutra]")
+    base, nova = versoes
 
     acertos_base = acertos_por_caso(base)
     acertos_nova = acertos_por_caso(nova)
@@ -117,8 +134,10 @@ if __name__ == "__main__":
 
     # Mostra os números que levaram à decisão, para ela nunca ser uma "caixa-preta".
     ganhos, perdas = contar_mudancas(acertos_base, acertos_nova)
-    print(f"\nGanhos (viraram estável ✓): {len(ganhos)} {ganhos}  | mínimo {MINIMO_GANHOS}")
+    minimo = "não exigido" if neutra else MINIMO_GANHOS
+    print(f"\nRégua: {'neutra (trava de segurança)' if neutra else 'normal'}")
+    print(f"Ganhos (viraram estável ✓): {len(ganhos)} {ganhos}  | mínimo {minimo}")
     print(f"Perdas (deixaram de ser estável ✓): {len(perdas)} {perdas}  | máximo {MAXIMO_PERDAS}")
 
-    decisao = versao_aprovada(acertos_base, acertos_nova)
+    decisao = versao_aprovada(acertos_base, acertos_nova, neutra=neutra)
     print(f"Decisão: {'APROVAR ' + nova if decisao else 'MANTER ' + base}")
