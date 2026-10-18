@@ -120,6 +120,11 @@ def versao_aprovada(acertos_base, acertos_nova, neutra=False):
 
 
 if __name__ == "__main__":
+    # Força a saída em UTF-8. Sem isto, ao gravar a saída num arquivo
+    # (ex.: comparar_versoes.py v7 v8 > saida.txt), o Windows usa a codificação
+    # antiga cp1252, que não tem o símbolo ✓, e o script para com UnicodeEncodeError.
+    sys.stdout.reconfigure(encoding="utf-8")
+
     # sys.argv = palavras digitadas no terminal. Ex.: comparar_versoes.py v4 v7 --neutra
     #   -> ["comparar_versoes.py", "v4", "v7", "--neutra"]
     neutra = "--neutra" in sys.argv          # True se a palavra foi digitada
