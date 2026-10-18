@@ -35,6 +35,10 @@ VERSAO_AGENTE = "v7"   # mude a cada alteração no agente (v2, v3...)
 #      do valor (régua neutra: implementa "nunca invente um valor" da especificação)
 #      -> APROVADA em 17/10 pela régua neutra (34/45, igual à v4 caso a caso; a trava
 #      não foi acionada). Base atual.
+# v8 = v7 + regra de categoria da v6 (mesmo texto, na seção Categorias do prompt)
+#      -> REPROVADA em 18/10 pela régua normal (40/45, ganhou C02, C07 e C14, mas perdeu
+#      C10: 2/3, na ordem invertida perguntou também o pagamento, que já tinha sido dado;
+#      nas outras 2 ordens a trava da v7 trocou o valor 0 por pergunta). Oficial segue a v7.
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 
