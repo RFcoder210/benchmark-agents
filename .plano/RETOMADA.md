@@ -13,7 +13,7 @@ Motivo do checkpoint: fim do dia (lote noturno)
 ## Onde paramos
 - Base oficial = v7 (`agente.py` idêntico ao do `main`; `VERSAO_AGENTE` = "v7"). Trabalho da noite só no branch `noite/2026-10-18`, não juntado ao `main`, sem push.
 - Tarefa em andamento: nenhuma.
-- Não commitado: `.plano/noite/2026-10-18/` (RELATORIO.md, REVISAO_GERAL.md, instantaneo_fim.txt, REGISTRO.md modificado) e este RETOMADA.md.
+- Tudo commitado no branch `noite/2026-10-18` (commits dc5bc41 e 160979c).
 - Consumo ao fim do lote (20:45): janela de 5 h em 27%; semana em 28%.
 
 ## Próxima ação (a primeira coisa a fazer)
