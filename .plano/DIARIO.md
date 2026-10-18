@@ -6,4 +6,4 @@ Uma linha por dia de trabalho. O hook `iniciar-sessao.ps1` lê a última linha p
 |---|---|---|---|
 | 1 | 2026-10-13 | Dia 1 · 11–13/10 · Casos e ambiente | Estrutura inicial, especificação do agente, 20 casos de teste, venv e Ollama. |
 | 2 | 2026-10-14 | Dia 2 · 14/10 · Agente, benchmark e v2 | Agente mínimo, benchmark completo, linha de base v1 (56%) e v2 (67%); rotina diária. |
-| 3 | 2026-10-17 | Dia 3 · 17/10 · Planejar a v5 | v6 reprovada (38/45, perdeu C10); régua neutra criada; v7 (trava do valor 0) aprovada, 34/45, nova base. |
+| 3 | 2026-10-17 | Dia 3 · 17/10 · v6, régua neutra e v7 | v6 reprovada (perdeu C10), régua neutra criada e v7 (trava do valor 0) aprovada como nova base; ideia do laboratório de agentes registrada. |
