@@ -427,6 +427,114 @@ def retirar_pagamento_informado(argumentos, mensagem):
 
 
 # ---------------------------------------------------------------------------
+# v12: CLASSIFICADOR ESPECIALISTA DE CATEGORIA + TRAVA
+# ---------------------------------------------------------------------------
+# O agente decide tudo de uma vez (ação, valor, categoria, pagamento, data), e é
+# na categoria que ele oscila: ora deduz demais ("gastei 50 na loja" -> mercado),
+# ora de menos. Modelos pequenos acertam mais em tarefas estreitas. Por isso uma
+# SEGUNDA chamada, com uma tarefa só: dizer a categoria, ou que ela não é
+# identificável. Analogia: o atendente ganha um colega especialista; quando os
+# dois discordam, quem decide é uma regra fixa em Python.
+CATEGORIAS = ["alimentacao", "mercado", "transporte", "moradia",
+              "saude", "educacao", "lazer", "outros"]
+# As 10 etiquetas possíveis: as 8 categorias + 2 situações especiais.
+ETIQUETAS_CLASSIFICADOR = CATEGORIAS + ["nao_identificavel", "nao_e_gasto"]
+
+# "Molde" da resposta (saída estruturada do Ollama): um JSON com a chave
+# "categoria", cujo valor só pode ser uma das etiquetas. O modelo não consegue
+# responder fora da lista.
+FORMATO_CLASSIFICADOR = {
+    "type": "object",
+    "properties": {"categoria": {"type": "string", "enum": ETIQUETAS_CLASSIFICADOR}},
+    "required": ["categoria"],
+}
+
+
+def recortar_categorias(prompt):
+    """Recorta do prompt do agente a seção "## Categorias" (até "## Formas de
+    pagamento"), para o classificador usar EXATAMENTE as mesmas definições.
+    Tira a linha sobre valor e pagamento, que não interessa ao classificador."""
+    inicio = prompt.index("## Categorias\n")
+    fim = prompt.index("\n\n## Formas de pagamento")
+    linhas = prompt[inicio:fim].split("\n")
+    return "\n".join(linha for linha in linhas
+                     if not linha.startswith("- Esta dedução vale SOMENTE"))
+
+
+# Os exemplos NÃO repetem mensagens de casos/casos.json (nada de "loja" nem
+# "abastecer"), para não ensinar a resposta da prova.
+PROMPT_CLASSIFICADOR = f"""
+Você classifica mensagens de gastos pessoais enviadas por um usuário brasileiro pelo Telegram.
+Sua única tarefa é dizer em que categoria o gasto se encaixa. Não registre nada e não converse.
+Responda com UMA etiqueta:
+- uma das 8 categorias abaixo, se a mensagem diz em que foi gasto;
+- nao_identificavel, se a mensagem descreve um gasto, mas não dá para saber em quê (sempre que as regras abaixo mandam perguntar a categoria);
+- nao_e_gasto, se a mensagem não descreve um gasto (cumprimento, pergunta, entrada de dinheiro como salário ou reembolso, transferência para uma conta do próprio usuário).
+Valor, forma de pagamento e data não importam aqui: classifique só a categoria.
+
+{recortar_categorias(PROMPT_SISTEMA)}
+
+## Exemplos
+"remédio 30 no pix" -> saude
+"jantar fora ontem, 90" -> alimentacao
+"conserto do relógio, 40 no débito" -> outros
+"comprei umas coisas, 45 no pix" -> nao_identificavel
+"oi, tudo bem?" -> nao_e_gasto
+"""
+
+
+def classificar_categoria(mensagem, temperatura=0):
+    """Pergunta ao modelo só a categoria da mensagem. Devolve um dicionário com a
+    etiqueta (ou None, se a resposta vier quebrada), o tempo e os tokens gastos."""
+    inicio = time.perf_counter()
+    resposta = ollama.chat(
+        model=MODELO,
+        messages=[{"role": "system", "content": PROMPT_CLASSIFICADOR.strip()},
+                  {"role": "user", "content": mensagem}],
+        format=FORMATO_CLASSIFICADOR,
+        options={"temperature": temperatura},
+    )
+    tempo_s = time.perf_counter() - inicio
+    try:
+        etiqueta = json.loads(resposta.message.content)["categoria"]
+    except (json.JSONDecodeError, KeyError, TypeError):
+        etiqueta = None
+    if etiqueta not in ETIQUETAS_CLASSIFICADOR:
+        etiqueta = None
+    return {"etiqueta": etiqueta, "tempo_s": tempo_s,
+            "tokens_entrada": resposta.prompt_eval_count or 0,
+            "tokens_saida": resposta.eval_count or 0}
+
+
+PERGUNTA_CATEGORIA = {"campos_faltantes": ["categoria"], "pergunta": "Em que foi esse gasto?"}
+
+
+def conciliar_categoria(acao, argumentos, etiqueta):
+    """Trava da v12 (regra 5.5 da especificação): se o agente registrou, mas o
+    classificador diz que a categoria não é identificável, o registro vira pergunta
+    da categoria. Em qualquer outra combinação, não mexe.
+    Devolve (acao, argumentos, travou)."""
+    if acao == "registrar" and etiqueta == "nao_identificavel":
+        return "perguntar", dict(PERGUNTA_CATEGORIA), True
+    return acao, argumentos, False
+
+
+def categoria_divergente(acao, argumentos, etiqueta):
+    """Só ANOTA (não muda nada) quando o agente e o classificador discordam sobre a
+    categoria. Serve de dado para a v13. Exemplos de divergência:
+      - o agente registrou "mercado" e o classificador disse "outros";
+      - o agente perguntou a categoria, mas o classificador sabe qual é."""
+    if etiqueta is None:
+        return False
+    if acao == "registrar":
+        return argumentos.get("categoria") != etiqueta
+    if acao == "perguntar":
+        campos = argumentos.get("campos_faltantes") or []
+        return "categoria" in campos and etiqueta in CATEGORIAS
+    return False
+
+
+# ---------------------------------------------------------------------------
 # FUNÇÃO PRINCIPAL DO AGENTE
 # ---------------------------------------------------------------------------
 def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
@@ -438,7 +546,8 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
       - prompt_sistema=None (padrão): agente OFICIAL = prompt da v2, com os
         exemplos na ordem ordem_exemplos (None = original), + validação em Python
         que recupera a chamada escrita como texto (v4) + trava do valor 0 (v7)
-        + trava do pagamento já informado (v9) + regra de categoria no prompt (v10).
+        + trava do pagamento já informado (v9) + regra de categoria no prompt (v10)
+        + classificador especialista de categoria com trava (v12).
       - exemplos_em_conversa=True: experimento v3 (reprovado em 16/10), com os
         exemplos como conversa. Sem validação.
       - prompt_sistema informado: modo antigo, usado por lote.py para reproduzir
@@ -511,6 +620,23 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
             argumentos = corrigidos
             pagamento_retirado = True
 
+    # v12: o classificador especialista dá a sua etiqueta; a divergência só é
+    # anotada, e a trava age num sentido só (registro sem categoria
+    # identificável -> pergunta). Só no agente oficial.
+    tokens_entrada = resposta.prompt_eval_count or 0
+    tokens_saida = resposta.eval_count or 0
+    etiqueta = None
+    divergente = categoria_travada = False
+    if oficial:
+        classificacao = classificar_categoria(mensagem, temperatura)
+        etiqueta = classificacao["etiqueta"]
+        # Eficiência honesta: a resposta custa as DUAS chamadas.
+        tempo_s += classificacao["tempo_s"]
+        tokens_entrada += classificacao["tokens_entrada"]
+        tokens_saida += classificacao["tokens_saida"]
+        divergente = categoria_divergente(acao, argumentos, etiqueta)
+        acao, argumentos, categoria_travada = conciliar_categoria(acao, argumentos, etiqueta)
+
     return {
         "acao": acao,
         "argumentos": argumentos,
@@ -518,10 +644,13 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
         "chamada_recuperada": chamada_recuperada,  # True = veio do texto, não do modelo
         "valor_travado": valor_travado,  # True = registro com valor 0 trocado por pergunta
         "pagamento_retirado": pagamento_retirado,  # True = pagamento já informado saiu da pergunta
+        "categoria_classificador": etiqueta,  # etiqueta do classificador (v12)
+        "categoria_divergente": divergente,  # True = agente e classificador discordaram
+        "categoria_travada": categoria_travada,  # True = registro sem categoria virou pergunta
         "texto": resposta.message.content,  # texto solto, se o modelo "conversou"
         "tempo_s": round(tempo_s, 2),
-        "tokens_entrada": resposta.prompt_eval_count,
-        "tokens_saida": resposta.eval_count,
+        "tokens_entrada": tokens_entrada,
+        "tokens_saida": tokens_saida,
     }
 
 

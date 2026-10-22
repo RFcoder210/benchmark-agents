@@ -18,7 +18,7 @@ from agente import ACAO_POR_FERRAMENTA, EXEMPLOS_V2, interpretar
 
 ARQUIVO_CASOS = "casos/casos.json"
 PASTA_RESULTADOS = "resultados"
-VERSAO_AGENTE = "v10"   # mude a cada alteração no agente (v2, v3...)
+VERSAO_AGENTE = "v12"   # mude a cada alteração no agente (v2, v3...)
 # Histórico: v1 = linha de base (instruções); v2 = + bloco de exemplos resolvidos no prompt;
 # v3 = os mesmos 8 exemplos passam do texto do prompt para a conversa, como
 #      chamadas de ferramenta reais (degrau "saída estruturada") -> REPROVADA em 16/10
@@ -46,12 +46,19 @@ VERSAO_AGENTE = "v10"   # mude a cada alteração no agente (v2, v3...)
 # v10 = v9 + regra de categoria da v6 (mesmo texto da v8, na seção Categorias do prompt)
 #      -> APROVADA em 22/10 pela régua normal (41/45, ganhou C02, C07 e C14, C13 foi a 2/3,
 #      0 perdas; no C10 a trava da v7 agiu nas ordens original e girada e a da v9 na
-#      invertida). Base atual.
+#      invertida).
 # v11 = v10 + revisão do vocabulário das categorias (mais exemplos por categoria e a
 #      regra "a categoria pode vir de um verbo"; "abastecer" e "carro" ficaram de fora
 #      de propósito, para testar generalização no C08)
 #      -> REPROVADA em 22/10 pela régua normal (42/45; C08 0/3 -> 2/3 e C13 2/3 -> 1/3,
 #      nenhum ganho de estável ✓; tokens médios 2261, +9%). Oficial segue a v10.
+# v12 = v10 + classificador especialista de categoria (2ª chamada, saída estruturada)
+#      + trava: registro com categoria "nao_identificavel" vira pergunta da categoria
+#      (régua neutra: implementa a regra 5.5 da especificação)
+#      -> APROVADA em 22/10 pelo usuário (41/45; ganhou C13, 2/3 -> 3/3, pela trava;
+#      a régua neutra apontou perda do C09, 3/3 -> 2/3, mas a v10 repetida no mesmo dia,
+#      sem o classificador, deu 40/45 com o MESMO erro no C09 invertida: ruído do
+#      agente, não efeito da mudança). Custo: 5,6 s (+70%) e 2781 tokens (+34%). Base atual.
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 
@@ -323,6 +330,10 @@ def observacao(resposta, esperado, campos_errados):
         partes.append("valor 0 trocado por pergunta")
     if resposta.get("pagamento_retirado"):   # v9: pagamento já informado saiu da pergunta
         partes.append("pagamento informado retirado da pergunta")
+    if resposta.get("categoria_travada"):   # v12: registro sem categoria identificável
+        partes.append("sem categoria identificável: registro trocado por pergunta")
+    if resposta.get("categoria_divergente"):   # v12: só anotação, para a v13
+        partes.append(f"categoria divergente (classificador: {resposta['categoria_classificador']})")
     erro = descrever_erro(resposta, esperado, campos_errados)
     if erro:
         partes.append(erro)

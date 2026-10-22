@@ -35,8 +35,9 @@ HISTORICO = {
     "v7": "aprovada",
     "v8": "reprovada",
     "v9": "aprovada",
-    "v10": "aprovada (base atual)",
+    "v10": "aprovada",
     "v11": "reprovada",
+    "v12": "aprovada (base atual)",
 }
 # Versão oficial em uso: a marcada como "base atual" no HISTORICO. É a referência
 # padrão da faixa de ruído e dos números do topo; muda sozinha ao aprovar uma versão.
