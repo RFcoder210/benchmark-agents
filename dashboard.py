@@ -224,17 +224,27 @@ with direita:
     st.subheader("Acerto por grupo")
     dimensao = st.radio("Agrupar por", ["categoria", "dificuldade"], horizontal=True,
                         format_func=lambda d: "ação esperada" if d == "categoria" else d)
+    st.caption("Uma linha por grupo, com a versão no eixo, como no acerto geral.")
     grupos = (dados.groupby([dimensao, "versao_agente"])["acertou"].mean()
               .mul(100).rename("taxa_pct").reset_index())
-    barras = alt.Chart(grupos).mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4).encode(
-        x=alt.X(f"{dimensao}:N", title=None, axis=alt.Axis(labelAngle=0)),
-        xOffset=alt.XOffset("versao_agente:N", sort=versoes_presentes),
+    # Antes eram barras com uma COR por versão; com mais de 8 versões as cores se
+    # repetiam (v9 = v1...). Agora a versão fica escrita no eixo e a cor marca só o
+    # grupo: 3 grupos fixos, 3 cores fixas (as 3 primeiras da paleta). O domínio é
+    # a lista completa, para a cor de um grupo não mudar quando outro sai do filtro.
+    ordem_grupos = (["registrar", "perguntar", "ignorar"] if dimensao == "categoria"
+                    else ["facil", "medio", "dificil"])
+    linhas_grupo = alt.Chart(grupos).mark_line(strokeWidth=2, point=alt.OverlayMarkDef(
+        size=60, filled=True)).encode(
+        x=eixo_versao,
         y=alt.Y("taxa_pct:Q", title="Acerto (%)", scale=alt.Scale(domain=[0, 100])),
-        color=alt.Color("versao_agente:N", title="Versão", scale=escala_cor),
+        # columns=2: a legenda quebra em 2 linhas e não é cortada em telas estreitas.
+        color=alt.Color(f"{dimensao}:N", title=None, sort=ordem_grupos,
+                        scale=alt.Scale(domain=ordem_grupos, range=CORES_SERIES[:3]),
+                        legend=alt.Legend(columns=2)),
         tooltip=[alt.Tooltip("versao_agente:N", title="Versão"),
                  alt.Tooltip(f"{dimensao}:N", title="Grupo"),
                  alt.Tooltip("taxa_pct:Q", title="Acerto (%)", format=".0f")])
-    mostrar(barras)
+    mostrar(linhas_grupo)
 
 
 # ---------------------------------------------------------------------------
