@@ -34,7 +34,8 @@ HISTORICO = {
     "v6": "reprovada",
     "v7": "aprovada",
     "v8": "reprovada",
-    "v9": "aprovada (base atual)",
+    "v9": "aprovada",
+    "v10": "aprovada (base atual)",
 }
 
 # Paleta categórica (ordem fixa, validada para daltonismo). A cor segue a VERSÃO:

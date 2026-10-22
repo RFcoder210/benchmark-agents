@@ -18,7 +18,7 @@ from agente import ACAO_POR_FERRAMENTA, EXEMPLOS_V2, interpretar
 
 ARQUIVO_CASOS = "casos/casos.json"
 PASTA_RESULTADOS = "resultados"
-VERSAO_AGENTE = "v9"   # mude a cada alteração no agente (v2, v3...)
+VERSAO_AGENTE = "v10"   # mude a cada alteração no agente (v2, v3...)
 # Histórico: v1 = linha de base (instruções); v2 = + bloco de exemplos resolvidos no prompt;
 # v3 = os mesmos 8 exemplos passam do texto do prompt para a conversa, como
 #      chamadas de ferramenta reais (degrau "saída estruturada") -> REPROVADA em 16/10
@@ -42,7 +42,11 @@ VERSAO_AGENTE = "v9"   # mude a cada alteração no agente (v2, v3...)
 # v9 = v7 + trava em Python: uma pergunta não pede o pagamento que a mensagem já
 #      informou (régua neutra: implementa "campos_faltantes lista os campos que faltam")
 #      -> APROVADA em 22/10 pela régua neutra (34/45, igual à v7 caso a caso; a trava
-#      não foi acionada). Base atual.
+#      não foi acionada).
+# v10 = v9 + regra de categoria da v6 (mesmo texto da v8, na seção Categorias do prompt)
+#      -> APROVADA em 22/10 pela régua normal (41/45, ganhou C02, C07 e C14, C13 foi a 2/3,
+#      0 perdas; no C10 a trava da v7 agiu nas ordens original e girada e a da v9 na
+#      invertida). Base atual.
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 

@@ -57,6 +57,11 @@ Use exatamente um destes valores no campo categoria:
 - outros: gasto conhecido que não se encaixa nas demais (presente, corte de cabelo)
 Use outros quando se sabe em que se gastou, mas não há categoria própria (ex.: corte de cabelo).
 Se não dá para saber em que se gastou (ex.: "comprei umas coisas, 45 no pix"), não use outros: pergunte a categoria.
+Quando deduzir e quando perguntar a categoria:
+- Se a mensagem diz o que foi comprado ou feito (um item, serviço ou atividade), deduza a categoria e não pergunte. Ex.: "remédio" -> saude; "pedágio" -> transporte; "condomínio" -> moradia.
+- Se a mensagem traz vários itens de uma mesma ocasião, use a categoria da atividade principal. Ex.: "pizza e refrigerante no boliche" -> lazer.
+- Pergunte a categoria só quando a mensagem não diz o que foi comprado: nenhum item, ou apenas um lugar genérico (ex.: "shopping", "camelô") ou algo vago (ex.: "umas coisas").
+- Esta dedução vale SOMENTE para a categoria. Valor e pagamento nunca são deduzidos: se um deles faltar ou for ambíguo, chame perguntar_usuario, mesmo que a categoria esteja clara. Ex.: "pedágio no débito" -> pergunte o valor; "remédio na farmácia, 32" -> pergunte o pagamento; "dentista, 200 no cartão" -> pergunte se foi débito ou crédito.
 
 ## Formas de pagamento
 Use exatamente um destes valores no campo pagamento:
@@ -433,7 +438,7 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
       - prompt_sistema=None (padrão): agente OFICIAL = prompt da v2, com os
         exemplos na ordem ordem_exemplos (None = original), + validação em Python
         que recupera a chamada escrita como texto (v4) + trava do valor 0 (v7)
-        + trava do pagamento já informado (v9).
+        + trava do pagamento já informado (v9) + regra de categoria no prompt (v10).
       - exemplos_em_conversa=True: experimento v3 (reprovado em 16/10), com os
         exemplos como conversa. Sem validação.
       - prompt_sistema informado: modo antigo, usado por lote.py para reproduzir
