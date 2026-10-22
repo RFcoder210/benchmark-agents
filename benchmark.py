@@ -18,7 +18,7 @@ from agente import ACAO_POR_FERRAMENTA, EXEMPLOS_V2, interpretar
 
 ARQUIVO_CASOS = "casos/casos.json"
 PASTA_RESULTADOS = "resultados"
-VERSAO_AGENTE = "v7"   # mude a cada alteração no agente (v2, v3...)
+VERSAO_AGENTE = "v9"   # mude a cada alteração no agente (v2, v3...)
 # Histórico: v1 = linha de base (instruções); v2 = + bloco de exemplos resolvidos no prompt;
 # v3 = os mesmos 8 exemplos passam do texto do prompt para a conversa, como
 #      chamadas de ferramenta reais (degrau "saída estruturada") -> REPROVADA em 16/10
@@ -39,6 +39,10 @@ VERSAO_AGENTE = "v7"   # mude a cada alteração no agente (v2, v3...)
 #      -> REPROVADA em 18/10 pela régua normal (40/45, ganhou C02, C07 e C14, mas perdeu
 #      C10: 2/3, na ordem invertida perguntou também o pagamento, que já tinha sido dado;
 #      nas outras 2 ordens a trava da v7 trocou o valor 0 por pergunta). Oficial segue a v7.
+# v9 = v7 + trava em Python: uma pergunta não pede o pagamento que a mensagem já
+#      informou (régua neutra: implementa "campos_faltantes lista os campos que faltam")
+#      -> APROVADA em 22/10 pela régua neutra (34/45, igual à v7 caso a caso; a trava
+#      não foi acionada). Base atual.
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 
@@ -308,6 +312,8 @@ def observacao(resposta, esperado, campos_errados):
         partes.append("chamada recuperada do texto")
     if resposta.get("valor_travado"):   # v7: registro com valor 0 virou pergunta
         partes.append("valor 0 trocado por pergunta")
+    if resposta.get("pagamento_retirado"):   # v9: pagamento já informado saiu da pergunta
+        partes.append("pagamento informado retirado da pergunta")
     erro = descrever_erro(resposta, esperado, campos_errados)
     if erro:
         partes.append(erro)

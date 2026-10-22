@@ -356,6 +356,72 @@ def valor_invalido(argumentos):
 
 
 # ---------------------------------------------------------------------------
+# VALIDAÇÃO EM PYTHON (v9): TRAVA DO PAGAMENTO JÁ INFORMADO
+# ---------------------------------------------------------------------------
+# A especificação diz que campos_faltantes lista os campos que FALTAM. Se a
+# mensagem já diz a forma de pagamento, "pagamento" não falta e não deve ser
+# perguntado. Como as formas de pagamento são uma lista fechada (seção 4 da
+# especificação), o Python consegue conferir isso sozinho. Analogia: o garçom
+# que pergunta "vai pagar como?" logo depois de você dizer "no pix".
+# "cartão" sozinho NÃO conta como pagamento informado: é ambíguo (regra 5.3)
+# e deve continuar sendo perguntado.
+
+# Palavras que indicam uma forma de pagamento definida, em minúsculas. A fonte é
+# a seção "## Formas de pagamento" do PROMPT_SISTEMA: o Python reconhece as
+# mesmas palavras que o modelo foi instruído a reconhecer.
+# Como a busca é por PEDAÇO de texto (operador in), um radical cobre várias
+# formas: "deb" acha "deb", "debito" e "cartão de debito"; "cred" acha "cred",
+# "credito" e "cartão de credito". As versões com acento ("déb", "créd") são
+# outros caracteres para o Python, por isso aparecem separadas.
+# "cartão" fica de fora de propósito: sozinho, é ambíguo (regra 5.3).
+# Limite conhecido: um radical também acha palavras sem relação ("deb" em
+# "debate", "cred" em "credencial"); em mensagens de gastos, o risco é pequeno.
+PALAVRAS_PAGAMENTO = [
+    "pix",
+    "deb", "déb",                  # débito
+    "cred", "créd", "parcelado",   # crédito
+    "dinheiro", "espécie", "especie", "em mãos", "em maos",   # dinheiro
+]
+
+
+def pagamento_na_mensagem(mensagem):
+    """Devolve True se a mensagem contém alguma palavra de PALAVRAS_PAGAMENTO,
+    sem diferenciar maiúsculas de minúsculas ("PIX" = "pix"). Senão, False."""
+    texto = (mensagem or "").lower()   # "or ''" evita erro se a mensagem vier vazia (None)
+    for palavra in PALAVRAS_PAGAMENTO:
+        if palavra in texto:
+            return True    # achou uma: não precisa olhar as outras
+    return False           # o laço terminou sem achar nenhuma
+
+
+# Trecho de pergunta para cada campo, usado para remontar a pergunta sem o pagamento.
+TRECHO_PERGUNTA = {"valor": "o valor", "categoria": "a categoria",
+                   "pagamento": "a forma de pagamento"}
+
+
+def retirar_pagamento_informado(argumentos, mensagem):
+    """Se a pergunta pede o pagamento, mas a mensagem já o informa, devolve novos
+    argumentos sem "pagamento" e com a pergunta remontada. Caso contrário (nada a
+    corrigir), devolve None e a resposta do modelo fica como está."""
+    campos = argumentos.get("campos_faltantes")
+    if not isinstance(campos, list) or "pagamento" not in campos:
+        return None
+    if not pagamento_na_mensagem(mensagem):
+        return None
+
+    # List comprehension: uma lista nova só com os campos diferentes de "pagamento".
+    restantes = [campo for campo in campos if campo != "pagamento"]
+    # Se só faltava o pagamento, o modelo se enganou sobre o que falta, e o Python
+    # não tem como saber o que perguntar no lugar: não mexe.
+    if not restantes:
+        return None
+
+    trechos = [TRECHO_PERGUNTA.get(campo, campo) for campo in restantes]
+    pergunta = "Qual foi " + " e ".join(trechos) + "?"   # ex.: "Qual foi o valor?"
+    return {"campos_faltantes": restantes, "pergunta": pergunta}
+
+
+# ---------------------------------------------------------------------------
 # FUNÇÃO PRINCIPAL DO AGENTE
 # ---------------------------------------------------------------------------
 def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
@@ -364,9 +430,10 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
     e as medidas de eficiência (tempo e tokens).
 
     Modos:
-      - prompt_sistema=None (padrão): agente OFICIAL (v7) = prompt da v2, com os
+      - prompt_sistema=None (padrão): agente OFICIAL = prompt da v2, com os
         exemplos na ordem ordem_exemplos (None = original), + validação em Python
-        que recupera a chamada escrita como texto (v4) + trava do valor 0 (v7).
+        que recupera a chamada escrita como texto (v4) + trava do valor 0 (v7)
+        + trava do pagamento já informado (v9).
       - exemplos_em_conversa=True: experimento v3 (reprovado em 16/10), com os
         exemplos como conversa. Sem validação.
       - prompt_sistema informado: modo antigo, usado por lote.py para reproduzir
@@ -430,12 +497,22 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
         argumentos = dict(PERGUNTA_VALOR)   # dict() faz uma cópia, para não alterar o original
         valor_travado = True
 
+    # v9: uma pergunta não pede o pagamento que a mensagem já informou. Vale para a
+    # chamada real e para a recuperada do texto. Só no agente oficial.
+    pagamento_retirado = False
+    if oficial and acao == "perguntar":
+        corrigidos = retirar_pagamento_informado(argumentos, mensagem)
+        if corrigidos is not None:
+            argumentos = corrigidos
+            pagamento_retirado = True
+
     return {
         "acao": acao,
         "argumentos": argumentos,
         "n_chamadas": len(chamadas),
         "chamada_recuperada": chamada_recuperada,  # True = veio do texto, não do modelo
         "valor_travado": valor_travado,  # True = registro com valor 0 trocado por pergunta
+        "pagamento_retirado": pagamento_retirado,  # True = pagamento já informado saiu da pergunta
         "texto": resposta.message.content,  # texto solto, se o modelo "conversou"
         "tempo_s": round(tempo_s, 2),
         "tokens_entrada": resposta.prompt_eval_count,
