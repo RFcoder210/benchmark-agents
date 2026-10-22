@@ -38,6 +38,9 @@ HISTORICO = {
     "v10": "aprovada (base atual)",
     "v11": "reprovada",
 }
+# Versão oficial em uso: a marcada como "base atual" no HISTORICO. É a referência
+# padrão da faixa de ruído e dos números do topo; muda sozinha ao aprovar uma versão.
+VERSAO_BASE = next(v for v, situacao in HISTORICO.items() if "base atual" in situacao)
 
 # Paleta categórica (ordem fixa, validada para daltonismo). A cor segue a VERSÃO:
 # a v2 tem sempre a mesma cor, em qualquer gráfico e com qualquer filtro.
@@ -154,7 +157,7 @@ dificuldades = st.sidebar.multiselect("Dificuldade", ["facil", "medio", "dificil
                                       default=["facil", "medio", "dificil"])
 oficiais = [v for v in versoes if "-" not in v]
 base = st.sidebar.selectbox("Versão de referência (faixa de ruído)", oficiais or versoes,
-                            index=(oficiais.index("v4") if "v4" in oficiais else 0))
+                            index=(oficiais.index(VERSAO_BASE) if VERSAO_BASE in oficiais else 0))
 
 dados = base_filtrada[base_filtrada["versao_agente"].isin(versoes)
                       & base_filtrada["categoria"].isin(acoes)

@@ -19,6 +19,7 @@ from benchmark import ARQUIVO_CSV
 from comparar_versoes import acertos_por_caso
 
 OFICIAIS = ["v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11"]
+BASE = "v10"   # a versão "base atual" do HISTORICO; atualize ao aprovar uma versão
 resultados = []  # lista de (nome do teste, passou?, detalhe)
 
 
@@ -80,7 +81,8 @@ checar("padrão: 9 gráficos", len(p.get("vega_lite_chart")) == 9, len(p.get("ve
 checar("padrão: versões = todas as oficiais",
        widget(p, "multiselect", "Versões").value == OFICIAIS,
        widget(p, "multiselect", "Versões").value)
-checar("padrão: referência = v4", widget(p, "selectbox", "Versão de referência (faixa de ruído)").value == "v4")
+checar(f"padrão: referência = {BASE} (base atual)",
+       widget(p, "selectbox", "Versão de referência (faixa de ruído)").value == BASE)
 
 # 2. Os números batem com o CSV?
 resumo = tabela_resumo(p)
@@ -88,11 +90,11 @@ for v in OFICIAIS:
     esperado = (acertos_recente[v], execucoes_recente[v])
     obtido = (int(resumo.loc[v, "acertos"]), int(resumo.loc[v, "execucoes"]))
     checar(f"números: {v} = {esperado[0]}/{esperado[1]} como no CSV", obtido == esperado, obtido)
-taxa_v4 = round(100 * acertos_recente["v4"] / execucoes_recente["v4"])
-checar("números: cartão 'Acerto (v4)'", p.metric[0].value == f"{taxa_v4}%", p.metric[0].value)
-estaveis_v4 = sum(1 for a in acertos_por_caso("v4").values() if a == 3)
+taxa_base = round(100 * acertos_recente[BASE] / execucoes_recente[BASE])
+checar(f"números: cartão 'Acerto ({BASE})'", p.metric[0].value == f"{taxa_base}%", p.metric[0].value)
+estaveis_base = sum(1 for a in acertos_por_caso(BASE).values() if a == 3)
 checar("números: cartão 'Casos estáveis' igual ao comparar_versoes.py",
-       p.metric[1].value.startswith(f"{estaveis_v4} de"), p.metric[1].value)
+       p.metric[1].value.startswith(f"{estaveis_base} de"), p.metric[1].value)
 
 # 3. Agrupar por dificuldade
 p = nova_pagina()
