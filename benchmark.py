@@ -47,6 +47,11 @@ VERSAO_AGENTE = "v10"   # mude a cada alteração no agente (v2, v3...)
 #      -> APROVADA em 22/10 pela régua normal (41/45, ganhou C02, C07 e C14, C13 foi a 2/3,
 #      0 perdas; no C10 a trava da v7 agiu nas ordens original e girada e a da v9 na
 #      invertida). Base atual.
+# v11 = v10 + revisão do vocabulário das categorias (mais exemplos por categoria e a
+#      regra "a categoria pode vir de um verbo"; "abastecer" e "carro" ficaram de fora
+#      de propósito, para testar generalização no C08)
+#      -> REPROVADA em 22/10 pela régua normal (42/45; C08 0/3 -> 2/3 e C13 2/3 -> 1/3,
+#      nenhum ganho de estável ✓; tokens médios 2261, +9%). Oficial segue a v10.
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 
