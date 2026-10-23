@@ -551,7 +551,8 @@ def categoria_divergente(acao, argumentos, etiqueta):
 # Ele precisa dizer: a categoria provável; e que valor, pagamento e data vêm
 # somente da mensagem (proteção contra o efeito gangorra visto na v5).
 # Comece com "\n\n" para separar a dica da mensagem.
-TEXTO_DICA = None
+TEXTO_DICA = ("\n\n(Nota do sistema, não escrita pelo usuário: a categoria deste gasto é "
+              "{categoria}. Valor, pagamento e data vêm somente da mensagem acima.)")
 
 
 def mensagem_com_dica(mensagem, etiqueta):

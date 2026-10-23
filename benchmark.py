@@ -63,6 +63,10 @@ VERSAO_AGENTE = "v13"   # mude a cada alteração no agente (v2, v3...)
 #      para o agente (só quando é uma das 8 categorias; o classificador passa a rodar antes)
 #      -> régua DIRIGIDA, caso-alvo C08, decidida antes de rodar (23/10):
 #      comparar_versoes.py v12 v13 --alvo C08
+#      -> REPROVADA em 23/10 pela régua dirigida (40/45; C08 0/3 -> 2/3, mas perdeu C02,
+#      3/3 -> 1/3, e C09 foi de 2/3 a 1/3: com a categoria dada, o agente INVENTOU o
+#      pagamento, "dinheiro" no "Almoço 22" e "credito" no "no cartão"). Efeito gangorra,
+#      como na v5. Oficial segue a v12.
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 

@@ -18,7 +18,7 @@ from streamlit.testing.v1 import AppTest
 from benchmark import ARQUIVO_CSV
 from comparar_versoes import acertos_por_caso
 
-OFICIAIS = ["v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v12"]
+OFICIAIS = ["v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v12", "v13"]
 BASE = "v12"   # a versão "base atual" do HISTORICO; atualize ao aprovar uma versão
 resultados = []  # lista de (nome do teste, passou?, detalhe)
 
