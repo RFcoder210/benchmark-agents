@@ -18,7 +18,7 @@ from agente import ACAO_POR_FERRAMENTA, EXEMPLOS_V2, interpretar
 
 ARQUIVO_CASOS = "casos/casos.json"
 PASTA_RESULTADOS = "resultados"
-VERSAO_AGENTE = "v12"   # mude a cada alteração no agente (v2, v3...)
+VERSAO_AGENTE = "v13"   # mude a cada alteração no agente (v2, v3...)
 # Histórico: v1 = linha de base (instruções); v2 = + bloco de exemplos resolvidos no prompt;
 # v3 = os mesmos 8 exemplos passam do texto do prompt para a conversa, como
 #      chamadas de ferramenta reais (degrau "saída estruturada") -> REPROVADA em 16/10
@@ -59,6 +59,10 @@ VERSAO_AGENTE = "v12"   # mude a cada alteração no agente (v2, v3...)
 #      a régua neutra apontou perda do C09, 3/3 -> 2/3, mas a v10 repetida no mesmo dia,
 #      sem o classificador, deu 40/45 com o MESMO erro no C09 invertida: ruído do
 #      agente, não efeito da mudança). Custo: 5,6 s (+70%) e 2781 tokens (+34%). Base atual.
+# v13 = v12 + a etiqueta do classificador entra no fim da mensagem do usuário como dica
+#      para o agente (só quando é uma das 8 categorias; o classificador passa a rodar antes)
+#      -> régua DIRIGIDA, caso-alvo C08, decidida antes de rodar (23/10):
+#      comparar_versoes.py v12 v13 --alvo C08
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 
@@ -330,6 +334,8 @@ def observacao(resposta, esperado, campos_errados):
         partes.append("valor 0 trocado por pergunta")
     if resposta.get("pagamento_retirado"):   # v9: pagamento já informado saiu da pergunta
         partes.append("pagamento informado retirado da pergunta")
+    if resposta.get("dica_categoria"):   # v13: a mensagem levou a dica do classificador
+        partes.append(f"dica de categoria: {resposta['categoria_classificador']}")
     if resposta.get("categoria_travada"):   # v12: registro sem categoria identificável
         partes.append("sem categoria identificável: registro trocado por pergunta")
     if resposta.get("categoria_divergente"):   # v12: só anotação, para a v13

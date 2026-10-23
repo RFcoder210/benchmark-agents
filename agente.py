@@ -535,6 +535,37 @@ def categoria_divergente(acao, argumentos, etiqueta):
 
 
 # ---------------------------------------------------------------------------
+# v13: A ETIQUETA DO CLASSIFICADOR VIRA DICA PARA O AGENTE
+# ---------------------------------------------------------------------------
+# Na v12 o especialista dava o parecer DEPOIS que o atendente respondia, e só
+# podia vetar. Na v13 o atendente recebe o parecer ANTES de responder: a etiqueta
+# vai no fim da mensagem do usuário. O prompt de sistema não muda, para preservar
+# o cache do Ollama (a dica muda a cada mensagem; o prompt de sistema, não).
+#
+# TEXTO_DICA é um MOLDE: "{categoria}" é trocado pela etiqueta com .format().
+# (Uma f-string não serve aqui, porque ela é preenchida na hora em que a linha é
+# lida, e nesse momento ainda não se sabe a categoria.)
+# Exemplo: "Categoria: {categoria}".format(categoria="lazer") -> "Categoria: lazer"
+#
+# >>> ESTE TEXTO É SEU PARA ESCREVER (é a parte central da v13). <<<
+# Ele precisa dizer: a categoria provável; e que valor, pagamento e data vêm
+# somente da mensagem (proteção contra o efeito gangorra visto na v5).
+# Comece com "\n\n" para separar a dica da mensagem.
+TEXTO_DICA = None
+
+
+def mensagem_com_dica(mensagem, etiqueta):
+    """Devolve a mensagem que o agente vai ler: a original + a dica, só quando a
+    etiqueta é uma das 8 categorias. Com "nao_identificavel", "nao_e_gasto" ou
+    None (resposta quebrada), não há dica e a mensagem segue como na v12."""
+    if etiqueta not in CATEGORIAS:
+        return mensagem
+    if TEXTO_DICA is None:
+        raise RuntimeError("Escreva o TEXTO_DICA em agente.py antes de rodar a v13.")
+    return mensagem + TEXTO_DICA.format(categoria=etiqueta)
+
+
+# ---------------------------------------------------------------------------
 # FUNÇÃO PRINCIPAL DO AGENTE
 # ---------------------------------------------------------------------------
 def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
@@ -547,7 +578,8 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
         exemplos na ordem ordem_exemplos (None = original), + validação em Python
         que recupera a chamada escrita como texto (v4) + trava do valor 0 (v7)
         + trava do pagamento já informado (v9) + regra de categoria no prompt (v10)
-        + classificador especialista de categoria com trava (v12).
+        + classificador especialista de categoria com trava (v12), cuja
+        etiqueta entra na mensagem como dica para o agente (v13).
       - exemplos_em_conversa=True: experimento v3 (reprovado em 16/10), com os
         exemplos como conversa. Sem validação.
       - prompt_sistema informado: modo antigo, usado por lote.py para reproduzir
@@ -562,12 +594,21 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
     elif prompt_sistema is None:
         prompt_sistema = montar_prompt(ordem_exemplos)
 
+    # v13: o classificador especialista roda ANTES do agente, e a etiqueta dele
+    # entra na mensagem como dica. Só no agente oficial.
+    etiqueta = None
+    texto_usuario = mensagem
+    if oficial:
+        classificacao = classificar_categoria(mensagem, temperatura)
+        etiqueta = classificacao["etiqueta"]
+        texto_usuario = mensagem_com_dica(mensagem, etiqueta)
+
     # Monta a conversa: instruções (system), exemplos (se houver) e a mensagem (user).
     # A data de referência é anexada às instruções, para o modelo saber qual é "hoje".
     instrucoes = prompt_sistema.strip() + f"\n\nData de referência (hoje): {data_referencia}"
     conversa = ([{"role": "system", "content": instrucoes}]
                 + exemplos
-                + [{"role": "user", "content": mensagem}])
+                + [{"role": "user", "content": texto_usuario}])
 
     # Chama o modelo, oferecendo as ferramentas, e mede o tempo.
     inicio = time.perf_counter()
@@ -613,6 +654,7 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
 
     # v9: uma pergunta não pede o pagamento que a mensagem já informou. Vale para a
     # chamada real e para a recuperada do texto. Só no agente oficial.
+    # (Usa a mensagem ORIGINAL, sem a dica: a palavra deve vir do usuário.)
     pagamento_retirado = False
     if oficial and acao == "perguntar":
         corrigidos = retirar_pagamento_informado(argumentos, mensagem)
@@ -620,16 +662,13 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
             argumentos = corrigidos
             pagamento_retirado = True
 
-    # v12: o classificador especialista dá a sua etiqueta; a divergência só é
-    # anotada, e a trava age num sentido só (registro sem categoria
-    # identificável -> pergunta). Só no agente oficial.
+    # v12: com a etiqueta do classificador (obtida no início, na v13), a
+    # divergência só é anotada, e a trava age num sentido só (registro sem
+    # categoria identificável -> pergunta). Só no agente oficial.
     tokens_entrada = resposta.prompt_eval_count or 0
     tokens_saida = resposta.eval_count or 0
-    etiqueta = None
     divergente = categoria_travada = False
     if oficial:
-        classificacao = classificar_categoria(mensagem, temperatura)
-        etiqueta = classificacao["etiqueta"]
         # Eficiência honesta: a resposta custa as DUAS chamadas.
         tempo_s += classificacao["tempo_s"]
         tokens_entrada += classificacao["tokens_entrada"]
@@ -645,6 +684,7 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
         "valor_travado": valor_travado,  # True = registro com valor 0 trocado por pergunta
         "pagamento_retirado": pagamento_retirado,  # True = pagamento já informado saiu da pergunta
         "categoria_classificador": etiqueta,  # etiqueta do classificador (v12)
+        "dica_categoria": texto_usuario != mensagem,  # True = a mensagem levou a dica (v13)
         "categoria_divergente": divergente,  # True = agente e classificador discordaram
         "categoria_travada": categoria_travada,  # True = registro sem categoria virou pergunta
         "texto": resposta.message.content,  # texto solto, se o modelo "conversou"

@@ -9,3 +9,4 @@ Uma linha por dia de trabalho. O hook `iniciar-sessao.ps1` lê a última linha p
 | 3 | 2026-10-17 | Dia 3 · 17/10 · v6, régua neutra e v7 | v6 reprovada (perdeu C10), régua neutra criada e v7 (trava do valor 0) aprovada como nova base; ideia do laboratório de agentes registrada. |
 | 4 | 2026-10-18 | Dia 4 · 18/10 · v8 noturna | Lote noturno: v8 (v7 + regra de categoria) deu 40/45, mas foi reprovada por perder o C10; oficial seguiu a v7. |
 | 5 | 2026-10-22 | Dia 5 · 22/10 · v9 a v12 e classificador | v9, v10 e v12 aprovadas (34 → 41/45), v11 reprovada; classificador de categoria, regra de repetição da base e dashboard ajustado. |
+| 6 | 2026-10-23 | Dia 6 · 23/10 · Desenho da v13 | (em andamento) |

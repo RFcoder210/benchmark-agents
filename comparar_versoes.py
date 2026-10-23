@@ -68,6 +68,7 @@ def mostrar_tabela(base, nova, acertos_base, acertos_nova):
 # versões da prova; acertar em uma e errar em outra ainda é sorte.
 MINIMO_GANHOS = 2   # ganhos necessários para aprovar (1 só pode ser acaso)
 MAXIMO_PERDAS = 0   # um acerto estável que quebra é regressão real: reprova
+MINIMO_SUBIDA_ALVO = 2   # régua dirigida: ordens que o caso-alvo precisa ganhar
 
 
 def contar_mudancas(acertos_base, acertos_nova):
@@ -85,7 +86,7 @@ def contar_mudancas(acertos_base, acertos_nova):
     return ganhos, perdas
 
 
-def versao_aprovada(acertos_base, acertos_nova, neutra=False):
+def versao_aprovada(acertos_base, acertos_nova, neutra=False, alvo=None):
     """Recebe os dois dicionários {id_caso: acertos de 0 a 3} e devolve True
     (aprovar a versão nova) ou False (manter a base).
 
@@ -100,12 +101,24 @@ def versao_aprovada(acertos_base, acertos_nova, neutra=False):
     que implementa uma regra explícita da especificação (ex.: "nunca invente
     um valor"). O valor dela é impedir erros futuros, não ganhar casos agora,
     então a condição 2 não é exigida; valem só a 1 e a 3. O tipo da mudança
-    é decidido ANTES de rodar o benchmark, nunca depois de ver o resultado."""
+    é decidido ANTES de rodar o benchmark, nunca depois de ver o resultado.
+
+    Régua dirigida (alvo="C08", regra de 23/10): para uma mudança que mira UM
+    caso, declarado antes de rodar. Um caso só dificilmente chega a 3/3, então
+    a condição 2 vira "o caso-alvo subiu pelo menos MINIMO_SUBIDA_ALVO ordens";
+    a 1 e a 3 continuam valendo."""
     ganhos, perdas = contar_mudancas(acertos_base, acertos_nova)
     total_base = sum(acertos_base.values())
     total_nova = sum(acertos_nova.values())
 
-    if neutra:
+    if alvo is not None:
+        subida = acertos_nova.get(alvo, 0) - acertos_base.get(alvo, 0)
+        condicoes = [
+            len(perdas) <= MAXIMO_PERDAS,
+            subida >= MINIMO_SUBIDA_ALVO,
+            total_nova >= total_base,
+        ]
+    elif neutra:
         condicoes = [
             len(perdas) <= MAXIMO_PERDAS,
             total_nova >= total_base,
@@ -127,22 +140,43 @@ if __name__ == "__main__":
 
     # sys.argv = palavras digitadas no terminal. Ex.: comparar_versoes.py v4 v7 --neutra
     #   -> ["comparar_versoes.py", "v4", "v7", "--neutra"]
-    neutra = "--neutra" in sys.argv          # True se a palavra foi digitada
-    versoes = [a for a in sys.argv[1:] if a != "--neutra"]
-    if len(versoes) != 2:
-        sys.exit("Uso: .venv\\Scripts\\python comparar_versoes.py VERSAO_BASE VERSAO_NOVA [--neutra]")
+    uso = ("Uso: .venv\\Scripts\\python comparar_versoes.py VERSAO_BASE VERSAO_NOVA "
+           "[--neutra | --alvo CASO]")
+    argumentos = sys.argv[1:]
+    neutra = "--neutra" in argumentos        # True se a palavra foi digitada
+    alvo = None
+    if "--alvo" in argumentos:
+        posicao = argumentos.index("--alvo")
+        if posicao + 1 >= len(argumentos):   # "--alvo" sem o caso depois
+            sys.exit(uso)
+        alvo = argumentos.pop(posicao + 1)   # tira o caso da lista e guarda
+    versoes = [a for a in argumentos if a not in ("--neutra", "--alvo")]
+    if len(versoes) != 2 or (neutra and alvo):
+        sys.exit(uso)
     base, nova = versoes
 
     acertos_base = acertos_por_caso(base)
     acertos_nova = acertos_por_caso(nova)
+    if alvo is not None and alvo not in acertos_base:
+        sys.exit(f"Caso-alvo {alvo!r} não existe nos resultados da versão {base!r}.")
     mostrar_tabela(base, nova, acertos_base, acertos_nova)
 
     # Mostra os números que levaram à decisão, para ela nunca ser uma "caixa-preta".
     ganhos, perdas = contar_mudancas(acertos_base, acertos_nova)
-    minimo = "não exigido" if neutra else MINIMO_GANHOS
-    print(f"\nRégua: {'neutra (trava de segurança)' if neutra else 'normal'}")
+    if alvo is not None:
+        nome_regua = f"dirigida (caso-alvo {alvo})"
+    elif neutra:
+        nome_regua = "neutra (trava de segurança)"
+    else:
+        nome_regua = "normal"
+    minimo = "não exigido" if (neutra or alvo) else MINIMO_GANHOS
+    print(f"\nRégua: {nome_regua}")
     print(f"Ganhos (viraram estável ✓): {len(ganhos)} {ganhos}  | mínimo {minimo}")
     print(f"Perdas (deixaram de ser estável ✓): {len(perdas)} {perdas}  | máximo {MAXIMO_PERDAS}")
+    if alvo is not None:
+        subida = acertos_nova.get(alvo, 0) - acertos_base[alvo]
+        print(f"Caso-alvo {alvo}: {acertos_base[alvo]}/3 -> {acertos_nova.get(alvo, 0)}/3 "
+              f"(subiu {subida})  | mínimo {MINIMO_SUBIDA_ALVO}")
 
-    decisao = versao_aprovada(acertos_base, acertos_nova, neutra=neutra)
+    decisao = versao_aprovada(acertos_base, acertos_nova, neutra=neutra, alvo=alvo)
     print(f"Decisão: {'APROVAR ' + nova if decisao else 'MANTER ' + base}")
