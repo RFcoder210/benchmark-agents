@@ -1049,3 +1049,48 @@
 2026-10-23 19:11;v13;C13;perguntar;dificil;3;girada;1;;;4,9;2790;0,0;1;"sem categoria identificável: registro trocado por pergunta; categoria divergente (classificador: nao_identificavel)"
 2026-10-23 19:11;v13;C14;registrar;dificil;3;girada;1;;;5,29;2830;0,0;1;dica de categoria: outros
 2026-10-23 19:11;v13;C15;perguntar;dificil;3;girada;1;;;9,02;2883;0,0;1;
+2026-10-27 18:52;v14;C01;registrar;facil;1;original;1;;;25,51;2780;0,0;1;
+2026-10-27 18:52;v14;C02;perguntar;facil;1;original;1;;;4,19;2756;0,0;1;
+2026-10-27 18:52;v14;C03;registrar;facil;1;original;1;;;4,66;2779;0,0;1;
+2026-10-27 18:52;v14;C04;ignorar;facil;1;original;1;;;1,85;2732;0,0;0;
+2026-10-27 18:52;v14;C05;registrar;facil;1;original;1;;;3,44;2774;0,0;0;chamada recuperada do texto
+2026-10-27 18:52;v14;C06;registrar;medio;1;original;1;;;4,48;2771;0,0;1;
+2026-10-27 18:52;v14;C07;registrar;medio;1;original;1;;;4,55;2785;0,0;1;
+2026-10-27 18:52;v14;C08;registrar;medio;1;original;0;acao;acao;4,26;2773;0,0;1;"perguntou ['valor']: ""Qual foi o valor do abastecimento?"""
+2026-10-27 18:52;v14;C09;perguntar;medio;1;original;1;;;4,99;2784;0,0;1;
+2026-10-27 18:52;v14;C10;perguntar;medio;1;original;1;;;3,31;2749;0,0;0;"chamada recuperada do texto; valor 0 trocado por pergunta"
+2026-10-27 18:52;v14;C11;ignorar;medio;1;original;1;;;1,85;2734;0,0;0;
+2026-10-27 18:52;v14;C12;registrar;dificil;1;original;1;;;5,6;2798;0,0;1;
+2026-10-27 18:52;v14;C13;perguntar;dificil;1;original;1;;;4,65;2775;0,0;1;
+2026-10-27 18:52;v14;C14;registrar;dificil;1;original;1;;;6,12;2796;0,0;1;
+2026-10-27 18:52;v14;C15;perguntar;dificil;1;original;1;;;9,99;2886;0,0;1;
+2026-10-27 18:52;v14;C01;registrar;facil;2;invertida;1;;;12,03;2780;0,0;1;
+2026-10-27 18:52;v14;C02;perguntar;facil;2;invertida;1;;;4,58;2756;0,0;1;
+2026-10-27 18:52;v14;C03;registrar;facil;2;invertida;1;;;5,67;2779;0,0;1;
+2026-10-27 18:52;v14;C04;ignorar;facil;2;invertida;1;;;2,23;2732;0,0;0;
+2026-10-27 18:52;v14;C05;registrar;facil;2;invertida;1;;;5,58;2796;0,0;1;
+2026-10-27 18:52;v14;C06;registrar;medio;2;invertida;1;;;5,13;2771;0,0;1;
+2026-10-27 18:52;v14;C07;registrar;medio;2;invertida;1;;;5,08;2785;0,0;1;
+2026-10-27 18:52;v14;C08;registrar;medio;2;invertida;0;acao;acao;4,3;2774;0,0;1;"categoria divergente (classificador: transporte); perguntou ['categoria']: ""Em que categoria esse gasto se encaixa?"""
+2026-10-27 18:52;v14;C09;perguntar;medio;2;invertida;0;campos_faltantes;campos;4,79;2790;0,0;1;"categoria divergente (classificador: educacao); campos_faltantes=['categoria'] (esperado ['pagamento'])"
+2026-10-27 18:52;v14;C10;perguntar;medio;2;invertida;1;;;4,28;2773;0,0;1;pagamento informado retirado da pergunta
+2026-10-27 18:52;v14;C11;ignorar;medio;2;invertida;1;;;1,72;2734;0,0;0;
+2026-10-27 18:52;v14;C12;registrar;dificil;2;invertida;1;;;5,09;2798;0,0;1;
+2026-10-27 18:52;v14;C13;perguntar;dificil;2;invertida;1;;;4,27;2775;0,0;1;
+2026-10-27 18:52;v14;C14;registrar;dificil;2;invertida;1;;;5,11;2796;0,0;1;
+2026-10-27 18:52;v14;C15;perguntar;dificil;2;invertida;1;;;9,99;2890;0,0;1;
+2026-10-27 18:52;v14;C01;registrar;facil;3;girada;1;;;11,24;2780;0,0;1;
+2026-10-27 18:52;v14;C02;perguntar;facil;3;girada;1;;;4,06;2756;0,0;1;
+2026-10-27 18:52;v14;C03;registrar;facil;3;girada;1;;;5,17;2779;0,0;1;
+2026-10-27 18:52;v14;C04;ignorar;facil;3;girada;1;;;1,91;2732;0,0;0;
+2026-10-27 18:52;v14;C05;registrar;facil;3;girada;1;;;4,97;2796;0,0;1;
+2026-10-27 18:52;v14;C06;registrar;medio;3;girada;1;;;4,59;2771;0,0;1;
+2026-10-27 18:52;v14;C07;registrar;medio;3;girada;1;;;4,61;2785;0,0;1;
+2026-10-27 18:52;v14;C08;registrar;medio;3;girada;0;acao;acao;3,66;2770;0,0;1;"categoria divergente (classificador: transporte); perguntou ['categoria']: ""Qual foi a forma de pagamento?"""
+2026-10-27 18:52;v14;C09;perguntar;medio;3;girada;1;;;4,26;2784;0,0;1;
+2026-10-27 18:52;v14;C10;perguntar;medio;3;girada;1;;;4,23;2769;0,0;1;
+2026-10-27 18:52;v14;C11;ignorar;medio;3;girada;1;;;1,71;2734;0,0;0;
+2026-10-27 18:52;v14;C12;registrar;dificil;3;girada;1;;;5,0;2798;0,0;1;
+2026-10-27 18:52;v14;C13;perguntar;dificil;3;girada;1;;;5,11;2790;0,0;1;"sem categoria identificável: registro trocado por pergunta; categoria divergente (classificador: nao_identificavel)"
+2026-10-27 18:52;v14;C14;registrar;dificil;3;girada;1;;;5,19;2796;0,0;1;
+2026-10-27 18:52;v14;C15;perguntar;dificil;3;girada;1;;;9,34;2883;0,0;1;

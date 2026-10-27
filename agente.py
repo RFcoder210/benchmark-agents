@@ -427,6 +427,42 @@ def retirar_pagamento_informado(argumentos, mensagem):
 
 
 # ---------------------------------------------------------------------------
+# VALIDAÇÃO EM PYTHON (v14): TRAVA DO PAGAMENTO INVENTADO
+# ---------------------------------------------------------------------------
+# O prompt diz: "Valor e pagamento nunca são deduzidos". Na v13, com a categoria
+# dada, o agente registrou "Almoço 22" como dinheiro e "no cartão" como crédito:
+# inventou o pagamento. Se a mensagem não tem NENHUMA palavra de pagamento
+# (PALAVRAS_PAGAMENTO, da v9), qualquer pagamento no registro foi inventado, e o
+# registro vira pergunta do pagamento. Analogia: o caixa que não pode marcar
+# "pago no pix" se o cliente não disse como pagou.
+# "cartão" sozinho não está em PALAVRAS_PAGAMENTO, então "no cartão" também cai
+# na trava, e a pergunta passa a ser "débito ou crédito?" (regra 5.3).
+# Limite conhecido: se o registro também tinha a categoria não identificável
+# (trava da v12), a pergunta sai só com o pagamento; o ideal seria perguntar os dois.
+PERGUNTA_PAGAMENTO = {"campos_faltantes": ["pagamento"],
+                      "pergunta": "Qual foi a forma de pagamento?"}
+PERGUNTA_DEBITO_CREDITO = {"campos_faltantes": ["pagamento"],
+                           "pergunta": "Foi no débito ou no crédito?"}
+
+
+def pagamento_inventado(mensagem):
+    """Parte central da v14. Devolve True se o pagamento de um registro só pode ter
+    sido inventado, isto é, se a mensagem NÃO contém nenhuma palavra de pagamento.
+    Senão, False. Reaproveita pagamento_na_mensagem() (v9) e inverte a resposta
+    com "not". Teste com:  .venv\\Scripts\\python testar_trava_pagamento.py"""
+    return not pagamento_na_mensagem(mensagem)
+
+
+def pergunta_do_pagamento(mensagem):
+    """Escolhe a pergunta da trava: se a mensagem fala em cartão, falta só saber
+    se foi débito ou crédito; senão, falta a forma de pagamento inteira."""
+    texto = (mensagem or "").lower()
+    if "cartão" in texto or "cartao" in texto:
+        return dict(PERGUNTA_DEBITO_CREDITO)
+    return dict(PERGUNTA_PAGAMENTO)
+
+
+# ---------------------------------------------------------------------------
 # v12: CLASSIFICADOR ESPECIALISTA DE CATEGORIA + TRAVA
 # ---------------------------------------------------------------------------
 # O agente decide tudo de uma vez (ação, valor, categoria, pagamento, data), e é
@@ -554,6 +590,12 @@ def categoria_divergente(acao, argumentos, etiqueta):
 TEXTO_DICA = ("\n\n(Nota do sistema, não escrita pelo usuário: a categoria deste gasto é "
               "{categoria}. Valor, pagamento e data vêm somente da mensagem acima.)")
 
+# Interruptor da dica. A v13 foi REPROVADA em 23/10 (com a categoria dada, o agente
+# inventou o pagamento), então o agente oficial roda sem a dica, como na v12.
+# O texto e a função ficam guardados: a v15 planeja religar a dica (True) depois
+# da trava do pagamento inventado (v14).
+USAR_DICA = False
+
 
 def mensagem_com_dica(mensagem, etiqueta):
     """Devolve a mensagem que o agente vai ler: a original + a dica, só quando a
@@ -579,8 +621,9 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
         exemplos na ordem ordem_exemplos (None = original), + validação em Python
         que recupera a chamada escrita como texto (v4) + trava do valor 0 (v7)
         + trava do pagamento já informado (v9) + regra de categoria no prompt (v10)
-        + classificador especialista de categoria com trava (v12), cuja
-        etiqueta entra na mensagem como dica para o agente (v13).
+        + classificador especialista de categoria com trava (v12)
+        + trava do pagamento inventado (v14). A dica da
+        v13 (etiqueta na mensagem) fica desligada (USAR_DICA = False).
       - exemplos_em_conversa=True: experimento v3 (reprovado em 16/10), com os
         exemplos como conversa. Sem validação.
       - prompt_sistema informado: modo antigo, usado por lote.py para reproduzir
@@ -595,14 +638,16 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
     elif prompt_sistema is None:
         prompt_sistema = montar_prompt(ordem_exemplos)
 
-    # v13: o classificador especialista roda ANTES do agente, e a etiqueta dele
-    # entra na mensagem como dica. Só no agente oficial.
+    # v12: o classificador especialista roda ANTES do agente. Na v13, a etiqueta
+    # dele entrava na mensagem como dica; hoje isso depende de USAR_DICA.
+    # Só no agente oficial.
     etiqueta = None
     texto_usuario = mensagem
     if oficial:
         classificacao = classificar_categoria(mensagem, temperatura)
         etiqueta = classificacao["etiqueta"]
-        texto_usuario = mensagem_com_dica(mensagem, etiqueta)
+        if USAR_DICA:
+            texto_usuario = mensagem_com_dica(mensagem, etiqueta)
 
     # Monta a conversa: instruções (system), exemplos (se houver) e a mensagem (user).
     # A data de referência é anexada às instruções, para o modelo saber qual é "hoje".
@@ -653,6 +698,15 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
         argumentos = dict(PERGUNTA_VALOR)   # dict() faz uma cópia, para não alterar o original
         valor_travado = True
 
+    # v14: um registro cujo pagamento não aparece na mensagem vira pergunta do
+    # pagamento. Vale para a chamada real e para a recuperada do texto. Usa a
+    # mensagem ORIGINAL, sem a dica. Só no agente oficial.
+    pagamento_travado = False
+    if oficial and acao == "registrar" and pagamento_inventado(mensagem):
+        acao = "perguntar"
+        argumentos = pergunta_do_pagamento(mensagem)
+        pagamento_travado = True
+
     # v9: uma pergunta não pede o pagamento que a mensagem já informou. Vale para a
     # chamada real e para a recuperada do texto. Só no agente oficial.
     # (Usa a mensagem ORIGINAL, sem a dica: a palavra deve vir do usuário.)
@@ -684,6 +738,7 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
         "chamada_recuperada": chamada_recuperada,  # True = veio do texto, não do modelo
         "valor_travado": valor_travado,  # True = registro com valor 0 trocado por pergunta
         "pagamento_retirado": pagamento_retirado,  # True = pagamento já informado saiu da pergunta
+        "pagamento_travado": pagamento_travado,  # True = registro com pagamento inventado virou pergunta (v14)
         "categoria_classificador": etiqueta,  # etiqueta do classificador (v12)
         "dica_categoria": texto_usuario != mensagem,  # True = a mensagem levou a dica (v13)
         "categoria_divergente": divergente,  # True = agente e classificador discordaram
