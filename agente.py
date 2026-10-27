@@ -591,10 +591,9 @@ TEXTO_DICA = ("\n\n(Nota do sistema, não escrita pelo usuário: a categoria des
               "{categoria}. Valor, pagamento e data vêm somente da mensagem acima.)")
 
 # Interruptor da dica. A v13 foi REPROVADA em 23/10 (com a categoria dada, o agente
-# inventou o pagamento), então o agente oficial roda sem a dica, como na v12.
-# O texto e a função ficam guardados: a v15 planeja religar a dica (True) depois
-# da trava do pagamento inventado (v14).
-USAR_DICA = False
+# inventou o pagamento), e a v14 rodou sem a dica (False). A v15 religa a dica
+# (True), agora com a trava do pagamento inventado (v14) protegendo o pagamento.
+USAR_DICA = True
 
 
 def mensagem_com_dica(mensagem, etiqueta):
@@ -622,8 +621,8 @@ def interpretar(mensagem, data_referencia, temperatura=0, prompt_sistema=None,
         que recupera a chamada escrita como texto (v4) + trava do valor 0 (v7)
         + trava do pagamento já informado (v9) + regra de categoria no prompt (v10)
         + classificador especialista de categoria com trava (v12)
-        + trava do pagamento inventado (v14). A dica da
-        v13 (etiqueta na mensagem) fica desligada (USAR_DICA = False).
+        + trava do pagamento inventado (v14) + a dica da v13 religada (v15):
+        a etiqueta do classificador entra na mensagem (USAR_DICA = True).
       - exemplos_em_conversa=True: experimento v3 (reprovado em 16/10), com os
         exemplos como conversa. Sem validação.
       - prompt_sistema informado: modo antigo, usado por lote.py para reproduzir

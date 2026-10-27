@@ -18,7 +18,7 @@ from agente import ACAO_POR_FERRAMENTA, EXEMPLOS_V2, interpretar
 
 ARQUIVO_CASOS = "casos/casos.json"
 PASTA_RESULTADOS = "resultados"
-VERSAO_AGENTE = "v14"   # mude a cada alteração no agente (v2, v3...)
+VERSAO_AGENTE = "v15"   # mude a cada alteração no agente (v2, v3...)
 # Histórico: v1 = linha de base (instruções); v2 = + bloco de exemplos resolvidos no prompt;
 # v3 = os mesmos 8 exemplos passam do texto do prompt para a conversa, como
 #      chamadas de ferramenta reais (degrau "saída estruturada") -> REPROVADA em 16/10
@@ -73,7 +73,14 @@ VERSAO_AGENTE = "v14"   # mude a cada alteração no agente (v2, v3...)
 #      pagamento nunca são deduzidos", regra explícita do prompt):
 #      comparar_versoes.py v12 v14 --neutra
 #      -> APROVADA em 27/10 pela régua neutra (41/45, igual à v12 caso a caso; a trava
-#      não foi acionada, como previa a simulação). Base atual.
+#      não foi acionada, como previa a simulação).
+# v15 = v14 + a dica da v13 religada (USAR_DICA = True; mesmo TEXTO_DICA da v13)
+#      -> régua DIRIGIDA, caso-alvo C08, decidida antes de rodar (27/10):
+#      comparar_versoes.py v14 v15 --alvo C08
+#      Previsão da simulação nas respostas da v13: 44/45 (C02 e C09 a 3/3 pela trava).
+#      -> APROVADA em 27/10 pela régua dirigida (44/45, exatamente o previsto; C08 0/3 ->
+#      2/3, C09 2/3 -> 3/3, 0 perdas; a trava da v14 agiu 4 vezes, no C02 e no C09,
+#      sempre certa). Base atual.
 ARQUIVO_CSV = os.path.join(PASTA_RESULTADOS, "resultados.csv")  # um só arquivo para todas as versões
 
 
