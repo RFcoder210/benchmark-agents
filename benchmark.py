@@ -5,6 +5,7 @@
 #   Parte 3: comparar a resposta com o gabarito.                     <- pronto
 #   Parte 4: salvar os resultados num CSV.                           <- pronto
 # Execução:  .venv\Scripts\python benchmark.py
+# Validação final (conjunto oculto):  .venv\Scripts\python benchmark.py --ocultos
 #
 # Atenção: durante os ajustes do agente, use SOMENTE casos/casos.json.
 # O conjunto oculto (casos/casos_ocultos.json) fica para a validação final.
@@ -12,11 +13,13 @@
 import csv       # biblioteca padrão para escrever planilhas CSV
 import json      # biblioteca padrão para ler e escrever arquivos JSON
 import os        # biblioteca padrão para lidar com pastas e caminhos
+import sys       # biblioteca padrão; sys.argv é a lista de opções da linha de comando
 from datetime import datetime  # data e hora atuais, para nomear os resultados
 
 from agente import ACAO_POR_FERRAMENTA, EXEMPLOS_V2, interpretar
 
 ARQUIVO_CASOS = "casos/casos.json"
+ARQUIVO_CASOS_OCULTOS = "casos/casos_ocultos.json"   # só com a opção --ocultos
 PASTA_RESULTADOS = "resultados"
 VERSAO_AGENTE = "v15"   # mude a cada alteração no agente (v2, v3...)
 # Histórico: v1 = linha de base (instruções); v2 = + bloco de exemplos resolvidos no prompt;
@@ -450,17 +453,24 @@ def mostrar_resumo(linhas):
 # EXECUÇÃO
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
-    casos = carregar_casos(ARQUIVO_CASOS)
+    # Com --ocultos, roda o conjunto oculto e grava com o rótulo "vN-oculto",
+    # para não misturar com os resultados dos casos de ajuste da mesma versão.
+    if "--ocultos" in sys.argv:
+        arquivo, rotulo = ARQUIVO_CASOS_OCULTOS, f"{VERSAO_AGENTE}-oculto"
+    else:
+        arquivo, rotulo = ARQUIVO_CASOS, VERSAO_AGENTE
+
+    casos = carregar_casos(arquivo)
     nomes = ", ".join(nome for nome, _ in ORDENS_EXEMPLOS)
-    print(f"{len(casos)} casos carregados de {ARQUIVO_CASOS}; "
+    print(f"{len(casos)} casos carregados de {arquivo}; "
           f"{N_EXECUCOES} execução por ordem dos exemplos ({nomes}).\n")
 
     data_execucao = datetime.now().strftime("%Y-%m-%d %H:%M")
     registros = executar_casos(casos, N_EXECUCOES, ordens=ORDENS_EXEMPLOS)
-    caminho = salvar_brutos(registros)
+    caminho = salvar_brutos(registros, rotulo)
     print(f"\nRespostas salvas em {caminho}")
 
-    linhas = avaliar(registros, data_execucao)
+    linhas = avaliar(registros, data_execucao, rotulo)
     salvar_csv(linhas)
     print(f"Resultados acrescentados em {ARQUIVO_CSV}")
     mostrar_resumo(linhas)
