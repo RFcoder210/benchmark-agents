@@ -1,31 +1,30 @@
-# Retomada — 2026-10-27
+# Retomada — 2026-10-30
 Motivo do checkpoint: fim do dia
 
 ## Feito hoje
-- Agente voltou à v12 pelo interruptor `USAR_DICA` (agente.py); `TEXTO_DICA` e `mensagem_com_dica()` mantidos.
-- v14 = v12 + trava do pagamento inventado (`pagamento_inventado()`, `pergunta_do_pagamento()`), APROVADA pela régua neutra: 41/45, igual à v12; trava não acionada (82c06b2).
-- v15 = v14 + dica religada, APROVADA pela régua dirigida (alvo C08): 44/45; C08 0/3 → 2/3, C09 → 3/3, 0 perdas; a trava agiu 4 vezes, todas certas (2a1a864).
-- Relatório do dia apresentado ao usuário no chat (não gravado em arquivo).
+- Teste de mutação do benchmark (`testar_mutacao.py`): comparação com o gabarito aprovada e 8 lacunas dos testes corrigidas (5 exemplos em `testar_comparar.py`; `testar_regua.py` novo).
+- Na 0.40.4, 5 de 8 falhas do agente foram detectadas; sobreviveram v4, v9 e o prompt sem "o que não é gasto".
+- Descoberta: a atualização automática do Ollama (0.40.13, em 30/10) tira a v15 de 44/45 para 41 a 44/45.
+- Benchmark fixado na 0.40.4, com trava de versão (`ambiente.py`, `iniciar_ollama.bat`); a v15 pelo caminho novo deu 44/45, igual a 27/10.
 
 ## Onde paramos
-- Base oficial = v15 (44/45). Código, CSV, dashboard e CLAUDE.md coerentes com isso; `VERSAO_AGENTE` = "v15".
-- Tudo commitado, exceto este encerramento (RETOMADA, DIARIO e o arquivo em .plano/historico).
+- A v1 está concluída; a base segue v15, e os fatos estão em `CLAUDE.md`.
+- O trabalho de 30/10 está commitado.
+- O servidor fixado está desligado.
 
 ## Próxima ação (a primeira coisa de amanhã)
-1. Perguntar ao usuário o caminho: (a) investigar o C08 na ordem invertida (único erro restante) ou (b) ir à validação final no conjunto oculto.
-2. Se (a): começar pelas respostas salvas em `resultados/brutos_v15_2026-10-27_1920.json` e simular antes de mudar o agente; decidir a régua ANTES de rodar.
-3. Se (b): confirmar com o usuário que os ajustes estão encerrados antes de abrir `casos/casos_ocultos.json` (regra do conjunto oculto).
+1. Perguntar ao usuário o caminho, recomendando o README de portfólio: (a) README e decisão de publicar; (b) mutantes de entrada; (c) 1º degrau do harness de pesquisa.
+2. Se o próximo passo rodar o modelo, lembrar de ligar `.\iniciar_ollama.bat` em outro terminal.
 
 ## Decisões tomadas que não estão em outro arquivo
-- A trava da v14 roda logo após a trava do valor 0 (v7) e antes da v9 e da v12; usa a mensagem original, sem a dica.
-- No PowerShell 5.1, `git commit -m` com aspas na mensagem quebra os argumentos: grave a mensagem num arquivo e use `git commit -F`.
-- Erro "CUDA error: shared object initialization failed" no Ollama foi passageiro: rodar de novo resolveu; o benchmark só grava no CSV ao terminar.
-- `testar_dashboard.py`: acrescente cada versão nova em `OFICIAIS` e atualize `BASE`.
+- O `/encerrar-dia` só funciona enviado sozinho pelo usuário; não dá para acioná-lo pela ferramenta Skill.
+- Para ligar o servidor pelas ferramentas do Claude, use a ferramenta PowerShell (`.\iniciar_ollama.bat`); `cmd //c` no Bash não encontra o arquivo.
+- As mensagens acentuadas da trava saíram corrompidas na captura do Git Bash; a exibição no PowerShell não foi conferida.
 
 ## Aguardando o usuário
-- Escolher entre atacar o C08 invertida ou a validação final.
+- Escolher o próximo caminho.
 
 ## Ler se necessário
-- `CLAUDE.md`, seção 4: itens v14 e v15.
-- `agente.py`: seção da v14 e início de `interpretar` (ordem das travas).
-- `resultados/brutos_v15_2026-10-27_1920.json` (C08 invertida).
+- `resultados/analise_mutacao_2026-10-30.md`
+- `CLAUDE.md`: seção 3 (ambiente) e item "Teste de mutação" da seção 4.
+- `contexto-benchmark-agentes.md`, seção 8 (evoluções futuras).
