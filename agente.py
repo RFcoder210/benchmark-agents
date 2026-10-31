@@ -11,6 +11,7 @@
 import json  # para ler a lista de campos escrita como texto (validação da v4)
 import re    # expressões regulares: procurar padrões dentro de textos
 import time
+import ambiente  # aponta para o Ollama fixado; precisa vir antes de "import ollama"
 import ollama
 
 MODELO = "qwen3:4b-instruct"

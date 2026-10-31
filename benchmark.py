@@ -17,6 +17,7 @@ import sys       # biblioteca padrão; sys.argv é a lista de opções da linha 
 from datetime import datetime  # data e hora atuais, para nomear os resultados
 
 from agente import ACAO_POR_FERRAMENTA, EXEMPLOS_V2, interpretar
+from ambiente import conferir_ollama
 
 ARQUIVO_CASOS = "casos/casos.json"
 ARQUIVO_CASOS_OCULTOS = "casos/casos_ocultos.json"   # só com a opção --ocultos
@@ -453,6 +454,9 @@ def mostrar_resumo(linhas):
 # EXECUÇÃO
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
+    # Trava do ambiente: resultados de outra versão do Ollama não são comparáveis.
+    conferir_ollama()
+
     # Com --ocultos, roda o conjunto oculto e grava com o rótulo "vN-oculto",
     # para não misturar com os resultados dos casos de ajuste da mesma versão.
     if "--ocultos" in sys.argv:

@@ -54,6 +54,23 @@ EXEMPLOS = [
     ("registro certo, mas com 2 chamadas de ferramenta",
      resposta("registrar", {"valor": 35, "categoria": "mercado", "pagamento": "pix", "data": "2026-10-11"}, n_chamadas=2),
      GASTO, (False, ["n_chamadas"])),
+    # Acrescentados em 30/10: o teste de mutação mostrou que nenhum exemplo conferia
+    # um campo PRESENTE, mas errado (só ausente) nem uma pergunta com campo a menos.
+    ("valor errado",
+     resposta("registrar", {"valor": 36, "categoria": "mercado", "pagamento": "pix", "data": "2026-10-11"}),
+     GASTO, (False, ["valor"])),
+    ("valor quase certo (35,50 não é 35)",
+     resposta("registrar", {"valor": 35.5, "categoria": "mercado", "pagamento": "pix", "data": "2026-10-11"}),
+     GASTO, (False, ["valor"])),
+    ("categoria errada",
+     resposta("registrar", {"valor": 35, "categoria": "outros", "pagamento": "pix", "data": "2026-10-11"}),
+     GASTO, (False, ["categoria"])),
+    ("data errada",
+     resposta("registrar", {"valor": 35, "categoria": "mercado", "pagamento": "pix", "data": "2026-10-10"}),
+     GASTO, (False, ["data"])),
+    ("pergunta com campo a menos",
+     resposta("perguntar", {"pergunta": "...", "campos_faltantes": ["categoria"]}),
+     PERGUNTA, (False, ["campos_faltantes"])),
 ]
 
 

@@ -1,0 +1,1514 @@
+[
+  {
+    "id_caso": "C01",
+    "dificuldade": "facil",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 35.0,
+      "categoria": "mercado",
+      "pagamento": "pix",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 35,
+        "categoria": "mercado",
+        "pagamento": "pix",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "mercado",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 85.27,
+      "tokens_entrada": 2746,
+      "tokens_saida": 68
+    }
+  },
+  {
+    "id_caso": "C02",
+    "dificuldade": "facil",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "campos_faltantes": [
+          "pagamento"
+        ],
+        "pergunta": "Qual foi a forma de pagamento?"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": true,
+      "categoria_classificador": "alimentacao",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 4.78,
+      "tokens_entrada": 2739,
+      "tokens_saida": 67
+    }
+  },
+  {
+    "id_caso": "C03",
+    "dificuldade": "facil",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 18.5,
+      "categoria": "transporte",
+      "pagamento": "credito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 18.5,
+        "categoria": "transporte",
+        "pagamento": "credito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "transporte",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.42,
+      "tokens_entrada": 2744,
+      "tokens_saida": 69
+    }
+  },
+  {
+    "id_caso": "C04",
+    "dificuldade": "facil",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "ignorar"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "nao_e_gasto",
+      "dica_categoria": false,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "ignorado",
+      "tempo_s": 1.81,
+      "tokens_entrada": 2708,
+      "tokens_saida": 21
+    }
+  },
+  {
+    "id_caso": "C05",
+    "dificuldade": "facil",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 187.3,
+      "categoria": "moradia",
+      "pagamento": "debito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 187.3,
+        "categoria": "moradia",
+        "pagamento": "debito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "moradia",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.13,
+      "tokens_entrada": 2765,
+      "tokens_saida": 66
+    }
+  },
+  {
+    "id_caso": "C06",
+    "dificuldade": "medio",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 42.0,
+      "categoria": "saude",
+      "pagamento": "debito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 42,
+        "categoria": "saude",
+        "pagamento": "debito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "saude",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.57,
+      "tokens_entrada": 2741,
+      "tokens_saida": 65
+    }
+  },
+  {
+    "id_caso": "C07",
+    "dificuldade": "medio",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 30.0,
+      "categoria": "lazer",
+      "pagamento": "dinheiro",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 30,
+        "categoria": "lazer",
+        "pagamento": "dinheiro",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "lazer",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 6.0,
+      "tokens_entrada": 2755,
+      "tokens_saida": 65
+    }
+  },
+  {
+    "id_caso": "C08",
+    "dificuldade": "medio",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 150.0,
+      "categoria": "transporte",
+      "pagamento": "pix",
+      "data": "2026-10-10"
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que categoria esse gasto se encaixa?",
+        "campos_faltantes": [
+          "categoria"
+        ]
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "transporte",
+      "dica_categoria": true,
+      "categoria_divergente": true,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.36,
+      "tokens_entrada": 2754,
+      "tokens_saida": 63
+    }
+  },
+  {
+    "id_caso": "C09",
+    "dificuldade": "medio",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Foi no débito ou no crédito?",
+        "campos_faltantes": [
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "educacao",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.87,
+      "tokens_entrada": 2761,
+      "tokens_saida": 58
+    }
+  },
+  {
+    "id_caso": "C10",
+    "dificuldade": "medio",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "valor"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Qual foi o valor do curso de inglês?",
+        "campos_faltantes": [
+          "valor"
+        ]
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "educacao",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.19,
+      "tokens_entrada": 2747,
+      "tokens_saida": 57
+    }
+  },
+  {
+    "id_caso": "C11",
+    "dificuldade": "medio",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "ignorar"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "nao_e_gasto",
+      "dica_categoria": false,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "ignorado",
+      "tempo_s": 1.96,
+      "tokens_entrada": 2718,
+      "tokens_saida": 16
+    }
+  },
+  {
+    "id_caso": "C12",
+    "dificuldade": "dificil",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 1250.0,
+      "categoria": "moradia",
+      "pagamento": "pix",
+      "data": "2026-10-05"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 1250,
+        "categoria": "moradia",
+        "pagamento": "pix",
+        "data": "2026-10-05"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "moradia",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.71,
+      "tokens_entrada": 2767,
+      "tokens_saida": 66
+    }
+  },
+  {
+    "id_caso": "C13",
+    "dificuldade": "dificil",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "categoria"
+      ]
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 50,
+        "categoria": "mercado",
+        "pagamento": "debito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "mercado",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.81,
+      "tokens_entrada": 2752,
+      "tokens_saida": 70
+    }
+  },
+  {
+    "id_caso": "C14",
+    "dificuldade": "dificil",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 80.0,
+      "categoria": "outros",
+      "pagamento": "credito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 80,
+        "categoria": "outros",
+        "pagamento": "credito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "outros",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.77,
+      "tokens_entrada": 2756,
+      "tokens_saida": 74
+    }
+  },
+  {
+    "id_caso": "C15",
+    "dificuldade": "dificil",
+    "execucao_n": 1,
+    "ordem": "original",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "categoria",
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Qual foi a categoria e a forma de pagamento?",
+        "campos_faltantes": [
+          "categoria",
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "nao_identificavel",
+      "dica_categoria": false,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 4.63,
+      "tokens_entrada": 2708,
+      "tokens_saida": 64
+    }
+  },
+  {
+    "id_caso": "C01",
+    "dificuldade": "facil",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 35.0,
+      "categoria": "mercado",
+      "pagamento": "pix",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 35,
+        "categoria": "mercado",
+        "pagamento": "pix",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "mercado",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 12.22,
+      "tokens_entrada": 2746,
+      "tokens_saida": 68
+    }
+  },
+  {
+    "id_caso": "C02",
+    "dificuldade": "facil",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "campos_faltantes": [
+          "pagamento"
+        ],
+        "pergunta": "Qual foi a forma de pagamento?"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": true,
+      "categoria_classificador": "alimentacao",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.42,
+      "tokens_entrada": 2739,
+      "tokens_saida": 67
+    }
+  },
+  {
+    "id_caso": "C03",
+    "dificuldade": "facil",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 18.5,
+      "categoria": "transporte",
+      "pagamento": "credito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 18.5,
+        "categoria": "transporte",
+        "pagamento": "credito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "transporte",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.12,
+      "tokens_entrada": 2744,
+      "tokens_saida": 69
+    }
+  },
+  {
+    "id_caso": "C04",
+    "dificuldade": "facil",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "ignorar"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "nao_e_gasto",
+      "dica_categoria": false,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "ignorado",
+      "tempo_s": 1.8,
+      "tokens_entrada": 2708,
+      "tokens_saida": 21
+    }
+  },
+  {
+    "id_caso": "C05",
+    "dificuldade": "facil",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 187.3,
+      "categoria": "moradia",
+      "pagamento": "debito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 187.3,
+        "categoria": "moradia",
+        "pagamento": "debito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "moradia",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.48,
+      "tokens_entrada": 2765,
+      "tokens_saida": 66
+    }
+  },
+  {
+    "id_caso": "C06",
+    "dificuldade": "medio",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 42.0,
+      "categoria": "saude",
+      "pagamento": "debito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 42,
+        "categoria": "saude",
+        "pagamento": "debito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "saude",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.0,
+      "tokens_entrada": 2741,
+      "tokens_saida": 65
+    }
+  },
+  {
+    "id_caso": "C07",
+    "dificuldade": "medio",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 30.0,
+      "categoria": "lazer",
+      "pagamento": "dinheiro",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 30,
+        "categoria": "lazer",
+        "pagamento": "dinheiro",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "lazer",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.11,
+      "tokens_entrada": 2755,
+      "tokens_saida": 65
+    }
+  },
+  {
+    "id_caso": "C08",
+    "dificuldade": "medio",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 150.0,
+      "categoria": "transporte",
+      "pagamento": "pix",
+      "data": "2026-10-10"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 150,
+        "categoria": "transporte",
+        "pagamento": "pix",
+        "data": "2026-10-10"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "transporte",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.71,
+      "tokens_entrada": 2754,
+      "tokens_saida": 74
+    }
+  },
+  {
+    "id_caso": "C09",
+    "dificuldade": "medio",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "campos_faltantes": [
+          "pagamento"
+        ],
+        "pergunta": "Foi no débito ou no crédito?"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": true,
+      "categoria_classificador": "educacao",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.4,
+      "tokens_entrada": 2761,
+      "tokens_saida": 69
+    }
+  },
+  {
+    "id_caso": "C10",
+    "dificuldade": "medio",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "valor"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Qual foi o valor do curso de inglês?",
+        "campos_faltantes": [
+          "valor"
+        ]
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "educacao",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 4.92,
+      "tokens_entrada": 2747,
+      "tokens_saida": 57
+    }
+  },
+  {
+    "id_caso": "C11",
+    "dificuldade": "medio",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "ignorar"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "nao_e_gasto",
+      "dica_categoria": false,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "ignorado",
+      "tempo_s": 1.73,
+      "tokens_entrada": 2718,
+      "tokens_saida": 16
+    }
+  },
+  {
+    "id_caso": "C12",
+    "dificuldade": "dificil",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 1250.0,
+      "categoria": "moradia",
+      "pagamento": "pix",
+      "data": "2026-10-05"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 1250,
+        "categoria": "moradia",
+        "pagamento": "pix",
+        "data": "2026-10-05"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "moradia",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.36,
+      "tokens_entrada": 2767,
+      "tokens_saida": 66
+    }
+  },
+  {
+    "id_caso": "C13",
+    "dificuldade": "dificil",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "categoria"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que foi esse gasto?",
+        "campos_faltantes": [
+          "categoria"
+        ]
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "mercado",
+      "dica_categoria": true,
+      "categoria_divergente": true,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 4.67,
+      "tokens_entrada": 2752,
+      "tokens_saida": 55
+    }
+  },
+  {
+    "id_caso": "C14",
+    "dificuldade": "dificil",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 80.0,
+      "categoria": "outros",
+      "pagamento": "credito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 80,
+        "categoria": "outros",
+        "pagamento": "credito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "outros",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.81,
+      "tokens_entrada": 2756,
+      "tokens_saida": 74
+    }
+  },
+  {
+    "id_caso": "C15",
+    "dificuldade": "dificil",
+    "execucao_n": 2,
+    "ordem": "invertida",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "categoria",
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Qual foi a categoria desse gasto?",
+        "campos_faltantes": [
+          "categoria",
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "nao_identificavel",
+      "dica_categoria": false,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 4.6,
+      "tokens_entrada": 2708,
+      "tokens_saida": 63
+    }
+  },
+  {
+    "id_caso": "C01",
+    "dificuldade": "facil",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 35.0,
+      "categoria": "mercado",
+      "pagamento": "pix",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 35,
+        "categoria": "mercado",
+        "pagamento": "pix",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "mercado",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 11.93,
+      "tokens_entrada": 2746,
+      "tokens_saida": 68
+    }
+  },
+  {
+    "id_caso": "C02",
+    "dificuldade": "facil",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Qual foi a forma de pagamento?",
+        "campos_faltantes": [
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "alimentacao",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 4.32,
+      "tokens_entrada": 2739,
+      "tokens_saida": 52
+    }
+  },
+  {
+    "id_caso": "C03",
+    "dificuldade": "facil",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 18.5,
+      "categoria": "transporte",
+      "pagamento": "credito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 18.5,
+        "categoria": "transporte",
+        "pagamento": "credito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "transporte",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.55,
+      "tokens_entrada": 2744,
+      "tokens_saida": 69
+    }
+  },
+  {
+    "id_caso": "C04",
+    "dificuldade": "facil",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "ignorar"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "nao_e_gasto",
+      "dica_categoria": false,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "ignorado",
+      "tempo_s": 1.86,
+      "tokens_entrada": 2708,
+      "tokens_saida": 21
+    }
+  },
+  {
+    "id_caso": "C05",
+    "dificuldade": "facil",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 187.3,
+      "categoria": "moradia",
+      "pagamento": "debito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 187.3,
+        "categoria": "moradia",
+        "pagamento": "debito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "moradia",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.8,
+      "tokens_entrada": 2765,
+      "tokens_saida": 66
+    }
+  },
+  {
+    "id_caso": "C06",
+    "dificuldade": "medio",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 42.0,
+      "categoria": "saude",
+      "pagamento": "debito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 42,
+        "categoria": "saude",
+        "pagamento": "debito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "saude",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.07,
+      "tokens_entrada": 2741,
+      "tokens_saida": 65
+    }
+  },
+  {
+    "id_caso": "C07",
+    "dificuldade": "medio",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 30.0,
+      "categoria": "lazer",
+      "pagamento": "dinheiro",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 30,
+        "categoria": "lazer",
+        "pagamento": "dinheiro",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "lazer",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.26,
+      "tokens_entrada": 2755,
+      "tokens_saida": 65
+    }
+  },
+  {
+    "id_caso": "C08",
+    "dificuldade": "medio",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 150.0,
+      "categoria": "transporte",
+      "pagamento": "pix",
+      "data": "2026-10-10"
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que foi esse gasto?",
+        "campos_faltantes": [
+          "categoria"
+        ]
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "transporte",
+      "dica_categoria": true,
+      "categoria_divergente": true,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 4.77,
+      "tokens_entrada": 2754,
+      "tokens_saida": 59
+    }
+  },
+  {
+    "id_caso": "C09",
+    "dificuldade": "medio",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "campos_faltantes": [
+          "pagamento"
+        ],
+        "pergunta": "Foi no débito ou no crédito?"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": true,
+      "categoria_classificador": "educacao",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.46,
+      "tokens_entrada": 2761,
+      "tokens_saida": 69
+    }
+  },
+  {
+    "id_caso": "C10",
+    "dificuldade": "medio",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "valor"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "campos_faltantes": [
+          "valor"
+        ],
+        "pergunta": "Qual foi o valor?"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": true,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "educacao",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.27,
+      "tokens_entrada": 2747,
+      "tokens_saida": 67
+    }
+  },
+  {
+    "id_caso": "C11",
+    "dificuldade": "medio",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "ignorar"
+    },
+    "resposta": {
+      "acao": "ignorar",
+      "argumentos": {},
+      "n_chamadas": 0,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "nao_e_gasto",
+      "dica_categoria": false,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "ignorado",
+      "tempo_s": 1.73,
+      "tokens_entrada": 2718,
+      "tokens_saida": 16
+    }
+  },
+  {
+    "id_caso": "C12",
+    "dificuldade": "dificil",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 1250.0,
+      "categoria": "moradia",
+      "pagamento": "pix",
+      "data": "2026-10-05"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 1250,
+        "categoria": "moradia",
+        "pagamento": "pix",
+        "data": "2026-10-05"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "moradia",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.26,
+      "tokens_entrada": 2767,
+      "tokens_saida": 66
+    }
+  },
+  {
+    "id_caso": "C13",
+    "dificuldade": "dificil",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "categoria"
+      ]
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 50,
+        "categoria": "mercado",
+        "pagamento": "debito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "mercado",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.93,
+      "tokens_entrada": 2752,
+      "tokens_saida": 70
+    }
+  },
+  {
+    "id_caso": "C14",
+    "dificuldade": "dificil",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "registrar",
+      "valor": 80.0,
+      "categoria": "outros",
+      "pagamento": "credito",
+      "data": "2026-10-11"
+    },
+    "resposta": {
+      "acao": "registrar",
+      "argumentos": {
+        "valor": 80,
+        "categoria": "outros",
+        "pagamento": "credito",
+        "data": "2026-10-11"
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "outros",
+      "dica_categoria": true,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 5.72,
+      "tokens_entrada": 2756,
+      "tokens_saida": 74
+    }
+  },
+  {
+    "id_caso": "C15",
+    "dificuldade": "dificil",
+    "execucao_n": 3,
+    "ordem": "girada",
+    "esperado": {
+      "acao": "perguntar",
+      "campos_faltantes": [
+        "categoria",
+        "pagamento"
+      ]
+    },
+    "resposta": {
+      "acao": "perguntar",
+      "argumentos": {
+        "pergunta": "Em que foi esse gasto?",
+        "campos_faltantes": [
+          "categoria",
+          "pagamento"
+        ]
+      },
+      "n_chamadas": 1,
+      "chamada_recuperada": false,
+      "valor_travado": false,
+      "pagamento_retirado": false,
+      "pagamento_travado": false,
+      "categoria_classificador": "nao_identificavel",
+      "dica_categoria": false,
+      "categoria_divergente": false,
+      "categoria_travada": false,
+      "texto": "",
+      "tempo_s": 4.42,
+      "tokens_entrada": 2708,
+      "tokens_saida": 61
+    }
+  }
+]
