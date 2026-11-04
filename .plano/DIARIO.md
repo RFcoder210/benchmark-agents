@@ -13,5 +13,5 @@ Uma linha por dia de trabalho. O hook `iniciar-sessao.ps1` lê a última linha p
 | 7 | 2026-10-27 | Dia 7 · 27/10 · v14 e v15: 44/45 | v14 (trava do pagamento inventado) aprovada pela régua neutra com 41/45 e v15 (dica religada) aprovada pela régua dirigida com 44/45, nova base. |
 | 8 | 2026-10-28 | Dia 8 · 28/10 · C08 ou validação final | Ajustes encerrados e validação final da v15 no conjunto oculto: 15/15. |
 | 9 | 2026-10-30 | Dia 9 · 30/10 · Mutação e Ollama fixado | Teste de mutação do benchmark (5 de 8 falhas do agente detectadas); a atualização do Ollama mudou os resultados, e o benchmark foi fixado na 0.40.4, com trava de versão. |
-| 10 | 2026-10-31 | Dia 10 · 31/10 · Escolha do próximo caminho | em andamento |
-| 11 | 2026-11-03 | Dia 11 · 03/11 · README e publicação | em andamento |
+| 10 | 2026-10-31 | Dia 10 · 31/10 · README de portfólio | Rascunho do README de portfólio e regra no CLAUDE.md para mantê-lo atualizado; dia sem encerramento. |
+| 11 | 2026-11-03 | Dia 11 · 03/11 · README e publicação | README revisado contra o CSV, com 4 correções, e commitado (260acc9); seções pessoais e publicação ficam para o próximo dia. |
