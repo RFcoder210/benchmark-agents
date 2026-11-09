@@ -1,13 +1,13 @@
-# Retomada — 2026-11-03
+# Retomada — 2026-11-09
 Motivo do checkpoint: fim do dia
 
 ## Feito hoje
-- README de portfólio (rascunho de 31/10) revisado: números conferidos contra o CSV e a análise de mutação, links e os 5 comandos "sem o modelo" testados.
-- 4 correções aplicadas: tempo +77% (não 74%), v1 "3 execuções na ordem original", v2 "adotada", "casos de ajuste" nos limites.
-- Commit 260acc9: README novo, regra do README no CLAUDE.md e diário.
+- Dia só de consulta: dashboard aberto para ver o estado do benchmark (v15 = 44/45, 14 de 15 estáveis, 15/15 no oculto).
+- Nenhuma execução nova do benchmark desde 28/10; o CSV não mudou.
+- Linha do Dia 12 acrescentada em `.plano/DIARIO.md`.
 
 ## Onde paramos
-- O README está pronto, exceto as duas seções marcadas `[A ESCREVER PELO AUTOR]`.
+- O mesmo ponto de 03/11: o README está pronto, exceto as duas seções marcadas `[A ESCREVER PELO AUTOR]`.
 - Nada foi publicado; o repositório segue só local.
 - O servidor fixado (0.40.4) não foi ligado hoje.
 
