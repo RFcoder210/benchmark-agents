@@ -167,10 +167,22 @@ py -m venv .venv
 
 ## O que aprendi
 
-> **[A ESCREVER PELO AUTOR]**
+**Avaliar é um método, não uma conferência no fim.** Antes deste projeto, eu julgaria uma versão do agente testando algumas mensagens e olhando as respostas. O benchmark mostrou que essa impressão engana: versões que pareciam melhores perdiam casos que antes acertavam. Aprendi também a escolher o critério de aprovação antes de ver o resultado, porque, depois de ver o número, é fácil ajustar a régua para aprovar a ideia de que gosto.
+
+**Um agente não responde sempre igual.** Mesmo com temperatura 0, só mudar a ordem dos exemplos no prompt mudava o placar. Um caso que eu considerava estável (C09) errou uma das três ordens na v12; a versão anterior, repetida no mesmo dia, errou a mesma ordem do mesmo jeito: não era efeito da mudança, era ruído. Por isso cada caso roda em três ordens, e uma perda inesperada pede uma repetição antes da decisão.
+
+**Cada parte do trabalho vai para quem a faz melhor.** O modelo é bom em interpretar a linguagem; regras exatas, como "não registrar valor 0" ou "não inventar a forma de pagamento", são mais confiáveis em Python. As travas mais úteis nasceram de erros observados nas respostas salvas e foram simuladas nelas antes de rodar o modelo de novo, o que poupou execuções e evitou mudanças às cegas.
+
+**O avaliador também precisa ser avaliado.** O teste de mutação mostrou que o benchmark tinha lacunas que eu não teria percebido, e que alguns casos não cobrem regras importantes. Uma nota só tem valor se o instrumento que a mede foi testado.
+
+**Python na prática.** Comecei o projeto aprendendo a linguagem. Ao longo dele, usei listas e dicionários para representar casos e respostas, funções para separar cada etapa, leitura e escrita de JSON e CSV, expressões regulares para encontrar palavras nas mensagens, argumentos de linha de comando e testes automatizados que conferem cada peça sem chamar o modelo.
 
 ## Como este projeto foi construído
 
 Projeto desenvolvido com o apoio do Claude Code, registrado como coautor nos commits.
 
-> **[A ESCREVER PELO AUTOR]**
+**Divisão do trabalho.** As decisões foram minhas: as regras do agente na [especificação](especificacao-agente.md), os casos de teste e seus gabaritos, os textos do prompt, escritos em conjunto ou aprovados por mim antes de cada execução, as três réguas de aprovação, que defini ou aceitei, a decisão de aprovar ou reprovar cada versão, o momento de encerrar os ajustes antes de abrir o conjunto oculto e a fixação da versão do Ollama. O Claude Code escreveu boa parte do código a meu pedido, explicou os conceitos de Python à medida que apareciam e propôs análises e simulações, que eu conferi caso a caso antes de aceitar.
+
+**Método.** O trabalho foi feito em etapas pequenas: casos com gabarito, agente mínimo, script do benchmark, linha de base e, depois, uma mudança no agente por versão. Entre 14/10 e 28/10, o benchmark registrou 1155 execuções no CSV, somando as 15 versões, os lotes de calibração e a validação oculta. Desde o segundo dia, as sessões terminaram, em regra, com um bilhete de retomada e uma linha no diário, para que a seguinte começasse do ponto em que a anterior parou.
+
+**Restrições.** Tudo foi feito em casa, sozinho e com ferramentas gratuitas: um modelo de 4B parâmetros rodando localmente em uma GPU de 4 GB, sem nenhuma chamada a API paga. O limite de hardware orientou escolhas, como corrigir erros com travas em Python em vez de trocar por um modelo maior.
