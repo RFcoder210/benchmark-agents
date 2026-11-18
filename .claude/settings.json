@@ -1,7 +1,17 @@
 {
+  "model": "sonnet",
+  "env": {
+    "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Read(~/.claude/ocorrencias-agentes.md)",
+      "Edit(~/.claude/ocorrencias-agentes.md)"
+    ]
+  },
   "statusLine": {
     "type": "command",
-    "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/statusline-uso.ps1"
+    "command": "py -3 .claude/hooks/statusline-uso.py"
   },
   "hooks": {
     "SessionStart": [
@@ -9,8 +19,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe",
-            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/iniciar-sessao.ps1"],
+            "command": "py",
+            "args": [
+              "-3",
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/iniciar-sessao.py"
+            ],
             "timeout": 30
           }
         ]
@@ -21,8 +34,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe",
-            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/verificar-uso.ps1"],
+            "command": "py",
+            "args": [
+              "-3",
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/verificar-uso.py"
+            ],
             "timeout": 15
           }
         ]
@@ -34,8 +50,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe",
-            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/proteger-estado.ps1"],
+            "command": "py",
+            "args": [
+              "-3",
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/proteger-estado.py"
+            ],
             "timeout": 10
           }
         ]
@@ -47,8 +66,43 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe",
-            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/verificar-uso.ps1"],
+            "command": "py",
+            "args": [
+              "-3",
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/verificar-uso.py"
+            ],
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "executor-tarefa",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py",
+            "args": [
+              "-3",
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/fiscal-executor.py"
+            ],
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "matcher": "rate_limit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py",
+            "args": [
+              "-3",
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/limite-atingido.py"
+            ],
             "timeout": 15
           }
         ]
@@ -60,21 +114,14 @@
           {
             "type": "command",
             "command": "powershell.exe",
-            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/testar-ao-parar.ps1"],
+            "args": [
+              "-NoProfile",
+              "-ExecutionPolicy",
+              "Bypass",
+              "-File",
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/testar-ao-parar.ps1"
+            ],
             "timeout": 90
-          }
-        ]
-      }
-    ],
-    "StopFailure": [
-      {
-        "matcher": "rate_limit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "powershell.exe",
-            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/limite-atingido.ps1"],
-            "timeout": 15
           }
         ]
       }

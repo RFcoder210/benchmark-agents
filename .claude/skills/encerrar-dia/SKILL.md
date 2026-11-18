@@ -7,7 +7,7 @@ disable-model-invocation: true
 # Encerramento do dia (benchmark de agentes)
 
 Rotina do projeto: **uma sessão por dia**. O estado duradouro fica no CLAUDE.md;
-o bilhete do dia fica em `.plano/RETOMADA.md`, que o hook `iniciar-sessao.ps1`
+o bilhete do dia fica em `.plano/RETOMADA.md`, que o hook `iniciar-sessao.py`
 entrega automaticamente à próxima sessão. Não duplique informação entre os dois.
 
 1. **Não inicie nenhuma tarefa nova.** Se algo estiver no meio (ex.: benchmark rodando), aguarde terminar.
