@@ -1,28 +1,28 @@
 # Retomada — 2026-11-17
-Motivo do checkpoint: fim do dia
+Motivo do checkpoint: fim do dia (2º encerramento do mesmo dia; este bilhete substitui o anterior)
 
 ## Feito hoje
-- README completo: seções "O que aprendi" e "Como este projeto foi construído", conferidas contra o CSV e confirmadas pelo usuário (06f1731).
-- Lançador com duplo clique (`abrir_benchmark.bat` + atalho "Benchmark de agentes" na área de trabalho) (63cfdb0).
-- App pessoal (caminho 1): menu `app.py` com "Visão geral" e "Executar"; página Executar na etapa 1, só conferência (40e3014).
-- Tema Grafite aplicado, escolhido entre 3 maquetes; testes 43/43 (painel) e 9/9 (Executar) (40e3014).
-- Porte dos hooks de `.claude/` para Python commitado (1793312); não foi feito nesta sessão, só conferido.
+- README completo, com as seções pessoais (06f1731); lançador com duplo clique (63cfdb0).
+- App pessoal: menu `app.py`, página Executar na etapa 1 (só conferência) e tema Grafite (40e3014).
+- Revisão de todos os arquivos: 9 correções, entre elas a queda por valor inválido no `agente.py`, a cor única por versão no painel, o README e a LICENSE MIT (f6c224a).
+- **Publicado no GitHub**: https://github.com/RFcoder210/benchmark-agents. O histórico foi reescrito com o e-mail noreply, e as 40 citações a códigos de commit foram atualizadas (f784521, ab331b9).
 
 ## Onde paramos
-- A página Executar mostra o estado do Ollama e avisa que o rótulo `v15` já tem 45 execuções; o botão "Executar" está desligado.
-- Nada sem commit, exceto este encerramento.
+- Tudo commitado e enviado: a `main` local é igual à do GitHub.
+- A página Executar ainda tem o botão desligado.
 
 ## Próxima ação (a primeira coisa de amanhã)
 1. Etapa 2 da página Executar: opção `--rotulo` no `benchmark.py` (com teste), para rodar `v15-repeticao` sem editar o código.
 2. Depois, ligar o botão: rodar em segundo plano com barra de progresso e aviso antes de gravar no CSV.
 
 ## Decisões tomadas que não estão em outro arquivo
-- Ideia guardada para o futuro (não iniciar agora): um agente que faz a análise crítica do eval a partir do CSV e dos brutos. Por enquanto, as análises técnicas seguem na sessão.
-- Sem CSS próprio no painel: só opções do tema. Diferenças aceitas em relação à maquete: etiquetas dos filtros em verde-água cheio e números grandes em Geist, não em Geist Mono.
-- Ao mudar a pasta de páginas ou o `app.py`, é preciso reiniciar o painel: fechar a janela "Painel do benchmark" e abrir o atalho de novo.
+- Ideia guardada para o futuro (não iniciar agora): um agente que faz a análise crítica do eval a partir do CSV e dos brutos.
+- Sem CSS próprio no painel: só opções do tema. Diferenças aceitas em relação à maquete: etiquetas dos filtros em verde-água cheio e números grandes em Geist.
+- Só a `main` foi publicada; os ramos `lote-noturno-2026-10-15` e `noite/2026-10-18` ficam locais (todo o conteúdo deles já está na main).
+- Os códigos de commit citados nos bilhetes anteriores a hoje já foram trocados pelos novos.
 
 ## Aguardando o usuário
-- Decidir se publica o repositório: licença, link do Ollama 0.40.4 em "Como rodar" e se `casos/casos_ocultos.json` vai junto.
+- Apagar, quando quiser, a cópia de segurança `..\benchmark-agents-backup-antes-da-publicacao.bundle`; ela tem o e-mail pessoal e não deve ser publicada.
 
 ## Ler se necessário
 - `benchmark.py` (bloco `if __name__ == "__main__"`, onde o rótulo é definido).

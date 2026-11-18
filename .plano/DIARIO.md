@@ -17,4 +17,4 @@ Uma linha por dia de trabalho. O hook `iniciar-sessao.ps1` lê a última linha p
 | 11 | 2026-11-03 | Dia 11 · 03/11 · README e publicação | README revisado contra o CSV, com 4 correções, e commitado (ba832ed); seções pessoais e publicação ficam para o próximo dia. |
 | 12 | 2026-11-09 | Dia 12 · 09/11 · Panorama do benchmark | Dashboard aberto para ver o estado do benchmark; sem execuções novas desde a validação oculta (28/10). |
 | 13 | 2026-11-10 | Dia 13 · 10/11 · Seções pessoais do README | Sessão sem encerramento; as seções pessoais do README não foram escritas. |
-| 14 | 2026-11-17 | Dia 14 · 17/11 · README, app e tema Grafite | README completo; lançador com duplo clique, menu com página Executar (etapa 1) e tema Grafite aplicado ao painel. |
+| 14 | 2026-11-17 | Dia 14 · 17/11 · App, tema e publicação | README completo; lançador, página Executar (etapa 1) e tema Grafite; revisão de todos os arquivos e projeto publicado no GitHub. |
