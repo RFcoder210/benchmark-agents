@@ -1,7 +1,7 @@
 # Lote noturno — 2026-10-18 (benchmark-agents)
 
 ## 1. Projeto
-- Raiz: `C:\Users\rodri\OneDrive\Documentos\05-Projetos\benchmark-agents` (Git Bash: `/c/Users/rodri/OneDrive/Documentos/05-Projetos/benchmark-agents`)
+- Raiz: a pasta do projeto (no Git Bash, o mesmo caminho com barras normais)
 - Windows 11. Python pelo ambiente virtual: `.venv\Scripts\python arquivo.py` (nunca `python`; `py` só fora do venv).
 - Modelo do agente: Ollama local, `qwen3:4b-instruct` (custo zero; sem API paga).
 - Benchmark: `.venv\Scripts\python benchmark.py` (15 casos × 3 ordens = 45 linhas no CSV; poucos minutos).

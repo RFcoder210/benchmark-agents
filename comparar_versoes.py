@@ -4,8 +4,9 @@
 # Usa só as execuções no protocolo de 3 ordens (original, invertida, girada)
 # e, de cada versão, a execução MAIS RECENTE gravada em resultados/resultados.csv.
 #
-# A função versao_aprovada() (no fim do arquivo) é SUA para escrever: ela é a
-# regra que transforma os números em decisão. O resto do arquivo já funciona.
+# A função versao_aprovada() é a regra que transforma os números em decisão
+# (escrita em 16/10 e ampliada com a régua neutra, 17/10, e a dirigida, 23/10).
+# Uso: comparar_versoes.py BASE NOVA [--neutra | --alvo CASO]
 
 import csv
 import sys
@@ -51,7 +52,10 @@ def mostrar_tabela(base, nova, acertos_base, acertos_nova):
         a, b = acertos_base[caso], acertos_nova.get(caso, 0)
         seta = "  <- mudou" if situacao(a) != situacao(b) else ""
         print(f"{caso:<6}{a:>6}/3{b:>6}/3   {situacao(a)} -> {situacao(b)}{seta}")
-    print(f"{'Total':<6}{sum(acertos_base.values()):>5}/45{sum(acertos_nova.values()):>5}/45")
+    # Máximo possível = 3 ordens por caso (45 nos 15 casos de ajuste; 15 nos 5 ocultos).
+    maximo = 3 * len(acertos_base)
+    print(f"{'Total':<6}{sum(acertos_base.values()):>5}/{maximo}"
+          f"{sum(acertos_nova.values()):>5}/{maximo}")
 
 
 # ---------------------------------------------------------------------------

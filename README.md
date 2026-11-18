@@ -131,12 +131,14 @@ py -m venv .venv
 .venv\Scripts\python testar_regua.py
 .venv\Scripts\python testar_trava_pagamento.py
 .venv\Scripts\python testar_dashboard.py
-.venv\Scripts\streamlit run dashboard.py
+.venv\Scripts\streamlit run app.py
 ```
+
+O último comando abre o painel no navegador, com duas páginas: **Visão geral** (os gráficos) e **Executar** (confere o ambiente antes de uma execução).
 
 **Com o modelo:**
 
-1. Extraia o zip oficial do Ollama 0.40.4 em `%LOCALAPPDATA%\Programs\Ollama-0.40.4`.
+1. Baixe o zip oficial do [Ollama 0.40.4](https://github.com/ollama/ollama/releases/tag/v0.40.4) para Windows e extraia em `%LOCALAPPDATA%\Programs\Ollama-0.40.4`.
 2. Em um terminal separado, ligue o servidor na porta 11500 e deixe a janela aberta:
 
    ```powershell
@@ -151,6 +153,8 @@ py -m venv .venv
    .venv\Scripts\python benchmark.py
    ```
 
+**Atalho:** [abrir_benchmark.bat](abrir_benchmark.bat) faz os passos de ligar o servidor e o painel com um duplo clique e abre o navegador.
+
 ## Estrutura
 
 | Arquivo | Função |
@@ -158,12 +162,18 @@ py -m venv .venv
 | [agente.py](agente.py) | O agente: prompt, ferramentas simuladas, classificador e travas |
 | [benchmark.py](benchmark.py) | Executa os casos, compara com o gabarito e grava os resultados |
 | [comparar_versoes.py](comparar_versoes.py) | Compara duas versões caso a caso e aplica a régua |
-| [dashboard.py](dashboard.py) | Painel das métricas em Streamlit, que só lê o CSV |
+| [app.py](app.py) | Ponto de entrada do painel: menu com as páginas |
+| [dashboard.py](dashboard.py) | Página "Visão geral": as métricas em Streamlit, lidas só do CSV |
+| [app_pages/executar.py](app_pages/executar.py) | Página "Executar": confere o Ollama e o rótulo da versão |
+| [.streamlit/config.toml](.streamlit/config.toml) | Tema visual do painel ("Grafite") |
+| [abrir_benchmark.bat](abrir_benchmark.bat) | Liga o Ollama e o painel com um duplo clique |
 | [ambiente.py](ambiente.py) | Fixa e confere a versão do Ollama |
 | [testar_mutacao.py](testar_mutacao.py) | Teste de mutação do benchmark |
 | `testar_*.py` | Testes das demais peças |
 | [casos/](casos/) | Casos de teste com gabarito |
 | [resultados/](resultados/) | CSV, respostas cruas e análises |
+| [design/esteticas/](design/esteticas/) | Maquetes das três estéticas avaliadas para o painel |
+| [docs/](docs/) | Ideia de uma evolução: o Laboratório de Agentes de Pesquisa |
 
 ## O que aprendi
 
@@ -186,3 +196,7 @@ Projeto desenvolvido com o apoio do Claude Code, registrado como coautor nos com
 **Método.** O trabalho foi feito em etapas pequenas: casos com gabarito, agente mínimo, script do benchmark, linha de base e, depois, uma mudança no agente por versão. Entre 14/10 e 28/10, o benchmark registrou 1155 execuções no CSV, somando as 15 versões, os lotes de calibração e a validação oculta. Desde o segundo dia, as sessões terminaram, em regra, com um bilhete de retomada e uma linha no diário, para que a seguinte começasse do ponto em que a anterior parou.
 
 **Restrições.** Tudo foi feito em casa, sozinho e com ferramentas gratuitas: um modelo de 4B parâmetros rodando localmente em uma GPU de 4 GB, sem nenhuma chamada a API paga. O limite de hardware orientou escolhas, como corrigir erros com travas em Python em vez de trocar por um modelo maior.
+
+## Licença
+
+[MIT](LICENSE): o código pode ser usado e adaptado, desde que o aviso de autoria seja mantido.

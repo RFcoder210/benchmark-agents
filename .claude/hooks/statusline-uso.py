@@ -17,7 +17,6 @@ Só funciona no terminal: no app desktop a barra de status não roda e quem grav
 o medidor é o gravar-uso.py, chamado pelo orquestrador.
 """
 import json
-import os
 import sys
 from datetime import datetime
 from pathlib import Path

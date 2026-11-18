@@ -38,7 +38,7 @@ VERSAO_AGENTE = "v15"   # mude a cada alteração no agente (v2, v3...)
 # v7 = v4 + trava em Python: registro sem valor positivo (0, ausente) vira pergunta
 #      do valor (régua neutra: implementa "nunca invente um valor" da especificação)
 #      -> APROVADA em 17/10 pela régua neutra (34/45, igual à v4 caso a caso; a trava
-#      não foi acionada). Base atual.
+#      não foi acionada). Foi a base até a aprovação da v9.
 # v8 = v7 + regra de categoria da v6 (mesmo texto, na seção Categorias do prompt)
 #      -> REPROVADA em 18/10 pela régua normal (40/45, ganhou C02, C07 e C14, mas perdeu
 #      C10: 2/3, na ordem invertida perguntou também o pagamento, que já tinha sido dado;

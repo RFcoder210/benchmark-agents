@@ -322,11 +322,18 @@ def recuperar_chamada_em_texto(texto, data_referencia):
     achado = PADRAO_REGISTRAR.search(texto)
     if achado:
         valor, categoria, pagamento, data = achado.groups()
+        # O padrão aceita dígitos e pontos, então pode capturar algo que não é número
+        # (ex.: "." ou "1.2.3"). Nesse caso, float() daria erro e derrubaria a execução
+        # inteira do benchmark; em vez disso, a chamada é tratada como não reconhecida.
+        try:
+            valor = float(valor)
+        except ValueError:
+            return None
         data = data.strip()
         # Nos exemplos, a data aparece como "data de referência": troca pela data real.
         if data.startswith("de referência"):
             data = data_referencia
-        return "registrar_gasto", {"valor": float(valor), "categoria": categoria,
+        return "registrar_gasto", {"valor": valor, "categoria": categoria,
                                    "pagamento": pagamento, "data": data}
 
     achado = PADRAO_PERGUNTAR.search(texto)

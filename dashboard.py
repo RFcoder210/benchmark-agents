@@ -50,8 +50,10 @@ VERSAO_BASE = next(v for v, situacao in HISTORICO.items() if "base atual" in sit
 # Cores do tema "Grafite" (escuro; o resto do tema está em .streamlit/config.toml).
 # Paleta categórica (ordem fixa): os mesmos 8 tons de antes, nos passos do fundo
 # escuro, validada em 17/11 contra o fundo #0B0C0E (daltonismo, distância entre
-# vizinhas e contraste: todas as verificações passaram). A cor segue a VERSÃO:
-# a v2 tem sempre a mesma cor, em qualquer gráfico e com qualquer filtro.
+# vizinhas e contraste: todas as verificações passaram). Ela colore GRUPOS pequenos
+# (ações, dificuldades, ordens, tipos de erro). As versões não ganham cor própria:
+# são mais de 8, e as cores se repetiriam (v1 e v9 iguais); nos gráficos por versão,
+# o eixo ou o rótulo do ponto já diz qual é a versão, e a cor é o destaque do tema.
 CORES_SERIES = ["#3987e5", "#d95926", "#199e70", "#c98500",
                 "#d55181", "#0ca30c", "#9085e9", "#e66767"]
 # Tipos de erro: 3 cores fixas, as 3 primeiras da paleta.
@@ -157,10 +159,9 @@ base_filtrada = todos if incluir_calibracao else todos[~todos["calibracao"]]
 if so_recente:
     base_filtrada = base_filtrada[base_filtrada["mais_recente"]]
 
-# A ordem das versões e as cores são calculadas com TODOS os rótulos, para a
-# cor de uma versão não mudar quando outra some do filtro.
+# A ordem das versões é calculada com TODOS os rótulos, para uma versão não
+# mudar de posição quando outra some do filtro.
 ordem_versoes = sorted(todos["versao_agente"].unique(), key=chave_versao)
-cor_por_versao = {v: CORES_SERIES[i % len(CORES_SERIES)] for i, v in enumerate(ordem_versoes)}
 
 disponiveis = [v for v in ordem_versoes if v in set(base_filtrada["versao_agente"])]
 versoes = st.sidebar.multiselect("Versões", disponiveis, default=disponiveis)
@@ -180,8 +181,6 @@ if dados.empty:
     st.stop()
 
 versoes_presentes = [v for v in ordem_versoes if v in set(dados["versao_agente"])]
-escala_cor = alt.Scale(domain=versoes_presentes,
-                       range=[cor_por_versao[v] for v in versoes_presentes])
 eixo_versao = alt.X("versao_agente:N", title="Versão", sort=versoes_presentes,
                      axis=alt.Axis(labelAngle=0))
 resumo = resumo_por_versao(dados)
@@ -203,7 +202,8 @@ numeros.metric(f"Acerto ({base})", f"{linha_base['taxa_pct']:.0f}%",
                help=f"{int(linha_base['acertos'])} de {int(linha_base['execucoes'])} execuções", width=160, border=True)
 numeros.metric("Casos estáveis ✓", f"{(casos_base['taxa'] == 1).sum()} de {len(casos_base)}",
                help="Casos que acertaram em todas as execuções.", width=160, border=True)
-numeros.metric("Tempo mediano", f"{linha_base['tempo_mediano']:.1f} s", width=160, border=True)
+# Vírgula decimal, como no resto do painel: 4.7 -> "4,7".
+numeros.metric("Tempo mediano", f"{linha_base['tempo_mediano']:.1f} s".replace(".", ","), width=160, border=True)
 numeros.metric("Tokens por resposta", f"{linha_base['tokens_medios']:.0f}", width=160, border=True)
 
 
@@ -338,19 +338,17 @@ with col1:
     st.subheader("Tempo por resposta")
     st.caption("A caixa vai do 1º ao 3º quartil; o traço é a mediana; os pontos são respostas fora "
                "do padrão. Os pontos acima de ~8 s costumam ser a 1ª chamada, que carrega o modelo.")
-    caixas = alt.Chart(dados).mark_boxplot(extent=1.5, size=28).encode(
+    caixas = alt.Chart(dados).mark_boxplot(extent=1.5, size=28, color=COR_DESTAQUE).encode(
         x=eixo_versao,
-        y=alt.Y("tempo_s:Q", title="Tempo (s)"),
-        color=alt.Color("versao_agente:N", scale=escala_cor, legend=None))
+        y=alt.Y("tempo_s:Q", title="Tempo (s)"))
     mostrar(caixas)
 
 with col2:
     st.subheader("Tokens por resposta")
     st.caption("Média de tokens (entrada + saída). Custo: R$ 0, modelo local.")
-    tokens = alt.Chart(resumo).mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4).encode(
+    tokens = alt.Chart(resumo).mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4, color=COR_DESTAQUE).encode(
         x=eixo_versao,
         y=alt.Y("tokens_medios:Q", title="Tokens"),
-        color=alt.Color("versao_agente:N", scale=escala_cor, legend=None),
         tooltip=[alt.Tooltip("versao_agente:N", title="Versão"),
                  alt.Tooltip("tokens_medios:Q", title="Tokens", format=".0f")])
     mostrar(tokens)
@@ -358,10 +356,10 @@ with col2:
 with col3:
     st.subheader("Eficácia × eficiência")
     st.caption("Para cima = acerta mais; para a esquerda = gasta menos tokens.")
-    pontos = alt.Chart(resumo).mark_circle(size=140, opacity=1, stroke=COR_FUNDO, strokeWidth=2).encode(
+    pontos = alt.Chart(resumo).mark_circle(size=140, opacity=1, stroke=COR_FUNDO, strokeWidth=2,
+                                         color=COR_DESTAQUE).encode(
         x=alt.X("tokens_medios:Q", title="Tokens por resposta", scale=alt.Scale(zero=False)),
         y=alt.Y("taxa_pct:Q", title="Acerto (%)", scale=alt.Scale(zero=False)),
-        color=alt.Color("versao_agente:N", scale=escala_cor, legend=None),
         tooltip=[alt.Tooltip("versao_agente:N", title="Versão"),
                  alt.Tooltip("taxa_pct:Q", title="Acerto (%)", format=".0f"),
                  alt.Tooltip("tokens_medios:Q", title="Tokens", format=".0f"),
