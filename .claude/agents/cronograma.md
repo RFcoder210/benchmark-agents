@@ -20,9 +20,10 @@ Nunca suponha a data. Execute no terminal (Git Bash): `date +%Y-%m-%d`
 Não leia `PLANO.md` nem `PENDENCIAS.md`: porte e dependências já estão na tabela, e tarefa travada já aparece como BLOQUEADA.
 
 ## Passo 3 — Calcular
-Parâmetros provisórios (estimativas, a substituir pelos valores medidos no benchmark):
-- `UNIDADES_POR_JANELA = 6` (unidades que cabem numa janela de 5 h)
-- `PCT_SEMANA_POR_UNIDADE = 2` (% da cota semanal gasta por unidade)
+Parâmetros de calibração:
+- `UNIDADES_POR_JANELA = 6` (unidades que cabem numa janela de 5 h). **Provisório**: ainda sem medição de tarefas por janela.
+- `PCT_SEMANA_POR_UNIDADE = 2` (% da cota semanal gasta por unidade). **Coerente com os dados**: no editalia (06 a 10/11/2026), uma janela de 5 h cheia equivaleu a 9–13% da semana (média ~11%), o que dá ~1,8% por unidade com 6 unidades por janela.
+Recalibre com `.plano/estado/uso_historico.txt` quando houver dias com tarefas concluídas registradas.
 
 - **Dias úteis restantes** até o prazo final, contando apenas os dias de trabalho informados.
 - **Carga restante**: some as tarefas não concluídas (P = 1 unidade, M = 3).
