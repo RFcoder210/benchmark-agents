@@ -2,11 +2,11 @@
 Motivo do checkpoint: fim do dia
 
 ## Feito hoje
-- README completo: seções "O que aprendi" e "Como este projeto foi construído", conferidas contra o CSV e confirmadas pelo usuário (d0a14e6).
-- Lançador com duplo clique (`abrir_benchmark.bat` + atalho "Benchmark de agentes" na área de trabalho) (7a001c4).
-- App pessoal (caminho 1): menu `app.py` com "Visão geral" e "Executar"; página Executar na etapa 1, só conferência (a8408d2).
-- Tema Grafite aplicado, escolhido entre 3 maquetes; testes 43/43 (painel) e 9/9 (Executar) (a8408d2).
-- Porte dos hooks de `.claude/` para Python commitado (06da62c); não foi feito nesta sessão, só conferido.
+- README completo: seções "O que aprendi" e "Como este projeto foi construído", conferidas contra o CSV e confirmadas pelo usuário (06f1731).
+- Lançador com duplo clique (`abrir_benchmark.bat` + atalho "Benchmark de agentes" na área de trabalho) (63cfdb0).
+- App pessoal (caminho 1): menu `app.py` com "Visão geral" e "Executar"; página Executar na etapa 1, só conferência (40e3014).
+- Tema Grafite aplicado, escolhido entre 3 maquetes; testes 43/43 (painel) e 9/9 (Executar) (40e3014).
+- Porte dos hooks de `.claude/` para Python commitado (1793312); não foi feito nesta sessão, só conferido.
 
 ## Onde paramos
 - A página Executar mostra o estado do Ollama e avisa que o rótulo `v15` já tem 45 execuções; o botão "Executar" está desligado.

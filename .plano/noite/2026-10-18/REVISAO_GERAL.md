@@ -15,15 +15,15 @@ Veredito: **COM_RESSALVAS** (nenhum problema grave; 3 ressalvas de forma/estado)
 - Números recalculados do CSV e conferidos (12): 40/45; registrar 21/24, perguntar 13/15, ignorar 6/6; tokens médios 2075,5 (v8) e 1804,3 (v7); tempo 3,44 s e 3,60 s; erros acao 4/campos 1 (v8) e acao 9/campos 2 (v7); por ordem 14/13/13; C01 2085 tokens (v6 e v8) e 1813 (v7); tokens v6 = v8 nas 45 respostas; C10 2/3 com falha na invertida. Os dois textos `registrar_gasto: valor 0.0, ...` do C10 estão no `brutos_v8_2026-10-18_2032.json`. Citação da RETOMADA ("cerca de 40/45 ... C10 pode ficar 2/3") confere com `.plano/RETOMADA.md`, linha 12. Nenhum número sem origem.
 
 ## 3. Coerência entre tarefas
-Lote de uma tarefa só (V8). Os números são os mesmos no commit `dc5bc41`, no `benchmark.py`, no `CLAUDE.md`, no `dashboard.py` e na análise. Ressalvas:
+Lote de uma tarefa só (V8). Os números são os mesmos no commit `e5304ba`, no `benchmark.py`, no `CLAUDE.md`, no `dashboard.py` e na análise. Ressalvas:
 1. `CLAUDE.md`, linha 45 (item da v7) ainda termina com "Próximo passo: v8 = v7 + regra de categoria da v6 (régua normal)." — desatualizado; a linha 38 e o novo item da v8 (linha 46) já dizem que o próximo passo está em aberto.
 2. `CLAUDE.md`, linha 46, resume "C08 continua 0/3", mas o modo de falha mudou na ordem original: a v8 perguntou o **valor** ("Qual foi o valor do abastecimento?", com 150 na mensagem). A análise registra isso (seção 6); o CLAUDE.md não. Na ordem girada, `campos_faltantes ['categoria']` acompanha a pergunta "Qual foi a forma de pagamento?" (incoerência do próprio modelo, registrada na análise).
 3. `LOTE.md`, critério (b) ("`VERSAO_AGENTE = "v8"`") contradiz a seção 6 (reprovada → espelhar a v6). O executor seguiu a seção 6 (`VERSAO_AGENTE = "v7"`, v8 no comentário de histórico), o que é coerente com o padrão da v5/v6. Defeito do lote, não da execução; já anotado pela revisão individual.
 
 ## 4. Estado
 - `REGISTRO.md`: V8 passou por "em andamento" → "execução concluída" → "revisão individual APROVADA" → "concluida"; nada ficou em andamento.
-- Git: `git log main..noite/2026-10-18` = 1 commit (`dc5bc41`, v8 reprovada), que corresponde à única tarefa aprovada; nenhum commit em `main` fora do branch. Fora do commit: só `REGISTRO.md` (linha de cota, do orquestrador) e `instantaneo_fim.txt` (desta revisão).
-- `HISTORICO` ("v8": "reprovada"), `OFICIAIS` (com v8), comentário de `VERSAO_AGENTE` e CLAUDE.md seguem o padrão do commit `7617401` (v6).
+- Git: `git log main..noite/2026-10-18` = 1 commit (`e5304ba`, v8 reprovada), que corresponde à única tarefa aprovada; nenhum commit em `main` fora do branch. Fora do commit: só `REGISTRO.md` (linha de cota, do orquestrador) e `instantaneo_fim.txt` (desta revisão).
+- `HISTORICO` ("v8": "reprovada"), `OFICIAIS` (com v8), comentário de `VERSAO_AGENTE` e CLAUDE.md seguem o padrão do commit `d40483e` (v6).
 - `.plano/DIARIO.md`, linha 10: o Dia 4 continua "(em andamento)" (escrito na preparação; deve ser fechado no encerramento do dia).
 
 ## 5. Pendências do usuário

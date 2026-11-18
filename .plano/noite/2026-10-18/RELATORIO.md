@@ -12,7 +12,7 @@
 | V8: v8 = v7 + regra de categoria da v6 | concluída (v8 reprovada pela régua) | opus | APROVADA | o critério (b) do lote contradizia a seção 6; o executor seguiu a seção 6, que é a correta |
 
 ## 3. O que foi feito
-- **V8.** O bloco de regra do commit `7617401` entrou na seção Categorias do prompt. O benchmark rodou uma vez (45 respostas) e depois veio `comparar_versoes.py v7 v8`. Ganhos: C02, C07 e C14 viraram estáveis ✓, e o C13 foi de 1/3 para 2/3. Perda: o C10 caiu de 3/3 para 2/3. Decisão da régua: MANTER v7. A simulação da retomada acertou o resultado (40/45, com o C10 falhando na ordem invertida).
+- **V8.** O bloco de regra do commit `d40483e` entrou na seção Categorias do prompt. O benchmark rodou uma vez (45 respostas) e depois veio `comparar_versoes.py v7 v8`. Ganhos: C02, C07 e C14 viraram estáveis ✓, e o C13 foi de 1/3 para 2/3. Perda: o C10 caiu de 3/3 para 2/3. Decisão da régua: MANTER v7. A simulação da retomada acertou o resultado (40/45, com o C10 falhando na ordem invertida).
 - Arquivos: [analise_v8_2026-10-18.md](../../../resultados/analise_v8_2026-10-18.md) (novo), `resultados/brutos_v8_2026-10-18_2032.json` (novo), `resultados/resultados.csv` (+45 linhas, 0 removidas), [benchmark.py](../../../benchmark.py) (histórico), [dashboard.py](../../../dashboard.py) (`HISTORICO` com "v8": "reprovada"), [testar_dashboard.py](../../../testar_dashboard.py) (`OFICIAIS` com a v8) e [CLAUDE.md](../../../CLAUDE.md) (seção 4).
 - O `agente.py` termina idêntico ao do `main` (v7).
 
@@ -39,7 +39,7 @@
 6. Para os próximos lotes: o critério de pronto não deve fixar um valor que a decisão do usuário pode mudar (o caso do critério (b)).
 
 ## 7. Git
-- Branch `noite/2026-10-18`, criado a partir de `main` (456fbd0). Commits: `dc5bc41` (v8 reprovada) e o commit de encerramento (relatório, revisão, registro, retomada).
+- Branch `noite/2026-10-18`, criado a partir de `main` (90bca0f). Commits: `e5304ba` (v8 reprovada) e o commit de encerramento (relatório, revisão, registro, retomada).
 - **Nada foi juntado ao `main`**, e não houve push.
 
 ## 8. Conceitos novos

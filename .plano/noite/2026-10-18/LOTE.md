@@ -29,12 +29,12 @@
 ## 5. Tabela do lote
 | Ordem | Id | Descrição | Critério de pronto | Tamanho | Executor | Em cadeia de |
 |---|---|---|---|---|---|---|
-| 1 | V8 | v8 = v7 + regra de categoria da v6 (texto na mensagem do commit `7617401`, inserido na seção "## Categorias" do `PROMPT_SISTEMA` de `agente.py`). Rodar o benchmark, comparar com a v7 pela régua normal, analisar e registrar o resultado. | (a) `git diff main -- agente.py` só altera o `PROMPT_SISTEMA` na seção Categorias (texto idêntico ao do commit 7617401) e nada mais; (b) `VERSAO_AGENTE = "v8"` com o histórico atualizado; (c) 45 linhas `v8` acrescentadas a `resultados/resultados.csv` e nenhuma linha antiga alterada (`git diff --numstat main -- resultados/resultados.csv` com 0 remoções) e um `resultados/brutos_v8_*.json` novo; (d) saída de `.venv\Scripts\python comparar_versoes.py v7 v8` (sem `--neutra`) copiada na análise; (e) `resultados/analise_v8_2026-10-18.md` com total, taxas por ação, caso a caso v7×v8, veredito da régua e o C10 ordem por ordem (resposta crua de cada ordem, citada do brutos); (f) decisão aplicada conforme a seção 6; (g) `testar_comparar.py` e `testar_dashboard.py` passando (o dashboard conhece a v8). | média | opus | — |
+| 1 | V8 | v8 = v7 + regra de categoria da v6 (texto na mensagem do commit `d40483e`, inserido na seção "## Categorias" do `PROMPT_SISTEMA` de `agente.py`). Rodar o benchmark, comparar com a v7 pela régua normal, analisar e registrar o resultado. | (a) `git diff main -- agente.py` só altera o `PROMPT_SISTEMA` na seção Categorias (texto idêntico ao do commit d40483e) e nada mais; (b) `VERSAO_AGENTE = "v8"` com o histórico atualizado; (c) 45 linhas `v8` acrescentadas a `resultados/resultados.csv` e nenhuma linha antiga alterada (`git diff --numstat main -- resultados/resultados.csv` com 0 remoções) e um `resultados/brutos_v8_*.json` novo; (d) saída de `.venv\Scripts\python comparar_versoes.py v7 v8` (sem `--neutra`) copiada na análise; (e) `resultados/analise_v8_2026-10-18.md` com total, taxas por ação, caso a caso v7×v8, veredito da régua e o C10 ordem por ordem (resposta crua de cada ordem, citada do brutos); (f) decisão aplicada conforme a seção 6; (g) `testar_comparar.py` e `testar_dashboard.py` passando (o dashboard conhece a v8). | média | opus | — |
 
 ## 6. Decisões do usuário para a noite (palavra por palavra)
 - Veredito da v8: **"Seguir o padrão de sempre"** — opção descrita como: "Se a regra aprovar, a v8 vira a nova base. Se reprovar, o agente.py volta à v7 e os dados ficam, como aconteceu com a v5 e a v6."
-  - Aprovada: espelhar o commit `9e15bfe` (v7): HISTORICO "aprovada (base atual)" e a v7 passa a "aprovada"; CLAUDE.md seção 4 com a v8 como base.
-  - Reprovada: espelhar o commit `7617401` (v6): `agente.py` idêntico à v7 (`git diff main -- agente.py` vazio no fim); dados da v8 ficam no CSV e no brutos; HISTORICO "reprovada"; CLAUDE.md registra a v8 reprovada e o oficial segue a v7.
+  - Aprovada: espelhar o commit `baecec4` (v7): HISTORICO "aprovada (base atual)" e a v7 passa a "aprovada"; CLAUDE.md seção 4 com a v8 como base.
+  - Reprovada: espelhar o commit `d40483e` (v6): `agente.py` idêntico à v7 (`git diff main -- agente.py` vazio no fim); dados da v8 ficam no CSV e no brutos; HISTORICO "reprovada"; CLAUDE.md registra a v8 reprovada e o oficial segue a v7.
 - Início: **"Agora e silenciar (Recommended)"**. Horário de volta: não informado.
 
 ## 7. Protegidos (instantâneo)
@@ -90,7 +90,7 @@ Silenciadas em 18/10 ~20:40. Valores anteriores, para restaurar:
 - `permission_request_notifications` = `banner`
 
 ## 11. Git
-- Origem: `main` (456fbd0). Branch da noite: `noite/2026-10-18`. Sem push, sem merge.
+- Origem: `main` (90bca0f). Branch da noite: `noite/2026-10-18`. Sem push, sem merge.
 - Vão junto para o branch da noite: esta pasta e a linha do Dia 4 em `.plano/DIARIO.md` (feitas na preparação).
 
 ## 12. Fora do lote

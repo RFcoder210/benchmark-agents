@@ -14,7 +14,7 @@ Uma linha por dia de trabalho. O hook `iniciar-sessao.ps1` lê a última linha p
 | 8 | 2026-10-28 | Dia 8 · 28/10 · C08 ou validação final | Ajustes encerrados e validação final da v15 no conjunto oculto: 15/15. |
 | 9 | 2026-10-30 | Dia 9 · 30/10 · Mutação e Ollama fixado | Teste de mutação do benchmark (5 de 8 falhas do agente detectadas); a atualização do Ollama mudou os resultados, e o benchmark foi fixado na 0.40.4, com trava de versão. |
 | 10 | 2026-10-31 | Dia 10 · 31/10 · README de portfólio | Rascunho do README de portfólio e regra no CLAUDE.md para mantê-lo atualizado; dia sem encerramento. |
-| 11 | 2026-11-03 | Dia 11 · 03/11 · README e publicação | README revisado contra o CSV, com 4 correções, e commitado (260acc9); seções pessoais e publicação ficam para o próximo dia. |
+| 11 | 2026-11-03 | Dia 11 · 03/11 · README e publicação | README revisado contra o CSV, com 4 correções, e commitado (ba832ed); seções pessoais e publicação ficam para o próximo dia. |
 | 12 | 2026-11-09 | Dia 12 · 09/11 · Panorama do benchmark | Dashboard aberto para ver o estado do benchmark; sem execuções novas desde a validação oculta (28/10). |
 | 13 | 2026-11-10 | Dia 13 · 10/11 · Seções pessoais do README | Sessão sem encerramento; as seções pessoais do README não foram escritas. |
 | 14 | 2026-11-17 | Dia 14 · 17/11 · README, app e tema Grafite | README completo; lançador com duplo clique, menu com página Executar (etapa 1) e tema Grafite aplicado ao painel. |
