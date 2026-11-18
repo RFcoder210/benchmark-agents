@@ -34,7 +34,7 @@ rem primeiro uso; quem abre o navegador é o passo 3.
 curl -s -m 3 http://localhost:8501/_stcore/health >nul 2>&1
 if errorlevel 1 (
     echo Ligando o painel na porta 8501...
-    start "Painel do benchmark" /min ".venv\Scripts\streamlit.exe" run dashboard.py --server.headless true --server.port 8501
+    start "Painel do benchmark" /min ".venv\Scripts\streamlit.exe" run app.py --server.headless true --server.port 8501
 ) else (
     echo O painel já estava ligado.
 )

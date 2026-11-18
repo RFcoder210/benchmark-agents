@@ -2,8 +2,8 @@
 # Lê resultados/resultados.csv e mostra cada métrica no gráfico mais adequado.
 # NUNCA roda o modelo: só lê o que o benchmark.py já gravou.
 #
-# Execução:  .venv\Scripts\streamlit run dashboard.py
-# (abre sozinho no navegador, em http://localhost:8501)
+# Execução:  .venv\Scripts\streamlit run app.py  (este arquivo é a página "Visão geral")
+# (abre no navegador, em http://localhost:8501; ou use o atalho "Benchmark de agentes")
 #
 # Ferramentas:
 #   pandas    -> lê e resume a tabela (como uma planilha programável)
@@ -47,17 +47,25 @@ HISTORICO = {
 # padrão da faixa de ruído e dos números do topo; muda sozinha ao aprovar uma versão.
 VERSAO_BASE = next(v for v, situacao in HISTORICO.items() if "base atual" in situacao)
 
-# Paleta categórica (ordem fixa, validada para daltonismo). A cor segue a VERSÃO:
+# Cores do tema "Grafite" (escuro; o resto do tema está em .streamlit/config.toml).
+# Paleta categórica (ordem fixa): os mesmos 8 tons de antes, nos passos do fundo
+# escuro, validada em 17/11 contra o fundo #0B0C0E (daltonismo, distância entre
+# vizinhas e contraste: todas as verificações passaram). A cor segue a VERSÃO:
 # a v2 tem sempre a mesma cor, em qualquer gráfico e com qualquer filtro.
-CORES_SERIES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100",
-                "#e87ba4", "#008300", "#6250d6", "#e34948"]
+CORES_SERIES = ["#3987e5", "#d95926", "#199e70", "#c98500",
+                "#d55181", "#0ca30c", "#9085e9", "#e66767"]
 # Tipos de erro: 3 cores fixas, as 3 primeiras da paleta.
-CORES_ERRO = {"formato": "#2a78d6", "acao": "#eb6834", "campos": "#1baf7a"}
-# Mapa de calor: um só tom (azul), do claro (pouco acerto) ao escuro (muito acerto).
-ESCALA_CALOR = ["#cde2fb", "#6da7ec", "#256abf", "#0d366b"]
+CORES_ERRO = {"formato": "#3987e5", "acao": "#d95926", "campos": "#199e70"}
+# Gráficos de uma série só usam o destaque do tema (verde-água).
+COR_DESTAQUE = "#4FD6C2"
+# Fundo da página: usado como "vão" de 2 px entre barras, células e pontos.
+COR_FUNDO = "#0B0C0E"
+# Mapa de calor: um só tom (verde-água). No fundo escuro, mais acerto = mais brilho.
+ESCALA_CALOR = ["#163330", "#1E5C55", "#2E9486", "#4FD6C2"]
 ORDENS = ["original", "invertida", "girada"]
-# Cinza médio para textos sobre o gráfico: legível no tema claro e no escuro.
-COR_TEXTO = "#8a8984"
+# Cinza médio para textos sobre o gráfico; texto claro para as células escuras.
+COR_TEXTO = "#8A8F98"
+COR_TEXTO_FORTE = "#ECEDEE"
 
 st.set_page_config(page_title="Benchmark de agentes", layout="wide")
 
@@ -192,11 +200,11 @@ casos_base = por_caso(dados[dados["versao_agente"] == base])
 # e 2 por linha no celular (cada número tem largura fixa de 160 px).
 numeros = st.container(horizontal=True, gap="small")
 numeros.metric(f"Acerto ({base})", f"{linha_base['taxa_pct']:.0f}%",
-               help=f"{int(linha_base['acertos'])} de {int(linha_base['execucoes'])} execuções", width=160)
+               help=f"{int(linha_base['acertos'])} de {int(linha_base['execucoes'])} execuções", width=160, border=True)
 numeros.metric("Casos estáveis ✓", f"{(casos_base['taxa'] == 1).sum()} de {len(casos_base)}",
-               help="Casos que acertaram em todas as execuções.", width=160)
-numeros.metric("Tempo mediano", f"{linha_base['tempo_mediano']:.1f} s", width=160)
-numeros.metric("Tokens por resposta", f"{linha_base['tokens_medios']:.0f}", width=160)
+               help="Casos que acertaram em todas as execuções.", width=160, border=True)
+numeros.metric("Tempo mediano", f"{linha_base['tempo_mediano']:.1f} s", width=160, border=True)
+numeros.metric("Tokens por resposta", f"{linha_base['tokens_medios']:.0f}", width=160, border=True)
 
 
 # ---------------------------------------------------------------------------
@@ -211,9 +219,9 @@ with esquerda:
                "uma versão dentro dela não é diferente da referência só pelo total.")
     centro = linha_base["taxa_pct"]
     faixa = alt.Chart(pd.DataFrame({"y1": [centro - RUIDO_PP], "y2": [centro + RUIDO_PP]})
-                      ).mark_rect(opacity=0.12, color="#2a78d6").encode(y="y1:Q", y2="y2:Q")
-    linha = alt.Chart(resumo).mark_line(strokeWidth=2, color="#2a78d6", point=alt.OverlayMarkDef(
-        size=80, filled=True, color="#2a78d6")).encode(
+                      ).mark_rect(opacity=0.12, color=COR_DESTAQUE).encode(y="y1:Q", y2="y2:Q")
+    linha = alt.Chart(resumo).mark_line(strokeWidth=2, color=COR_DESTAQUE, point=alt.OverlayMarkDef(
+        size=80, filled=True, color=COR_DESTAQUE)).encode(
         x=eixo_versao,
         y=alt.Y("taxa_pct:Q", title="Acerto (%)", scale=alt.Scale(domain=[0, 100])),
         tooltip=[alt.Tooltip("versao_agente:N", title="Versão"),
@@ -260,9 +268,9 @@ esquerda, direita = st.columns([3, 2])
 
 with esquerda:
     st.subheader("Mapa de calor: acertos por caso e versão")
-    st.caption("Cor escura = acertou em todas as execuções (estável ✓); clara = errou em todas.")
+    st.caption("Cor clara e brilhante = acertou em todas as execuções (estável ✓); escura = errou em todas.")
     tabela = por_caso(dados)
-    celulas = alt.Chart(tabela).mark_rect(stroke="white", strokeWidth=2).encode(
+    celulas = alt.Chart(tabela).mark_rect(stroke=COR_FUNDO, strokeWidth=2).encode(
         x=alt.X("versao_agente:N", title="Versão", sort=versoes_presentes, axis=alt.Axis(labelAngle=0)),
         y=alt.Y("id_caso:N", title="Caso"),
         color=alt.Color("taxa:Q", title="Acerto", scale=alt.Scale(domain=[0, 1], range=ESCALA_CALOR),
@@ -270,10 +278,10 @@ with esquerda:
         tooltip=[alt.Tooltip("id_caso:N", title="Caso"),
                  alt.Tooltip("versao_agente:N", title="Versão"),
                  alt.Tooltip("rotulo:N", title="Acertos")])
-    # Texto branco nas células escuras e escuro nas claras, para ser sempre legível.
+    # Texto escuro nas células claras e claro nas escuras, para ser sempre legível.
     textos = alt.Chart(tabela).mark_text(fontSize=11).encode(
         x=alt.X("versao_agente:N", sort=versoes_presentes), y="id_caso:N", text="rotulo:N",
-        color=alt.condition("datum.taxa > 0.5", alt.value("white"), alt.value("#0b0b0b")))
+        color=alt.condition("datum.taxa > 0.5", alt.value(COR_FUNDO), alt.value(COR_TEXTO_FORTE)))
     altura = 26 * tabela["id_caso"].nunique()
     mostrar((celulas + textos).properties(height=altura))
 
@@ -286,7 +294,7 @@ with direita:
     if erros.empty:
         st.info("Nenhum erro com esses filtros.")
     else:
-        empilhado = alt.Chart(erros).mark_bar(stroke="white", strokeWidth=2).encode(
+        empilhado = alt.Chart(erros).mark_bar(stroke=COR_FUNDO, strokeWidth=2).encode(
             x=eixo_versao,
             y=alt.Y("quantidade:Q", title="Execuções com erro"),
             color=alt.Color("tipo_erro:N", title="Tipo de erro",
@@ -350,7 +358,7 @@ with col2:
 with col3:
     st.subheader("Eficácia × eficiência")
     st.caption("Para cima = acerta mais; para a esquerda = gasta menos tokens.")
-    pontos = alt.Chart(resumo).mark_circle(size=140, opacity=1, stroke="white", strokeWidth=2).encode(
+    pontos = alt.Chart(resumo).mark_circle(size=140, opacity=1, stroke=COR_FUNDO, strokeWidth=2).encode(
         x=alt.X("tokens_medios:Q", title="Tokens por resposta", scale=alt.Scale(zero=False)),
         y=alt.Y("taxa_pct:Q", title="Acerto (%)", scale=alt.Scale(zero=False)),
         color=alt.Color("versao_agente:N", scale=escala_cor, legend=None),
@@ -373,7 +381,7 @@ if not temperatura.empty:
     instab = por_caso(temperatura)
     instab["taxa_pct"] = instab["taxa"] * 100
     horizontais = alt.Chart(instab).mark_bar(
-        cornerRadiusTopRight=4, cornerRadiusBottomRight=4, color="#2a78d6").encode(
+        cornerRadiusTopRight=4, cornerRadiusBottomRight=4, color=COR_DESTAQUE).encode(
         y=alt.Y("id_caso:N", title="Caso"),
         x=alt.X("taxa_pct:Q", title="Acerto (%)", scale=alt.Scale(domain=[0, 100])),
         tooltip=[alt.Tooltip("id_caso:N", title="Caso"), alt.Tooltip("rotulo:N", title="Acertos")])

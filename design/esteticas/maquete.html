@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maquete das estéticas</title>
+<!-- Maquete ESTÁTICA da página inicial do painel, só para comparar estéticas.
+     Não é o painel real: imita o layout do Streamlit (barra lateral + área larga).
+     A estética vem do #hash da URL: #grafite, #papel ou #ardosia.
+     Dados: os números reais do CSV (v1 a v15). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Tokens de cada estética ---------- */
+  :root, [data-estetica="grafite"] {
+    --bg:#0B0C0E; --side:#101114; --surface:#15171A; --border:#25282D; --grid:#1E2024;
+    --text:#ECEDEE; --muted:#8A8F98; --accent:#4FD6C2; --accent-soft:rgba(79,214,194,.10);
+    --reprov:#6B7079; --font:"Geist",system-ui,sans-serif; --font-num:"Geist Mono",monospace; --font-mono:"Geist Mono",monospace;
+    --font-title:"Geist",system-ui,sans-serif; --title-weight:600; --title-size:30px;
+    --radius:10px; --num-size:30px; --num-weight:500; --tracking:-0.02em;
+  }
+  [data-estetica="papel"] {
+    --bg:#F6F5F1; --side:#EEECE6; --surface:#FFFFFF; --border:#E0DDD5; --grid:#EEECE7;
+    --text:#14151A; --muted:#6A6D75; --accent:#2449D8; --accent-soft:rgba(36,73,216,.08);
+    --reprov:#A3A6AD; --font:"Inter",system-ui,sans-serif; --font-num:"IBM Plex Mono",monospace; --font-mono:"IBM Plex Mono",monospace;
+    --font-title:"Inter",system-ui,sans-serif; --title-weight:600; --title-size:30px;
+    --radius:4px; --num-size:30px; --num-weight:500; --tracking:-0.025em;
+  }
+  [data-estetica="ardosia"] {
+    --bg:#0F141B; --side:#0B0F15; --surface:#141B24; --border:#233041; --grid:#1B2430;
+    --text:#ECE6D9; --muted:#8E97A5; --accent:#CBA868; --accent-soft:rgba(203,168,104,.13);
+    --reprov:#5F6B7C; --font:"Inter",system-ui,sans-serif; --font-num:"Instrument Serif",serif; --font-mono:"Inter",system-ui,sans-serif;
+    --font-title:"Instrument Serif",serif; --title-weight:400; --title-size:40px;
+    --radius:3px; --num-size:42px; --num-weight:400; --tracking:0;
+  }
+
+  /* ---------- Estrutura (igual nas três) ---------- */
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:var(--font); font-size:14px;
+         display:grid; grid-template-columns:270px 1fr; min-height:100vh; }
+  aside { background:var(--side); border-right:1px solid var(--border); padding:28px 20px; }
+  .marca { display:flex; align-items:center; gap:10px; margin-bottom:28px; font-weight:600; letter-spacing:var(--tracking); }
+  .marca .logo { width:22px; height:22px; border:1.5px solid var(--accent); border-radius:calc(var(--radius) * .6);
+                 display:grid; place-items:center; }
+  .marca .logo::after { content:""; width:8px; height:8px; background:var(--accent); border-radius:1px; }
+  nav a { display:block; padding:8px 10px; border-radius:var(--radius); color:var(--muted); text-decoration:none; margin-bottom:2px; }
+  nav a.ativo { background:var(--surface); color:var(--text); box-shadow:inset 2px 0 0 var(--accent); }
+  .rotulo { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin:28px 0 10px; }
+  .campo { border:1px solid var(--border); background:var(--surface); border-radius:var(--radius);
+           padding:8px 10px; margin-bottom:10px; display:flex; flex-wrap:wrap; gap:6px; }
+  .chip { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:11px; padding:2px 7px; border-radius:calc(var(--radius) * .6);
+          border:1px solid var(--border); color:var(--text); }
+  .check { display:flex; gap:8px; align-items:center; color:var(--muted); margin:8px 0; font-size:13px; }
+  .check i { width:14px; height:14px; border:1px solid var(--border); border-radius:3px; display:inline-block; }
+  .check i.on { background:var(--accent); border-color:var(--accent); }
+  .rodape { margin-top:32px; font-size:12px; color:var(--muted); display:flex; align-items:center; gap:8px; }
+  .ponto { width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
+
+  main { padding:40px 48px; max-width:1180px; }
+  .sobre { font-family:var(--font-mono); font-size:11px; color:var(--accent); letter-spacing:.08em; text-transform:uppercase; }
+  h1 { font-family:var(--font-title); font-weight:var(--title-weight); font-size:var(--title-size);
+       letter-spacing:var(--tracking); margin:8px 0 6px; }
+  .legenda { color:var(--muted); max-width:640px; line-height:1.5; }
+
+  .numeros { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border);
+             border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin:28px 0; }
+  .numero { background:var(--surface); padding:18px 20px; }
+  .numero span { color:var(--muted); font-size:12px; }
+  .numero b { display:block; font-family:var(--font-num); font-size:var(--num-size); font-weight:var(--num-weight);
+              letter-spacing:var(--tracking); margin-top:6px; line-height:1.1; }
+  .numero small { color:var(--muted); font-size:12px; }
+  .numero small em { font-style:normal; color:var(--accent); }
+
+  .linha { display:grid; grid-template-columns:1.75fr 1fr; gap:20px; }
+  .cartao { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px 22px; }
+  .cartao h2 { font-size:15px; font-weight:600; letter-spacing:var(--tracking); }
+  [data-estetica="ardosia"] .cartao h2 { font-family:"Instrument Serif",serif; font-weight:400; font-size:22px; }
+  .cartao p { color:var(--muted); font-size:12.5px; margin:4px 0 12px; line-height:1.45; }
+  .chave { display:flex; gap:16px; font-size:12px; color:var(--muted); margin-bottom:6px; }
+  .chave span { display:flex; align-items:center; gap:6px; }
+  svg text { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:11px; fill:var(--muted); }
+
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { text-align:left; font-weight:500; color:var(--muted); font-size:11px; text-transform:uppercase;
+       letter-spacing:.06em; padding:0 0 8px; border-bottom:1px solid var(--border); }
+  td { padding:10px 0; border-bottom:1px solid var(--grid); }
+  td.n { font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
+  .sit { display:inline-flex; align-items:center; gap:6px; font-size:12px; }
+  .sit i { width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .sit.ok i { background:var(--accent); }
+  .sit.no i { border:1.5px solid var(--reprov); }
+  .sit.no { color:var(--muted); }
+</style>
+</head>
+<body>
+<aside>
+  <div class="marca"><div class="logo"></div>Benchmark de agentes</div>
+  <nav>
+    <a class="ativo" href="#">Visão geral</a>
+    <a href="#">Executar</a>
+  </nav>
+  <div class="rotulo">Filtros</div>
+  <div class="campo"><span class="chip">v12</span><span class="chip">v13</span><span class="chip">v14</span><span class="chip">v15</span><span class="chip">+11</span></div>
+  <div class="campo"><span class="chip">registrar</span><span class="chip">perguntar</span><span class="chip">ignorar</span></div>
+  <div class="check"><i></i>Incluir lotes de calibração</div>
+  <div class="check"><i class="on"></i>Só a execução mais recente</div>
+  <div class="rotulo">Referência</div>
+  <div class="campo"><span class="chip">v15 · base atual</span></div>
+  <div class="rodape"><span class="ponto"></span>Ollama 0.40.4 · porta 11500</div>
+</aside>
+
+<main>
+  <div class="sobre">Agente de gastos · qwen3:4b-instruct</div>
+  <h1>Benchmark do agente de gastos</h1>
+  <p class="legenda">Cada caso roda uma vez em cada ordem dos exemplos (original, invertida, girada). Os dados vêm só do CSV; o modelo não é executado nesta página.</p>
+
+  <section class="numeros">
+    <div class="numero"><span>Acerto · v15</span><b>98%</b><small><em>+42 p.p.</em> desde a v1</small></div>
+    <div class="numero"><span>Casos estáveis ✓</span><b>14 de 15</b><small>só o C08 oscila</small></div>
+    <div class="numero"><span>Tempo mediano</span><b>4,7 s</b><small>por mensagem</small></div>
+    <div class="numero"><span>Tokens por resposta</span><b>2808</b><small>custo R$ 0</small></div>
+  </section>
+
+  <div class="linha">
+    <div class="cartao">
+      <h2>Acerto geral por versão</h2>
+      <p>A faixa é a v15 ± 11 p.p. (limiar de ruído): uma versão dentro dela não difere da referência só pelo total.</p>
+      <div class="chave">
+        <span><svg width="10" height="10"><circle cx="5" cy="5" r="4" fill="var(--accent)"/></svg>aprovada</span>
+        <span><svg width="10" height="10"><circle cx="5" cy="5" r="3.5" fill="none" stroke="var(--reprov)" stroke-width="1.5"/></svg>reprovada</span>
+      </div>
+      <svg id="grafico" width="100%" viewBox="0 0 640 250"></svg>
+    </div>
+    <div class="cartao">
+      <h2>Últimas decisões</h2>
+      <p>Régua escolhida antes de cada execução.</p>
+      <table>
+        <tr><th>Versão</th><th>Acertos</th><th>Situação</th></tr>
+        <tr><td class="n">v15</td><td class="n">44/45</td><td><span class="sit ok"><i></i>aprovada</span></td></tr>
+        <tr><td class="n">v14</td><td class="n">41/45</td><td><span class="sit ok"><i></i>aprovada</span></td></tr>
+        <tr><td class="n">v13</td><td class="n">40/45</td><td><span class="sit no"><i></i>reprovada</span></td></tr>
+        <tr><td class="n">v12</td><td class="n">41/45</td><td><span class="sit ok"><i></i>aprovada</span></td></tr>
+        <tr><td class="n">v11</td><td class="n">42/45</td><td><span class="sit no"><i></i>reprovada</span></td></tr>
+        <tr><td class="n">oculto</td><td class="n">15/15</td><td><span class="sit ok"><i></i>validação final</span></td></tr>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Estética escolhida pelo #hash (padrão: grafite).
+  document.body.dataset.estetica = (location.hash || "#grafite").slice(1);
+
+  // Dados reais do CSV: acertos de 45 por versão, e se a versão foi aprovada.
+  const versoes = [
+    ["v1",25,true],["v2",31,true],["v3",27,false],["v4",34,true],["v5",36,false],
+    ["v6",38,false],["v7",34,true],["v8",40,false],["v9",34,true],["v10",41,true],
+    ["v11",42,false],["v12",41,true],["v13",40,false],["v14",41,true],["v15",44,true]];
+  const L = 44, R = 624, T = 14, B = 214;            // margens do desenho
+  const x = i => L + i * (R - L) / (versoes.length - 1);
+  const y = p => B - (p - 50) / 50 * (B - T);         // eixo de 50% a 100%
+  const ns = "http://www.w3.org/2000/svg", svg = document.getElementById("grafico");
+  const el = (tag, attrs, txt) => { const e = document.createElementNS(ns, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]); if (txt) e.textContent = txt; svg.appendChild(e); return e; };
+
+  // Faixa de ruído da v15: 97,8 ± 11 p.p., cortada em 100.
+  const ref = 44 / 45 * 100;
+  el("rect", {x:L, y:y(Math.min(100, ref + 11)), width:R - L, height:y(ref - 11) - y(Math.min(100, ref + 11)), fill:"var(--accent-soft)"});
+  // Grade horizontal discreta.
+  for (const p of [50,60,70,80,90,100]) {
+    el("line", {x1:L, x2:R, y1:y(p), y2:y(p), stroke:"var(--grid)", "stroke-width":1});
+    el("text", {x:L - 10, y:y(p) + 4, "text-anchor":"end"}, p + "%");
+  }
+  // Linha do acerto.
+  el("polyline", {points: versoes.map(([, a], i) => x(i) + "," + y(a / 45 * 100)).join(" "),
+    fill:"none", stroke:"var(--accent)", "stroke-width":2, "stroke-linejoin":"round"});
+  // Pontos: cheio = aprovada; vazado = reprovada. Anel da cor do cartão separa ponto e linha.
+  versoes.forEach(([v, a, ok], i) => {
+    const cx = x(i), cy = y(a / 45 * 100);
+    if (ok) el("circle", {cx, cy, r:4.5, fill:"var(--accent)", stroke:"var(--surface)", "stroke-width":2});
+    else el("circle", {cx, cy, r:4, fill:"var(--surface)", stroke:"var(--reprov)", "stroke-width":1.5});
+    el("text", {x:cx, y:B + 20, "text-anchor":"middle"}, v);
+  });
+  // Rótulos diretos só nos extremos: a linha de base e a versão atual.
+  el("text", {x:x(0) + 8, y:y(25 / 45 * 100) + 4}, "56%");
+  el("text", {x:x(14) - 8, y:y(ref) - 12, "text-anchor":"end", style:"fill:var(--text)"}, "98%");
+</script>
+</body>
+</html>

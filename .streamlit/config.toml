@@ -1,0 +1,35 @@
+# Tema "Grafite" do painel (escolhido em 17/11; maquete em design/esteticas/).
+# Analogia: este arquivo é o "guarda-roupa" do painel. O código decide O QUE aparece;
+# aqui se decide COMO aparece (cores, fontes, cantos), sem mexer no código.
+# Lista completa de opções:  .venv\Scripts\streamlit config show
+#
+# O tema é fixo no escuro (base = "dark"): as cores dos gráficos em dashboard.py
+# foram validadas para este fundo, e não para o claro.
+
+[theme]
+base = "dark"
+
+# Cores: fundo quase preto neutro, cartões um tom acima e UM só destaque (verde-água).
+primaryColor = "#4FD6C2"
+backgroundColor = "#0B0C0E"
+secondaryBackgroundColor = "#15171A"
+textColor = "#ECEDEE"
+borderColor = "#25282D"
+showSidebarBorder = true
+greenColor = "#4FD6C2"       # caixas de sucesso (st.success) no tom do destaque
+
+# Fontes (Google Fonts, carregadas pelo navegador; sem internet, cai na fonte padrão).
+font = "Geist:https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap"
+codeFont = "'Geist Mono':https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap"
+headingFontWeights = [600, 600, 600, 500, 500, 500]
+metricValueFontWeight = 500
+
+# Cantos arredondados de 10 px, como na maquete.
+baseRadius = "10px"
+
+# Paleta das séries nos gráficos: a mesma de dashboard.py (CORES_SERIES), passos do escuro.
+chartCategoricalColors = ["#3987e5", "#d95926", "#199e70", "#c98500", "#d55181", "#0ca30c", "#9085e9", "#e66767"]
+
+[theme.sidebar]
+backgroundColor = "#101114"
+secondaryBackgroundColor = "#15171A"
