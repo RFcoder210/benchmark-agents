@@ -19,6 +19,9 @@
       "PowerShell(Get-NetIPAddress *)",
       "PowerShell(Get-NetConnectionProfile *)",
       "PowerShell(Get-Process *)"
+    ],
+    "deny": [
+      "Read(**/casos_ocultos.json)"
     ]
   },
   "statusLine": {
@@ -70,6 +73,20 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "Read|Grep|Edit|Write|NotebookEdit|Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py",
+            "args": [
+              "-3",
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/proteger-oculto.py"
+            ],
+            "timeout": 10
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -84,6 +101,20 @@
               "${CLAUDE_PROJECT_DIR}/.claude/hooks/verificar-uso.py"
             ],
             "timeout": 15
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py",
+            "args": [
+              "-3",
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/testar-ao-editar.py"
+            ],
+            "timeout": 150
           }
         ]
       }
