@@ -32,7 +32,7 @@ Diagnóstico feito pelo `analise-projeto` a partir de `.plano/OBJETIVO.md` (prim
 |---|---|---|---|---|---|---|
 | T01 | (U) AGUARDA USUÁRIO: decidir o ramo de trabalho e as permissões pendentes | P | usuário | nenhuma | CONCLUIDA | nenhuma |
 | T02 | Teste e esqueleto da opção --rotulo | P | executor-tarefa | nenhuma | CONCLUIDA | T01 |
-| T03 | (U) AGUARDA USUÁRIO: escrever rotulo_invalido() e escolher_execucao() | P | usuário | nenhuma | EM_ANDAMENTO | T02 |
+| T03 | (U) AGUARDA USUÁRIO: escrever rotulo_invalido() e escolher_execucao() | P | usuário | nenhuma | CONCLUIDA | T02 |
 | T04 | Conferir a opção --rotulo pela linha de comando | P | executor-tarefa | nenhuma | PENDENTE | T03 |
 | T05 | Teste e esqueleto das regras da execução (execucao.py) | P | executor-tarefa | nenhuma | PENDENTE | T04 |
 | T06 | (U) AGUARDA USUÁRIO: escrever ler_progresso() e pode_executar() | P | usuário | nenhuma | PENDENTE | T05 |

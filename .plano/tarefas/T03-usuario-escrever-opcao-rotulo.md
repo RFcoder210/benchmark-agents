@@ -37,4 +37,10 @@ Esta é uma parte central do projeto, reservada ao usuário para aprendizado (CL
 - Se o `import sys` deixar de ser usado em `benchmark.py`, pode ser removido; confirme com o teste.
 
 ## Resultado
-(preenchido ao terminar: o que o usuário escreveu, dúvidas que surgiram, saída do teste)
+CONCLUIDA em 2026-11-20. A pedido do usuário ("escreva para mim"), a sessão principal escreveu as duas funções e explicou cada passo (memória `delegar-codigo-analisar-resultado`).
+- `rotulo_invalido()`: conferências na ordem vazio → tamanho → caracteres (`re.fullmatch`) → final `-oculto` → `None`.
+- `escolher_execucao()`: `argparse` com grupo mutuamente exclusivo (`--rotulo` | `--ocultos`); `--rotulo` usa `type=conferir_rotulo`, função-ponte que levanta `ArgumentTypeError` com o motivo de `rotulo_invalido()`.
+- Bloco `__main__`: `arquivo, rotulo = escolher_execucao()` antes de `conferir_ollama()`; `import sys` removido (não era mais usado).
+- `testar_rotulo.py`: 25/25. `testar_comparar`, `testar_mutacao` e `testar_executar` passam (hook).
+- À mão: `--help` mostra as duas opções; `--rotulo "a b"` e `--ocultos --rotulo x` terminam com código 2 e a mensagem do motivo.
+- Observação: as mensagens fixas do argparse ("usage", "error", "not allowed with argument") ficam em inglês; os motivos do rótulo, em português.

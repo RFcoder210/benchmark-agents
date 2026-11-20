@@ -15,7 +15,6 @@ import csv       # biblioteca padrão para escrever planilhas CSV
 import json      # biblioteca padrão para ler e escrever arquivos JSON
 import os        # biblioteca padrão para lidar com pastas e caminhos
 import re        # biblioteca padrão de expressões regulares (conferir o formato de um texto)
-import sys       # biblioteca padrão; sys.argv é a lista de opções da linha de comando
 from datetime import datetime  # data e hora atuais, para nomear os resultados
 
 from agente import ACAO_POR_FERRAMENTA, EXEMPLOS_V2, interpretar
@@ -458,7 +457,7 @@ def mostrar_resumo(linhas):
 TAMANHO_MAXIMO_ROTULO = 40   # o rótulo vai no nome do arquivo de brutos e numa coluna do CSV
 
 
-# ROTEIRO (sua vez de escrever o corpo desta função)
+# ROTEIRO (os números dos passos aparecem nos comentários do corpo)
 # Analogia: esta função é a ficha de entrada. Ela confere os dados do rótulo
 # e diz "serve" (None) ou "não serve, porque..." (um texto).
 # Passos:
@@ -480,10 +479,30 @@ def rotulo_invalido(rotulo):
         arquivo de brutos e numa coluna do CSV separado por ";");
       - não pode terminar em "-oculto" (reservado à validação final).
     """
-    raise NotImplementedError("Sua vez: veja o roteiro nos comentários")
+    # 1. Vazio: "" conta como falso num if.
+    if not rotulo:
+        return "o rótulo não pode ser vazio"
+
+    # 2. Tamanho: compara com a constante, e não com o número escrito à mão.
+    if len(rotulo) > TAMANHO_MAXIMO_ROTULO:
+        return (f"o rótulo tem {len(rotulo)} caracteres; "
+                f"o máximo é {TAMANHO_MAXIMO_ROTULO}")
+
+    # 3. Caracteres: o texto INTEIRO precisa caber no molde (fullmatch).
+    #    Barra espaço, ";", "/", "\" e letras com acento.
+    if not re.fullmatch(r"[A-Za-z0-9._-]+", rotulo):
+        return ("use só letras sem acento, dígitos, '.', '_' e '-' "
+                "(sem espaços nem acentos)")
+
+    # 4. Final reservado: "-oculto" é só da validação final (opção --ocultos).
+    if rotulo.endswith("-oculto"):
+        return "rótulos terminados em '-oculto' são reservados à validação final"
+
+    # 5. Passou por todas as conferências.
+    return None
 
 
-# ROTEIRO (sua vez de escrever o corpo desta função)
+# ROTEIRO (os números dos passos aparecem nos comentários do corpo)
 # Analogia: o argparse é um recepcionista que confere a ficha de entrada antes
 # de deixar a pessoa subir. Se algo estiver errado, ele barra com uma mensagem
 # e encerra o programa (SystemExit com código 2).
@@ -512,22 +531,61 @@ def escolher_execucao(argv=None):
     opção desconhecida.
     argv=None significa "usar sys.argv[1:]".
     """
-    raise NotImplementedError("Sua vez: veja o roteiro nos comentários")
+    # 1. O "recepcionista": descreve o programa e monta a ajuda do --help.
+    parser = argparse.ArgumentParser(
+        description="Roda o benchmark do agente de gastos e grava o resultado "
+                    "em resultados/resultados.csv.")
+
+    # 4. Um grupo "mutuamente exclusivo": o argparse recusa sozinho as duas
+    #    opções juntas, com a mensagem de erro e o código 2.
+    grupo = parser.add_mutually_exclusive_group()
+
+    # 2. --rotulo recebe um texto; type= passa esse texto pela conferência.
+    grupo.add_argument(
+        "--rotulo", type=conferir_rotulo, metavar="ROTULO",
+        help=f"rótulo gravado no CSV (padrão: {VERSAO_AGENTE}); "
+             f"ex.: {VERSAO_AGENTE}-repeticao")
+
+    # 3. --ocultos não recebe valor: se aparecer, vira True ("store_true").
+    grupo.add_argument(
+        "--ocultos", action="store_true",
+        help="validação final no conjunto oculto (rótulo fixo: "
+             f"{VERSAO_AGENTE}-oculto)")
+
+    # 5. Lê as opções. Com argv=None, o argparse usa sys.argv[1:] sozinho.
+    opcoes = parser.parse_args(argv)
+
+    # 6. Devolve a tupla (arquivo_de_casos, rotulo).
+    if opcoes.ocultos:
+        return ARQUIVO_CASOS_OCULTOS, f"{VERSAO_AGENTE}-oculto"
+    if opcoes.rotulo is not None:
+        return ARQUIVO_CASOS, opcoes.rotulo
+    return ARQUIVO_CASOS, VERSAO_AGENTE
+
+
+def conferir_rotulo(texto):
+    """Ponte entre rotulo_invalido() e o argparse (usada em type= do --rotulo).
+
+    Devolve o próprio texto se ele serve. Se não serve, levanta
+    ArgumentTypeError: o argparse mostra o motivo e encerra com código 2.
+    """
+    motivo = rotulo_invalido(texto)
+    if motivo is not None:
+        raise argparse.ArgumentTypeError(motivo)
+    return texto
 
 
 # ---------------------------------------------------------------------------
 # EXECUÇÃO
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
+    # Opções primeiro: um erro de digitação aparece sem precisar do Ollama ligado.
+    # Sem opções: casos de ajuste com o rótulo VERSAO_AGENTE; --rotulo X troca o
+    # rótulo; --ocultos roda o conjunto oculto com o rótulo "vN-oculto".
+    arquivo, rotulo = escolher_execucao()
+
     # Trava do ambiente: resultados de outra versão do Ollama não são comparáveis.
     conferir_ollama()
-
-    # Com --ocultos, roda o conjunto oculto e grava com o rótulo "vN-oculto",
-    # para não misturar com os resultados dos casos de ajuste da mesma versão.
-    if "--ocultos" in sys.argv:
-        arquivo, rotulo = ARQUIVO_CASOS_OCULTOS, f"{VERSAO_AGENTE}-oculto"
-    else:
-        arquivo, rotulo = ARQUIVO_CASOS, VERSAO_AGENTE
 
     casos = carregar_casos(arquivo)
     nomes = ", ".join(nome for nome, _ in ORDENS_EXEMPLOS)
