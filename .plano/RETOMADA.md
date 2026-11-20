@@ -8,11 +8,11 @@ Motivo do checkpoint: antes de compactar (contexto em 72% do orçamento)
 - Dia 15 renomeado para "Permissões de leitura" (diário e título da sessão).
 
 ## Onde paramos
-- T02 (teste e esqueleto da opção --rotulo) EM_ANDAMENTO com o `executor-tarefa`.
+- T02 concluída e commitada (8394dce): esqueletos em `benchmark.py` e `testar_rotulo.py` (0/25, esperado).
+- T03 EM_ANDAMENTO: é do usuário.
 
 ## Próxima ação
-1. Ao receber o relatório da T02: marcar no ESTADO.md, commitar e dar push.
-2. T03 é do usuário: escrever `rotulo_invalido()` e `escolher_execucao()` com orientação (ver a tarefa).
+1. T03: orientar o usuário a escrever `rotulo_invalido()` e `escolher_execucao()` em `benchmark.py` (ver a tarefa); explicar argparse como iniciante; meta: `testar_rotulo.py` 25/25.
 3. Seguir o cronograma: T04, T05, T06 (U).
 
 ## Decisões tomadas que não estão em outro arquivo
