@@ -1,29 +1,27 @@
-# Retomada — 2026-11-17
-Motivo do checkpoint: fim do dia (2º encerramento do mesmo dia; este bilhete substitui o anterior)
+# Retomada — 2026-11-20
+Motivo do checkpoint: antes de compactar (contexto em 72% do orçamento)
 
 ## Feito hoje
-- README completo, com as seções pessoais (06f1731); lançador com duplo clique (63cfdb0).
-- App pessoal: menu `app.py`, página Executar na etapa 1 (só conferência) e tema Grafite (40e3014).
-- Revisão de todos os arquivos: 9 correções, entre elas a queda por valor inválido no `agente.py`, a cor única por versão no painel, o README e a LICENSE MIT (f6c224a).
-- **Publicado no GitHub**: https://github.com/RFcoder210/benchmark-agents. O histórico foi reescrito com o e-mail noreply, e as 40 citações a códigos de commit foram atualizadas (f784521, ab331b9).
+- Orquestração ligada neste projeto: `.plano/OBJETIVO.md` (concluir o app pessoal, sem prazo, sessões de 2 h), PLANO, ESTADO e 13 tarefas (446c512).
+- T01 concluída: trabalho direto na `main`; `.plano/` entra nos commits.
+- Ambiente conferido (nada instalado, testes sem modelo passando) e cronograma de hoje: T02 a T06 (612a070).
+- Dia 15 renomeado para "Permissões de leitura" (diário e título da sessão).
 
 ## Onde paramos
-- Tudo commitado e enviado: a `main` local é igual à do GitHub.
-- A página Executar ainda tem o botão desligado.
+- T02 (teste e esqueleto da opção --rotulo) EM_ANDAMENTO com o `executor-tarefa`.
 
-## Próxima ação (a primeira coisa de amanhã)
-1. Etapa 2 da página Executar: opção `--rotulo` no `benchmark.py` (com teste), para rodar `v15-repeticao` sem editar o código.
-2. Depois, ligar o botão: rodar em segundo plano com barra de progresso e aviso antes de gravar no CSV.
+## Próxima ação
+1. Ao receber o relatório da T02: marcar no ESTADO.md, commitar e dar push.
+2. T03 é do usuário: escrever `rotulo_invalido()` e `escolher_execucao()` com orientação (ver a tarefa).
+3. Seguir o cronograma: T04, T05, T06 (U).
 
 ## Decisões tomadas que não estão em outro arquivo
-- Ideia guardada para o futuro (não iniciar agora): um agente que faz a análise crítica do eval a partir do CSV e dos brutos.
-- Sem CSS próprio no painel: só opções do tema. Diferenças aceitas em relação à maquete: etiquetas dos filtros em verde-água cheio e números grandes em Geist.
-- Só a `main` foi publicada; os ramos `lote-noturno-2026-10-15` e `noite/2026-10-18` ficam locais (todo o conteúdo deles já está na main).
-- Os códigos de commit citados nos bilhetes anteriores a hoje já foram trocados pelos novos.
+- Aprovação permanente de commits (20/11): "sempre commite tudo quando for coerente", seguido de push (memória `commitar-tudo-coerente`; também no OBJETIVO.md).
+- Decisões padrão do PLANO aprovadas: rótulo repetido recusado; confirmação por caixa de seleção; rótulo sem hífen aceito com aviso; logs em `resultados/logs/` fora do git; sem botão de cancelar.
 
 ## Aguardando o usuário
-- Apagar, quando quiser, a cópia de segurança `..\benchmark-agents-backup-antes-da-publicacao.bundle`; ela tem o e-mail pessoal e não deve ser publicada.
+- `.claude/hooks/proteger-oculto.py` e `testar-ao-editar.py` (não commitados) são da sessão "Testar skills e melhorar setup"; não mexer.
+- Ollama 0.40.4 ligado só na T10.
 
 ## Ler se necessário
-- `benchmark.py` (bloco `if __name__ == "__main__"`, onde o rótulo é definido).
-- `app_pages/executar.py` e `testar_executar.py`.
+- `.plano/CRONOGRAMA.md`, `.plano/ESTADO.md` (tabela) e a tarefa da vez em `.plano/tarefas/`.
