@@ -9,11 +9,10 @@ Motivo do checkpoint: antes de compactar (contexto em 72% do orçamento)
 
 ## Onde paramos
 - T02 concluída e commitada (8394dce): esqueletos em `benchmark.py` e `testar_rotulo.py` (0/25, esperado).
-- T03 EM_ANDAMENTO: é do usuário.
+- T03 concluída e commitada (722e580): `--rotulo` com argparse, `testar_rotulo.py` 25/25 (código escrito pela sessão a pedido do usuário). Pausa às 18h.
 
 ## Próxima ação
-1. T03: orientar o usuário a escrever `rotulo_invalido()` e `escolher_execucao()` em `benchmark.py` (ver a tarefa); explicar argparse como iniciante; meta: `testar_rotulo.py` 25/25.
-3. Seguir o cronograma: T04, T05, T06 (U).
+1. Ler o uso e seguir o cronograma: T04 (conferir --rotulo pela linha de comando), T05, T06 (U).
 
 ## Decisões tomadas que não estão em outro arquivo
 - Aprovação permanente de commits (20/11): "sempre commite tudo quando for coerente", seguido de push (memória `commitar-tudo-coerente`; também no OBJETIVO.md).
