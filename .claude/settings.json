@@ -6,7 +6,19 @@
   "permissions": {
     "allow": [
       "Read(~/.claude/ocorrencias-agentes.md)",
-      "Edit(~/.claude/ocorrencias-agentes.md)"
+      "Edit(~/.claude/ocorrencias-agentes.md)",
+      "mcp__Claude_Browser__find",
+      "mcp__ccd_session_mgmt__get_usage",
+      "mcp__Claude_Browser__read_page",
+      "mcp__Claude_Browser__get_page_text",
+      "mcp__Claude_Browser__read_console_messages",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(Select-String *)",
+      "PowerShell(Get-Content *)",
+      "PowerShell(Test-Path *)",
+      "PowerShell(Get-NetIPAddress *)",
+      "PowerShell(Get-NetConnectionProfile *)",
+      "PowerShell(Get-Process *)"
     ]
   },
   "statusLine": {
