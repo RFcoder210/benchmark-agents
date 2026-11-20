@@ -10,9 +10,11 @@
 # Atenção: durante os ajustes do agente, use SOMENTE casos/casos.json.
 # O conjunto oculto (casos/casos_ocultos.json) fica para a validação final.
 
+import argparse  # biblioteca padrão para ler as opções da linha de comando (--rotulo, --ocultos)
 import csv       # biblioteca padrão para escrever planilhas CSV
 import json      # biblioteca padrão para ler e escrever arquivos JSON
 import os        # biblioteca padrão para lidar com pastas e caminhos
+import re        # biblioteca padrão de expressões regulares (conferir o formato de um texto)
 import sys       # biblioteca padrão; sys.argv é a lista de opções da linha de comando
 from datetime import datetime  # data e hora atuais, para nomear os resultados
 
@@ -448,6 +450,69 @@ def mostrar_resumo(linhas):
     tempo_medio = sum(linha["tempo_s"] for linha in linhas) / len(linhas)
     tokens_medio = sum(linha["tokens"] for linha in linhas) / len(linhas)
     print(f"Tempo médio: {tempo_medio:.2f} s | Tokens médios: {tokens_medio:.0f} | Custo: R$ 0,00")
+
+
+# ---------------------------------------------------------------------------
+# OPÇÕES DA LINHA DE COMANDO
+# ---------------------------------------------------------------------------
+TAMANHO_MAXIMO_ROTULO = 40   # o rótulo vai no nome do arquivo de brutos e numa coluna do CSV
+
+
+# ROTEIRO (sua vez de escrever o corpo desta função)
+# Analogia: esta função é a ficha de entrada. Ela confere os dados do rótulo
+# e diz "serve" (None) ou "não serve, porque..." (um texto).
+# Passos:
+#   1. Se o rótulo for vazio, devolva um texto explicando (conceito: `if not rotulo:`).
+#   2. Se o tamanho passar de TAMANHO_MAXIMO_ROTULO, devolva um texto (conceito: `len()`).
+#   3. Confira os caracteres: só letras sem acento, dígitos, ".", "_" e "-"
+#      (conceito: `re.fullmatch(r"[A-Za-z0-9._-]+", rotulo)`, ou um laço com `in`).
+#      Atenção: um espaço, ";", "/" ou "\" também não servem.
+#   4. Se terminar em "-oculto", devolva um texto (conceito: `str.endswith()`).
+#   5. Se passou por todas as conferências, `return None`.
+def rotulo_invalido(rotulo):
+    """Confere se o rótulo de uma execução pode ser usado.
+
+    Devolve None se o rótulo serve, ou um texto em português com o motivo.
+    Regras:
+      - não pode ser vazio;
+      - até TAMANHO_MAXIMO_ROTULO (40) caracteres;
+      - só letras sem acento, dígitos, ".", "_" e "-" (o rótulo vai no nome do
+        arquivo de brutos e numa coluna do CSV separado por ";");
+      - não pode terminar em "-oculto" (reservado à validação final).
+    """
+    raise NotImplementedError("Sua vez: veja o roteiro nos comentários")
+
+
+# ROTEIRO (sua vez de escrever o corpo desta função)
+# Analogia: o argparse é um recepcionista que confere a ficha de entrada antes
+# de deixar a pessoa subir. Se algo estiver errado, ele barra com uma mensagem
+# e encerra o programa (SystemExit com código 2).
+# Passos:
+#   1. Crie o recepcionista: `argparse.ArgumentParser(...)`.
+#   2. Registre `--rotulo` com `add_argument`; use `type=` com uma função sua que
+#      chame `rotulo_invalido()` e, se houver motivo, levante
+#      `argparse.ArgumentTypeError(motivo)`.
+#   3. Registre `--ocultos` (conceito: `action="store_true"`).
+#   4. `--ocultos` e `--rotulo` não podem vir juntos: use
+#      `add_mutually_exclusive_group()` ou confira depois e chame `parser.error()`.
+#   5. Leia as opções com `parser.parse_args(argv)` (com argv=None ele usa sys.argv[1:]).
+#   6. Devolva a tupla certa, conforme a docstring.
+# Lembrete: toda a leitura das opções fica DENTRO da função. Código no nível do
+# módulo roda quando o `testar_mutacao.py` carrega este arquivo, e não deve
+# ler opções nem encerrar o programa.
+def escolher_execucao(argv=None):
+    """Decide qual conjunto de casos rodar e com qual rótulo gravar.
+
+    Devolve a tupla (arquivo_de_casos, rotulo):
+      - sem opções: (ARQUIVO_CASOS, VERSAO_AGENTE);
+      - --rotulo X: (ARQUIVO_CASOS, X);
+      - --ocultos: (ARQUIVO_CASOS_OCULTOS, f"{VERSAO_AGENTE}-oculto").
+    Termina com erro do argparse (SystemExit, código 2) para: --rotulo sem valor,
+    rótulo inválido segundo rotulo_invalido(), --ocultos junto com --rotulo e
+    opção desconhecida.
+    argv=None significa "usar sys.argv[1:]".
+    """
+    raise NotImplementedError("Sua vez: veja o roteiro nos comentários")
 
 
 # ---------------------------------------------------------------------------

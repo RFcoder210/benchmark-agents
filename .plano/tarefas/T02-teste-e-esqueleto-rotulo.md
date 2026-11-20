@@ -56,4 +56,5 @@ O rótulo de uma execução do benchmark hoje só muda editando `VERSAO_AGENTE` 
 - Comentários em português, formais e objetivos.
 
 ## Resultado
-(preenchido pelo executor ao terminar: o que foi feito, arquivos alterados, evidência da verificação)
+Feito: imports argparse/re, constante TAMANHO_MAXIMO_ROTULO e esqueletos rotulo_invalido/escolher_execucao (com roteiros) em benchmark.py (65 acréscimos, 0 remoções); testar_rotulo.py novo (25 verificações).
+Evidência: testar_rotulo.py = 0/25 e saida=1; import benchmark ok; testar_regua 11/11; testar_trava_pagamento "Tudo certo."; testar_mutacao 1/13 e 0/10; testar_comparar passou.
