@@ -63,4 +63,4 @@ A página "Executar" (`app_pages/executar.py`, aberta pelo menu de `app.py`) est
 - Nunca abra `casos/casos_ocultos.json`.
 
 ## Resultado
-(preenchido pelo executor ao terminar: o que foi feito, arquivos alterados, evidência da verificação)
+Concluída. `app_pages/executar.py` (etapa 2): campo de rótulo, avisos (já gravado / novo / sem hífen), `pode_executar`, caixa de confirmação com N calculado, botão que chama `execucao.iniciar` via registro `@st.cache_resource`, mensagem de execução iniciada. `testar_executar.py` reescrito: 24/24, saída 0 (cenário do Ollama real PULADO, pois está desligado). Cliques só com comando falso; CSV com mesmo tamanho e data; sem brutos nem logs `teste-pagina-*`. Suíte: testar_dashboard 43/43, testar_processo 13/13, testar_execucao 15/15, testar_rotulo 25/25. `git status resultados/` limpo.
