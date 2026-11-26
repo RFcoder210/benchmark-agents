@@ -5,6 +5,9 @@
 #   Parte 3: comparar a resposta com o gabarito.                     <- pronto
 #   Parte 4: salvar os resultados num CSV.                           <- pronto
 # Execução:  .venv\Scripts\python benchmark.py
+#            .venv\Scripts\python benchmark.py --rotulo v15-repeticao
+#            (repete a base como lote de calibração, com outro rótulo no CSV,
+#             sem editar o código)
 # Validação final (conjunto oculto):  .venv\Scripts\python benchmark.py --ocultos
 #
 # Atenção: durante os ajustes do agente, use SOMENTE casos/casos.json.

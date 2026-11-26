@@ -49,3 +49,12 @@ O usuário escreveu `rotulo_invalido()` e `escolher_execucao()` em `benchmark.py
 
 ## Resultado
 (preenchido pelo executor ao terminar: o que foi feito, arquivos alterados, evidência da verificação)
+
+### Executado (26/11)
+- `testar_rotulo.py`: 25/25, saída 0.
+- Linha de comando (sempre com OLLAMA_HOST=127.0.0.1:1): `--help` saída 0 (mostra `--rotulo` e `--ocultos`); `--rotulo "a b"` 2; `--rotulo v15-oculto` 2; `--ocultos --rotulo x` 2; `--desconhecida` 2; `--rotulo v15-conferencia` saída 1 ("O Ollama 0.40.4 não está ligado em 127.0.0.1:1"). As opções são lidas antes de `conferir_ollama()`.
+- Nada gravado: `git status --short resultados/` vazio; sem `brutos_v15-conferencia_*.json`.
+- Cabeçalho de `benchmark.py` atualizado (linhas 7-10, exemplo `--rotulo v15-repeticao`). Único arquivo alterado.
+- Suíte: comparar 14/14 (Parte A), regua 11/11, trava_pagamento "Tudo certo.", mutacao 1/13 e 0/10, executar 6/6, dashboard 43/43; todas saída 0.
+- Sugestões (não aplicadas): (1) o comentário "ROTEIRO" com passos a fazer ficou acima das funções já prontas; pode ser removido ou virar docstring; (2) o cabeçalho "Benchmark (v1)" e as "Partes 1-4" estão antigos; (3) `TAMANHO_MAXIMO_ROTULO` está sob o título "OPÇÕES" mas serve a `rotulo_invalido`; (4) a mensagem de rótulo vazio nunca aparece pelo argparse com `--rotulo ""`? vale um teste de leitura da mensagem; (5) comentar no `__main__` que `escolher_execucao()` precisa vir antes de `conferir_ollama()` de propósito (já há, só reforçar).
+- Commit proposto: "Entrega 1: opção --rotulo no benchmark, conferida pela linha de comando e cabeçalho de uso atualizado".
