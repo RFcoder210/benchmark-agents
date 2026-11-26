@@ -1,28 +1,20 @@
 # Retomada — 2026-11-26
-Motivo: checkpoint antes de compactar (contexto em 70%; janela de 5 h em 19%)
-
 ## Feito hoje
-- Cronograma de 26/11 (T04–T07; T08 adiantada a pedido do usuário).
 - T04 (1cbd683): `--rotulo` conferido pela linha de comando, sem modelo.
-- T05 (f13d89a): esqueleto de `execucao.py` e `testar_execucao.py`.
-- T06 (45fcea2): `ler_progresso()` e `pode_executar()` escritas pela sessão a pedido do usuário, com explicação linha por linha; 15/15.
-- T07 (ec722c2): `iniciar`, `ler_log`, `situacao` em `execucao.py`; `testar_processo.py` 13/13; `resultados/logs/` no `.gitignore`.
-- T08 (18d4027): página Executar com rótulo, confirmação e botão ligado; `testar_executar.py` 24/24.
-
+- T05–T06 (f13d89a, 45fcea2): `execucao.py` com `ler_progresso()` e `pode_executar()` (escritas pela sessão a pedido do usuário, explicadas linha por linha); 15/15.
+- T07 (ec722c2): lançar e acompanhar o benchmark em segundo plano; `testar_processo.py` 13/13.
+- T08 (18d4027, adiantada): página Executar com rótulo, confirmação e botão ligado.
+- T09 (2ad42da): barra de progresso (fragmento de 2 s), resultado e "Nova execução"; `testar_executar.py` 33/33.
 ## Onde paramos
-- T01–T08 CONCLUIDAS (8 de 13). Tudo commitado e publicado.
-- Próxima: T09 (executor), barra de progresso e resultado na página Executar.
-
-## Próxima ação
-1. `/orquestrar` → Etapa 4 com T09 (ler o uso antes).
-2. Depois T10 (U): primeira execução real `v15-repeticao` pelo botão, com o Ollama 0.40.4 ligado.
-
+- T01–T09 CONCLUIDAS (9 de 13). Tudo commitado e publicado. Nada gravado no CSV.
+- O atalho "Ver na Visão geral" (`st.page_link`) não roda no AppTest; no app real ainda não foi visto funcionando.
+## Próxima ação (a primeira coisa de amanhã)
+1. `/orquestrar` (Etapa 0 → cronograma do dia).
+2. T10 (U): ligar o Ollama 0.40.4 com `.\iniciar_ollama.bat` (porta 11500), abrir o painel e executar `v15-repeticao` pelo botão (4–5 min, custo zero). Conferir o atalho para a Visão geral.
+3. Depois T11 (conferência), T12 (documentação) e T13 (fechamento).
 ## Decisões tomadas que não estão em outro arquivo
-- T08 adiantada em 26/11 (o cronograma a previa para 27/11).
-- CLAUDE.md ainda diz "testar_executar.py, 9 verificações" e "etapa 1": atualizar no `/encerrar-dia` (agora 24 verificações, botão ligado).
-
+- Resultado diferente de 44/45 na T10 é dado para a T11, não falha.
 ## Aguardando o usuário
-- Ollama 0.40.4 ligado só na T10.
-
+- Estar presente na T10, com o Ollama 0.40.4 ligado.
 ## Ler se necessário
-- `.plano/ESTADO.md` (tabela) e `.plano/tarefas/T09-*.md`.
+- `.plano/ESTADO.md` e `.plano/tarefas/T10-usuario-execucao-real.md`.
