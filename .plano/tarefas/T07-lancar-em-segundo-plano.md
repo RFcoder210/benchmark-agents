@@ -60,4 +60,4 @@
 - Nada no nível do módulo além de imports, constantes e funções.
 
 ## Resultado
-(preenchido pelo executor ao terminar: o que foi feito, arquivos alterados, evidência da verificação)
+Concluída (26/11). Seção "LANÇAR E ACOMPANHAR" em execucao.py (montar_comando, iniciar, ler_log, situacao), testar_processo.py novo (13/13, saída 0), .gitignore com resultados/logs/. Outros testes: testar_execucao 15/15, testar_rotulo 25/25, testar_executar 6/6, testar_dashboard 43/43, testar_mutacao 1/13 e 0/10. git status sem mudanças em resultados/. Funções do usuário intocadas; só comandos falsos.

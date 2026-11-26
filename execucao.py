@@ -11,6 +11,11 @@
 # Esqueleto criado na T05; as duas funções foram escritas na T06 (26/11), pela
 # sessão a pedido do usuário, com explicação linha por linha.
 
+import os
+import subprocess
+import sys
+from datetime import datetime
+
 import ambiente
 from benchmark import rotulo_invalido
 
@@ -128,3 +133,101 @@ def pode_executar(versao_ollama, rotulo, ja_gravadas, em_andamento=False):
 
     # Nenhuma regra barrou: pode executar.
     return None
+
+
+# ---------------------------------------------------------------------------
+# LANÇAR E ACOMPANHAR
+# ---------------------------------------------------------------------------
+# Analogia: aqui fica o "encanamento". O benchmark roda como um processo
+# separado (outro programa em andamento), para a página continuar respondendo
+# durante os minutos da execução. A saída dele vai para um arquivo de log, que
+# a página lê de tempos em tempos.
+
+# Pasta onde este arquivo está (a raiz do projeto) e pasta dos logs passageiros.
+PASTA_PROJETO = os.path.dirname(os.path.abspath(__file__))
+PASTA_LOGS = os.path.join(PASTA_PROJETO, "resultados", "logs")
+
+
+def montar_comando(rotulo):
+    """Monta o comando que roda o benchmark real com o rótulo dado.
+
+    "-u" desliga o buffer de saída (a saída chega ao log na hora). Nunca inclui
+    --ocultos: o conjunto oculto não é rodado por aqui.
+    """
+    caminho = os.path.join(PASTA_PROJETO, "benchmark.py")
+    return [sys.executable, "-u", caminho, "--rotulo", rotulo]
+
+
+def iniciar(rotulo, comando=None, pasta_logs=PASTA_LOGS):
+    """Lança o benchmark em segundo plano e devolve os dados da execução.
+
+    `comando` existe para os testes usarem um comando falso. Devolve um
+    dicionário com "processo", "rotulo", "log" (caminho) e "inicio".
+    """
+    # Defesa extra: mesmo que a página já tenha conferido, recusa rótulo ruim.
+    motivo = rotulo_invalido(rotulo)
+    if motivo is not None:
+        raise ValueError(motivo)
+
+    # Cria a pasta de logs (se já existe, não faz nada) e o nome do arquivo.
+    os.makedirs(pasta_logs, exist_ok=True)
+    inicio = datetime.now()
+    nome = f"execucao_{rotulo}_{inicio.strftime('%Y-%m-%d_%H%M%S')}.log"
+    caminho_log = os.path.join(pasta_logs, nome)
+
+    # Cópia do ambiente: saída em UTF-8 e sem buffer. O filho herda OLLAMA_HOST.
+    ambiente_filho = os.environ.copy()
+    ambiente_filho["PYTHONIOENCODING"] = "utf-8"
+    ambiente_filho["PYTHONUNBUFFERED"] = "1"
+
+    # No Windows, evita abrir uma janela de console para o processo filho.
+    flags = subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
+
+    # O pai abre o log só para entregá-lo ao Popen; o filho mantém a cópia dele.
+    with open(caminho_log, "wb") as arquivo_log:
+        processo = subprocess.Popen(
+            comando or montar_comando(rotulo),
+            cwd=PASTA_PROJETO,
+            stdout=arquivo_log,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.DEVNULL,
+            env=ambiente_filho,
+            creationflags=flags,
+        )
+
+    return {"processo": processo, "rotulo": rotulo,
+            "log": caminho_log, "inicio": inicio}
+
+
+def ler_log(caminho):
+    """Devolve o texto do log, ou "" se o arquivo ainda não existe."""
+    try:
+        with open(caminho, encoding="utf-8", errors="replace") as arquivo:
+            return arquivo.read()
+    except FileNotFoundError:
+        return ""
+
+
+def situacao(execucao):
+    """Resume a situação de uma execução lançada por iniciar()."""
+    # poll() devolve None enquanto roda; depois, o código de saída.
+    codigo = execucao["processo"].poll()
+    texto = ler_log(execucao["log"])
+    linhas = texto.splitlines()
+    feitas, total = ler_progresso(texto)
+
+    # Linha final com a taxa de acerto (None se ainda não apareceu).
+    acerto = None
+    for linha in linhas:
+        if linha.startswith("Acerto geral:"):
+            acerto = linha.strip()
+
+    return {
+        "rodando": codigo is None,
+        "codigo_saida": codigo,
+        "feitas": feitas,
+        "total": total,
+        "acerto": acerto,
+        "ultimas_linhas": linhas[-10:],
+        "segundos": (datetime.now() - execucao["inicio"]).total_seconds(),
+    }
