@@ -56,4 +56,4 @@ A página "Executar" do painel (`app_pages/executar.py`) vai lançar `benchmark.
 - Comentários em português, formais e objetivos.
 
 ## Resultado
-(preenchido pelo executor ao terminar: o que foi feito, arquivos alterados, evidência da verificação)
+Criados `execucao.py` (imports, roteiros comentados e dois esqueletos com `NotImplementedError`) e `testar_execucao.py` (15 verificações). Evidência: `testar_execucao.py` -> FALHA em todas, 0/15, saida=1; `import execucao` ok; `testar_rotulo.py` 25/25, `testar_executar.py` 6/6, `testar_dashboard.py` 43/43. Modelo, CSV e arquivos de "Não alterar" intocados.
