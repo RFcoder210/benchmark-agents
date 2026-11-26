@@ -36,4 +36,7 @@ Segunda parte central reservada ao usuário (CLAUDE.md, seção 1). A T05 criou 
 - Não rodar `benchmark.py` com rótulo válido e o Ollama ligado (grava no CSV oficial).
 
 ## Resultado
-(preenchido ao terminar: o que o usuário escreveu, dúvidas que surgiram, saída do teste)
+26/11: a pedido do usuário ("Escreva e explique"), a sessão escreveu as duas funções e explicou linha por linha.
+- `ler_progresso()`: laço com `reversed()`, triagem por `strip()`/`startswith("[")`, `find("]")` para recusar linha cortada, `split("/")` e `int()` dentro de `try/except ValueError`; sem regex.
+- `pode_executar()`: cinco regras com retorno cedo, na ordem do roteiro; `rotulo_invalido()` chamada uma vez e guardada em variável.
+- `testar_execucao.py`: 15/15, saída 0. `testar_rotulo.py`: 25/25.

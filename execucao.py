@@ -8,7 +8,8 @@
 # Este módulo não tem tela: assim ele pode ser testado sem navegador
 # (ver testar_execucao.py) e importado pela página a cada recarga.
 #
-# ESQUELETO (T05): as duas funções abaixo serão escritas por você na T06.
+# Esqueleto criado na T05; as duas funções foram escritas na T06 (26/11), pela
+# sessão a pedido do usuário, com explicação linha por linha.
 
 import ambiente
 from benchmark import rotulo_invalido
@@ -42,7 +43,39 @@ def ler_progresso(texto_log):
     Linhas de outro formato, inclusive uma última linha cortada pela metade
     (ex.: "[ 7/4"), são ignoradas. Sem nenhuma linha de progresso: (0, 0).
     """
-    raise NotImplementedError("Sua vez: veja o roteiro nos comentários")
+    # 1. Corta o texto em uma lista de linhas (aceita \n e \r\n do Windows).
+    linhas = texto_log.splitlines()
+
+    # 2. Lê de trás para a frente: a primeira linha válida é a mais recente.
+    for linha in reversed(linhas):
+        # 3. Triagem: tira os espaços das pontas e pula o que não começa com "[".
+        linha = linha.strip()
+        if not linha.startswith("["):
+            continue
+
+        # 4a. Procura o "]". Sem ele, a linha foi cortada no meio: pula.
+        fim = linha.find("]")
+        if fim == -1:
+            continue
+
+        # 4b. Pega o miolo entre "[" e "]" (ex.: " 7/45") e separa na barra.
+        miolo = linha[1:fim]
+        partes = miolo.split("/")
+        if len(partes) != 2:
+            continue
+
+        # 4c. Converte os dois pedaços em número; se algum não for número, pula.
+        try:
+            feitas = int(partes[0])
+            total = int(partes[1])
+        except ValueError:
+            continue
+
+        # 5. Achou a última linha de progresso completa: devolve e encerra.
+        return (feitas, total)
+
+    # Nenhuma linha serviu (log vazio ou só com avisos).
+    return (0, 0)
 
 
 # ---------------------------------------------------------------------------
@@ -66,4 +99,32 @@ def ler_progresso(texto_log):
 # Dica: use f-strings para montar os textos e `is None` para comparar com None.
 def pode_executar(versao_ollama, rotulo, ja_gravadas, em_andamento=False):
     """Devolve None se pode executar; senão, o motivo (texto em português)."""
-    raise NotImplementedError("Sua vez: veja o roteiro nos comentários")
+    exigida = ambiente.VERSAO_OLLAMA
+
+    # Regra 1: não começa uma execução por cima de outra.
+    if em_andamento:
+        return "Já há uma execução em andamento. Espere ela terminar."
+
+    # Regra 2: o Ollama fixado precisa estar ligado.
+    if versao_ollama is None:
+        return (f"O Ollama {exigida} não está ligado. "
+                "Ligue-o com iniciar_ollama.bat e recarregue a página.")
+
+    # Regra 3: ligado, mas em outra versão (os resultados não seriam comparáveis).
+    if versao_ollama != exigida:
+        return (f"O Ollama respondeu na versão {versao_ollama}, "
+                f"mas o benchmark exige a {exigida}.")
+
+    # Regra 4: rótulo inválido. Guarda o motivo numa variável para chamar
+    # rotulo_invalido() uma vez só e devolver exatamente o texto dela.
+    motivo_rotulo = rotulo_invalido(rotulo)
+    if motivo_rotulo is not None:
+        return motivo_rotulo
+
+    # Regra 5: rótulo já usado no CSV (gravar de novo misturaria duas execuções).
+    if ja_gravadas > 0:
+        return (f"O rótulo '{rotulo}' já tem {ja_gravadas} linhas gravadas no CSV. "
+                "Escolha outro rótulo.")
+
+    # Nenhuma regra barrou: pode executar.
+    return None
