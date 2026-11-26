@@ -112,10 +112,63 @@ else:
         registro["execucao"] = execucao.iniciar(rotulo)
         st.rerun()
 
+def formatar_tempo(segundos):
+    """Converte segundos em 'mm:ss' (ex.: 125 -> '02:05')."""
+    minutos, resto = divmod(int(segundos), 60)
+    return f"{minutos:02d}:{resto:02d}"
+
+
+# FRAGMENTO: um pedaço da página que se atualiza sozinho, sem recarregar o resto.
+# Analogia: só o placar do jogo muda a cada 2 segundos; o estádio inteiro fica parado.
+@st.fragment(run_every="2s")
+def painel_progresso(lancada):
+    """Barra de progresso da execução em andamento; ao terminar, recarrega a página."""
+    estado = execucao.situacao(lancada)
+    if not estado["rodando"]:
+        # Recarrega a página inteira: ela sai do modo de atualização automática
+        # e passa a mostrar o resultado final.
+        st.rerun()
+    feitas, total = estado["feitas"], estado["total"]
+    fracao = feitas / total if total > 0 else 0
+    st.progress(fracao, text=f"{feitas} de {total} respostas · "
+                             f"{formatar_tempo(estado['segundos'])}")
+    if estado["ultimas_linhas"]:
+        st.caption(estado["ultimas_linhas"][-1])
+
+
 if registro["execucao"] is not None:
     lancada = registro["execucao"]
     st.info(f"Execução iniciada com o rótulo **{lancada['rotulo']}** em "
             f"{lancada['inicio'].strftime('%H:%M:%S')}. Log: `{lancada['log']}`")
+    estado = execucao.situacao(lancada)
+
+    if estado["rodando"]:
+        painel_progresso(lancada)
+    else:
+        if estado["codigo_saida"] == 0:
+            st.success(f"Execução **{lancada['rotulo']}** concluída. "
+                       f"{estado['acerto'] or 'Sem linha de acerto no log.'}")
+            try:
+                st.page_link("dashboard.py", label="Ver na Visão geral",
+                             icon=":material/monitoring:")
+            except st.errors.StreamlitPageNotFoundError:
+                # Fora do menu do app.py (ex.: página testada sozinha) o atalho não existe.
+                st.write("Abra **Visão geral** no menu à esquerda.")
+            if "-" in lancada["rotulo"]:
+                st.caption("Na Visão geral, marque **Incluir lotes de calibração** "
+                           "para ver este rótulo.")
+        else:
+            st.error(f"A execução terminou com erro (código {estado['codigo_saida']}).")
+            st.code("\n".join(estado["ultimas_linhas"]))
+            gravadas = contar_execucoes(lancada["rotulo"])
+            if gravadas == 0:
+                st.write("Nada foi gravado no CSV.")
+            else:
+                st.write(f"{gravadas} linhas com este rótulo estão no CSV; "
+                         "confira antes de rodar de novo.")
+        if st.button("Nova execução"):
+            registro["execucao"] = None
+            st.rerun()
 
 st.markdown(
     f"- Cada execução roda os casos de ajuste nas {len(ORDENS_EXEMPLOS)} ordens dos exemplos "

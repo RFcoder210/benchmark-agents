@@ -58,4 +58,7 @@ Depois da T08, o botão "Executar" lança o benchmark em segundo plano e a pági
 - Nunca abra `casos/casos_ocultos.json`.
 
 ## Resultado
-(preenchido pelo executor ao terminar: o que foi feito, arquivos alterados, evidência da verificação)
+Feito: seção 3 de `app_pages/executar.py` com fragmento `@st.fragment(run_every="2s")` (barra + última linha do log; `st.rerun()` só ao terminar), sucesso com acerto, erro com código/log/frase do CSV, botão "Nova execução". `testar_executar.py` com 10 verificações novas (33/33).
+Decisão: `st.page_link("dashboard.py")` dá StreamlitPageNotFoundError no AppTest; mantive o link dentro de `try/except` com fallback em texto ("Abra **Visão geral** no menu à esquerda"), assim o link funciona no app real.
+Verificação: testar_executar 33/33 saida=0 (só o cenário do Ollama real PULADO); dashboard 43/43; processo 13/13; execucao 15/15; rotulo 25/25; comparar 14/14; regua 11/11; trava_pagamento "Tudo certo."; mutacao 1/13 e 0/10. Painel na porta 8510: HTTP 200, encerrado. resultados.csv intacto, sem logs/brutos teste-pagina.
+Mensagem de commit proposta: "T09: página Executar com barra de progresso, resultado e nova execução (entrega 2)"

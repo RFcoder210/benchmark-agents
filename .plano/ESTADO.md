@@ -38,7 +38,7 @@ Diagnóstico feito pelo `analise-projeto` a partir de `.plano/OBJETIVO.md` (prim
 | T06 | (U) AGUARDA USUÁRIO: escrever ler_progresso() e pode_executar() | P | usuário | nenhuma | CONCLUIDA | T05 |
 | T07 | Lançar e acompanhar o benchmark em segundo plano (execucao.py) | M | executor-tarefa | nenhuma | CONCLUIDA | T06 |
 | T08 | Página Executar: rótulo, confirmação e botão ligado | M | executor-tarefa | nenhuma | CONCLUIDA | T07 |
-| T09 | Página Executar: barra de progresso e resultado | M | executor-tarefa | nenhuma | PENDENTE | T08 |
+| T09 | Página Executar: barra de progresso e resultado | M | executor-tarefa | nenhuma | CONCLUIDA | T08 |
 | T10 | (U) AGUARDA USUÁRIO: execução real v15-repeticao pelo botão | P | usuário | nenhuma | PENDENTE | T09 |
 | T11 | Conferir a execução real e a suíte de testes | P | executor-tarefa | nenhuma | PENDENTE | T10 |
 | T12 | Documentar a página Executar no README e no CLAUDE.md | P | executor-tarefa | nenhuma | PENDENTE | T11 |

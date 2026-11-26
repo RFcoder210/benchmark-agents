@@ -159,6 +159,80 @@ try:
                     time.sleep(0.5)
     else:
         print("PULADO  clique: a troca do comando não valeu; nenhum clique foi feito")
+
+    # --- Cenário 7: progresso e resultado (comando falso lento, depois com erro) -------
+    def comando_lento(rotulo):
+        codigo = ("import time\n"
+                  "for i in (1, 2, 3):\n"
+                  "    print(f'[ {i}/3] C01 #1 (original) -> registrar (0.1 s)', flush=True)\n"
+                  "    time.sleep(1)\n"
+                  "print('Acerto geral: 3/3 (100%)')\n")
+        return [sys.executable, "-c", codigo]
+
+    def comando_erro(rotulo):
+        return [sys.executable, "-c",
+                "print('[ 1/3] C01 #1 (original) -> registrar (0.1 s)', flush=True)\n"
+                "raise RuntimeError('falha simulada')"]
+
+    def apagar_logs_pagina():
+        for log in glob.glob("resultados/logs/execucao_teste-pagina-*"):
+            for _ in range(20):
+                try:
+                    os.remove(log)
+                    break
+                except PermissionError:
+                    time.sleep(0.5)
+
+    def esperar_fim(pagina, tentativas=30):
+        """Roda a página de novo até não haver mais barra de progresso (máx. ~15 s)."""
+        for _ in range(tentativas):
+            time.sleep(0.5)
+            pagina.run()
+            if not pagina.get("progress"):
+                break
+
+    # 7a: comando lento -> barra, botão desligado, aviso de andamento
+    rotulo_lento = f"teste-pagina-lento-{carimbo}"
+    pagina = rodar_pagina("127.0.0.1:1", rotulo_lento)
+    pagina.checkbox[0].check().run()
+    execucao.montar_comando = comando_lento
+    if execucao.montar_comando is comando_lento and ambiente.versao_ollama is ollama_simulado:
+        botao_executar(pagina).click().run()
+        pagina.run()  # processo ainda vivo (dura ~3 s)
+        conferir("andamento: há barra de progresso", len(pagina.get("progress")) >= 1)
+        botao = botao_executar(pagina)
+        conferir("andamento: botão Executar desligado", botao is not None and botao.disabled)
+        conferir("andamento: aviso com 'andamento'",
+                 any("andamento" in w.value for w in pagina.warning))
+        esperar_fim(pagina)
+        conferir("fim: mensagem de sucesso com o acerto",
+                 any("Acerto geral: 3/3 (100%)" in s.value for s in pagina.success),
+                 str([s.value for s in pagina.success]))
+        nova = [b for b in pagina.button if b.label == "Nova execução"]
+        conferir("fim: botão 'Nova execução' presente", len(nova) == 1)
+        if nova:
+            nova[0].click().run()
+            conferir("nova execução: caixa de confirmação volta", len(pagina.checkbox) == 1)
+    else:
+        print("PULADO  andamento: a troca do comando não valeu")
+    apagar_logs_pagina()
+
+    # 7b: comando com erro -> st.error, texto do erro e "Nada foi gravado no CSV."
+    rotulo_erro = f"teste-pagina-erro-{carimbo}"
+    pagina = rodar_pagina("127.0.0.1:1", rotulo_erro)
+    pagina.checkbox[0].check().run()
+    execucao.montar_comando = comando_erro
+    if execucao.montar_comando is comando_erro and ambiente.versao_ollama is ollama_simulado:
+        botao_executar(pagina).click().run()
+        esperar_fim(pagina)
+        texto = " ".join([e.value for e in pagina.error] + [c.value for c in pagina.code]
+                         + [m.value for m in pagina.markdown])
+        conferir("erro: st.error presente", len(pagina.error) >= 1)
+        conferir("erro: 'falha simulada' no texto", "falha simulada" in texto)
+        conferir("erro: frase 'Nada foi gravado no CSV.'", "Nada foi gravado no CSV." in texto)
+    else:
+        print("PULADO  erro: a troca do comando não valeu")
+    apagar_logs_pagina()
 finally:
     # Restaura sempre as funções originais, mesmo se um teste quebrar.
     ambiente.versao_ollama = versao_real
