@@ -1,67 +1,739 @@
 {
   "projeto": "Benchmark de agentes",
   "semana_inicio": "23/11/2026",
-  "versao": "1.0",
+  "versao": "2.0",
   "atualizado_em": "27/11/2026",
   "status": "em construção; app pessoal com 9 de 13 tarefas concluídas",
-  "situacao": "O benchmark em si estava pronto desde 28/10/2026. O agente de gastos, que lê uma mensagem e decide entre registrar o gasto e perguntar o que falta, chegou à <b>v15</b>, com 44 de 45 respostas corretas nos casos de ajuste e 15 de 15 no <b>conjunto oculto</b> (casos guardados à parte, usados uma única vez para conferir se as melhorias não foram feitas sob medida para os casos conhecidos). Desde 17/11/2026, o trabalho é o <b>app pessoal</b>: o painel que mostra os resultados ganhou uma página \"Executar\", para rodar o benchmark sem depender de uma sessão do Claude. Em 20/11/2026, o plano do app foi dividido em 13 tarefas (T01 a T13) e o benchmark passou a aceitar um <b>rótulo</b> (o nome com que uma execução é gravada no CSV de resultados) escolhido na hora, sem editar o código.",
-  "foco": "Ligar o botão \"Executar\" de verdade: conferir o ambiente, pedir confirmação, rodar o benchmark em segundo plano com barra de progresso e mostrar o resultado. O teste final é uma execução real feita pelo próprio usuário, gravada com o rótulo v15-repeticao. Ela repete a v15 para medir o quanto o agente varia de uma execução para outra, sem mudar nada no agente.",
-  "raciocinio": [
-    "(26/11) <b>O app deve funcionar sem a sessão do Claude</b>; por isso, o botão lança o benchmark como um <b>processo em segundo plano</b> (um programa que roda à parte, enquanto o painel continua respondendo), e o painel só acompanha o andamento, relendo o progresso a cada 2 segundos.",
-    "(26/11) <b>Gravar no CSV oficial é difícil de desfazer</b>; por isso, o botão só age depois de uma confirmação explícita, e o rótulo é conferido antes: vazio, longo demais, com caracteres estranhos ou terminado em \"-oculto\" é recusado.",
-    "(26/11) <b>O conjunto oculto já foi usado na validação final da v15</b>; por isso, a página não tem botão para ele. Usá-lo de novo, sem casos novos, deixaria de ser uma validação honesta.",
-    "(26/11) <b>Rodar o modelo de verdade leva de 4 a 5 minutos e grava dados</b>; por isso, os testes automáticos da página usam um <b>comando falso</b> (um programa de mentira que imita o benchmark) e a execução real ficou numa tarefa separada, com o usuário presente (T10).",
-    "(26/11) <b>Um resultado diferente de 44/45 não prova defeito no app</b>, porque o agente não responde sempre igual; por isso, o número da execução real é tratado como dado a analisar (T11), não como falha.",
-    "(27/11) <b>Um erro relatado sem rastro precisa de evidência antes de correção</b>; por isso, antes de mexer no código, a sessão conferiu o servidor do modelo, os registros e o CSV, e constatou que a execução nem chegou a começar.",
-    "(27/11) <b>O usuário precisa acompanhar o raciocínio sem ler o código</b>; por isso, foi criado este relatório semanal, atualizado no fim de toda sessão, com uma parte da cota de uso reservada para ele."
+  "como_ler": "Este relatório é material de estudo, não ata. Comece pelo mapa (seção 2), que mostra todas as peças do projeto e destaca em verde o que mudou na semana. Depois leia cada lição da seção 3: o problema, a ideia, o funcionamento e o trecho real do código. No fim, responda às perguntas da seção 8 sem olhar; as respostas estão na última página. Todo termo técnico é explicado na primeira vez que aparece e está reunido no glossário.",
+  "resumo": [
+    "O painel ganhou um botão que <b>roda o benchmark sozinho</b>, sem precisar de uma sessão do Claude: ele confere o ambiente, pede confirmação e acompanha a execução com uma barra de progresso.",
+    "As regras do botão (pode ou não pode executar, quanto já andou) ficaram num arquivo separado da tela, <b>execucao.py</b>, e por isso puderam ser testadas sem abrir o navegador.",
+    "O benchmark agora roda como um <b>processo em segundo plano</b>: um programa à parte, que escreve o andamento num arquivo enquanto a página continua respondendo.",
+    "A primeira execução real pelo botão (27/11/2026) não começou. A investigação mostrou que nada chegou ao modelo nem ao CSV; falta saber onde o erro apareceu.",
+    "Foi criado este relatório semanal, com uma parte da cota de uso reservada para ele."
   ],
-  "sessoes": [
+  "mapa": {
+    "texto": "O projeto tem três camadas. Em cima, o <b>painel</b>, que é o que você vê no navegador. No meio, o <b>benchmark</b>, que aplica as provas e anota as notas. Embaixo, o <b>agente</b> e o <b>modelo</b>, que são o aluno sendo avaliado. As setas mostram quem chama quem. Nesta semana, a novidade é o caminho da direita: da página Executar até o benchmark rodando sozinho.",
+    "diagrama": {
+      "titulo": "Mapa do projeto em 27/11/2026: quem chama quem.",
+      "colunas": 3,
+      "nos": [
+        {
+          "id": "voce",
+          "texto": "Você\nabre o painel no navegador",
+          "linha": 0,
+          "coluna": 1,
+          "tipo": "externo"
+        },
+        {
+          "id": "painel",
+          "texto": "Painel (app.py)\nmenu com duas páginas",
+          "linha": 1,
+          "coluna": 1
+        },
+        {
+          "id": "visao",
+          "texto": "Visão geral\ndashboard.py: gráficos e números",
+          "linha": 2,
+          "coluna": 0
+        },
+        {
+          "id": "executar",
+          "texto": "Página Executar\nconfirmação, botão e barra de progresso",
+          "linha": 2,
+          "coluna": 1,
+          "tipo": "novo"
+        },
+        {
+          "id": "regras",
+          "texto": "Regras e processo\nexecucao.py: pode executar? quanto andou?",
+          "linha": 2,
+          "coluna": 2,
+          "tipo": "novo"
+        },
+        {
+          "id": "csv",
+          "texto": "resultados.csv\ntodas as execuções já feitas",
+          "linha": 3,
+          "coluna": 0,
+          "tipo": "dados"
+        },
+        {
+          "id": "bench",
+          "texto": "Benchmark\nbenchmark.py: 15 casos em 3 ordens",
+          "linha": 3,
+          "coluna": 2
+        },
+        {
+          "id": "log",
+          "texto": "Log da execução\numa linha por resposta; a página relê a cada 2 s",
+          "linha": 4,
+          "coluna": 1,
+          "tipo": "dados"
+        },
+        {
+          "id": "agente",
+          "texto": "Agente de gastos\nagente.py: mensagem vira dados",
+          "linha": 4,
+          "coluna": 2
+        },
+        {
+          "id": "ollama",
+          "texto": "Ollama 0.40.4\nservidor local do modelo",
+          "linha": 5,
+          "coluna": 2,
+          "tipo": "externo"
+        }
+      ],
+      "ligacoes": [
+        {
+          "de": "voce",
+          "para": "painel"
+        },
+        {
+          "de": "painel",
+          "para": "visao"
+        },
+        {
+          "de": "painel",
+          "para": "executar"
+        },
+        {
+          "de": "executar",
+          "para": "regras"
+        },
+        {
+          "de": "regras",
+          "para": "bench",
+          "rotulo": "inicia em segundo plano"
+        },
+        {
+          "de": "bench",
+          "para": "csv",
+          "rotulo": "grava 45 linhas"
+        },
+        {
+          "de": "csv",
+          "para": "visao",
+          "rotulo": "lido"
+        },
+        {
+          "de": "bench",
+          "para": "log",
+          "rotulo": "escreve"
+        },
+        {
+          "de": "log",
+          "para": "executar"
+        },
+        {
+          "de": "bench",
+          "para": "agente"
+        },
+        {
+          "de": "agente",
+          "para": "ollama",
+          "rotulo": "pergunta"
+        }
+      ]
+    },
+    "componentes": [
+      {
+        "nome": "Painel (app.py)",
+        "o_que_e": "o programa em Streamlit que você abre no navegador. Ele só monta o menu e entrega cada página.",
+        "analogia": "a recepção de um prédio, que indica a sala certa."
+      },
+      {
+        "nome": "Visão geral (dashboard.py)",
+        "o_que_e": "a página dos gráficos. Ela só lê o CSV e nunca grava nada."
+      },
+      {
+        "nome": "Página Executar",
+        "novo": true,
+        "o_que_e": "a tela do botão. Mostra se o ambiente está pronto, pede a confirmação e exibe o progresso.",
+        "analogia": "o painel de um elevador: você aperta o botão e vê os andares passando, mas não puxa os cabos."
+      },
+      {
+        "nome": "Regras e processo (execucao.py)",
+        "novo": true,
+        "o_que_e": "as decisões e o encanamento por trás do botão, sem nenhuma tela. É o que realmente lança e acompanha o benchmark.",
+        "analogia": "a torre de controle: autoriza a decolagem e acompanha o voo."
+      },
+      {
+        "nome": "Benchmark (benchmark.py)",
+        "o_que_e": "aplica os 15 casos de teste ao agente, em 3 ordens dos exemplos, compara com o gabarito e grava o resultado."
+      },
+      {
+        "nome": "Agente (agente.py) e Ollama",
+        "o_que_e": "o aluno avaliado. O agente monta a pergunta; o Ollama é o programa que roda o modelo de linguagem no seu computador, de graça e sem internet."
+      },
+      {
+        "nome": "resultados.csv e o log",
+        "o_que_e": "dois arquivos. O CSV guarda tudo para sempre; o log é passageiro e serve só para a página saber quanto a execução já andou."
+      }
+    ]
+  },
+  "licoes": [
     {
+      "titulo": "Separar as regras da tela",
       "data": "26/11/2026",
       "sessao": "Dia 17",
-      "titulo": "Botão Executar e barra de progresso",
-      "feito": [
-        "Conferência, pela linha de comando e sem rodar o modelo, de que o rótulo escolhido na hora funciona (T04).",
-        "Regras da execução num arquivo próprio: ler o progresso e decidir se a execução pode começar. As duas funções foram escritas pela sessão, a pedido do usuário, e explicadas linha por linha (T05 e T06).",
-        "Lançamento e acompanhamento do benchmark em segundo plano (T07).",
-        "Página Executar com rótulo, confirmação, botão, barra de progresso, resultado final e botão \"Nova execução\" (T08 e T09)."
+      "em_uma_frase": "Tudo o que é decisão (pode ou não pode) fica numa função sem tela, que devolve o motivo em português; a página só mostra o que a função respondeu.",
+      "problema": "O botão Executar grava 45 linhas no CSV oficial, e isso é difícil de desfazer. Antes de liberá-lo, é preciso conferir várias coisas: se já não há uma execução rodando, se o Ollama certo está ligado, se o rótulo é válido e se ele já não foi usado. Se essas conferências ficassem misturadas com o código da tela, só daria para testá-las abrindo o navegador e clicando, o que é lento e fácil de esquecer.",
+      "ideia": "Aplicar a <b>separação de responsabilidades</b> (cada parte do programa cuida de uma coisa só). As regras viram uma <b>função</b> (um bloco de código com nome, que recebe dados e devolve uma resposta) chamada pode_executar, num arquivo sem tela. Ela recebe a versão do Ollama, o rótulo, quantas linhas já existem com esse rótulo e se há algo em andamento, e devolve None quando pode, ou o motivo quando não pode. Devolver o motivo, e não só sim ou não, é o que permite à página explicar ao usuário por que o botão está bloqueado.",
+      "como_funciona": [
+        "A página junta as informações (versão do Ollama, rótulo digitado, linhas já gravadas) e chama pode_executar.",
+        "A função testa as regras numa ordem fixa. A primeira que falhar encerra a função na hora, devolvendo o motivo (isso se chama <b>retorno antecipado</b>).",
+        "Se nenhuma regra falhar, a função chega ao fim e devolve None, que em Python significa \"nada\": não há motivo para bloquear.",
+        "A página olha a resposta: se veio um texto, mostra-o como aviso e desativa o botão; se veio None, mostra a caixa de confirmação."
       ],
-      "por_que": "Separar as regras (o que pode e o que não pode) da tela permite testá-las sozinhas e com rapidez; a tela fica só com a tarefa de mostrar e perguntar.",
-      "resultado": "Nove das 13 tarefas concluídas, todas com testes automáticos passando. Nada foi gravado no CSV: a execução real ficou para o dia seguinte.",
-      "tecnico": "execucao.py (testar_execucao.py 15/15 e testar_processo.py 13/13); app_pages/executar.py (testar_executar.py 33/33); commits de 1cbd683 a 2ad42da."
+      "codigo": {
+        "arquivo": "execucao.py",
+        "linha_inicial": 105,
+        "linha_final": 135,
+        "explicacao": [
+          "Linha 105: a definição da função. em_andamento=False é um <b>valor padrão</b>: quem chama pode omitir esse argumento.",
+          "Linhas 110 a 111: a regra mais urgente vem primeiro. Se já há execução rodando, nada mais importa.",
+          "Linhas 114 a 121: duas regras sobre o Ollama. \"is None\" pergunta se o valor é o nada do Python, ou seja, ninguém respondeu.",
+          "Linhas 125 a 127: reaproveita rotulo_invalido, escrita em 20/11/2026, em vez de repetir as regras do rótulo. O resultado é guardado numa variável para a função ser chamada uma vez só.",
+          "Linha 135: se o programa chegou até aqui, todas as regras passaram."
+        ],
+        "trecho": "def pode_executar(versao_ollama, rotulo, ja_gravadas, em_andamento=False):\n    \"\"\"Devolve None se pode executar; senão, o motivo (texto em português).\"\"\"\n    exigida = ambiente.VERSAO_OLLAMA\n\n    # Regra 1: não começa uma execução por cima de outra.\n    if em_andamento:\n        return \"Já há uma execução em andamento. Espere ela terminar.\"\n\n    # Regra 2: o Ollama fixado precisa estar ligado.\n    if versao_ollama is None:\n        return (f\"O Ollama {exigida} não está ligado. \"\n                \"Ligue-o com iniciar_ollama.bat e recarregue a página.\")\n\n    # Regra 3: ligado, mas em outra versão (os resultados não seriam comparáveis).\n    if versao_ollama != exigida:\n        return (f\"O Ollama respondeu na versão {versao_ollama}, \"\n                f\"mas o benchmark exige a {exigida}.\")\n\n    # Regra 4: rótulo inválido. Guarda o motivo numa variável para chamar\n    # rotulo_invalido() uma vez só e devolver exatamente o texto dela.\n    motivo_rotulo = rotulo_invalido(rotulo)\n    if motivo_rotulo is not None:\n        return motivo_rotulo\n\n    # Regra 5: rótulo já usado no CSV (gravar de novo misturaria duas execuções).\n    if ja_gravadas > 0:\n        return (f\"O rótulo '{rotulo}' já tem {ja_gravadas} linhas gravadas no CSV. \"\n                \"Escolha outro rótulo.\")\n\n    # Nenhuma regra barrou: pode executar.\n    return None"
+      },
+      "python": [
+        "<b>f-string</b>: o texto com f na frente, como f\"O Ollama {exigida}...\", que encaixa o valor de uma variável dentro do texto.",
+        "<b>return</b> no meio da função: encerra a função imediatamente. É o que faz a primeira regra que falha ser a que decide.",
+        "<b>None</b>: o valor que representa \"nada\". Compare sempre com \"is None\", não com \"== None\"."
+      ],
+      "alternativas": [
+        "Devolver True ou False: descartado, porque a página não saberia qual mensagem mostrar e teria de repetir as regras.",
+        "Escrever as regras direto na página: descartado, porque só daria para testá-las pelo navegador."
+      ],
+      "como_sabemos": "O arquivo testar_execucao.py chama a função com 15 combinações (Ollama desligado, versão errada, rótulo vazio, rótulo repetido, tudo certo...) e confere cada resposta. Roda em menos de um segundo, sem navegador e sem modelo: 15 de 15."
     },
     {
+      "titulo": "Rodar o benchmark em segundo plano",
+      "data": "26/11/2026",
+      "sessao": "Dia 17",
+      "em_uma_frase": "O botão não roda o benchmark dentro da página: ele lança um segundo programa, que escreve o andamento num arquivo, e a página só lê esse arquivo de tempos em tempos.",
+      "problema": "Uma execução leva de 4 a 5 minutos. Se a página rodasse o benchmark dentro de si, ela ficaria congelada esse tempo todo, sem conseguir mostrar progresso nenhum. Além disso, no Streamlit a página é refeita do zero a cada clique; um trabalho longo dentro dela seria interrompido.",
+      "ideia": "Usar um <b>processo filho</b>. Um processo é um programa em execução; o painel é um processo e pode pedir ao sistema operacional que inicie outro, o filho, que roda em paralelo. Em Python, isso se faz com <b>subprocess.Popen</b>. A saída do filho (tudo o que o benchmark imprimiria na tela) é desviada para um arquivo de <b>log</b> (um diário de bordo em texto). O pai nunca espera o filho terminar: de 2 em 2 segundos ele pergunta \"já terminou?\" com o método <b>poll</b> e lê o log para saber quanto andou.",
+      "diagrama": {
+        "titulo": "O caminho de um clique em Executar até o resultado.",
+        "colunas": 2,
+        "nos": [
+          {
+            "id": "clique",
+            "texto": "Você clica em Executar",
+            "linha": 0,
+            "coluna": 0,
+            "tipo": "externo"
+          },
+          {
+            "id": "iniciar",
+            "texto": "iniciar(rotulo)\ncria o arquivo de log e lança o processo filho",
+            "linha": 1,
+            "coluna": 0,
+            "tipo": "novo"
+          },
+          {
+            "id": "filho",
+            "texto": "benchmark.py roda sozinho\n45 respostas, de 4 a 5 minutos",
+            "linha": 2,
+            "coluna": 0
+          },
+          {
+            "id": "log",
+            "texto": "Arquivo de log\numa linha por resposta",
+            "linha": 2,
+            "coluna": 1,
+            "tipo": "dados"
+          },
+          {
+            "id": "situacao",
+            "texto": "situacao(execucao)\npergunta se terminou e lê o log",
+            "linha": 3,
+            "coluna": 0,
+            "tipo": "novo"
+          },
+          {
+            "id": "terminou",
+            "texto": "Terminou?",
+            "linha": 4,
+            "coluna": 0,
+            "tipo": "decisao"
+          },
+          {
+            "id": "fim",
+            "texto": "Mostra o acerto ou o erro\ne o botão Nova execução",
+            "linha": 5,
+            "coluna": 0
+          }
+        ],
+        "ligacoes": [
+          {
+            "de": "clique",
+            "para": "iniciar"
+          },
+          {
+            "de": "iniciar",
+            "para": "filho",
+            "rotulo": "Popen"
+          },
+          {
+            "de": "filho",
+            "para": "log",
+            "rotulo": "escreve"
+          },
+          {
+            "de": "log",
+            "para": "situacao",
+            "rotulo": "lido"
+          },
+          {
+            "de": "situacao",
+            "para": "terminou"
+          },
+          {
+            "de": "terminou",
+            "para": "situacao",
+            "lado": "esquerda",
+            "rotulo": "não: espera 2 s e repete"
+          },
+          {
+            "de": "terminou",
+            "para": "fim",
+            "rotulo": "sim"
+          }
+        ]
+      },
+      "codigo": {
+        "arquivo": "execucao.py",
+        "linha_inicial": 186,
+        "linha_final": 199,
+        "explicacao": [
+          "Linha 187: \"with open(...)\" abre o arquivo de log e garante que ele será fechado no fim do bloco. \"wb\" significa escrever em modo binário (bytes).",
+          "Linha 189: o comando a rodar. \"comando or montar_comando(rotulo)\" usa o comando falso quando um teste o fornece e, se não, o benchmark real.",
+          "Linhas 191 a 192: stdout é a saída normal do programa e stderr a saída de erros. As duas vão para o mesmo arquivo de log.",
+          "Linha 193: o filho não recebe nada pelo teclado (DEVNULL é um \"buraco\" vazio).",
+          "Linha 195: no Windows, impede que uma janela preta de console se abra.",
+          "Linhas 198 a 199: devolve um <b>dicionário</b> (pares nome e valor) com tudo o que a página precisa guardar sobre a execução."
+        ],
+        "trecho": "    # O pai abre o log só para entregá-lo ao Popen; o filho mantém a cópia dele.\n    with open(caminho_log, \"wb\") as arquivo_log:\n        processo = subprocess.Popen(\n            comando or montar_comando(rotulo),\n            cwd=PASTA_PROJETO,\n            stdout=arquivo_log,\n            stderr=subprocess.STDOUT,\n            stdin=subprocess.DEVNULL,\n            env=ambiente_filho,\n            creationflags=flags,\n        )\n\n    return {\"processo\": processo, \"rotulo\": rotulo,\n            \"log\": caminho_log, \"inicio\": inicio}"
+      },
+      "python": [
+        "<b>with</b>: abre um recurso e o fecha sozinho no fim do bloco, mesmo se der erro.",
+        "<b>dicionário</b>: {\"processo\": ..., \"log\": ...}; você pega um valor pelo nome, como execucao[\"log\"].",
+        "<b>argumentos nomeados</b>: cwd=..., stdout=...; deixam claro o papel de cada valor passado à função."
+      ],
+      "alternativas": [
+        "Rodar o benchmark dentro da página: descartado, porque a página congelaria por minutos.",
+        "Usar threads (tarefas paralelas dentro do mesmo programa): descartado, porque o Streamlit refaz a página a cada clique e a tarefa ficaria presa a ela; um processo separado é independente e roda igual ao comando de terminal já testado."
+      ],
+      "como_sabemos": "testar_processo.py lança comandos falsos (programas curtos que imitam o benchmark, sem modelo) e confere o log, o progresso e o código de saída: 13 de 13. A execução com o benchmark real é justamente a T10, ainda pendente."
+    },
+    {
+      "titulo": "Ler o progresso no log",
+      "data": "26/11/2026",
+      "sessao": "Dia 17",
+      "em_uma_frase": "A função lê o log de trás para a frente e para na primeira linha de progresso completa; uma linha cortada no meio é ignorada.",
+      "problema": "O benchmark escreve uma linha por resposta, por exemplo \"[ 7/45] C03 #1 (original) -> registrar (2.8 s)\". A barra precisa saber o 7 e o 45. Mas a página lê o arquivo enquanto o benchmark ainda está escrevendo nele, e pode pegar a última linha pela metade, como \"[ 7/4\". Ler 4 em vez de 45 faria a barra pular para quase 100%.",
+      "ideia": "Esse risco tem nome: <b>condição de corrida</b> (dois programas mexendo na mesma coisa ao mesmo tempo, com resultado que depende de quem chega primeiro). A defesa é ler de forma <b>defensiva</b>: só aceitar uma linha se ela estiver completa, ou seja, se tiver o \"]\" e dois números válidos. Lendo de trás para a frente, a primeira linha aceita é a mais recente.",
+      "codigo": {
+        "arquivo": "execucao.py",
+        "linha_inicial": 52,
+        "linha_final": 83,
+        "explicacao": [
+          "Linha 52: splitlines corta o texto numa <b>lista</b> de linhas, aceitando a quebra de linha do Windows (\\r\\n) e a do Linux (\\n).",
+          "Linha 55: reversed percorre a lista do fim para o começo.",
+          "Linhas 58 a 59: continue pula para a próxima volta do laço, descartando linhas que não começam com \"[\".",
+          "Linhas 62 a 64: find devolve -1 quando não acha o \"]\". É assim que a linha cortada é reconhecida e pulada.",
+          "Linha 67: linha[1:fim] é um <b>fatiamento</b>: pega do segundo caractere até antes do \"]\", ou seja, \" 7/45\".",
+          "Linhas 73 a 77: int converte texto em número. Se o texto não for número, o Python levanta ValueError, e o except pula a linha em vez de quebrar o programa.",
+          "Linha 83: se nenhuma linha serviu (log vazio ou só avisos), devolve (0, 0)."
+        ],
+        "trecho": "    linhas = texto_log.splitlines()\n\n    # 2. Lê de trás para a frente: a primeira linha válida é a mais recente.\n    for linha in reversed(linhas):\n        # 3. Triagem: tira os espaços das pontas e pula o que não começa com \"[\".\n        linha = linha.strip()\n        if not linha.startswith(\"[\"):\n            continue\n\n        # 4a. Procura o \"]\". Sem ele, a linha foi cortada no meio: pula.\n        fim = linha.find(\"]\")\n        if fim == -1:\n            continue\n\n        # 4b. Pega o miolo entre \"[\" e \"]\" (ex.: \" 7/45\") e separa na barra.\n        miolo = linha[1:fim]\n        partes = miolo.split(\"/\")\n        if len(partes) != 2:\n            continue\n\n        # 4c. Converte os dois pedaços em número; se algum não for número, pula.\n        try:\n            feitas = int(partes[0])\n            total = int(partes[1])\n        except ValueError:\n            continue\n\n        # 5. Achou a última linha de progresso completa: devolve e encerra.\n        return (feitas, total)\n\n    # Nenhuma linha serviu (log vazio ou só com avisos).\n    return (0, 0)"
+      },
+      "python": [
+        "<b>laço for</b> com <b>continue</b>: repete o bloco para cada item; continue abandona a volta atual e vai para a próxima.",
+        "<b>try/except</b>: tenta um trecho que pode falhar e diz o que fazer se falhar.",
+        "<b>tupla</b>: (feitas, total), dois valores devolvidos juntos, que quem chama separa com \"feitas, total = ler_progresso(texto)\"."
+      ],
+      "como_sabemos": "testar_execucao.py inclui logs com a última linha cortada, linhas de aviso misturadas e log vazio, e confere que a resposta é sempre a última linha completa."
+    },
+    {
+      "titulo": "A página Executar: confirmação e atualização a cada 2 segundos",
+      "data": "26/11/2026",
+      "sessao": "Dia 17",
+      "em_uma_frase": "No Streamlit a página é refeita do zero a cada clique; por isso, o que precisa sobreviver entre uma recarga e outra fica num cache, e só o pedaço do progresso se atualiza sozinho.",
+      "problema": "O Streamlit funciona de um jeito incomum: a cada clique, ele roda o arquivo da página inteiro de novo, de cima a baixo. Duas consequências: uma variável comum seria esquecida na recarga seguinte (a página perderia a execução que acabou de lançar), e a barra de progresso não se mexeria sozinha, porque nada recarrega a página enquanto você não clica.",
+      "ideia": "Duas ferramentas do Streamlit. <b>st.cache_resource</b> guarda um objeto e devolve sempre o mesmo, recarga após recarga; a execução lançada fica nele, como num quadro de avisos fixo na parede. <b>st.fragment(run_every=\"2s\")</b> marca uma parte da página para ser refeita sozinha a cada 2 segundos, sem refazer o resto. A confirmação é uma caixa de marcar: o botão nasce desativado e só se ativa quando a caixa está marcada.",
+      "diagrama": {
+        "titulo": "Do carregamento da página ao lançamento da execução.",
+        "colunas": 2,
+        "nos": [
+          {
+            "id": "carrega",
+            "texto": "A página é refeita\no Streamlit roda o arquivo de cima a baixo",
+            "linha": 0,
+            "coluna": 0
+          },
+          {
+            "id": "motivo",
+            "texto": "pode_executar devolveu um motivo?",
+            "linha": 1,
+            "coluna": 0,
+            "tipo": "decisao"
+          },
+          {
+            "id": "bloq",
+            "texto": "Mostra o motivo\nbotão desativado",
+            "linha": 1,
+            "coluna": 1
+          },
+          {
+            "id": "caixa",
+            "texto": "Mostra a caixa de confirmação",
+            "linha": 2,
+            "coluna": 0,
+            "tipo": "novo"
+          },
+          {
+            "id": "marcada",
+            "texto": "Caixa marcada?",
+            "linha": 3,
+            "coluna": 0,
+            "tipo": "decisao"
+          },
+          {
+            "id": "espera",
+            "texto": "Botão continua desativado",
+            "linha": 3,
+            "coluna": 1
+          },
+          {
+            "id": "lanca",
+            "texto": "Clique em Executar\niniciar() e a página é refeita",
+            "linha": 4,
+            "coluna": 0,
+            "tipo": "novo"
+          }
+        ],
+        "ligacoes": [
+          {
+            "de": "carrega",
+            "para": "motivo"
+          },
+          {
+            "de": "motivo",
+            "para": "bloq",
+            "rotulo": "sim"
+          },
+          {
+            "de": "motivo",
+            "para": "caixa",
+            "rotulo": "não"
+          },
+          {
+            "de": "caixa",
+            "para": "marcada"
+          },
+          {
+            "de": "marcada",
+            "para": "espera",
+            "rotulo": "não"
+          },
+          {
+            "de": "marcada",
+            "para": "lanca",
+            "rotulo": "sim"
+          }
+        ]
+      },
+      "codigo": {
+        "arquivo": "app_pages/executar.py",
+        "linha_inicial": 103,
+        "linha_final": 113,
+        "explicacao": [
+          "Linha 103: a página não decide nada; pergunta às regras de execucao.py.",
+          "Linhas 104 a 106: com motivo, mostra o aviso e um botão desativado (disabled=True).",
+          "Linhas 108 a 110: sem motivo, mostra a caixa de confirmação; confirmado vale True quando ela está marcada.",
+          "Linha 111: disabled=not confirmado: o botão só se ativa com a caixa marcada. O if é verdadeiro no instante do clique.",
+          "Linhas 112 a 113: guarda a execução no registro (o cache) e manda refazer a página, que agora mostrará o progresso."
+        ],
+        "trecho": "motivo = execucao.pode_executar(versao, rotulo, ja_gravadas, em_andamento)\nif motivo:\n    st.warning(motivo)\n    st.button(\"Executar\", disabled=True)\nelse:\n    confirmado = st.checkbox(\n        f\"Confirmo: acrescentar {n_linhas} linhas a `resultados/resultados.csv` \"\n        f\"com o rótulo **{rotulo}**\")\n    if st.button(\"Executar\", type=\"primary\", disabled=not confirmado):\n        registro[\"execucao\"] = execucao.iniciar(rotulo)\n        st.rerun()"
+      },
+      "python": [
+        "<b>decorador</b>: a linha com @ antes de uma função, como @st.fragment ou @st.cache_resource. Ele embrulha a função e muda o seu comportamento sem mexer no corpo dela.",
+        "<b>not</b>: inverte verdadeiro e falso; \"not confirmado\" é verdadeiro quando a caixa está desmarcada."
+      ],
+      "como_sabemos": "testar_executar.py abre a página com o AppTest do Streamlit (um navegador simulado, sem tela) e confere 33 situações, sempre com comando falso. Um ponto ficou de fora: o atalho \"Ver na Visão geral\" não funciona no AppTest e só pode ser visto no app real."
+    },
+    {
+      "titulo": "Investigar um erro sem rastro",
       "data": "27/11/2026",
       "sessao": "Dia 18",
-      "titulo": "Primeira execução pelo botão e relatório semanal",
-      "feito": [
-        "Agenda do dia gerada: T10 (execução real), T11 (conferência), T12 (documentação) e T13 (fechamento).",
-        "Servidor do modelo na versão fixada (Ollama 0.40.4) e painel ligados pela sessão; a página Executar reconheceu os dois e aceitou o rótulo novo.",
-        "O usuário relatou um erro ao executar. A investigação não achou rastro: nenhuma chamada ao modelo, nenhum registro de execução e o CSV sem mudanças desde 28/10/2026.",
-        "A pedido do usuário, criada a rotina deste relatório semanal em PDF, com conferência automática das datas e reserva de cota."
+      "em_uma_frase": "Antes de corrigir, procurar evidência camada por camada; um erro sem mensagem não diz onde está o defeito.",
+      "problema": "Na primeira execução real pelo botão, o relato foi \"deu erro\", sem a mensagem. Corrigir às cegas poderia mexer no lugar errado e criar um defeito novo.",
+      "ideia": "Seguir o caminho da execução no mapa e conferir cada camada, da mais baixa para a mais alta, procurando o rastro que ela deixaria se tivesse funcionado. Se uma camada não deixou rastro, o problema está nela ou antes dela.",
+      "diagrama": {
+        "titulo": "As três conferências feitas em 27/11/2026 e o que cada uma mostrou.",
+        "colunas": 2,
+        "nos": [
+          {
+            "id": "relato",
+            "texto": "Relato: deu erro ao executar",
+            "linha": 0,
+            "coluna": 0,
+            "tipo": "externo"
+          },
+          {
+            "id": "q1",
+            "texto": "O modelo recebeu alguma pergunta?",
+            "linha": 1,
+            "coluna": 0,
+            "tipo": "decisao"
+          },
+          {
+            "id": "r1",
+            "texto": "Não\no Ollama só respondeu consultas de versão",
+            "linha": 1,
+            "coluna": 1,
+            "tipo": "dados"
+          },
+          {
+            "id": "q2",
+            "texto": "Existe log da execução?",
+            "linha": 2,
+            "coluna": 0,
+            "tipo": "decisao"
+          },
+          {
+            "id": "r2",
+            "texto": "Não\nresultados/logs está vazia: iniciar() não rodou",
+            "linha": 2,
+            "coluna": 1,
+            "tipo": "dados"
+          },
+          {
+            "id": "q3",
+            "texto": "O CSV mudou?",
+            "linha": 3,
+            "coluna": 0,
+            "tipo": "decisao"
+          },
+          {
+            "id": "r3",
+            "texto": "Não\núltima gravação em 28/10/2026",
+            "linha": 3,
+            "coluna": 1,
+            "tipo": "dados"
+          },
+          {
+            "id": "conc",
+            "texto": "Conclusão: a execução não começou\nfalta saber onde o erro apareceu e o que dizia",
+            "linha": 4,
+            "coluna": 0
+          }
+        ],
+        "ligacoes": [
+          {
+            "de": "relato",
+            "para": "q1"
+          },
+          {
+            "de": "q1",
+            "para": "r1"
+          },
+          {
+            "de": "q1",
+            "para": "q2"
+          },
+          {
+            "de": "q2",
+            "para": "r2"
+          },
+          {
+            "de": "q2",
+            "para": "q3"
+          },
+          {
+            "de": "q3",
+            "para": "r3"
+          },
+          {
+            "de": "q3",
+            "para": "conc"
+          }
+        ]
+      },
+      "como_funciona": [
+        "Servidor do modelo: o registro do Ollama mostra cada pedido recebido. Só houve duas consultas de versão (17:53:52 e 17:53:58), nenhuma pergunta ao modelo.",
+        "Log: iniciar() sempre cria um arquivo em resultados/logs antes de lançar o processo. A pasta estava vazia.",
+        "CSV: a data de modificação de resultados.csv continuava em 28/10/2026.",
+        "Pista a conferir, ainda não confirmada: o botão fica desativado até a caixa de confirmação ser marcada (linha 111 da página); um clique com a caixa desmarcada não faz nada."
       ],
-      "por_que": "A execução real é o último critério do app que depende do usuário; sem ela, não se sabe se o botão funciona fora dos testes com comando falso.",
-      "resultado": "A T10 continua pendente, aguardando a descrição do erro (onde apareceu e o que dizia). A rotina do relatório está pronta, e esta é a primeira edição.",
-      "tecnico": "Gerador em .claude/skills/relatorio-semanal/gerar_relatorio.py; passo 5c do /encerrar-dia; limites críticos do medidor em .claude/hooks/verificar-uso.py."
+      "como_sabemos": "Ainda não sabemos a causa. O próximo passo é saber onde a mensagem apareceu (no navegador do app, no seu navegador ou no atalho da área de trabalho) e o que ela dizia."
+    },
+    {
+      "titulo": "O relatório semanal e as versões fixadas de bibliotecas",
+      "data": "27/11/2026",
+      "sessao": "Dia 18",
+      "em_uma_frase": "Uma biblioteca nova pode trocar a versão de outra que o projeto já usa; por isso, cada versão fica anotada no requirements.txt e é conferida com pip check.",
+      "problema": "Para gerar este PDF foi instalada a biblioteca reportlab. A versão mais nova (5.1.2) exige o Pillow 13, e a instalação trocou o Pillow do projeto. Só que o Streamlit, que faz o painel, só aceita Pillow abaixo de 13: o painel poderia quebrar.",
+      "ideia": "Toda biblioteca tem <b>dependências</b> (outras bibliotecas de que ela precisa), cada uma com uma faixa de versões aceitas. Quando duas pedem faixas que não se cruzam, há um <b>conflito de dependências</b>. A saída foi escolher uma versão anterior do reportlab (4.5.1), que aceita o Pillow 12, e <b>fixar as versões</b> (anotar o número exato de cada uma no requirements.txt), para quem instalar o projeto do zero receber a mesma combinação.",
+      "como_funciona": [
+        "pip install instala a biblioteca e as dependências dela, às vezes trocando versões já instaladas.",
+        "pip check confere se todas as bibliotecas instaladas estão satisfeitas umas com as outras.",
+        "Depois da troca para o reportlab 4.5.1, o pip check respondeu \"No broken requirements found\" (nenhum conflito)."
+      ],
+      "como_sabemos": "O pip check sem conflitos. O painel ainda não foi reaberto depois da troca; isso fica para a próxima execução."
+    }
+  ],
+  "glossario": [
+    {
+      "termo": "Processo",
+      "definicao": "um programa em execução. Cada processo tem sua própria memória.",
+      "no_projeto": "o painel é um processo; o benchmark lançado pelo botão é outro."
+    },
+    {
+      "termo": "Processo filho",
+      "definicao": "um processo iniciado por outro, o pai. Os dois rodam ao mesmo tempo.",
+      "no_projeto": "benchmark.py lançado por iniciar()."
+    },
+    {
+      "termo": "subprocess.Popen",
+      "definicao": "a forma, em Python, de iniciar um processo filho sem esperar que ele termine.",
+      "no_projeto": "execucao.py, linha 188."
+    },
+    {
+      "termo": "poll",
+      "definicao": "método que pergunta ao processo filho se ele já terminou. Devolve None enquanto roda e, no fim, o código de saída (0 quando deu certo).",
+      "no_projeto": "situacao(), linha 214 de execucao.py."
+    },
+    {
+      "termo": "Log",
+      "definicao": "arquivo de texto onde um programa anota o que está fazendo, como um diário de bordo.",
+      "no_projeto": "resultados/logs/execucao_<rótulo>_<data>.log."
+    },
+    {
+      "termo": "Separação de responsabilidades",
+      "definicao": "princípio de dividir um programa em partes que cuidam de uma coisa só, para cada uma poder ser entendida e testada sozinha.",
+      "no_projeto": "regras em execucao.py; tela em app_pages/executar.py."
+    },
+    {
+      "termo": "Retorno antecipado",
+      "definicao": "encerrar uma função com return assim que a resposta é conhecida, em vez de acumular condições aninhadas.",
+      "no_projeto": "pode_executar."
+    },
+    {
+      "termo": "Condição de corrida",
+      "definicao": "situação em que o resultado depende da ordem em que dois programas agem sobre a mesma coisa.",
+      "no_projeto": "a página lendo o log enquanto o benchmark escreve nele."
+    },
+    {
+      "termo": "Comando falso",
+      "definicao": "um programa de mentira usado nos testes no lugar do verdadeiro, mais rápido e sem efeitos colaterais. Em inglês, test double.",
+      "no_projeto": "os testes da página e do processo nunca rodam o modelo nem gravam no CSV."
+    },
+    {
+      "termo": "st.cache_resource",
+      "definicao": "recurso do Streamlit que guarda um objeto e devolve sempre o mesmo, mesmo quando a página é refeita.",
+      "no_projeto": "registro_execucao() em app_pages/executar.py."
+    },
+    {
+      "termo": "st.fragment",
+      "definicao": "recurso do Streamlit que marca um pedaço da página para ser refeito sozinho, de tempos em tempos, sem refazer o resto.",
+      "no_projeto": "painel_progresso, a cada 2 segundos."
+    },
+    {
+      "termo": "AppTest",
+      "definicao": "ferramenta do Streamlit que roda uma página sem navegador, para testes automáticos.",
+      "no_projeto": "testar_executar.py e testar_dashboard.py."
+    },
+    {
+      "termo": "Dependência",
+      "definicao": "biblioteca de que outra biblioteca precisa para funcionar.",
+      "no_projeto": "o reportlab depende do Pillow; o Streamlit também."
+    },
+    {
+      "termo": "Fixar versões",
+      "definicao": "anotar o número exato de cada biblioteca, para o projeto ser instalado sempre igual.",
+      "no_projeto": "requirements.txt."
+    },
+    {
+      "termo": "Rótulo",
+      "definicao": "o nome com que uma execução é gravada no CSV. Com hífen (v15-repeticao) vira lote de calibração no painel; sem hífen, conta como versão oficial.",
+      "no_projeto": "opção --rotulo do benchmark e campo da página Executar."
     }
   ],
   "decisoes": [
-    {"data": "26/11/2026", "quem": "usuário", "texto": "As funções de leitura do progresso e de permissão para executar foram escritas pela sessão, com explicação linha por linha, em vez de escritas por ele."},
-    {"data": "26/11/2026", "quem": "sessão, registrado na retomada", "texto": "Se a execução real der resultado diferente de 44/45, isso é dado para a conferência (T11), não falha da tarefa."},
-    {"data": "27/11/2026", "quem": "usuário", "texto": "Relatório semanal em PDF, atualizado no fim de toda sessão, com datas corretas em tudo e cota reservada para gerá-lo."},
-    {"data": "27/11/2026", "quem": "sessão", "texto": "Para reservar a cota, o aviso crítico do medidor passou de 90% para 85% da janela de 5 horas e de 95% para 93% da semana."},
-    {"data": "27/11/2026", "quem": "sessão", "texto": "O PDF usa a biblioteca reportlab na versão 4.5.1, e não na mais nova, para não quebrar o painel."}
+    {
+      "data": "26/11/2026",
+      "quem": "usuário",
+      "texto": "As funções ler_progresso e pode_executar foram escritas pela sessão, com explicação linha por linha, em vez de escritas por ele."
+    },
+    {
+      "data": "26/11/2026",
+      "quem": "sessão, registrado na retomada",
+      "texto": "Se a execução real der resultado diferente de 44/45, isso é dado para a conferência (T11), não falha da tarefa."
+    },
+    {
+      "data": "27/11/2026",
+      "quem": "usuário",
+      "texto": "Relatório semanal em PDF, atualizado no fim de toda sessão, com datas corretas e cota reservada."
+    },
+    {
+      "data": "27/11/2026",
+      "quem": "usuário",
+      "texto": "O relatório deve ensinar: expor as mudanças, explicar cada termo técnico e usar fluxogramas para os conceitos de engenharia e arquitetura. O doc-projeto-pdf continua sendo o registro de ideias."
+    },
+    {
+      "data": "27/11/2026",
+      "quem": "sessão",
+      "texto": "Para reservar a cota, o aviso crítico do medidor passou de 90% para 85% da janela de 5 horas e de 95% para 93% da semana."
+    },
+    {
+      "data": "27/11/2026",
+      "quem": "sessão",
+      "texto": "O PDF usa o reportlab 4.5.1, e não o 5.x, para não quebrar o painel."
+    }
   ],
   "aprendizados": [
-    "(26/11) O atalho \"Ver na Visão geral\" não roda no teste automático do painel. É um <b>ponto cego</b> (algo que os testes não conseguem ver) e só pode ser conferido no app de verdade.",
-    "(27/11) Instalar a versão mais nova da biblioteca de PDF trocou uma dependência (Pillow) por outra que o painel não aceita. A correção foi usar uma versão anterior da biblioteca. Lição: depois de instalar algo, conferir as dependências com pip check.",
-    "(27/11) Um \"deu erro\" sem mensagem não basta para corrigir. Primeiro é preciso saber onde ele apareceu e o que dizia; até agora, os sinais indicam que a execução nem começou."
+    "(26/11) Teste automático tem <b>ponto cego</b> (algo que ele não consegue ver): o atalho \"Ver na Visão geral\" não roda no AppTest. Por isso a execução real com você presente continua necessária.",
+    "(27/11) Instalar uma biblioteca pode quebrar outra. Depois de qualquer pip install, rode pip check.",
+    "(27/11) \"Deu erro\" sem mensagem não basta. A mensagem de erro (em Python, o <b>traceback</b>, a lista de chamadas que levou ao erro) costuma dizer o arquivo e a linha do problema."
   ],
   "proximos": [
-    "<b>Descobrir</b> onde apareceu o erro da execução de 27/11/2026 e o que ele dizia, e corrigir a causa.",
-    "<b>Executar</b> o v15-repeticao pelo botão (T10) e conferir o atalho \"Ver na Visão geral\".",
-    "<b>Conferir</b> o resultado da execução real e a suíte de testes (T11).",
-    "<b>Documentar</b> o uso da página Executar no README e no CLAUDE.md (T12) e fechar o app (T13).",
-    "<b>Medir</b> quanto da cota cada atualização deste relatório consome e ajustar a reserva, se preciso."
+    "<b>Descobrir</b> onde apareceu o erro de 27/11/2026 e o que ele dizia. Você vai aprender a ler um traceback e a seguir o erro até a linha que o causou.",
+    "<b>Executar</b> o v15-repeticao pelo botão (T10). Você vai ver o processo filho funcionando de verdade e o log crescendo.",
+    "<b>Conferir</b> o resultado e a suíte de testes (T11). Você vai comparar a repetição com a v15 original e ver, nos dados, quanto o agente varia sem nenhuma mudança.",
+    "<b>Documentar</b> a página Executar no README e no CLAUDE.md (T12) e fechar o app (T13)."
+  ],
+  "perguntas": [
+    {
+      "pergunta": "Por que o benchmark roda num processo filho, e não dentro da própria página?",
+      "resposta": "Porque a execução leva de 4 a 5 minutos: dentro da página, ela congelaria a tela e seria interrompida, já que o Streamlit refaz a página a cada clique. O processo filho roda à parte, e a página só lê o log dele."
+    },
+    {
+      "pergunta": "O que pode_executar devolve quando está tudo certo? E por que ela devolve um texto, e não True ou False, quando algo está errado?",
+      "resposta": "Devolve None. O texto é o motivo do bloqueio, que a página mostra como está; com True ou False, a página não saberia o que dizer ao usuário."
+    },
+    {
+      "pergunta": "Por que ler_progresso lê o log de trás para a frente e ignora linhas sem \"]\"?",
+      "resposta": "De trás para a frente, a primeira linha válida é a mais recente. A linha sem \"]\" pode estar sendo escrita naquele instante (condição de corrida); aceitá-la daria um número errado, como 4 em vez de 45."
+    },
+    {
+      "pergunta": "Sem o st.cache_resource, o que aconteceria logo depois do clique em Executar?",
+      "resposta": "A página seria refeita do zero e esqueceria a execução lançada: o benchmark continuaria rodando, mas a página não teria como acompanhá-lo."
+    },
+    {
+      "pergunta": "Por que os testes da página usam um comando falso em vez do benchmark de verdade?",
+      "resposta": "Porque o verdadeiro leva minutos, depende do Ollama ligado e grava no CSV oficial. O falso roda em segundos e não deixa rastro, então os testes podem rodar a cada mudança."
+    },
+    {
+      "pergunta": "Na investigação de 27/11/2026, que evidência mostrou que iniciar() nem chegou a rodar?",
+      "resposta": "A pasta resultados/logs estava vazia: iniciar() sempre cria o arquivo de log antes de lançar o processo."
+    }
   ]
 }

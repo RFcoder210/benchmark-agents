@@ -11,7 +11,7 @@ O que faz:
     nível e por janela, para não repetir (estado em .plano/estado/alertas.json).
 
 Níveis (ajuste nas constantes abaixo):
-    janela de 5 h : 80% = checkpoint preventivo | 85% = encerrar o dia (reserva para o relatório semanal)
+    janela de 5 h : 75% = checkpoint preventivo | 80% = encerrar o dia (reserva para o relatório semanal)
     semana        : 85% = reduzir o ritmo       | 93% = encerrar o dia (reserva para o relatório semanal)
     contexto      : 70% do orçamento de 200 mil tokens = checkpoint + compactar
 """
@@ -21,8 +21,8 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-ALERTA_5H = 80
-CRITICO_5H = 85      # era 90; reserva cota para o relatório semanal em PDF (27/11/2026)
+ALERTA_5H = 75       # era 80 (27/11/2026)
+CRITICO_5H = 80      # era 90; reserva ~20 p.p. para o relatório semanal em PDF (27/11/2026)
 ALERTA_SEMANA = 85
 CRITICO_SEMANA = 93  # era 95; mesma reserva
 ALERTA_CTX = 70
