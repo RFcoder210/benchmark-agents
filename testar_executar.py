@@ -65,9 +65,14 @@ def comando_falso(rotulo):
 
 # Número esperado de execuções do rótulo atual, contado direto do CSV,
 # de forma independente da página.
-with open(ARQUIVO_CSV, encoding="utf-8-sig", newline="") as arquivo:
-    esperadas = sum(1 for linha in csv.DictReader(arquivo, delimiter=";")
-                    if linha["versao_agente"] == VERSAO_AGENTE)
+def contar_csv(rotulo):
+    """Linhas do CSV com este rótulo, contadas sem usar o código da página."""
+    with open(ARQUIVO_CSV, encoding="utf-8-sig", newline="") as arquivo:
+        return sum(1 for linha in csv.DictReader(arquivo, delimiter=";")
+                   if linha["versao_agente"] == rotulo)
+
+
+esperadas = contar_csv(VERSAO_AGENTE)
 
 # Estado do CSV e dos brutos antes de qualquer teste (para provar que nada foi gravado).
 stat_antes = os.stat(ARQUIVO_CSV)
@@ -87,8 +92,15 @@ try:
     conferir("desligado: nenhuma caixa de confirmação", len(pagina.checkbox) == 0)
 
     # --- Cenário 2: rótulo padrão e rótulo já gravado ----------------------------------
+    sugerido = pagina.text_input[0].value
     conferir("rótulo: campo começa com o rótulo de repetição",
-             pagina.text_input[0].value == f"{VERSAO_AGENTE}-repeticao")
+             sugerido.startswith(f"{VERSAO_AGENTE}-repeticao"), sugerido)
+    conferir("rótulo: sugestão ainda não existe no CSV", contar_csv(sugerido) == 0, sugerido)
+    # Rótulo repetido: o aviso sugere outro rótulo, nunca o próprio recusado.
+    pagina = rodar_pagina("127.0.0.1:1", f"{VERSAO_AGENTE}-repeticao")
+    aviso = " ".join(w.value for w in pagina.warning if "já tem" in w.value)
+    conferir("rótulo repetido: aviso não sugere o próprio rótulo",
+             aviso and f"como **{VERSAO_AGENTE}-repeticao**" not in aviso, aviso[:120])
     pagina = rodar_pagina("127.0.0.1:1", VERSAO_AGENTE)
     conferir("rótulo atual: aviso de rótulo já gravado", any(
         f"já tem {esperadas} execuções" in w.value for w in pagina.warning),
@@ -163,6 +175,7 @@ try:
     # --- Cenário 7: progresso e resultado (comando falso lento, depois com erro) -------
     def comando_lento(rotulo):
         codigo = ("import time\n"
+                  "time.sleep(2)\n"  # simula o modelo carregando antes da 1ª resposta
                   "for i in (1, 2, 3):\n"
                   "    print(f'[ {i}/3] C01 #1 (original) -> registrar (0.1 s)', flush=True)\n"
                   "    time.sleep(1)\n"
@@ -199,7 +212,11 @@ try:
     if execucao.montar_comando is comando_lento and ambiente.versao_ollama is ollama_simulado:
         botao_executar(pagina).click().run()
         pagina.run()  # processo ainda vivo (dura ~3 s)
-        conferir("andamento: há barra de progresso", len(pagina.get("progress")) >= 1)
+        barras = pagina.get("progress")
+        conferir("andamento: há barra de progresso", len(barras) >= 1)
+        texto_barra = barras[0].proto.text if barras else ""
+        conferir("aquecimento: barra diz 'Carregando o modelo', não '0 de 0'",
+                 "Carregando o modelo" in texto_barra and "0 de 0" not in texto_barra, texto_barra)
         botao = botao_executar(pagina)
         conferir("andamento: botão Executar desligado", botao is not None and botao.disabled)
         conferir("andamento: aviso com 'andamento'",

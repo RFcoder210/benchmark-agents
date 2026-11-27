@@ -39,6 +39,17 @@ def contar_execucoes(rotulo, caminho=ARQUIVO_CSV):
                    if linha["versao_agente"] == rotulo)
 
 
+def rotulo_livre(base, caminho=ARQUIVO_CSV):
+    """Primeiro rótulo ainda sem linhas no CSV: base, base2, base3...
+    Ex.: se v15-repeticao já existe, devolve v15-repeticao2."""
+    candidato, numero = base, 1
+    # Laço while: repete enquanto o candidato já estiver no CSV.
+    while contar_execucoes(candidato, caminho):
+        numero += 1
+        candidato = f"{base}{numero}"
+    return candidato
+
+
 @st.cache_resource
 def registro_execucao():
     """Dicionário compartilhado que guarda a execução lançada.
@@ -72,8 +83,10 @@ else:
 # --- 2. Rótulo da execução ---------------------------------------------------------
 st.subheader("2. Rótulo da execução")
 st.write(f"Agente em uso: **{VERSAO_AGENTE}** (definido em `benchmark.py`).")
+# Sugestão de rótulo de repetição que ainda não existe no CSV (v15-repeticao, -repeticao2...).
+sugestao = rotulo_livre(f"{VERSAO_AGENTE}-repeticao")
 rotulo = st.text_input(
-    "Rótulo da execução", value=f"{VERSAO_AGENTE}-repeticao",
+    "Rótulo da execução", value=sugestao,
     help="Nome que identifica estas linhas no CSV. Com hífen (ex.: v15-repeticao), "
          "vira lote de calibração no painel; sem hífen, conta como versão oficial.")
 ja_gravadas = contar_execucoes(rotulo)
@@ -81,7 +94,7 @@ ja_gravadas = contar_execucoes(rotulo)
 if ja_gravadas:
     st.warning(f"O rótulo **{rotulo}** já tem {ja_gravadas} execuções no CSV. "
                "Rodar de novo com ele misturaria duas execuções no mesmo rótulo. "
-               f"Para repetir a base, use um rótulo como **{VERSAO_AGENTE}-repeticao** "
+               f"Para repetir a base, use um rótulo novo, como **{sugestao}** "
                "(lote de calibração); para uma mudança no agente, atualize `VERSAO_AGENTE` "
                "em `benchmark.py`.")
 else:
@@ -129,9 +142,13 @@ def painel_progresso(lancada):
         # e passa a mostrar o resultado final.
         st.rerun()
     feitas, total = estado["feitas"], estado["total"]
-    fracao = feitas / total if total > 0 else 0
-    st.progress(fracao, text=f"{feitas} de {total} respostas · "
-                             f"{formatar_tempo(estado['segundos'])}")
+    tempo = formatar_tempo(estado["segundos"])
+    if total == 0:
+        # Antes da 1ª resposta o log ainda não tem progresso: o modelo está sendo
+        # carregado na memória (cerca de 30 s a frio). Mostrar "0 de 0" confundia.
+        st.progress(0, text=f"Carregando o modelo (a 1ª resposta leva cerca de 30 s) · {tempo}")
+    else:
+        st.progress(feitas / total, text=f"{feitas} de {total} respostas · {tempo}")
     if estado["ultimas_linhas"]:
         st.caption(estado["ultimas_linhas"][-1])
 
