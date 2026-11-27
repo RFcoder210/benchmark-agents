@@ -54,4 +54,5 @@ O botão "Executar" do painel está ligado e foi usado numa execução real (`v1
 - Linguagem formal, sem emojis.
 
 ## Resultado
-(preenchido pelo executor ao terminar: o que foi feito, arquivos alterados, evidência da verificação)
+Feito (27/11/2026): README.md com "Pela página Executar", exemplo `--rotulo`, quatro testes novos e linhas novas em "Estrutura"; CLAUDE.md com a descrição atual do botão e de `execucao.py`, `--rotulo`, resultado da `v15-repeticao` (44/45, idêntica à v15), lembrete do comando falso e correção "ignorar 6/6". Verificação: grep --rotulo no README = 2; execucao.py = 3; "Próxima etapa: o botão" ausente; v15-repeticao e testar_rotulo.py presentes no CLAUDE.md; git diff --stat só com README.md, CLAUDE.md e .plano/ESTADO.md (já alterado antes).
+Commit proposto: `T12: documenta a página Executar no README e no CLAUDE.md; corrige ignorar 6/6`

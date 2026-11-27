@@ -131,10 +131,22 @@ py -m venv .venv
 .venv\Scripts\python testar_regua.py
 .venv\Scripts\python testar_trava_pagamento.py
 .venv\Scripts\python testar_dashboard.py
+.venv\Scripts\python testar_rotulo.py
+.venv\Scripts\python testar_execucao.py
+.venv\Scripts\python testar_processo.py
+.venv\Scripts\python testar_executar.py
 .venv\Scripts\streamlit run app.py
 ```
 
-O último comando abre o painel no navegador, com duas páginas: **Visão geral** (os gráficos) e **Executar** (confere o ambiente antes de uma execução).
+O último comando abre o painel no navegador, com duas páginas: **Visão geral** (os gráficos) e **Executar** (roda o benchmark pelo painel).
+
+**Pela página Executar:** com o Ollama 0.40.4 ligado na porta 11500, a página confere o servidor e a versão, e valida o rótulo da nova versão antes de liberar o botão.
+
+- O rótulo deve ser novo (não pode já constar no CSV) e usar só letras sem acento, dígitos, `.`, `_` e `-`. O final `-oculto` é reservado ao conjunto oculto, que não tem botão.
+- Um rótulo com hífen (por exemplo, `v15-repeticao`) é gravado como lote de calibração, oculto por padrão no painel.
+- Antes de gravar no CSV, a página pede uma confirmação.
+- A execução leva de 4 a 5 minutos e mostra uma barra de progresso; o log fica em `resultados/logs/`, fora do git.
+- Fechar o painel durante uma execução não a interrompe, mas o CSV só é gravado no fim.
 
 **Com o modelo:**
 
@@ -153,6 +165,12 @@ O último comando abre o painel no navegador, com duas páginas: **Visão geral*
    .venv\Scripts\python benchmark.py
    ```
 
+   Para gravar a execução com outro rótulo, sem editar o código (por exemplo, uma repetição da base no mesmo dia):
+
+   ```powershell
+   .venv\Scripts\python benchmark.py --rotulo v15-repeticao
+   ```
+
 **Atalho:** [abrir_benchmark.bat](abrir_benchmark.bat) faz os passos de ligar o servidor e o painel com um duplo clique e abre o navegador.
 
 ## Estrutura
@@ -164,7 +182,10 @@ O último comando abre o painel no navegador, com duas páginas: **Visão geral*
 | [comparar_versoes.py](comparar_versoes.py) | Compara duas versões caso a caso e aplica a régua |
 | [app.py](app.py) | Ponto de entrada do painel: menu com as páginas |
 | [dashboard.py](dashboard.py) | Página "Visão geral": as métricas em Streamlit, lidas só do CSV |
-| [app_pages/executar.py](app_pages/executar.py) | Página "Executar": confere o Ollama e o rótulo da versão |
+| [app_pages/executar.py](app_pages/executar.py) | Página "Executar": confere o Ollama e o rótulo, pede confirmação, roda o benchmark em segundo plano e mostra o progresso |
+| [execucao.py](execucao.py) | Regras da página Executar: validação, processo em segundo plano e leitura do progresso |
+| `testar_rotulo.py`, `testar_execucao.py`, `testar_processo.py` | Testes da opção `--rotulo`, das regras e do processo em segundo plano |
+| [testar_executar.py](testar_executar.py) | Testa a página Executar sem navegador e sem o modelo (comando falso) |
 | [.streamlit/config.toml](.streamlit/config.toml) | Tema visual do painel ("Grafite") |
 | [abrir_benchmark.bat](abrir_benchmark.bat) | Liga o Ollama e o painel com um duplo clique |
 | [ambiente.py](ambiente.py) | Fixa e confere a versão do Ollama |

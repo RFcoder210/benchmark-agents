@@ -41,5 +41,5 @@ Diagnóstico feito pelo `analise-projeto` a partir de `.plano/OBJETIVO.md` (prim
 | T09 | Página Executar: barra de progresso e resultado | M | executor-tarefa | nenhuma | CONCLUIDA | T08 |
 | T10 | (U) AGUARDA USUÁRIO: execução real v15-repeticao pelo botão | P | usuário | nenhuma | CONCLUIDA | T09 |
 | T11 | Conferir a execução real e a suíte de testes | P | executor-tarefa | nenhuma | CONCLUIDA | T10 |
-| T12 | Documentar a página Executar no README e no CLAUDE.md | P | executor-tarefa | nenhuma | PENDENTE | T11 |
+| T12 | Documentar a página Executar no README e no CLAUDE.md | P | executor-tarefa | nenhuma | CONCLUIDA | T11 |
 | T13 | (U) AGUARDA USUÁRIO: aprovar o commit final e o push | P | usuário | nenhuma | PENDENTE | T12 |
