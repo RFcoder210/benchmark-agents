@@ -1154,3 +1154,48 @@
 2026-10-28 17:26;v15-oculto;O03;perguntar;medio;3;girada;1;;;4,36;2800;0,0;1;dica de categoria: mercado
 2026-10-28 17:26;v15-oculto;O04;ignorar;dificil;3;girada;1;;;1,67;2731;0,0;0;
 2026-10-28 17:26;v15-oculto;O05;perguntar;dificil;3;girada;1;;;4,24;2802;0,0;1;dica de categoria: alimentacao
+2026-11-27 18:19;v15-repeticao;C01;registrar;facil;1;original;1;;;31,41;2814;0,0;1;dica de categoria: mercado
+2026-11-27 18:19;v15-repeticao;C02;perguntar;facil;1;original;1;;;5,41;2806;0,0;1;"pagamento inventado trocado por pergunta; dica de categoria: alimentacao"
+2026-11-27 18:19;v15-repeticao;C03;registrar;facil;1;original;1;;;5,92;2813;0,0;1;dica de categoria: transporte
+2026-11-27 18:19;v15-repeticao;C04;ignorar;facil;1;original;1;;;1,82;2724;0,0;0;
+2026-11-27 18:19;v15-repeticao;C05;registrar;facil;1;original;1;;;5,73;2831;0,0;1;dica de categoria: moradia
+2026-11-27 18:19;v15-repeticao;C06;registrar;medio;1;original;1;;;5,28;2806;0,0;1;dica de categoria: saude
+2026-11-27 18:19;v15-repeticao;C07;registrar;medio;1;original;1;;;5,44;2820;0,0;1;dica de categoria: lazer
+2026-11-27 18:19;v15-repeticao;C08;registrar;medio;1;original;1;;;5,76;2823;0,0;1;dica de categoria: transporte
+2026-11-27 18:19;v15-repeticao;C09;perguntar;medio;1;original;1;;;4,93;2819;0,0;1;dica de categoria: educacao
+2026-11-27 18:19;v15-repeticao;C10;perguntar;medio;1;original;1;;;4,89;2804;0,0;1;dica de categoria: educacao
+2026-11-27 18:19;v15-repeticao;C11;ignorar;medio;1;original;1;;;1,92;2734;0,0;0;
+2026-11-27 18:19;v15-repeticao;C12;registrar;dificil;1;original;1;;;7,6;2833;0,0;1;dica de categoria: moradia
+2026-11-27 18:19;v15-repeticao;C13;perguntar;dificil;1;original;1;;;4,96;2776;0,0;1;
+2026-11-27 18:19;v15-repeticao;C14;registrar;dificil;1;original;1;;;6,83;2830;0,0;1;dica de categoria: outros
+2026-11-27 18:19;v15-repeticao;C15;perguntar;dificil;1;original;1;;;11,81;2886;0,0;1;
+2026-11-27 18:19;v15-repeticao;C01;registrar;facil;2;invertida;1;;;12,63;2814;0,0;1;dica de categoria: mercado
+2026-11-27 18:19;v15-repeticao;C02;perguntar;facil;2;invertida;1;;;6,09;2806;0,0;1;"pagamento inventado trocado por pergunta; dica de categoria: alimentacao"
+2026-11-27 18:19;v15-repeticao;C03;registrar;facil;2;invertida;1;;;6,0;2813;0,0;1;dica de categoria: transporte
+2026-11-27 18:19;v15-repeticao;C04;ignorar;facil;2;invertida;1;;;1,91;2724;0,0;0;
+2026-11-27 18:19;v15-repeticao;C05;registrar;facil;2;invertida;1;;;5,91;2831;0,0;1;dica de categoria: moradia
+2026-11-27 18:19;v15-repeticao;C06;registrar;medio;2;invertida;1;;;5,6;2806;0,0;1;dica de categoria: saude
+2026-11-27 18:19;v15-repeticao;C07;registrar;medio;2;invertida;1;;;5,84;2820;0,0;1;dica de categoria: lazer
+2026-11-27 18:19;v15-repeticao;C08;registrar;medio;2;invertida;0;acao;acao;4,87;2808;0,0;1;"dica de categoria: transporte; categoria divergente (classificador: transporte); perguntou ['categoria']: ""Em que foi esse gasto?"""
+2026-11-27 18:19;v15-repeticao;C09;perguntar;medio;2;invertida;1;;;6,11;2830;0,0;1;"pagamento inventado trocado por pergunta; dica de categoria: educacao"
+2026-11-27 18:19;v15-repeticao;C10;perguntar;medio;2;invertida;1;;;5,82;2804;0,0;1;dica de categoria: educacao
+2026-11-27 18:19;v15-repeticao;C11;ignorar;medio;2;invertida;1;;;2,16;2734;0,0;0;
+2026-11-27 18:19;v15-repeticao;C12;registrar;dificil;2;invertida;1;;;5,92;2833;0,0;1;dica de categoria: moradia
+2026-11-27 18:19;v15-repeticao;C13;perguntar;dificil;2;invertida;1;;;4,97;2775;0,0;1;
+2026-11-27 18:19;v15-repeticao;C14;registrar;dificil;2;invertida;1;;;10,91;2830;0,0;1;dica de categoria: outros
+2026-11-27 18:19;v15-repeticao;C15;perguntar;dificil;2;invertida;1;;;16,81;2885;0,0;1;
+2026-11-27 18:19;v15-repeticao;C01;registrar;facil;3;girada;1;;;12,52;2814;0,0;1;dica de categoria: mercado
+2026-11-27 18:19;v15-repeticao;C02;perguntar;facil;3;girada;1;;;4,71;2791;0,0;1;dica de categoria: alimentacao
+2026-11-27 18:19;v15-repeticao;C03;registrar;facil;3;girada;1;;;5,95;2813;0,0;1;dica de categoria: transporte
+2026-11-27 18:19;v15-repeticao;C04;ignorar;facil;3;girada;1;;;1,87;2724;0,0;0;
+2026-11-27 18:19;v15-repeticao;C05;registrar;facil;3;girada;1;;;5,97;2831;0,0;1;dica de categoria: moradia
+2026-11-27 18:19;v15-repeticao;C06;registrar;medio;3;girada;1;;;5,75;2806;0,0;1;dica de categoria: saude
+2026-11-27 18:19;v15-repeticao;C07;registrar;medio;3;girada;1;;;5,72;2820;0,0;1;dica de categoria: lazer
+2026-11-27 18:19;v15-repeticao;C08;registrar;medio;3;girada;1;;;6,13;2823;0,0;1;dica de categoria: transporte
+2026-11-27 18:19;v15-repeticao;C09;perguntar;medio;3;girada;1;;;6,33;2830;0,0;1;"pagamento inventado trocado por pergunta; dica de categoria: educacao"
+2026-11-27 18:19;v15-repeticao;C10;perguntar;medio;3;girada;1;;;10,3;2814;0,0;1;"valor 0 trocado por pergunta; dica de categoria: educacao"
+2026-11-27 18:19;v15-repeticao;C11;ignorar;medio;3;girada;1;;;2,57;2734;0,0;0;
+2026-11-27 18:19;v15-repeticao;C12;registrar;dificil;3;girada;1;;;7,67;2833;0,0;1;dica de categoria: moradia
+2026-11-27 18:19;v15-repeticao;C13;perguntar;dificil;3;girada;1;;;8,26;2790;0,0;1;"sem categoria identificável: registro trocado por pergunta; categoria divergente (classificador: nao_identificavel)"
+2026-11-27 18:19;v15-repeticao;C14;registrar;dificil;3;girada;1;;;8,82;2830;0,0;1;dica de categoria: outros
+2026-11-27 18:19;v15-repeticao;C15;perguntar;dificil;3;girada;1;;;14,67;2883;0,0;1;

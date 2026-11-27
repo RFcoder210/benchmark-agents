@@ -21,3 +21,4 @@ Uma linha por dia de trabalho. O hook `iniciar-sessao.ps1` lê a última linha p
 | 15 | 2026-11-19 | Dia 15 · 19/11 · Permissões de leitura | Sessão sem encerramento; só permissões de leitura em `.claude/settings.json` (ramo config/permissoes-leitura, não commitadas); a opção --rotulo não foi feita. |
 | 16 | 2026-11-20 | Dia 16 · 20/11 · Opção --rotulo no benchmark | Orquestração do app pessoal ligada (13 tarefas) e opção --rotulo pronta no benchmark.py (T02–T03, testar_rotulo 25/25); T04 em diante fica para o próximo dia. |
 | 17 | 2026-11-26 | Dia 17 · 26/11 · Botão Executar e progresso | Página Executar ligada: regras e processo em execucao.py, botão com confirmação e barra de progresso (T04–T09); a execução real (T10) fica para o próximo dia. |
+| 18 | 2026-11-27 | Dia 18 · 27/11 · Execução real pelo botão | (em andamento) |
