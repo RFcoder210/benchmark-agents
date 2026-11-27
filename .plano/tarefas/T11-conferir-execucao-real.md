@@ -45,3 +45,24 @@ O usuário rodou `v15-repeticao` pelo botão da página "Executar" (T10), o que 
 
 ## Resultado
 (preenchido pelo executor ao terminar: o que foi feito, arquivos alterados, evidência da verificação)
+
+### Resultado (executor, 27/11/2026)
+Nada de código alterado; só esta seção.
+
+**Integridade:** 45 linhas `;v15-repeticao;` no CSV; um brutos (`resultados/brutos_v15-repeticao_2026-11-27_1824.json`) com 45 registros.
+
+**comparar_versoes.py v15 v15-repeticao:** 44/45 nos dois lados. Todos os casos iguais (C01–C15 estáveis 3/3, exceto C08 2/3 "sensível" nos dois). Ganhos 0, perdas 0. Decisão: MANTER v15. Repetição idêntica à base.
+
+**Suíte sem modelo (todas saída 0):** testar_rotulo 25/25; testar_execucao 15/15; testar_processo 13/13; testar_executar 36/36; testar_dashboard 43/43; testar_comparar Parte A 14/14; testar_regua 11/11; testar_trava_pagamento "Tudo certo."; testar_mutacao B2 "Sobreviveram: 0/10". B1 (1230 respostas salvas, já com os brutos novos): 11 mutantes detectados, 1 sobrevivente, o já conhecido "sem o teste de campo ausente (equivalente)" (mutante equivalente, histórico 0).
+
+**Painel:** dashboard.py:87 `dados["calibracao"] = dados["versao_agente"].str.contains("-")` trata `v15-repeticao` como calibração; testar_dashboard passa.
+
+**Pontos observados:**
+1. Erro único: C08 #2 (invertida) -> perguntar, o limite conhecido da v15 (C08 também deu 2/3 na v15 de 27/10). Não é regressão.
+2. "0 de 0 respostas": o log só ganha linha de progresso após a 1ª resposta, e a 1ª levou 31,41 s (carga a frio do modelo; as demais ~2 a 6 s). `ler_progresso` devolve (0, 0) até lá. Isso também explica o tempo médio de 7,08 s contra 5,4 s da v15 (31 s a mais sobre 45 respostas, cerca de 0,6 s de média). Sugestão (não aplicada): ler o total "45" da linha de cabeçalho do log ("15 casos ... 3 ordens") ou mostrar "aquecendo o modelo" quando total = 0.
+3. Mensagem de rótulo repetido (app_pages/executar.py:84): sugere "use um rótulo como {VERSAO_AGENTE}-repeticao", que é justamente o rótulo já gravado quando se está nele. Confirmado como falha de texto. Sugestão: sugerir um sufixo novo (ex.: `-repeticao2`) quando o rótulo recusado já for esse.
+4. CLAUDE.md diz "ignorar 3/3" para a v15, mas são 2 casos (C04, C11) x 3 ordens = 6; 24+15+6 = 45. Correto: "ignorar 6/6". Erro de texto no CLAUDE.md (seção 4); a execução real não diverge.
+
+**Mensagem de commit proposta (a aprovar):**
+`T11: conferência da execução real v15-repeticao (CSV e brutos, 44/45, idêntica à v15)`
+(arquivos: resultados/resultados.csv, resultados/brutos_v15-repeticao_2026-11-27_1824.json, log e esta tarefa)
