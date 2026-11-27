@@ -1,0 +1,67 @@
+{
+  "projeto": "Benchmark de agentes",
+  "semana_inicio": "23/11/2026",
+  "versao": "1.0",
+  "atualizado_em": "27/11/2026",
+  "status": "em construção; app pessoal com 9 de 13 tarefas concluídas",
+  "situacao": "O benchmark em si estava pronto desde 28/10/2026. O agente de gastos, que lê uma mensagem e decide entre registrar o gasto e perguntar o que falta, chegou à <b>v15</b>, com 44 de 45 respostas corretas nos casos de ajuste e 15 de 15 no <b>conjunto oculto</b> (casos guardados à parte, usados uma única vez para conferir se as melhorias não foram feitas sob medida para os casos conhecidos). Desde 17/11/2026, o trabalho é o <b>app pessoal</b>: o painel que mostra os resultados ganhou uma página \"Executar\", para rodar o benchmark sem depender de uma sessão do Claude. Em 20/11/2026, o plano do app foi dividido em 13 tarefas (T01 a T13) e o benchmark passou a aceitar um <b>rótulo</b> (o nome com que uma execução é gravada no CSV de resultados) escolhido na hora, sem editar o código.",
+  "foco": "Ligar o botão \"Executar\" de verdade: conferir o ambiente, pedir confirmação, rodar o benchmark em segundo plano com barra de progresso e mostrar o resultado. O teste final é uma execução real feita pelo próprio usuário, gravada com o rótulo v15-repeticao. Ela repete a v15 para medir o quanto o agente varia de uma execução para outra, sem mudar nada no agente.",
+  "raciocinio": [
+    "(26/11) <b>O app deve funcionar sem a sessão do Claude</b>; por isso, o botão lança o benchmark como um <b>processo em segundo plano</b> (um programa que roda à parte, enquanto o painel continua respondendo), e o painel só acompanha o andamento, relendo o progresso a cada 2 segundos.",
+    "(26/11) <b>Gravar no CSV oficial é difícil de desfazer</b>; por isso, o botão só age depois de uma confirmação explícita, e o rótulo é conferido antes: vazio, longo demais, com caracteres estranhos ou terminado em \"-oculto\" é recusado.",
+    "(26/11) <b>O conjunto oculto já foi usado na validação final da v15</b>; por isso, a página não tem botão para ele. Usá-lo de novo, sem casos novos, deixaria de ser uma validação honesta.",
+    "(26/11) <b>Rodar o modelo de verdade leva de 4 a 5 minutos e grava dados</b>; por isso, os testes automáticos da página usam um <b>comando falso</b> (um programa de mentira que imita o benchmark) e a execução real ficou numa tarefa separada, com o usuário presente (T10).",
+    "(26/11) <b>Um resultado diferente de 44/45 não prova defeito no app</b>, porque o agente não responde sempre igual; por isso, o número da execução real é tratado como dado a analisar (T11), não como falha.",
+    "(27/11) <b>Um erro relatado sem rastro precisa de evidência antes de correção</b>; por isso, antes de mexer no código, a sessão conferiu o servidor do modelo, os registros e o CSV, e constatou que a execução nem chegou a começar.",
+    "(27/11) <b>O usuário precisa acompanhar o raciocínio sem ler o código</b>; por isso, foi criado este relatório semanal, atualizado no fim de toda sessão, com uma parte da cota de uso reservada para ele."
+  ],
+  "sessoes": [
+    {
+      "data": "26/11/2026",
+      "sessao": "Dia 17",
+      "titulo": "Botão Executar e barra de progresso",
+      "feito": [
+        "Conferência, pela linha de comando e sem rodar o modelo, de que o rótulo escolhido na hora funciona (T04).",
+        "Regras da execução num arquivo próprio: ler o progresso e decidir se a execução pode começar. As duas funções foram escritas pela sessão, a pedido do usuário, e explicadas linha por linha (T05 e T06).",
+        "Lançamento e acompanhamento do benchmark em segundo plano (T07).",
+        "Página Executar com rótulo, confirmação, botão, barra de progresso, resultado final e botão \"Nova execução\" (T08 e T09)."
+      ],
+      "por_que": "Separar as regras (o que pode e o que não pode) da tela permite testá-las sozinhas e com rapidez; a tela fica só com a tarefa de mostrar e perguntar.",
+      "resultado": "Nove das 13 tarefas concluídas, todas com testes automáticos passando. Nada foi gravado no CSV: a execução real ficou para o dia seguinte.",
+      "tecnico": "execucao.py (testar_execucao.py 15/15 e testar_processo.py 13/13); app_pages/executar.py (testar_executar.py 33/33); commits de 1cbd683 a 2ad42da."
+    },
+    {
+      "data": "27/11/2026",
+      "sessao": "Dia 18",
+      "titulo": "Primeira execução pelo botão e relatório semanal",
+      "feito": [
+        "Agenda do dia gerada: T10 (execução real), T11 (conferência), T12 (documentação) e T13 (fechamento).",
+        "Servidor do modelo na versão fixada (Ollama 0.40.4) e painel ligados pela sessão; a página Executar reconheceu os dois e aceitou o rótulo novo.",
+        "O usuário relatou um erro ao executar. A investigação não achou rastro: nenhuma chamada ao modelo, nenhum registro de execução e o CSV sem mudanças desde 28/10/2026.",
+        "A pedido do usuário, criada a rotina deste relatório semanal em PDF, com conferência automática das datas e reserva de cota."
+      ],
+      "por_que": "A execução real é o último critério do app que depende do usuário; sem ela, não se sabe se o botão funciona fora dos testes com comando falso.",
+      "resultado": "A T10 continua pendente, aguardando a descrição do erro (onde apareceu e o que dizia). A rotina do relatório está pronta, e esta é a primeira edição.",
+      "tecnico": "Gerador em .claude/skills/relatorio-semanal/gerar_relatorio.py; passo 5c do /encerrar-dia; limites críticos do medidor em .claude/hooks/verificar-uso.py."
+    }
+  ],
+  "decisoes": [
+    {"data": "26/11/2026", "quem": "usuário", "texto": "As funções de leitura do progresso e de permissão para executar foram escritas pela sessão, com explicação linha por linha, em vez de escritas por ele."},
+    {"data": "26/11/2026", "quem": "sessão, registrado na retomada", "texto": "Se a execução real der resultado diferente de 44/45, isso é dado para a conferência (T11), não falha da tarefa."},
+    {"data": "27/11/2026", "quem": "usuário", "texto": "Relatório semanal em PDF, atualizado no fim de toda sessão, com datas corretas em tudo e cota reservada para gerá-lo."},
+    {"data": "27/11/2026", "quem": "sessão", "texto": "Para reservar a cota, o aviso crítico do medidor passou de 90% para 85% da janela de 5 horas e de 95% para 93% da semana."},
+    {"data": "27/11/2026", "quem": "sessão", "texto": "O PDF usa a biblioteca reportlab na versão 4.5.1, e não na mais nova, para não quebrar o painel."}
+  ],
+  "aprendizados": [
+    "(26/11) O atalho \"Ver na Visão geral\" não roda no teste automático do painel. É um <b>ponto cego</b> (algo que os testes não conseguem ver) e só pode ser conferido no app de verdade.",
+    "(27/11) Instalar a versão mais nova da biblioteca de PDF trocou uma dependência (Pillow) por outra que o painel não aceita. A correção foi usar uma versão anterior da biblioteca. Lição: depois de instalar algo, conferir as dependências com pip check.",
+    "(27/11) Um \"deu erro\" sem mensagem não basta para corrigir. Primeiro é preciso saber onde ele apareceu e o que dizia; até agora, os sinais indicam que a execução nem começou."
+  ],
+  "proximos": [
+    "<b>Descobrir</b> onde apareceu o erro da execução de 27/11/2026 e o que ele dizia, e corrigir a causa.",
+    "<b>Executar</b> o v15-repeticao pelo botão (T10) e conferir o atalho \"Ver na Visão geral\".",
+    "<b>Conferir</b> o resultado da execução real e a suíte de testes (T11).",
+    "<b>Documentar</b> o uso da página Executar no README e no CLAUDE.md (T12) e fechar o app (T13).",
+    "<b>Medir</b> quanto da cota cada atualização deste relatório consome e ajustar a reserva, se preciso."
+  ]
+}

@@ -71,7 +71,7 @@ O contexto é medido contra um orçamento fixo de 200 mil tokens, e não contra 
 Os avisos chegam automaticamente (hook), a cada mensagem do usuário e sempre que você aciona ou retoma um subagente.
 O checkpoint é feito por você mesmo: leia `.claude/skills/encerrar-dia/SKILL.md` e siga a seção indicada (a skill não pode ser acionada por você, só pelo usuário).
 - **ALERTA (5 h ≥ 80%)** → faça a seção **Checkpoint**, motivo "alerta de uso". Depois, continue apenas com tarefas P.
-- **CRÍTICO (5 h ≥ 90% ou semana ≥ 95%)** → não inicie nada novo; siga a seção **Encerramento do dia** inteira.
+- **CRÍTICO (5 h ≥ 85% ou semana ≥ 93%)** → não inicie nada novo; siga a seção **Encerramento do dia** inteira, que inclui o relatório semanal em PDF (os limites ficam abaixo de 90%/95% para reservar cota para ele).
 - **Semana ≥ 85%** → acione o `cronograma` para redistribuir as tarefas.
 - **Contexto ≥ 70%** (cerca de 140 mil tokens) → faça a seção **Checkpoint**, motivo "antes de compactar", e oriente o usuário a digitar `/compact`. A retomada é recarregada sozinha depois.
 
