@@ -114,4 +114,5 @@ Regras de escrita:
 Medições:
 - 27/11/2026, padrão antigo (v1.0, 3 páginas): ~1 p.p. da janela de 5 h.
 - 27/11/2026, padrão didático (v2.0, 14 páginas, gerador novo incluído): de 23% para 35% (12 p.p.), mas a maior parte foi construir o gerador e ler o PDF inteiro duas vezes. Estimativa para uma atualização normal: 6 a 8 p.p. Leia o PDF inteiro uma vez só, depois de corrigir tudo o que for possível no JSON.
+- 27/11/2026, atualização v2.1 (14 para 19 páginas, 3 lições novas, feita por subagente para poupar o contexto da sessão): de 57% para 65% (8 p.p.), dentro da estimativa.
 - Reserva ajustada em 27/11/2026: ALERTA em 75% e CRÍTICO em 80% da janela de 5 h (cerca de 20 p.p. livres para o encerramento com o PDF).

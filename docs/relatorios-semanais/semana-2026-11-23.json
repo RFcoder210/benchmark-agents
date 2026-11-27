@@ -1,15 +1,16 @@
 {
   "projeto": "Benchmark de agentes",
   "semana_inicio": "23/11/2026",
-  "versao": "2.0",
+  "versao": "2.1",
   "atualizado_em": "27/11/2026",
-  "status": "em construção; app pessoal com 9 de 13 tarefas concluídas",
+  "status": "app pessoal concluído; plano T01 a T13 encerrado em 27/11/2026",
   "como_ler": "Este relatório é material de estudo, não ata. Comece pelo mapa (seção 2), que mostra todas as peças do projeto e destaca em verde o que mudou na semana. Depois leia cada lição da seção 3: o problema, a ideia, o funcionamento e o trecho real do código. No fim, responda às perguntas da seção 8 sem olhar; as respostas estão na última página. Todo termo técnico é explicado na primeira vez que aparece e está reunido no glossário.",
   "resumo": [
     "O painel ganhou um botão que <b>roda o benchmark sozinho</b>, sem precisar de uma sessão do Claude: ele confere o ambiente, pede confirmação e acompanha a execução com uma barra de progresso.",
     "As regras do botão (pode ou não pode executar, quanto já andou) ficaram num arquivo separado da tela, <b>execucao.py</b>, e por isso puderam ser testadas sem abrir o navegador.",
     "O benchmark agora roda como um <b>processo em segundo plano</b>: um programa à parte, que escreve o andamento num arquivo enquanto a página continua respondendo.",
-    "A primeira execução real pelo botão (27/11/2026) não começou. A investigação mostrou que nada chegou ao modelo nem ao CSV; falta saber onde o erro apareceu.",
+    "A primeira execução real pelo botão (27/11/2026) parecia ter dado erro, mas a causa era só o navegador interno do app oculto. Repetida em seguida, a execução <b>v15-repeticao</b> deu 44/45, idêntica à v15, e o plano do app (tarefas T01 a T13) foi concluído.",
+    "A execução real mostrou duas falhas de interface, corrigidas no mesmo dia: a barra agora diz \"Carregando o modelo\" enquanto o modelo é carregado, e o aviso de rótulo repetido sugere um rótulo que ainda não existe no CSV.",
     "Foi criado este relatório semanal, com uma parte da cota de uso reservada para ele."
   ],
   "mapa": {
@@ -330,7 +331,7 @@
         "Rodar o benchmark dentro da página: descartado, porque a página congelaria por minutos.",
         "Usar threads (tarefas paralelas dentro do mesmo programa): descartado, porque o Streamlit refaz a página a cada clique e a tarefa ficaria presa a ela; um processo separado é independente e roda igual ao comando de terminal já testado."
       ],
-      "como_sabemos": "testar_processo.py lança comandos falsos (programas curtos que imitam o benchmark, sem modelo) e confere o log, o progresso e o código de saída: 13 de 13. A execução com o benchmark real é justamente a T10, ainda pendente."
+      "como_sabemos": "testar_processo.py lança comandos falsos (programas curtos que imitam o benchmark, sem modelo) e confere o log, o progresso e o código de saída: 13 de 13. A execução com o benchmark real foi a T10, feita em 27/11/2026 (lição 3.7)."
     },
     {
       "titulo": "Ler o progresso no log",
@@ -573,7 +574,7 @@
         "CSV: a data de modificação de resultados.csv continuava em 28/10/2026.",
         "Pista a conferir, ainda não confirmada: o botão fica desativado até a caixa de confirmação ser marcada (linha 111 da página); um clique com a caixa desmarcada não faz nada."
       ],
-      "como_sabemos": "Ainda não sabemos a causa. O próximo passo é saber onde a mensagem apareceu (no navegador do app, no seu navegador ou no atalho da área de trabalho) e o que ela dizia."
+      "como_sabemos": "No mesmo dia (27/11/2026) a causa apareceu: o \"deu erro\" era o navegador interno do app oculto; você acompanhava pelo Remote Control e não via a tela do PC. Nenhum código precisou mudar: a execução seguinte (T10) rodou e gravou 44/45. A investigação evitou uma correção às cegas num código que não tinha defeito."
     },
     {
       "titulo": "O relatório semanal e as versões fixadas de bibliotecas",
@@ -588,6 +589,216 @@
         "Depois da troca para o reportlab 4.5.1, o pip check respondeu \"No broken requirements found\" (nenhum conflito)."
       ],
       "como_sabemos": "O pip check sem conflitos. O painel ainda não foi reaberto depois da troca; isso fica para a próxima execução."
+    },
+    {
+      "titulo": "A execução real e a conferência: repetir a base",
+      "data": "27/11/2026",
+      "sessao": "Dia 18",
+      "em_uma_frase": "O botão rodou o benchmark de verdade, e a repetição da v15 deu o mesmo resultado caso a caso.",
+      "problema": "Os testes da página usam um comando falso, que não chama o modelo. Faltava provar o caminho inteiro com o benchmark real e conferir se a repetição da base (v15-repeticao) divergia da v15 gravada em 27/10.",
+      "ideia": "Um <b>teste de ponta a ponta</b> (que passa por todas as camadas reais, do clique até o CSV) complementa os testes com comando falso: ele mostra o que a simulação não mostra. A repetição da base é também um experimento: medir de novo a mesma versão mostra quanto do resultado é <b>ruído</b> (variação do agente sem nenhuma mudança).",
+      "diagrama": {
+        "titulo": "Da execução real (T10) à conferência (T11), em 27/11/2026.",
+        "colunas": 2,
+        "nos": [
+          {
+            "id": "botao",
+            "texto": "Botão Executar\n18:19:19",
+            "linha": 0,
+            "coluna": 0,
+            "tipo": "novo"
+          },
+          {
+            "id": "bench",
+            "texto": "benchmark.py --rotulo v15-repeticao\n45 respostas, até 18:24:53",
+            "linha": 1,
+            "coluna": 0
+          },
+          {
+            "id": "dados",
+            "texto": "CSV e brutos\n45 linhas e 45 registros",
+            "linha": 2,
+            "coluna": 0,
+            "tipo": "dados"
+          },
+          {
+            "id": "comp",
+            "texto": "comparar_versoes.py\nv15 x v15-repeticao",
+            "linha": 3,
+            "coluna": 0
+          },
+          {
+            "id": "q",
+            "texto": "Algum caso mudou?",
+            "linha": 4,
+            "coluna": 0,
+            "tipo": "decisao"
+          },
+          {
+            "id": "resp",
+            "texto": "Não\n44/45 nos dois; só o C08 invertida erra",
+            "linha": 4,
+            "coluna": 1,
+            "tipo": "dados"
+          },
+          {
+            "id": "conc",
+            "texto": "Conclusão: repetição idêntica\na v15 continua como base",
+            "linha": 5,
+            "coluna": 0
+          }
+        ],
+        "ligacoes": [
+          {
+            "de": "botao",
+            "para": "bench"
+          },
+          {
+            "de": "bench",
+            "para": "dados",
+            "rotulo": "grava"
+          },
+          {
+            "de": "dados",
+            "para": "comp",
+            "rotulo": "lidos"
+          },
+          {
+            "de": "comp",
+            "para": "q"
+          },
+          {
+            "de": "q",
+            "para": "resp"
+          },
+          {
+            "de": "q",
+            "para": "conc"
+          }
+        ]
+      },
+      "como_funciona": [
+        "T10: a execução foi lançada pela página Executar às 18:19:19 e terminou às 18:24:53, com o Ollama 0.40.4. Gravou 45 linhas no CSV com o rótulo v15-repeticao (lote de calibração, por ter hífen) e as respostas cruas em resultados/brutos_v15-repeticao_2026-11-27_1824.json.",
+        "T11, integridade: 45 linhas no CSV e 45 registros nos brutos.",
+        "T11, comparação: comparar_versoes.py v15 v15-repeticao deu 44/45 nos dois lados, 0 ganhos e 0 perdas. O único erro é o C08 na ordem invertida, o limite já conhecido da v15.",
+        "T11, testes sem modelo: todos passaram (por exemplo, testar_dashboard 43/43, testar_execucao 15/15, testar_regua 11/11).",
+        "Tempo: a média foi 7,08 s por resposta, contra 5,4 s da v15. A 1ª resposta levou 31,41 s porque o modelo foi carregado <b>a frio</b> (do disco para a memória); as demais levaram de 2 a 6 s. Os cerca de 26 s a mais da 1ª resposta, divididos por 45, somam cerca de 0,6 s à média; o resto da diferença ainda está a conferir."
+      ],
+      "como_sabemos": "Pelos números do próprio CSV, lidos pelo comparar_versoes.py, e pela suíte de testes sem modelo, registrados no resultado da T11 (commit 84e0cb8)."
+    },
+    {
+      "titulo": "Corrigir o que só a execução real mostrou",
+      "data": "27/11/2026",
+      "sessao": "Dia 18",
+      "em_uma_frase": "Enquanto o modelo carregava, a barra dizia \"0 de 0 respostas\"; agora diz \"Carregando o modelo\", e um teste reproduz essa espera.",
+      "problema": "Nos cerca de 31 s da carga a frio, o log ainda não tem nenhuma linha de progresso, e ler_progresso devolve (0, 0). A barra mostrava \"0 de 0 respostas\", o que parecia um defeito. Os testes não pegaram isso porque o comando falso escrevia a primeira linha de progresso logo de saída.",
+      "ideia": "Um teste com comando falso só enxerga o que a simulação reproduz: esse é o <b>ponto cego</b> dele. O estado \"total igual a zero\" é um <b>caso-limite</b> (a situação na borda, antes do primeiro dado), e precisa de texto próprio. A correção vem junto com um teste que recria a condição: o comando falso passou a esperar 2 s antes da primeira linha, imitando o modelo carregando.",
+      "codigo": {
+        "arquivo": "app_pages/executar.py",
+        "linha_inicial": 134,
+        "linha_final": 153,
+        "explicacao": [
+          "Linhas 134 a 136: @st.fragment(run_every=\"2s\") faz só esta função ser refeita a cada 2 segundos, sem recarregar a página inteira.",
+          "Linha 139: situacao pergunta ao processo se ainda roda e lê o log; devolve um <b>dicionário</b> com rodando, feitas, total, segundos e ultimas_linhas.",
+          "Linhas 140 a 143: se terminou, st.rerun() recarrega a página, que passa a mostrar o resultado.",
+          "Linha 144: desempacota dois valores do dicionário de uma vez em feitas e total.",
+          "Linha 145: formatar_tempo converte os segundos em mm:ss.",
+          "Linhas 146 a 149: a novidade. Se total é 0, ainda não houve resposta: a barra fica vazia e o texto explica que o modelo está sendo carregado.",
+          "Linhas 150 a 151: com o total conhecido, a barra recebe a fração feitas / total (um número entre 0 e 1). Como total já não é 0, a divisão é segura.",
+          "Linhas 152 a 153: mostra a última linha do log embaixo da barra, se houver alguma."
+        ],
+        "trecho": "# FRAGMENTO: um pedaço da página que se atualiza sozinho, sem recarregar o resto.\n# Analogia: só o placar do jogo muda a cada 2 segundos; o estádio inteiro fica parado.\n@st.fragment(run_every=\"2s\")\ndef painel_progresso(lancada):\n    \"\"\"Barra de progresso da execução em andamento; ao terminar, recarrega a página.\"\"\"\n    estado = execucao.situacao(lancada)\n    if not estado[\"rodando\"]:\n        # Recarrega a página inteira: ela sai do modo de atualização automática\n        # e passa a mostrar o resultado final.\n        st.rerun()\n    feitas, total = estado[\"feitas\"], estado[\"total\"]\n    tempo = formatar_tempo(estado[\"segundos\"])\n    if total == 0:\n        # Antes da 1ª resposta o log ainda não tem progresso: o modelo está sendo\n        # carregado na memória (cerca de 30 s a frio). Mostrar \"0 de 0\" confundia.\n        st.progress(0, text=f\"Carregando o modelo (a 1ª resposta leva cerca de 30 s) · {tempo}\")\n    else:\n        st.progress(feitas / total, text=f\"{feitas} de {total} respostas · {tempo}\")\n    if estado[\"ultimas_linhas\"]:\n        st.caption(estado[\"ultimas_linhas\"][-1])"
+      },
+      "python": [
+        "<b>if/else</b>: escolhe entre dois caminhos; aqui, o texto do aquecimento ou o do andamento.",
+        "<b>dicionário</b>: estado[\"total\"] busca o valor pela chave, como procurar uma palavra no índice de um livro.",
+        "<b>f-string</b>: f\"{feitas} de {total}\" encaixa os valores das variáveis dentro do texto.",
+        "<b>divisão por zero</b>: feitas / total com total 0 faria o Python levantar ZeroDivisionError; o if de cima evita isso."
+      ],
+      "como_sabemos": "testar_executar.py ganhou o teste \"aquecimento\": o comando falso espera 2 s (time.sleep(2)) antes da primeira linha, e o teste confere que a barra diz \"Carregando o modelo\" e não \"0 de 0\". A suíte da página passou de 36 para 39 verificações, todas passando (commit 11b0dcc)."
+    },
+    {
+      "titulo": "Sugerir um rótulo livre com um laço while",
+      "data": "27/11/2026",
+      "sessao": "Dia 18",
+      "em_uma_frase": "rotulo_livre() tenta v15-repeticao, v15-repeticao2, v15-repeticao3... até achar um nome sem linhas no CSV.",
+      "problema": "Depois da T10, o rótulo v15-repeticao já existia no CSV. O campo da página começava com ele, e o aviso de rótulo repetido mandava usar \"um rótulo como v15-repeticao\": exatamente o rótulo que acabava de recusar.",
+      "ideia": "Quando não se sabe quantas tentativas serão necessárias, usa-se um <b>laço while</b> (repete enquanto uma condição for verdadeira), e não um laço for. A sugestão é calculada uma vez e usada em dois lugares: como valor inicial do campo e no texto do aviso, para os dois nunca divergirem.",
+      "diagrama": {
+        "titulo": "O laço de rotulo_livre(\"v15-repeticao\").",
+        "colunas": 2,
+        "nos": [
+          {
+            "id": "ini",
+            "texto": "candidato = base\nnumero = 1",
+            "linha": 0,
+            "coluna": 0,
+            "tipo": "novo"
+          },
+          {
+            "id": "q",
+            "texto": "candidato já está no CSV?",
+            "linha": 1,
+            "coluna": 0,
+            "tipo": "decisao"
+          },
+          {
+            "id": "fim",
+            "texto": "Devolve o candidato\nex.: v15-repeticao2",
+            "linha": 1,
+            "coluna": 1
+          },
+          {
+            "id": "soma",
+            "texto": "numero + 1\ncandidato = base + numero",
+            "linha": 2,
+            "coluna": 0,
+            "tipo": "novo"
+          }
+        ],
+        "ligacoes": [
+          {
+            "de": "ini",
+            "para": "q"
+          },
+          {
+            "de": "q",
+            "para": "fim",
+            "rotulo": "não"
+          },
+          {
+            "de": "q",
+            "para": "soma",
+            "rotulo": "sim"
+          },
+          {
+            "de": "soma",
+            "para": "q",
+            "lado": "esquerda",
+            "rotulo": "tenta de novo"
+          }
+        ]
+      },
+      "codigo": {
+        "arquivo": "app_pages/executar.py",
+        "linha_inicial": 42,
+        "linha_final": 50,
+        "explicacao": [
+          "Linha 42: a função recebe a base (por exemplo, \"v15-repeticao\") e o caminho do CSV, que tem um <b>valor padrão</b>: quem chama pode omiti-lo.",
+          "Linhas 43 a 44: a docstring diz o que a função faz, com um exemplo.",
+          "Linha 45: atribuição múltipla: candidato recebe a base e numero recebe 1, numa linha só.",
+          "Linha 47: contar_execucoes devolve quantas linhas do CSV têm aquele rótulo. Em Python, o número 0 vale como falso e qualquer outro como verdadeiro; por isso o while repete só enquanto houver linhas.",
+          "Linhas 48 a 49: soma 1 ao número e monta o novo candidato com uma f-string: \"v15-repeticao\" + \"2\".",
+          "Linha 50: ao sair do laço, o candidato não tem nenhuma linha no CSV, e é devolvido."
+        ],
+        "trecho": "def rotulo_livre(base, caminho=ARQUIVO_CSV):\n    \"\"\"Primeiro rótulo ainda sem linhas no CSV: base, base2, base3...\n    Ex.: se v15-repeticao já existe, devolve v15-repeticao2.\"\"\"\n    candidato, numero = base, 1\n    # Laço while: repete enquanto o candidato já estiver no CSV.\n    while contar_execucoes(candidato, caminho):\n        numero += 1\n        candidato = f\"{base}{numero}\"\n    return candidato"
+      },
+      "python": [
+        "<b>laço while</b>: repete o bloco enquanto a condição for verdadeira; cuidado para a condição mudar a cada volta, senão o laço nunca termina.",
+        "<b>valor de verdade</b>: 0, texto vazio e lista vazia contam como falso numa condição; o resto, como verdadeiro.",
+        "<b>parâmetro com valor padrão</b>: caminho=ARQUIVO_CSV deixa os testes passarem outro arquivo, sem mexer no CSV real."
+      ],
+      "como_sabemos": "testar_executar.py confere que a sugestão do campo ainda não existe no CSV e que o aviso de rótulo repetido não sugere o próprio rótulo recusado (commit 11b0dcc, 39/39 verificações)."
     }
   ],
   "glossario": [
@@ -665,6 +876,41 @@
       "termo": "Rótulo",
       "definicao": "o nome com que uma execução é gravada no CSV. Com hífen (v15-repeticao) vira lote de calibração no painel; sem hífen, conta como versão oficial.",
       "no_projeto": "opção --rotulo do benchmark e campo da página Executar."
+    },
+    {
+      "termo": "Teste de ponta a ponta",
+      "definicao": "teste que passa por todas as camadas reais do sistema, do clique até o arquivo gravado.",
+      "no_projeto": "a execução real v15-repeticao pelo botão (T10)."
+    },
+    {
+      "termo": "Ruído",
+      "definicao": "variação do resultado sem nenhuma mudança no que está sendo medido.",
+      "no_projeto": "a repetição da base mede o ruído do agente; em 27/11/2026, a v15-repeticao foi idêntica à v15."
+    },
+    {
+      "termo": "Carga a frio",
+      "definicao": "a primeira vez que um programa é usado, quando ele ainda precisa ser carregado do disco para a memória; costuma ser bem mais lenta.",
+      "no_projeto": "a 1ª resposta do modelo levou 31,41 s; as demais, de 2 a 6 s."
+    },
+    {
+      "termo": "Ponto cego",
+      "definicao": "algo que um teste não consegue ver, porque a simulação dele não reproduz aquela situação.",
+      "no_projeto": "o comando falso não imitava a carga do modelo, e o \"0 de 0\" passou pelos testes."
+    },
+    {
+      "termo": "Caso-limite",
+      "definicao": "a situação na borda do comportamento normal: vazio, zero, primeiro ou último item.",
+      "no_projeto": "total igual a 0 antes da primeira resposta."
+    },
+    {
+      "termo": "Laço while",
+      "definicao": "repetição que continua enquanto uma condição for verdadeira, sem número de voltas definido.",
+      "no_projeto": "rotulo_livre() em app_pages/executar.py."
+    },
+    {
+      "termo": "Valor de verdade",
+      "definicao": "como o Python trata um valor numa condição: 0, texto vazio e lista vazia contam como falso.",
+      "no_projeto": "while contar_execucoes(candidato, caminho) repete enquanto a contagem não for 0."
     }
   ],
   "decisoes": [
@@ -691,24 +937,43 @@
     {
       "data": "27/11/2026",
       "quem": "sessão",
-      "texto": "Para reservar a cota, o aviso crítico do medidor passou de 90% para 85% da janela de 5 horas e de 95% para 93% da semana."
+      "texto": "Para reservar a cota, o aviso crítico do medidor passou de 90% para 85% da janela de 5 horas e de 95% para 93% da semana. Ainda em 27/11/2026, a reserva foi ajustada de novo: alerta em 75% e crítico em 80% da janela de 5 horas."
     },
     {
       "data": "27/11/2026",
       "quem": "sessão",
       "texto": "O PDF usa o reportlab 4.5.1, e não o 5.x, para não quebrar o painel."
+    },
+    {
+      "data": "27/11/2026",
+      "quem": "usuário",
+      "texto": "A execução real (T10) foi feita pela sessão, com autorização explícita do usuário, que acompanhava pelo Remote Control."
+    },
+    {
+      "data": "27/11/2026",
+      "quem": "usuário",
+      "texto": "As duas pendências de interface da página Executar (\"0 de 0\" e o rótulo sugerido) foram corrigidas na mesma sessão, a pedido do usuário."
+    },
+    {
+      "data": "27/11/2026",
+      "quem": "usuário",
+      "texto": "O painel lateral de tarefas do Claude (mod painel-tarefas, fora do repositório) passa a mostrar o plano T01 a T13 dividido em pendentes e concluídas, atualizado sozinho a partir de .plano/ESTADO.md."
     }
   ],
   "aprendizados": [
     "(26/11) Teste automático tem <b>ponto cego</b> (algo que ele não consegue ver): o atalho \"Ver na Visão geral\" não roda no AppTest. Por isso a execução real com você presente continua necessária.",
     "(27/11) Instalar uma biblioteca pode quebrar outra. Depois de qualquer pip install, rode pip check.",
-    "(27/11) \"Deu erro\" sem mensagem não basta. A mensagem de erro (em Python, o <b>traceback</b>, a lista de chamadas que levou ao erro) costuma dizer o arquivo e a linha do problema."
+    "(27/11) \"Deu erro\" sem mensagem não basta. A mensagem de erro (em Python, o <b>traceback</b>, a lista de chamadas que levou ao erro) costuma dizer o arquivo e a linha do problema.",
+    "(27/11) O \"deu erro\" era o navegador interno oculto, não um defeito. Investigar antes de corrigir evitou mexer num código que estava certo.",
+    "(27/11) A execução real mostrou o que o comando falso não mostrava (o \"0 de 0\" na carga do modelo). Quando o mundo real revela um estado novo, ele entra na simulação dos testes.",
+    "(27/11) Números da documentação também se conferem contra os dados: o CLAUDE.md dizia \"ignorar 3/3\", mas são 2 casos x 3 ordens = 6 (24 + 15 + 6 = 45). Corrigido para 6/6 na T12.",
+    "(27/11) Tempo médio só se compara em condições iguais: uma execução que começa com o modelo a frio fica mais lenta na média, sem o agente ter mudado."
   ],
   "proximos": [
-    "<b>Descobrir</b> onde apareceu o erro de 27/11/2026 e o que ele dizia. Você vai aprender a ler um traceback e a seguir o erro até a linha que o causou.",
-    "<b>Executar</b> o v15-repeticao pelo botão (T10). Você vai ver o processo filho funcionando de verdade e o log crescendo.",
-    "<b>Conferir</b> o resultado e a suíte de testes (T11). Você vai comparar a repetição com a v15 original e ver, nos dados, quanto o agente varia sem nenhuma mudança.",
-    "<b>Documentar</b> a página Executar no README e no CLAUDE.md (T12) e fechar o app (T13)."
+    "<b>Escolher</b> o próximo objetivo entre os itens de TASKS.md: agente analista do eval, novos casos ocultos para a v16 ou o experimento com o qwen3:4b (thinking). Você vai aprender a definir um objetivo com critério de pronto antes de começar.",
+    "<b>Criar</b> casos ocultos novos, se o objetivo for a v16. Você vai entender por que um conjunto de validação já visto perde o valor de prova.",
+    "<b>Esboçar</b> o agente analista do eval, que lê o CSV e os brutos e escreve a análise. Você vai aprender a montar um agente que avalia outro.",
+    "<b>Medir</b> o qwen3:4b (thinking) no benchmark, se for o escolhido. Você vai ver, com dados, quanto o raciocínio custa em tempo e quanto rende em acerto."
   ],
   "perguntas": [
     {
@@ -734,6 +999,14 @@
     {
       "pergunta": "Na investigação de 27/11/2026, que evidência mostrou que iniciar() nem chegou a rodar?",
       "resposta": "A pasta resultados/logs estava vazia: iniciar() sempre cria o arquivo de log antes de lançar o processo."
+    },
+    {
+      "pergunta": "Por que a barra mostrava \"0 de 0 respostas\" e por que os testes não pegaram isso?",
+      "resposta": "Porque o log só ganha uma linha de progresso depois da 1ª resposta, e com o modelo a frio ela levou 31,41 s; até lá, ler_progresso devolve (0, 0). O comando falso dos testes escrevia a primeira linha logo de saída, então nunca passava por esse estado. O teste novo espera 2 s antes, imitando a carga."
+    },
+    {
+      "pergunta": "Em rotulo_livre, por que \"while contar_execucoes(candidato, caminho)\" funciona sem escrever \"> 0\"?",
+      "resposta": "Porque numa condição o Python trata 0 como falso e qualquer outro número como verdadeiro. Enquanto o candidato tiver linhas no CSV, a contagem é maior que 0 e o laço continua; quando chega a 0, ele para e devolve o candidato livre."
     }
   ]
 }
